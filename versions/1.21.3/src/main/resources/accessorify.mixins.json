@@ -11,7 +11,8 @@
     "AbstractClientPlayerMixin",
     "CapeLayerMixin",
     "ClientPacketListenerMixin",
-    "DebugScreenOverlayMixin"
+    "DebugScreenOverlayMixin",
+    "PackSelectionModelMixin"
   ],
   "injectors": {
     "defaultRequire": 1

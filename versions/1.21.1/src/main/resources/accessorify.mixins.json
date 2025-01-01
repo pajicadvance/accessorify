@@ -12,6 +12,7 @@
     "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
+    "PackSelectionModelMixin",
     "ElytraLayerMixin",
     "LocalPlayerMixin"
   ],

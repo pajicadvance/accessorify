@@ -8,11 +8,11 @@ import io.wispforest.owo.config.annotation.*;
 @Sync(Option.SyncMode.OVERRIDE_CLIENT)
 @SuppressWarnings("unused")
 public class ConfigModel {
-    public boolean clockAccessory = true;
-    public boolean compassAccessory = true;
-    public boolean elytraAccessory = true;
-    public boolean spyglassAccessory = true;
-    public boolean totemOfUndyingAccessory = true;
+    @RestartRequired public boolean clockAccessory = true;
+    @RestartRequired public boolean compassAccessory = true;
+    @RestartRequired public boolean elytraAccessory = true;
+    @RestartRequired public boolean spyglassAccessory = true;
+    @RestartRequired public boolean totemOfUndyingAccessory = true;
     public boolean hideDebugInfoInSurvival = false;
     @Nest public Overlay overlay = new Overlay();
 
