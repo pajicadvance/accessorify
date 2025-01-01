@@ -1,6 +1,7 @@
 package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -19,12 +20,15 @@ public class LivingEntityMixin {
             )
     )
     private ItemStack tryConsumeTotemAccessory(ItemStack original) {
-        ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.TOTEM_OF_UNDYING);
-        return stack.isEmpty() ? original : stack;
+        if (Main.CONFIG.totemOfUndyingAccessory()) {
+            ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.TOTEM_OF_UNDYING);
+            return stack.isEmpty() ? original : stack;
+        }
+        return original;
     }
 
     //? if <= 1.21.1 {
-    /*@ModifyExpressionValue(
+    @ModifyExpressionValue(
             method = "updateFallFlying",
             at = @At(
                     value = "INVOKE",
@@ -32,8 +36,11 @@ public class LivingEntityMixin {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.ELYTRA);
-        return stack.isEmpty() ? original : stack;
+        if (Main.CONFIG.elytraAccessory()) {
+            ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.ELYTRA);
+            return stack.isEmpty() ? original : stack;
+        }
+        return original;
     }
-    *///?}
+    //?}
 }

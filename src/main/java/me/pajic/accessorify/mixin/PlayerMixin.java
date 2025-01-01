@@ -31,7 +31,6 @@ public abstract class PlayerMixin extends LivingEntity {
     @Shadow public abstract boolean isSpectator();
     @Shadow public abstract void setReducedDebugInfo(boolean reducedDebugInfo);
     @Shadow public abstract @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot);
-
     @Shadow public abstract void stopFallFlying();
 
     @Inject(
@@ -51,7 +50,7 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     //? if <= 1.21.1 {
-    /*@ModifyExpressionValue(
+    @ModifyExpressionValue(
             method = "tryToStartFallFlying",
             at = @At(
                     value = "INVOKE",
@@ -59,10 +58,13 @@ public abstract class PlayerMixin extends LivingEntity {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.ELYTRA);
-        return stack.isEmpty() ? original : stack;
+        if (Main.CONFIG.elytraAccessory()) {
+            ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.ELYTRA);
+            return stack.isEmpty() ? original : stack;
+        }
+        return original;
     }
-    *///?}
+    //?}
 
     @Inject(
             method = "tick",

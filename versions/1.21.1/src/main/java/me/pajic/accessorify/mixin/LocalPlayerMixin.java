@@ -1,6 +1,7 @@
 package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +21,10 @@ public class LocalPlayerMixin {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.ELYTRA);
-        return stack.isEmpty() ? original : stack;
+        if (Main.CONFIG.elytraAccessory()) {
+            ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.ELYTRA);
+            return stack.isEmpty() ? original : stack;
+        }
+        return original;
     }
 }

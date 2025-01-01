@@ -2,6 +2,7 @@ package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.layers.CapeLayer;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class CapeLayerMixin {
 
     //? if <= 1.21.1 {
-    /*@ModifyExpressionValue(
+    @ModifyExpressionValue(
             method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;FFFFFF)V",
             at = @At(
                     value = "INVOKE",
@@ -22,8 +23,11 @@ public class CapeLayerMixin {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original, @Local(argsOnly = true) AbstractClientPlayer player) {
-        ItemStack stack = ModUtil.getAccessoryStack(player, Items.ELYTRA);
-        return stack.isEmpty() ? original : stack;
+        if (Main.CONFIG.elytraAccessory()) {
+            ItemStack stack = ModUtil.getAccessoryStack(player, Items.ELYTRA);
+            return stack.isEmpty() ? original : stack;
+        }
+        return original;
     }
-    *///?}
+    //?}
 }

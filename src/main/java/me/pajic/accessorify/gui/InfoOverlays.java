@@ -130,9 +130,9 @@ public class InfoOverlays {
             }
             else if (minecraft.level.isRaining()) {
                 //? if <= 1.21.1
-                /*Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos);*/
+                Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos);
                 //? if > 1.21.1
-                Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos, (int) minecraft.player.getY());
+                /*Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos, (int) minecraft.player.getY());*/
                 if (precipitation == Biome.Precipitation.RAIN) {
                     weather = Component.translatable("gui.accessorify.raining");
                     weatherColor = Main.CONFIG.overlay.colors.raining();

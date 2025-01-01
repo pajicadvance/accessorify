@@ -11,13 +11,13 @@ public class AbstractClientPlayerMixin {
 
     @WrapMethod(method = "getFieldOfViewModifier")
     //? if <= 1.21.1
-    /*private float modifyFOV(Operation<Float> original) {*/
+    private float modifyFOV(Operation<Float> original) {
     //? if > 1.21.1
-    private float modifyFOV(boolean isFirstPerson, float fovEffectScale, Operation<Float> original) {
+    /*private float modifyFOV(boolean isFirstPerson, float fovEffectScale, Operation<Float> original) {*/
         if (ModUtil.shouldScope) return 0.1F;
         //? if <= 1.21.1
-        /*return original.call();*/
+        return original.call();
         //? if > 1.21.1
-        return original.call(isFirstPerson, fovEffectScale);
+        /*return original.call(isFirstPerson, fovEffectScale);*/
     }
 }

@@ -11,9 +11,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 //? if <= 1.21.1
-/*import io.wispforest.accessories.api.AccessoriesAPI;*/
+import io.wispforest.accessories.api.AccessoriesAPI;
 //? if > 1.21.1
-import io.wispforest.accessories.api.AccessoryRegistry;
+/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
 public class CompassAccessory implements Accessory {
 
@@ -21,9 +21,9 @@ public class CompassAccessory implements Accessory {
 
     public static void init() {
         //? if <= 1.21.1
-        /*AccessoriesAPI.registerAccessory(Items.COMPASS, new CompassAccessory());*/
+        AccessoriesAPI.registerAccessory(Items.COMPASS, new CompassAccessory());
         //? if > 1.21.1
-        AccessoryRegistry.register(Items.COMPASS, new CompassAccessory());
+        /*AccessoryRegistry.register(Items.COMPASS, new CompassAccessory());*/
     }
 
     @Environment(EnvType.CLIENT)

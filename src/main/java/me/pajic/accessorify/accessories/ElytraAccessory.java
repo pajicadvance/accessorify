@@ -11,9 +11,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 //? if <= 1.21.1
-/*import io.wispforest.accessories.api.AccessoriesAPI;*/
+import io.wispforest.accessories.api.AccessoriesAPI;
 //? if > 1.21.1
-import io.wispforest.accessories.api.AccessoryRegistry;
+/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
 public class ElytraAccessory implements Accessory {
 
@@ -21,9 +21,9 @@ public class ElytraAccessory implements Accessory {
 
     public static void init() {
         //? if <= 1.21.1
-        /*AccessoriesAPI.registerAccessory(Items.ELYTRA, new ElytraAccessory());*/
+        AccessoriesAPI.registerAccessory(Items.ELYTRA, new ElytraAccessory());
         //? if > 1.21.1
-        AccessoryRegistry.register(Items.ELYTRA, new ElytraAccessory());
+        /*AccessoryRegistry.register(Items.ELYTRA, new ElytraAccessory());*/
     }
 
     @Environment(EnvType.CLIENT)

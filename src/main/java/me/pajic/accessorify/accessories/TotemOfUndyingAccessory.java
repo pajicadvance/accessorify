@@ -8,9 +8,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 //? if <= 1.21.1
-/*import io.wispforest.accessories.api.AccessoriesAPI;*/
+import io.wispforest.accessories.api.AccessoriesAPI;
 //? if > 1.21.1
-import io.wispforest.accessories.api.AccessoryRegistry;
+/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
 public class TotemOfUndyingAccessory implements Accessory {
 
@@ -18,9 +18,9 @@ public class TotemOfUndyingAccessory implements Accessory {
 
     public static void init() {
         //? if <= 1.21.1
-        /*AccessoriesAPI.registerAccessory(Items.TOTEM_OF_UNDYING, new TotemOfUndyingAccessory());*/
+        AccessoriesAPI.registerAccessory(Items.TOTEM_OF_UNDYING, new TotemOfUndyingAccessory());
         //? if > 1.21.1
-        AccessoryRegistry.register(Items.TOTEM_OF_UNDYING, new TotemOfUndyingAccessory());
+        /*AccessoryRegistry.register(Items.TOTEM_OF_UNDYING, new TotemOfUndyingAccessory());*/
     }
 
     @Override
