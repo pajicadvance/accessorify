@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.pajic.accessorify.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerMixin"
+  ],
+  "client": [
+    "AbstractClientPlayerMixin",
+    "CapeLayerMixin",
+    "ClientPacketListenerMixin",
+    "DebugScreenOverlayMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

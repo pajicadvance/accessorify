@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "accessorify",
+  "version": "${version}",
+  "name": "Accessorify",
+  "description": "Makes some vanilla items more useful using the Accessories API",
+  "authors": ["pajic"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.pajic.accessorify.ClientMain"
+    ],
+    "main": [
+      "me.pajic.accessorify.Main"
+    ]
+  },
+  "mixins": [
+    "accessorify.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": [
+      "1.21",
+      "1.21.1"
+    ],
+    "accessories": "*"
+  }
+}
