@@ -11,10 +11,10 @@ public class ClientMain implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ClockAccessory.clientInit();
-        CompassAccessory.clientInit();
-        ElytraAccessory.clientInit();
-        ModKeybinds.initKeybinds();
-        InfoOverlays.initOverlay();
+        if (Main.CONFIG.clockAccessory()) ClockAccessory.clientInit();
+        if (Main.CONFIG.compassAccessory()) CompassAccessory.clientInit();
+        if (Main.CONFIG.elytraAccessory()) ElytraAccessory.clientInit();
+        if (Main.CONFIG.spyglassAccessory()) ModKeybinds.initKeybinds();
+        if (Main.CONFIG.clockAccessory() || Main.CONFIG.compassAccessory()) InfoOverlays.initOverlay();
     }
 }
