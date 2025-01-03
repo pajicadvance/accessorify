@@ -5,14 +5,16 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "compat.fdrf.HUDOverlaysMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",
     "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
-    "PackSelectionModelMixin"
+    "PackSelectionModelMixin",
+    "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -12,6 +12,7 @@ base {
 
 
 repositories {
+    mavenCentral()
     maven { url = "https://maven.parchmentmc.org" }
     maven { url = "https://maven.terraformersmc.com/" }
     maven { url = "https://maven.wispforest.io/releases/" }
@@ -26,6 +27,21 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
+    maven {
+        name = "Greenhouse Maven"
+        url = 'https://repo.greenhouse.house/releases/'
+    }
+    maven {
+        name = "Greenhouse Maven"
+        url = 'https://repo.greenhouse.house/snapshots/' // Porting Lib Hotfixes
+    }
+    maven { url "https://mvn.devos.one/snapshots/" } // Porting Lib Betas
+    maven {
+        url "https://jitpack.io/" // Fabric ASM
+        content {
+            excludeGroup "io.github.fabricators_of_create"
+        }
+    }
 }
 
 dependencies {
@@ -37,12 +53,18 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}"
+    include(implementation("com.moulberry:mixinconstraints:${project.mixinconstraints_version}"))
     modImplementation("com.terraformersmc:modmenu:${property("modmenu_version")}")
     annotationProcessor modImplementation("io.wispforest:owo-lib:${property("owo_version")}")
     modImplementation "io.wispforest:accessories-fabric:${property("accessories_version")}"
 
     modCompileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
     modCompileOnly "maven.modrinth:raised:${property("raised_version")}"
+
+    modImplementation "maven.modrinth:notes:${property("notes_version")}"
+    modCompileOnly("vectorwing:FarmersDelight:${property("fdrf_version")}") {
+        exclude(group: "net.fabricmc")
+    }
 }
 
 processResources {
