@@ -70,13 +70,18 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
+jarJar.enable()
+
 dependencies {
     implementation "net.neoforged:neoforge:${property("neo_version")}"
+    implementation "com.moulberry:mixinconstraints:${project.mixinconstraints_version}"
+    jarJar(group: 'com.moulberry', name: 'mixinconstraints', version: project.mixinconstraints_version)
     implementation "io.wispforest:accessories-neoforge:${property("accessories_version")}"
 
     compileOnly "maven.modrinth:owo-lib:${property("owo_version")}"
     compileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
     compileOnly "maven.modrinth:raised:${property("raised_version")}"
+    implementation "maven.modrinth:notes:${property("notes_version")}"
 }
 
 tasks.withType(ProcessResources).configureEach {

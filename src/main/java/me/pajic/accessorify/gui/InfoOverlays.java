@@ -1,7 +1,6 @@
 package me.pajic.accessorify.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.owo.ui.core.Color;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
@@ -10,15 +9,14 @@ import me.pajic.accessorify.compat.SeasonsCompat;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.config.ModServerConfig;
+import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
@@ -37,15 +35,15 @@ public class InfoOverlays {
             if (
                     ModCommonConfig.compassAccessory &&
                     ModCommonConfig.clockAccessory &&
-                    hasCompass(minecraft.player) && hasClock(minecraft.player)
+                    ModUtil.hasCompass(minecraft.player) && ModUtil.hasClock(minecraft.player)
             ) {
                 renderCompassOverlay(guiGraphics, minecraft);
                 renderClockOverlay(guiGraphics, true, minecraft);
             }
-            else if (ModCommonConfig.compassAccessory && hasCompass(minecraft.player)) {
+            else if (ModCommonConfig.compassAccessory && ModUtil.hasCompass(minecraft.player)) {
                 renderCompassOverlay(guiGraphics, minecraft);
             }
-            else if (ModCommonConfig.clockAccessory && hasClock(minecraft.player)) {
+            else if (ModCommonConfig.clockAccessory && ModUtil.hasClock(minecraft.player)) {
                 renderClockOverlay(guiGraphics, false, minecraft);
             }
         }
@@ -149,14 +147,6 @@ public class InfoOverlays {
             renderLine(guiGraphics, font, weather, y, 0xffffff);
     }
 
-    private static boolean hasCompass(LocalPlayer player) {
-        return AccessoriesCapability.get(player).isEquipped(Items.COMPASS);
-    }
-
-    private static boolean hasClock(LocalPlayer player) {
-        return AccessoriesCapability.get(player).isEquipped(Items.CLOCK);
-    }
-
     private static void renderLine(GuiGraphics guiGraphics, Font font, Component text, int y, int color) {
         int xOffset = 0;
         int yOffset = 0;
@@ -166,6 +156,7 @@ public class InfoOverlays {
             yOffset = offsets.rightInt();
         }
 
+        guiGraphics.flush();
         RenderSystem.enableBlend();
 
         if (ModClientConfig.textBackground) {
@@ -176,6 +167,7 @@ public class InfoOverlays {
         }
         guiGraphics.drawString(font, text, 4 + xOffset, y + yOffset, color, ModClientConfig.textShadow);
 
+        guiGraphics.flush();
         RenderSystem.disableBlend();
     }
 }

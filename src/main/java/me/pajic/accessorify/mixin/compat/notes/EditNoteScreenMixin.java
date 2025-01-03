@@ -1,0 +1,37 @@
+package me.pajic.accessorify.mixin.compat.notes;
+
+import com.chaosthedude.notes.gui.EditNoteScreen;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+import me.pajic.accessorify.config.ModServerConfig;
+import me.pajic.accessorify.util.ModUtil;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+@IfModLoaded("notes")
+@Mixin(EditNoteScreen.class)
+public abstract class EditNoteScreenMixin extends Screen {
+
+    protected EditNoteScreenMixin(Component title) {
+        super(title);
+    }
+
+    @ModifyExpressionValue(
+            method = "tick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcom/chaosthedude/notes/gui/NotesTextField;isFocused()Z"
+            )
+    )
+    private boolean disableButtonsIfNoCompassFound(boolean original) {
+        if (
+                ModServerConfig.hideDebugInfoInSurvival &&
+                minecraft != null && minecraft.player != null && minecraft.level != null
+        ) {
+            return original && ModUtil.hasCompass(minecraft.player);
+        }
+        return original;
+    }
+}

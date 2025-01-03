@@ -2,9 +2,11 @@ package me.pajic.accessorify.util;
 
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class ModUtil {
 
@@ -19,5 +21,13 @@ public class ModUtil {
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    public static boolean hasCompass(LocalPlayer player) {
+        return AccessoriesCapability.get(player).isEquipped(Items.COMPASS);
+    }
+
+    public static boolean hasClock(LocalPlayer player) {
+        return AccessoriesCapability.get(player).isEquipped(Items.CLOCK);
     }
 }

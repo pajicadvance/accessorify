@@ -12,7 +12,8 @@
     "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
-    "PackSelectionModelMixin"
+    "PackSelectionModelMixin",
+    "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

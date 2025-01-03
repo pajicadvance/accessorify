@@ -12,9 +12,10 @@
     "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
-    "PackSelectionModelMixin",
     "ElytraLayerMixin",
-    "LocalPlayerMixin"
+    "LocalPlayerMixin",
+    "PackSelectionModelMixin",
+    "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
