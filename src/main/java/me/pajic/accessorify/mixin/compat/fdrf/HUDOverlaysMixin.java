@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import vectorwing.farmersdelight.client.gui.HUDOverlays;
 
-@IfModLoaded(value = "farmersdelight", maxVersion = "1.21.1-2.2.8+refabricated")
+@IfModLoaded("farmersdelight")
 @Mixin(HUDOverlays.class)
 public class HUDOverlaysMixin {
 
