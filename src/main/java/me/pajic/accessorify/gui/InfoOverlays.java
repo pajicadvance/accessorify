@@ -17,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
@@ -35,15 +36,15 @@ public class InfoOverlays {
             if (
                     ModCommonConfig.compassAccessory &&
                     ModCommonConfig.clockAccessory &&
-                    ModUtil.hasCompass(minecraft.player) && ModUtil.hasClock(minecraft.player)
+                    ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS) && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)
             ) {
                 renderCompassOverlay(guiGraphics, minecraft);
                 renderClockOverlay(guiGraphics, true, minecraft);
             }
-            else if (ModCommonConfig.compassAccessory && ModUtil.hasCompass(minecraft.player)) {
+            else if (ModCommonConfig.compassAccessory && ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS)) {
                 renderCompassOverlay(guiGraphics, minecraft);
             }
-            else if (ModCommonConfig.clockAccessory && ModUtil.hasClock(minecraft.player)) {
+            else if (ModCommonConfig.clockAccessory && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)) {
                 renderClockOverlay(guiGraphics, false, minecraft);
             }
         }

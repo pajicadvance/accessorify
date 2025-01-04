@@ -1,7 +1,6 @@
 package me.pajic.accessorify.keybind;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import io.wispforest.accessories.api.AccessoriesCapability;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -38,7 +37,7 @@ public class ModKeybinds {
         Minecraft client = Minecraft.getInstance();
         if (
                 USE_SPYGLASS.get().isDown() && client.player != null && client.level != null &&
-                AccessoriesCapability.get(client.player).isEquipped(Items.SPYGLASS)
+                ModUtil.accessoryEquipped(client.player, Items.SPYGLASS)
         ) {
             if (!soundPlayed) {
                 client.player.playSound(SoundEvents.SPYGLASS_USE);
