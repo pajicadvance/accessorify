@@ -7,6 +7,7 @@ import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -30,7 +31,7 @@ public abstract class EditNoteScreenMixin extends Screen {
                 Main.CONFIG.hideDebugInfoInSurvival() &&
                 minecraft != null && minecraft.player != null && minecraft.level != null
         ) {
-            return original && ModUtil.hasCompass(minecraft.player);
+            return original && ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS);
         }
         return original;
     }

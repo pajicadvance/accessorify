@@ -3,7 +3,6 @@ package me.pajic.accessorify.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import io.wispforest.accessories.api.AccessoriesCapability;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.EntityType;
@@ -74,7 +73,7 @@ public abstract class PlayerMixin extends LivingEntity {
         if (
                 isInWater() && (
                         getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA) ||
-                        AccessoriesCapability.get((LivingEntity) (Object) this).isEquipped(Items.ELYTRA)
+                        ModUtil.accessoryEquipped((Player) (Object) this, Items.ELYTRA)
                 )
         ) {
             stopFallFlying();
