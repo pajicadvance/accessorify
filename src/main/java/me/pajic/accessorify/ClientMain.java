@@ -23,7 +23,7 @@ public class ClientMain {
         modContainer.registerConfig(ModConfig.Type.CLIENT, ModClientConfig.CLIENT_SPEC);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modEventBus.addListener(this::onInitialize);
-        if (ModCommonConfig.spyglassAccessory) modEventBus.addListener(ModKeybinds::registerKeybinds);
+        modEventBus.addListener(ModKeybinds::registerKeybinds);
     }
 
     public void onInitialize(FMLClientSetupEvent event) {

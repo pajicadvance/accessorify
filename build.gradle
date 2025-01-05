@@ -72,6 +72,14 @@ configurations {
 
 jarJar.enable()
 
+jar {
+    archiveClassifier = "slim"
+}
+
+tasks.named('jarJar') {
+    archiveClassifier = ""
+}
+
 dependencies {
     implementation "net.neoforged:neoforge:${property("neo_version")}"
     implementation "com.moulberry:mixinconstraints:${project.mixinconstraints_version}"
