@@ -14,7 +14,7 @@ public class ClientMain implements ClientModInitializer {
         if (Main.CONFIG.clockAccessory()) ClockAccessory.clientInit();
         if (Main.CONFIG.compassAccessory()) CompassAccessory.clientInit();
         if (Main.CONFIG.elytraAccessory()) ElytraAccessory.clientInit();
-        if (Main.CONFIG.spyglassAccessory()) ModKeybinds.initKeybinds();
+        ModKeybinds.initKeybinds();
         if (Main.CONFIG.clockAccessory() || Main.CONFIG.compassAccessory()) InfoOverlays.initOverlay();
     }
 }
