@@ -1,5 +1,6 @@
 package me.pajic.accessorify.config;
 
+import me.pajic.accessorify.gui.InfoOverlays;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -9,6 +10,15 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class ModClientConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    private static final ModConfigSpec.ConfigValue<InfoOverlays.OverlayPosition> POSITION = BUILDER
+            .translation("text.config.accessorify.option.overlay.position")
+            .defineEnum("position", InfoOverlays.OverlayPosition.TOP_LEFT);
+    private static final ModConfigSpec.IntValue OFFSET_X = BUILDER
+            .translation("text.config.accessorify.option.overlay.offsetX")
+            .defineInRange("offsetX", 0, 0, Integer.MAX_VALUE);
+    private static final ModConfigSpec.IntValue OFFSET_Y = BUILDER
+            .translation("text.config.accessorify.option.overlay.offsetY")
+            .defineInRange("offsetY", 0, 0, Integer.MAX_VALUE);
     private static final ModConfigSpec.BooleanValue TEXT_BACKGROUND = BUILDER
             .translation("text.config.accessorify.option.textBackground")
             .define("textBackground", true);
@@ -51,6 +61,9 @@ public class ModClientConfig {
 
     public static final ModConfigSpec CLIENT_SPEC = BUILDER.build();
 
+    public static InfoOverlays.OverlayPosition position;
+    public static int offsetX;
+    public static int offsetY;
     public static boolean textBackground;
     public static double textBackgroundOpacity;
     public static boolean textShadow;
@@ -77,6 +90,9 @@ public class ModClientConfig {
 
     private static void updateConfig(ModConfigEvent event) {
         if (event.getConfig().getSpec() == CLIENT_SPEC) {
+            position = POSITION.get();
+            offsetX = OFFSET_X.get();
+            offsetY = OFFSET_Y.get();
             textBackground = TEXT_BACKGROUND.get();
             textBackgroundOpacity = TEXT_BACKGROUND_OPACITY.get();
             textShadow = TEXT_SHADOW.get();
