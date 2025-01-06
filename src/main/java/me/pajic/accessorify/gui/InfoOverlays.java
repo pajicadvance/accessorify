@@ -23,6 +23,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class InfoOverlays {
 
     public static void initOverlay() {
@@ -33,6 +37,8 @@ public class InfoOverlays {
     public static class InfoOverlay implements LayeredDraw.Layer {
 
         protected static final InfoOverlay INSTANCE = new InfoOverlay();
+
+        private static final List<ObjectIntImmutablePair<Component>> renderList = new ArrayList<>();
 
         @Override
         public void render(@NotNull GuiGraphics guiGraphics, @NotNull DeltaTracker deltaTracker) {
@@ -46,20 +52,21 @@ public class InfoOverlays {
                         Main.CONFIG.clockAccessory() &&
                         ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS) && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)
                 ) {
-                    renderCompassOverlay(guiGraphics, minecraft);
-                    renderClockOverlay(guiGraphics, true, minecraft);
+                    prepareCompassOverlay(minecraft);
+                    prepareClockOverlay(minecraft);
                 }
                 else if (Main.CONFIG.compassAccessory() && ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS)) {
-                    renderCompassOverlay(guiGraphics, minecraft);
+                    prepareCompassOverlay(minecraft);
                 }
                 else if (Main.CONFIG.clockAccessory() && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)) {
-                    renderClockOverlay(guiGraphics, false, minecraft);
+                    prepareClockOverlay(minecraft);
                 }
+                renderLines(guiGraphics, minecraft);
+                renderList.clear();
             }
         }
 
-        private void renderCompassOverlay(GuiGraphics guiGraphics, Minecraft minecraft) {
-            Font font = minecraft.gui.getFont();
+        private void prepareCompassOverlay(Minecraft minecraft) {
             BlockPos blockPos = minecraft.player.blockPosition();
             ResourceLocation biome = minecraft.player.level().getBiome(blockPos).unwrap().map(
                     key -> key != null ? key.location() : null, unknown -> null
@@ -82,21 +89,13 @@ public class InfoOverlays {
             Component direction = Component.translatable("gui.accessorify.facing", minecraft.player.getDirection().getName());
             Component biomeName = Component.translatable("biome." + biome.getNamespace() + "." + biome.getPath());
 
-            int y = 4;
-            renderLine(guiGraphics, font, coordinates, y, 0xffffff);
-            y += 12;
-            renderLine(guiGraphics, font, direction, y, 0xffffff);
-            y += 12;
-            renderLine(guiGraphics, font, biomeName, y, 0xffffff);
+            renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(direction, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(biomeName, 0xffffff));
         }
 
-        private void renderClockOverlay(GuiGraphics guiGraphics, boolean compassRendered, Minecraft minecraft) {
-            Font font = minecraft.gui.getFont();
+        private void prepareClockOverlay(Minecraft minecraft) {
             BlockPos blockPos = minecraft.player.blockPosition();
-
-            int y;
-            if (compassRendered) y = 40;
-            else y = 4;
 
             MutableComponent dayAndTime = Component.translatable(
                     "gui.accessorify.day",
@@ -110,15 +109,16 @@ public class InfoOverlays {
             );
             dayAndTime.append(", ");
             dayAndTime.append(time);
-            renderLine(guiGraphics, font, dayAndTime, y, 0xffffff);
+            renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
 
             if (FabricLoader.getInstance().isModLoaded("sereneseasons")) {
                 ObjectIntImmutablePair<Component> seasonStringData = SeasonsCompat.getSeasonStringData(minecraft.level);
-                y += 12;
-                if (Main.CONFIG.overlay.coloredSeason())
-                    renderLine(guiGraphics, font, seasonStringData.left(), y, seasonStringData.rightInt());
-                else
-                    renderLine(guiGraphics, font, seasonStringData.left(), y, 0xffffff);
+                if (Main.CONFIG.overlay.coloredSeason()) {
+                    renderList.add(seasonStringData);
+                }
+                else {
+                    renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
+                }
             }
 
             Component weather;
@@ -149,35 +149,78 @@ public class InfoOverlays {
                 weather = Component.translatable("gui.accessorify.clear");
                 weatherColor = 0xffffff;
             }
-            y += 12;
-            if (Main.CONFIG.overlay.coloredWeather())
-                renderLine(guiGraphics, font, weather, y, weatherColor);
-            else
-                renderLine(guiGraphics, font, weather, y, 0xffffff);
+            if (Main.CONFIG.overlay.coloredWeather()) {
+                renderList.add(new ObjectIntImmutablePair<>(weather, weatherColor));
+            }
+            else {
+                renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffff));
+            }
         }
 
-        private void renderLine(GuiGraphics guiGraphics, Font font, Component text, int y, int color) {
-            int xOffset = 0;
-            int yOffset = 0;
+        private void renderLines(GuiGraphics guiGraphics, Minecraft minecraft) {
+            final int[] y = {4};
+            OverlayPosition position = Main.CONFIG.overlay.position();
+            if (position == OverlayPosition.BOTTOM_LEFT || position == OverlayPosition.BOTTOM_RIGHT) {
+                Collections.reverse(renderList);
+            }
+            renderList.forEach(line -> {
+                renderLine(guiGraphics, minecraft.font, line.left(), y[0], line.rightInt(), minecraft);
+                y[0] += 12;
+            });
+        }
+
+        private void renderLine(GuiGraphics guiGraphics, Font font, Component text, int lineY, int color, Minecraft minecraft) {
+            int width = minecraft.getWindow().getGuiScaledWidth();
+            int height = minecraft.getWindow().getGuiScaledHeight();
+            int offsetX = Main.CONFIG.overlay.offsetX();
+            int offsetY = Main.CONFIG.overlay.offsetY();
+            int raisedOffsetX = 0;
+            int raisedOffsetY = 0;
             if (FabricLoader.getInstance().isModLoaded("raised")) {
                 IntIntImmutablePair offsets = RaisedCompat.getOtherComponentOffsets();
-                xOffset = offsets.leftInt();
-                yOffset = offsets.rightInt();
+                raisedOffsetX = offsets.leftInt();
+                raisedOffsetY = offsets.rightInt();
             }
+
+            IntIntImmutablePair position;
+            switch (Main.CONFIG.overlay.position()) {
+                case TOP_RIGHT -> position = new IntIntImmutablePair(
+                        width - 4 - font.width(text) - offsetX + raisedOffsetX,
+                        lineY + offsetY + raisedOffsetY
+                );
+                case BOTTOM_LEFT -> position = new IntIntImmutablePair(
+                        4 + offsetX + raisedOffsetX,
+                        height - 8 - lineY - offsetY + raisedOffsetY
+                );
+                case BOTTOM_RIGHT -> position = new IntIntImmutablePair(
+                        width - 4 - font.width(text) - offsetX + raisedOffsetX,
+                        height - 8 - lineY - offsetY + raisedOffsetY
+                );
+                default -> position = new IntIntImmutablePair(
+                        4 + offsetX + raisedOffsetX,
+                        lineY + offsetY + raisedOffsetY
+                );
+            }
+            int x = position.leftInt();
+            int y = position.rightInt();
 
             guiGraphics.flush();
             RenderSystem.enableBlend();
 
             if (Main.CONFIG.overlay.textBackground()) {
                 guiGraphics.fill(
-                        2 + xOffset, y - 2 + yOffset, font.width(text) + 5 + xOffset, y + 10 + yOffset,
+                        x - 2, y - 2, x + font.width(text) + 2, y + 10,
                         Color.ofHsv(0, 0, 0, Main.CONFIG.overlay.textBackgroundOpacity()).argb()
                 );
             }
-            guiGraphics.drawString(font, text, 4 + xOffset, y + yOffset, color, Main.CONFIG.overlay.textShadow());
+            guiGraphics.drawString(font, text, x, y, color, Main.CONFIG.overlay.textShadow());
 
             guiGraphics.flush();
             RenderSystem.disableBlend();
         }
+    }
+
+    public enum OverlayPosition {
+        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     }
 }
