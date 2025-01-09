@@ -1,4 +1,4 @@
-package me.pajic.accessorify.mixin.compat;
+package me.pajic.accessorify.compat;
 
 import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;

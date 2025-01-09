@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "me.pajic.accessorify.mixin",
   "compatibilityLevel": "JAVA_21",
-  "plugin": "me.pajic.accessorify.mixin.compat.CompatMixinPlugin",
+  "plugin": "me.pajic.accessorify.compat.CompatMixinPlugin",
   "mixins": [
     "LivingEntityMixin",
     "PlayerMixin",
