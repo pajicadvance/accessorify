@@ -18,10 +18,16 @@ public class ModDatapacks {
                     ResourceLocation.fromNamespaceAndPath("accessorify", "clock"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.elytraAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath("accessorify", "elytra"),
-                    modContainer, ResourcePackActivationType.ALWAYS_ENABLED
-            );
+            if (Main.CONFIG.elytraAccessory()) {
+                ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath("accessorify", "elytra"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+                if (Main.DEEPER_DARKER_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath("accessorify", "soulelytra"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+            }
             if (Main.CONFIG.spyglassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
                     ResourceLocation.fromNamespaceAndPath("accessorify", "spyglass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED

@@ -1,6 +1,7 @@
-package me.pajic.accessorify.accessories;
+package me.pajic.accessorify.compat.deeperdarker;
 
 import com.google.common.collect.HashMultimap;
+import com.kyanite.deeperdarker.content.DDItems;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
@@ -10,7 +11,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 //? if <= 1.21.1 {
 import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.world.item.ElytraItem;
@@ -18,20 +18,20 @@ import net.minecraft.world.item.ElytraItem;
 //? if > 1.21.1
 /*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
-public class ElytraAccessory implements Accessory {
+public class SoulElytraAccessory implements Accessory {
 
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath("accessorify", "add_cape");
+    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath("accessorify", "add_cape_1");
 
     public static void init() {
         //? if <= 1.21.1
-        AccessoriesAPI.registerAccessory(Items.ELYTRA, new ElytraAccessory());
+        AccessoriesAPI.registerAccessory(DDItems.SOUL_ELYTRA, new SoulElytraAccessory());
         //? if > 1.21.1
-        /*AccessoryRegistry.register(Items.ELYTRA, new ElytraAccessory());*/
+        /*AccessoryRegistry.register(DDItems.SOUL_ELYTRA, new SoulElytraAccessory());*/
     }
 
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
-        AccessoriesRendererRegistry.registerNoRenderer(Items.ELYTRA);
+        AccessoriesRendererRegistry.registerNoRenderer(DDItems.SOUL_ELYTRA);
     }
 
     @Override

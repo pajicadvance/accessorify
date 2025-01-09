@@ -16,6 +16,7 @@ repositories {
     maven { url = "https://maven.parchmentmc.org" }
     maven { url = "https://maven.terraformersmc.com/" }
     maven { url = "https://maven.wispforest.io/releases/" }
+    maven { url = "https://maven.kyrptonaught.dev" }
     exclusiveContent {
         forRepository {
             maven {
@@ -52,18 +53,31 @@ dependencies {
     }
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+    // Hard dependencies
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}"
     include(implementation("com.moulberry:mixinconstraints:${project.mixinconstraints_version}"))
     modImplementation("com.terraformersmc:modmenu:${property("modmenu_version")}")
     annotationProcessor modImplementation("io.wispforest:owo-lib:${property("owo_version")}")
     modImplementation "io.wispforest:accessories-fabric:${property("accessories_version")}"
 
+    // Supported mods
+    modImplementation "net.kyrptonaught:customportalapi:${property("customportalapi_version")}"
     modCompileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
-    modCompileOnly "maven.modrinth:raised:${property("raised_version")}"
-
+    modImplementation "maven.modrinth:raised:${property("raised_version")}"
     modImplementation "maven.modrinth:notes:${property("notes_version")}"
     modCompileOnly("vectorwing:FarmersDelight:${property("fdrf_version")}") {
         exclude(group: "net.fabricmc")
+    }
+    modCompileOnly("maven.modrinth:deeperdarker:${property("deeperdarker_version")}")
+    modCompileOnly("maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}")
+
+    // 1.21.1 exclusive supported mods
+    if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
+        modImplementation("vectorwing:FarmersDelight:${property("fdrf_version")}") {
+            exclude(group: "net.fabricmc")
+        }
+        modImplementation("maven.modrinth:deeperdarker:${property("deeperdarker_version")}")
+        modImplementation("maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}")
     }
 }
 

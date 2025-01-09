@@ -6,14 +6,16 @@
   "mixins": [
     "LivingEntityMixin",
     "PlayerMixin",
+    "compat.deeperdarker.DDNetworkingMixin",
+    "compat.deeperdarker.DeeperDarkerClientMixin",
     "compat.fdrf.HUDOverlaysMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",
-    "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
     "PackSelectionModelMixin",
+    "compat.deeperdarker.SoulElytraRendererMixin",
     "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {
