@@ -8,7 +8,9 @@
     "PlayerMixin",
     "compat.deeperdarker.DDNetworkingMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
-    "compat.fdrf.HUDOverlaysMixin"
+    "compat.fdrf.HUDOverlaysMixin",
+    "compat.friendsandfoes.PlayerEntityMixinSquared",
+    "compat.friendsandfoes.TrinketsCompatMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

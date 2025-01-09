@@ -5,17 +5,13 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin",
-    "compat.deeperdarker.DDNetworkingMixin",
-    "compat.deeperdarker.DeeperDarkerClientMixin",
-    "compat.fdrf.HUDOverlaysMixin"
+    "PlayerMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
     "PackSelectionModelMixin",
-    "compat.deeperdarker.SoulElytraRendererMixin",
     "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {

@@ -23,19 +23,29 @@ public class ModDatapacks {
                         ResourceLocation.fromNamespaceAndPath("accessorify", "elytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
+                //? if <= 1.21.1 {
                 if (Main.DEEPER_DARKER_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
                         ResourceLocation.fromNamespaceAndPath("accessorify", "soulelytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
+                //?}
             }
             if (Main.CONFIG.spyglassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
                     ResourceLocation.fromNamespaceAndPath("accessorify", "spyglass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.totemOfUndyingAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath("accessorify", "totem"),
-                    modContainer, ResourcePackActivationType.ALWAYS_ENABLED
-            );
+            if (Main.CONFIG.totemOfUndyingAccessory()) {
+                ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath("accessorify", "totem"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+                //? if <= 1.21.1 {
+                if (Main.FRIENDS_AND_FOES_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath("accessorify", "fnftotems"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+                //?}
+            }
         });
     }
 }
