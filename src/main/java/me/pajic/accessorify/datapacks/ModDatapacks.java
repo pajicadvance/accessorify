@@ -1,5 +1,6 @@
 package me.pajic.accessorify.datapacks;
 
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.config.ModCommonConfig;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -29,14 +30,28 @@ public class ModDatapacks {
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.elytraAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath("accessorify", "elytra"),
-                PackType.SERVER_DATA,
-                Component.literal("Accessorify Elytra"),
-                PackSource.BUILT_IN,
-                true,
-                Pack.Position.TOP
-        );
+        if (ModCommonConfig.elytraAccessory) {
+            event.addPackFinders(
+                    ResourceLocation.fromNamespaceAndPath("accessorify", "elytra"),
+                    PackType.SERVER_DATA,
+                    Component.literal("Accessorify Elytra"),
+                    PackSource.BUILT_IN,
+                    true,
+                    Pack.Position.TOP
+            );
+            //? if <= 1.21.1 {
+            if (Main.DEEPER_DARKER_LOADED) {
+                event.addPackFinders(
+                        ResourceLocation.fromNamespaceAndPath("accessorify", "soulelytra"),
+                        PackType.SERVER_DATA,
+                        Component.literal("Accessorify Soul Elytra"),
+                        PackSource.BUILT_IN,
+                        true,
+                        Pack.Position.TOP
+                );
+            }
+            //?}
+        }
         if (ModCommonConfig.spyglassAccessory) event.addPackFinders(
                 ResourceLocation.fromNamespaceAndPath("accessorify", "spyglass"),
                 PackType.SERVER_DATA,
@@ -45,13 +60,27 @@ public class ModDatapacks {
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.totemOfUndyingAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath("accessorify", "totem"),
-                PackType.SERVER_DATA,
-                Component.literal("Accessorify Totem"),
-                PackSource.BUILT_IN,
-                true,
-                Pack.Position.TOP
-        );
+        if (ModCommonConfig.totemOfUndyingAccessory) {
+            event.addPackFinders(
+                    ResourceLocation.fromNamespaceAndPath("accessorify", "totem"),
+                    PackType.SERVER_DATA,
+                    Component.literal("Accessorify Totem"),
+                    PackSource.BUILT_IN,
+                    true,
+                    Pack.Position.TOP
+            );
+            //? if <= 1.21.1 {
+            if (Main.FRIENDS_AND_FOES_LOADED) {
+                event.addPackFinders(
+                        ResourceLocation.fromNamespaceAndPath("accessorify", "fnftotems"),
+                        PackType.SERVER_DATA,
+                        Component.literal("Accessorify FNF Totems"),
+                        PackSource.BUILT_IN,
+                        true,
+                        Pack.Position.TOP
+                );
+            }
+            //?}
+        }
     }
 }

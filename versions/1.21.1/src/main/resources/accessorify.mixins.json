@@ -3,9 +3,13 @@
   "minVersion": "0.8",
   "package": "me.pajic.accessorify.mixin",
   "compatibilityLevel": "JAVA_21",
+  "plugin": "me.pajic.accessorify.compat.CompatMixinPlugin",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "compat.deeperdarker.SoulElytraBoostPacketMixin",
+    "compat.friendsandfoes.CuriosCompatMixin",
+    "compat.friendsandfoes.PlayerEntityMixinSquared"
   ],
   "client": [
     "AbstractClientPlayerMixin",
@@ -15,6 +19,7 @@
     "ElytraLayerMixin",
     "LocalPlayerMixin",
     "PackSelectionModelMixin",
+    "compat.deeperdarker.SoulElytraRendererMixin",
     "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {

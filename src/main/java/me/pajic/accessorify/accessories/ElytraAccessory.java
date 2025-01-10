@@ -7,8 +7,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-//? if <= 1.21.1
+import net.minecraft.core.component.DataComponents;
+//? if <= 1.21.1 {
 import io.wispforest.accessories.api.AccessoriesAPI;
+import net.minecraft.world.item.ElytraItem;
+//?}
 //? if > 1.21.1
 /*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
@@ -39,6 +42,11 @@ public class ElytraAccessory implements Accessory {
 
     @Override
     public boolean canEquip(ItemStack stack, SlotReference reference) {
-        return !reference.capability().isAnotherEquipped(stack, reference, Items.ELYTRA);
+        return !reference.capability().isAnotherEquipped(stack, reference,
+                //? if <= 1.21.1
+                itemStack -> itemStack.getItem() instanceof ElytraItem
+                //? if > 1.21.1
+                /*itemStack -> itemStack.has(DataComponents.GLIDER)*/
+        );
     }
 }

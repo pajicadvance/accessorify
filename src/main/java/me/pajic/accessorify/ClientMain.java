@@ -1,5 +1,6 @@
 package me.pajic.accessorify;
 
+import com.kyanite.deeperdarker.content.DDItems;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
@@ -30,6 +31,13 @@ public class ClientMain {
         if (ModCommonConfig.compassAccessory || ModCommonConfig.clockAccessory) NeoForge.EVENT_BUS.addListener(InfoOverlays::renderInfoOverlays);
         if (ModCommonConfig.clockAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.CLOCK);
         if (ModCommonConfig.compassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.COMPASS);
-        if (ModCommonConfig.elytraAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.ELYTRA);
+        if (ModCommonConfig.elytraAccessory) {
+            AccessoriesRendererRegistry.registerNoRenderer(Items.ELYTRA);
+            //? if <= 1.21.1 {
+            if (Main.DEEPER_DARKER_LOADED) {
+                AccessoriesRendererRegistry.registerNoRenderer(DDItems.SOUL_ELYTRA.get());
+            }
+            //?}
+        }
     }
 }

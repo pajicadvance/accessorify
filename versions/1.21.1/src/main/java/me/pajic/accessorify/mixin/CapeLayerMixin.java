@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(CapeLayer.class)
 public class CapeLayerMixin {
 
-    //? if <= 1.21.1 {
     @ModifyExpressionValue(
             method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;FFFFFF)V",
             at = @At(
@@ -29,5 +28,4 @@ public class CapeLayerMixin {
         }
         return original;
     }
-    //?}
 }

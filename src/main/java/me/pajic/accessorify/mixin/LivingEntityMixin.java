@@ -8,6 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+//? if <= 1.21.1
+import net.minecraft.world.item.ElytraItem;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
@@ -37,7 +39,7 @@ public class LivingEntityMixin {
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
         if (ModCommonConfig.elytraAccessory) {
-            ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.ELYTRA);
+            ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
             return stack.isEmpty() ? original : stack;
         }
         return original;

@@ -9,7 +9,6 @@
   ],
   "client": [
     "AbstractClientPlayerMixin",
-    "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
     "PackSelectionModelMixin",
