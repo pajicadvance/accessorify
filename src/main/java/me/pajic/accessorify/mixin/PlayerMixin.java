@@ -37,14 +37,22 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Shadow public abstract void stopFallFlying();
 
-    @WrapMethod(method = "getItemBySlot")
-    private ItemStack tryGetElytraAccessory(EquipmentSlot slot, Operation<ItemStack> original) {
-        if (slot == EquipmentSlot.CHEST && ModCommonConfig.elytraAccessory) {
+    //? if <= 1.21.1 {
+    @ModifyExpressionValue(
+            method = "tryToStartFallFlying",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/player/Player;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"
+            )
+    )
+    private ItemStack tryGetElytraAccessory(ItemStack original) {
+        if (ModCommonConfig.elytraAccessory) {
             ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
-            return stack.isEmpty() ? original.call(slot) : stack;
+            return stack.isEmpty() ? original : stack;
         }
-        return original.call(slot);
+        return original;
     }
+    //?}
 
     @Inject(
             method = "tick",
@@ -54,9 +62,10 @@ public abstract class PlayerMixin extends LivingEntity {
         if (
                 isInWater() && (
                         //? if <= 1.21.1
-                        (getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem)
+                        (getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem) ||
                         //? if > 1.21.1
-                        /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER)*/
+                        /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER) ||*/
+                        !ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).isEmpty()
                 )
         ) {
             stopFallFlying();

@@ -13,9 +13,13 @@
   ],
   "client": [
     "AbstractClientPlayerMixin",
+    "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
+    "ElytraLayerMixin",
+    "LocalPlayerMixin",
     "PackSelectionModelMixin",
+    "compat.deeperdarker.SoulElytraRendererMixin",
     "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {
