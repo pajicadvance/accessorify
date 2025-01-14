@@ -75,6 +75,8 @@ dependencies {
     modCompileOnly("maven.modrinth:deeperdarker:${property("deeperdarker_version")}")
     modCompileOnly("maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}")
     if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
+        modCompileOnly files("ext_imports/citresewn-defaults-1.2.2+1.21.jar")
+        modCompileOnly "maven.modrinth:cit-resewn:${property("citresewn_version")}"
         modImplementation("vectorwing:FarmersDelight:${property("fdrf_version")}") {
             exclude(group: "net.fabricmc")
         }

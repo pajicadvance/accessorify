@@ -33,6 +33,21 @@ public class LivingEntityMixin {
             method = "updateFallFlying",
             at = @At(
                     value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"
+            )
+    )
+    private ItemStack tryGetElytraAccessory(ItemStack original) {
+        if (Main.CONFIG.elytraAccessory()) {
+            ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
+            return stack.isEmpty() ? original : stack;
+        }
+        return original;
+    }
+
+    @ModifyExpressionValue(
+            method = "updateFallFlying",
+            at = @At(
+                    value = "INVOKE",
                     target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
             )
     )

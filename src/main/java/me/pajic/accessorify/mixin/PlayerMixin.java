@@ -1,6 +1,7 @@
 package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,16 +37,22 @@ public abstract class PlayerMixin extends LivingEntity {
     @Shadow public abstract @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot);
     @Shadow public abstract void stopFallFlying();
 
-    @WrapMethod(method = "getItemBySlot")
-    private ItemStack tryGetElytraAccessory(EquipmentSlot slot, Operation<ItemStack> original) {
-        if (slot == EquipmentSlot.CHEST && Main.CONFIG.elytraAccessory()) {
+    //? if <= 1.21.1 {
+    @ModifyExpressionValue(
+            method = "tryToStartFallFlying",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/player/Player;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"
+            )
+    )
+    private ItemStack tryGetElytraAccessory(ItemStack original) {
+        if (Main.CONFIG.elytraAccessory()) {
             ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
-            return stack.isEmpty() ? original.call(slot) : stack;
+            return stack.isEmpty() ? original : stack;
         }
-        return original.call(slot);
+        return original;
     }
 
-    //? if <= 1.21.1 {
     @ModifyExpressionValue(
             method = "tryToStartFallFlying",
             at = @At(
@@ -65,9 +73,10 @@ public abstract class PlayerMixin extends LivingEntity {
         if (
                 isInWater() && (
                         //? if <= 1.21.1
-                        getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem
+                        getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem ||
                         //? if > 1.21.1
-                        /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER)*/
+                        /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER) ||*/
+                        !ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).isEmpty()
                 )
         ) {
             stopFallFlying();
