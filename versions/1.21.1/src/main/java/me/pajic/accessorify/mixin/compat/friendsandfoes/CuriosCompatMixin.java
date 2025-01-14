@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 public class CuriosCompatMixin {
 
     @WrapMethod(method = "getEquippedItemFromCustomSlots")
-    private @Nullable ItemStack cancelTrinketsCompat(Entity entity, Predicate<ItemStack> itemStackPredicate, Operation<ItemStack> original) {
+    private @Nullable ItemStack addAccessoriesCompat(Entity entity, Predicate<ItemStack> itemStackPredicate, Operation<ItemStack> original) {
         if (ModCommonConfig.totemOfUndyingAccessory && entity instanceof Player player) {
             ItemStack stack = FriendsAndFoesCompat.getTotemAccessoryStack(player);
             if (stack.isEmpty()) {

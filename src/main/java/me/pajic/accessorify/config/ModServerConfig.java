@@ -14,7 +14,7 @@ public class ModServerConfig {
             .define("hideDebugInfoInSurvival", false);
     private static final ModConfigSpec.BooleanValue SHOW_Y_COORDINATE = BUILDER
             .translation("text.config.accessorify.option.showYCoordinate")
-            .define("showYCoordinate", false);
+            .define("showYCoordinate", true);
 
     public static final ModConfigSpec SERVER_SPEC = BUILDER.build();
 

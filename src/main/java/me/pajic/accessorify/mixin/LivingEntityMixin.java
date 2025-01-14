@@ -28,21 +28,4 @@ public class LivingEntityMixin {
         }
         return original;
     }
-
-    //? if <= 1.21.1 {
-    @ModifyExpressionValue(
-            method = "updateFallFlying",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/LivingEntity;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"
-            )
-    )
-    private ItemStack tryGetElytraAccessory(ItemStack original) {
-        if (ModCommonConfig.elytraAccessory) {
-            ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
-            return stack.isEmpty() ? original : stack;
-        }
-        return original;
-    }
-    //?}
 }
