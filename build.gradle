@@ -67,13 +67,13 @@ dependencies {
     modCompileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
     modImplementation "maven.modrinth:raised:${property("raised_version")}"
     modImplementation "maven.modrinth:notes:${property("notes_version")}"
+
+    // 1.21.1 exclusive supported mods
     modCompileOnly("vectorwing:FarmersDelight:${property("fdrf_version")}") {
         exclude(group: "net.fabricmc")
     }
     modCompileOnly("maven.modrinth:deeperdarker:${property("deeperdarker_version")}")
     modCompileOnly("maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}")
-
-    // 1.21.1 exclusive supported mods
     if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
         modImplementation("vectorwing:FarmersDelight:${property("fdrf_version")}") {
             exclude(group: "net.fabricmc")

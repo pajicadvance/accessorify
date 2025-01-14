@@ -8,7 +8,6 @@
     "LivingEntityMixin",
     "PlayerMixin",
     "compat.deeperdarker.DDNetworkingMixin",
-    "compat.deeperdarker.DeeperDarkerClientMixin",
     "compat.fdrf.HUDOverlaysMixin",
     "compat.friendsandfoes.PlayerEntityMixinSquared",
     "compat.friendsandfoes.TrinketsCompatMixin"
@@ -18,10 +17,8 @@
     "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
-    "ElytraLayerMixin",
     "LocalPlayerMixin",
     "PackSelectionModelMixin",
-    "compat.deeperdarker.SoulElytraRendererMixin",
     "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {

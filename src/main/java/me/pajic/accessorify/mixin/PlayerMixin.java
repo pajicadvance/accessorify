@@ -35,6 +35,46 @@ public abstract class PlayerMixin extends LivingEntity {
     @Shadow public abstract @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot);
     @Shadow public abstract void stopFallFlying();
 
+    @WrapMethod(method = "getItemBySlot")
+    private ItemStack tryGetElytraAccessory(EquipmentSlot slot, Operation<ItemStack> original) {
+        if (slot == EquipmentSlot.CHEST && Main.CONFIG.elytraAccessory()) {
+            ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
+            return stack.isEmpty() ? original.call(slot) : stack;
+        }
+        return original.call(slot);
+    }
+
+    //? if <= 1.21.1 {
+    @ModifyExpressionValue(
+            method = "tryToStartFallFlying",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
+            )
+    )
+    private boolean modifyElytraCheck(boolean original, @Local ItemStack itemStack) {
+        return ModUtil.moddedElytraCheck(itemStack, (LivingEntity) (Object) this, original);
+    }
+    //?}
+
+    @Inject(
+            method = "tick",
+            at = @At("HEAD")
+    )
+    private void cancelElytraFlyingInWater(CallbackInfo ci) {
+        if (
+                isInWater() && (
+                        //? if <= 1.21.1
+                        getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem
+                        //? if > 1.21.1
+                        /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER)*/
+                )
+        ) {
+            stopFallFlying();
+            setSwimming(true);
+        }
+    }
+
     @Inject(
             method = "tick",
             at = @At("HEAD")
@@ -49,59 +89,5 @@ public abstract class PlayerMixin extends LivingEntity {
     private boolean modifyScopingCondition(Operation<Boolean> original) {
         if (ModUtil.shouldScope) return true;
         return original.call();
-    }
-
-    //? if <= 1.21.1 {
-    @ModifyExpressionValue(
-            method = "tryToStartFallFlying",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/player/Player;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"
-            )
-    )
-    private ItemStack tryGetElytraAccessory(ItemStack original) {
-        if (Main.CONFIG.elytraAccessory()) {
-            ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
-            return stack.isEmpty() ? original : stack;
-        }
-        return original;
-    }
-
-    @ModifyExpressionValue(
-            method = "tryToStartFallFlying",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
-            )
-    )
-    private boolean modifyElytraCheck(boolean original, @Local ItemStack itemStack) {
-        LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (
-                !ModUtil.tryGetElytraAccessory(livingEntity).isEmpty() &&
-                !(livingEntity.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem)
-        ) {
-            return itemStack.getItem() instanceof ElytraItem;
-        }
-        return original;
-    }
-    //?}
-
-    @Inject(
-            method = "tick",
-            at = @At("HEAD")
-    )
-    private void cancelElytraFlyingInWater(CallbackInfo ci) {
-        if (
-                isInWater() && (
-                        //? if <= 1.21.1
-                        (getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem) ||
-                        //? if > 1.21.1
-                        /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER) ||*/
-                        !ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).isEmpty()
-                )
-        ) {
-            stopFallFlying();
-            setSwimming(true);
-        }
     }
 }

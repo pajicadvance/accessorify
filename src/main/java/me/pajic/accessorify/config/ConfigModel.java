@@ -18,7 +18,7 @@ public class ConfigModel {
     @Nest public Overlay overlay = new Overlay();
 
     public static class Overlay {
-        public boolean showYCoordinate = false;
+        public boolean showYCoordinate = true;
         @Sync(Option.SyncMode.NONE) public InfoOverlays.OverlayPosition position = InfoOverlays.OverlayPosition.TOP_LEFT;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetX = 0;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetY = 0;
