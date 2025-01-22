@@ -7,6 +7,7 @@ import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.compat.friendsandfoes.FriendsAndFoesCompat;
 import me.pajic.accessorify.util.ModUtil;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,12 +23,12 @@ public class TrinketsCompatMixin {
 
     @WrapMethod(method = "getEquippedItemFromCustomSlots")
     private @Nullable ItemStack addAccessoriesCompat(Entity entity, Predicate<ItemStack> itemStackPredicate, Operation<ItemStack> original) {
-        if (Main.CONFIG.totemOfUndyingAccessory() && entity instanceof Player player) {
+        if (Main.CONFIG.totemOfUndyingAccessory() && entity instanceof Player player && !FabricLoader.getInstance().isModLoaded("tclayer")) {
             ItemStack stack = FriendsAndFoesCompat.getTotemAccessoryStack(player);
             if (stack.isEmpty()) {
                 stack = ModUtil.getAccessoryStack(player, Items.TOTEM_OF_UNDYING);
             }
-            return stack.isEmpty() ? original.call(entity, itemStackPredicate) : stack;
+            return stack;
         }
         return original.call(entity, itemStackPredicate);
     }
