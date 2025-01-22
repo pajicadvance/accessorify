@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -22,12 +23,12 @@ public class CuriosCompatMixin {
 
     @WrapMethod(method = "getEquippedItemFromCustomSlots")
     private @Nullable ItemStack addAccessoriesCompat(Entity entity, Predicate<ItemStack> itemStackPredicate, Operation<ItemStack> original) {
-        if (ModCommonConfig.totemOfUndyingAccessory && entity instanceof Player player) {
+        if (ModCommonConfig.totemOfUndyingAccessory && entity instanceof Player player && !ModList.get().isLoaded("cclayer")) {
             ItemStack stack = FriendsAndFoesCompat.getTotemAccessoryStack(player);
             if (stack.isEmpty()) {
                 stack = ModUtil.getAccessoryStack(player, Items.TOTEM_OF_UNDYING);
             }
-            return stack.isEmpty() ? original.call(entity, itemStackPredicate) : stack;
+            return stack;
         }
         return original.call(entity, itemStackPredicate);
     }
