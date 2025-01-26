@@ -15,11 +15,19 @@ public class ModServerConfig {
     private static final ModConfigSpec.BooleanValue SHOW_Y_COORDINATE = BUILDER
             .translation("text.config.accessorify.option.showYCoordinate")
             .define("showYCoordinate", true);
+    private static final ModConfigSpec.BooleanValue OBFUSCATE_COMPASS_IF_NOT_OVERWORLD = BUILDER
+            .translation("text.config.accessorify.option.overlay.obfuscateCompassIfNotOverworld")
+            .define("obfuscateCompassIfNotOverworld", false);
+    private static final ModConfigSpec.BooleanValue OBFUSCATE_CLOCK_IF_NOT_OVERWORLD = BUILDER
+            .translation("text.config.accessorify.option.overlay.obfuscateClockIfNotOverworld")
+            .define("obfuscateClockIfNotOverworld", true);
 
     public static final ModConfigSpec SERVER_SPEC = BUILDER.build();
 
     public static boolean hideDebugInfoInSurvival;
     public static boolean showYCoordinate;
+    public static boolean obfuscateCompassIfNotOverworld;
+    public static boolean obfuscateClockIfNotOverworld;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent.Loading event) {
@@ -35,6 +43,8 @@ public class ModServerConfig {
         if (event.getConfig().getSpec() == SERVER_SPEC) {
             hideDebugInfoInSurvival = HIDE_DEBUG_INFO_IN_SURVIVAL.get();
             showYCoordinate = SHOW_Y_COORDINATE.get();
+            obfuscateCompassIfNotOverworld = OBFUSCATE_COMPASS_IF_NOT_OVERWORLD.get();
+            obfuscateClockIfNotOverworld = OBFUSCATE_CLOCK_IF_NOT_OVERWORLD.get();
         }
     }
 }

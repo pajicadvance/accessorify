@@ -10,6 +10,7 @@ import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.config.ModServerConfig;
 import me.pajic.accessorify.util.ModUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
@@ -59,93 +61,101 @@ public class InfoOverlays {
     }
 
     private static void prepareCompassOverlay(Minecraft minecraft) {
-        BlockPos blockPos = minecraft.player.blockPosition();
-        ResourceLocation biome = minecraft.player.level().getBiome(blockPos).unwrap().map(
-                key -> key != null ? key.location() : null, unknown -> null
-        );
-
-        Component coordinates;
-        if (ModServerConfig.showYCoordinate) {
-            coordinates = Component.translatable(
-                    "gui.accessorify.coordinates_xyz",
-                    blockPos.getX(), blockPos.getY(), blockPos.getZ()
+        if (ModServerConfig.obfuscateCompassIfNotOverworld && minecraft.level.dimension() != Level.OVERWORLD) {
+            Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, minecraft.level.random.nextInt(4) + 3));
+            renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+        } else {
+            BlockPos blockPos = minecraft.player.blockPosition();
+            ResourceLocation biome = minecraft.player.level().getBiome(blockPos).unwrap().map(
+                    key -> key != null ? key.location() : null, unknown -> null
             );
-        }
-        else {
-            coordinates = Component.translatable(
-                    "gui.accessorify.coordinates_xz",
-                    blockPos.getX(), blockPos.getZ()
-            );
-        }
 
-        Component direction = Component.translatable("gui.accessorify.facing", minecraft.player.getDirection().getName());
-        Component biomeName = Component.translatable("biome." + biome.getNamespace() + "." + biome.getPath());
+            Component coordinates;
+            if (ModServerConfig.showYCoordinate) {
+                coordinates = Component.translatable(
+                        "gui.accessorify.coordinates_xyz",
+                        blockPos.getX(), blockPos.getY(), blockPos.getZ()
+                );
+            } else {
+                coordinates = Component.translatable(
+                        "gui.accessorify.coordinates_xz",
+                        blockPos.getX(), blockPos.getZ()
+                );
+            }
 
-        renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
-        renderList.add(new ObjectIntImmutablePair<>(direction, 0xffffff));
-        renderList.add(new ObjectIntImmutablePair<>(biomeName, 0xffffff));
+            Component direction = Component.translatable("gui.accessorify.facing", minecraft.player.getDirection().getName());
+            Component biomeName = Component.translatable("biome." + biome.getNamespace() + "." + biome.getPath());
+
+            renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(direction, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(biomeName, 0xffffff));
+        }
     }
 
     private static void prepareClockOverlay(Minecraft minecraft) {
-        BlockPos blockPos = minecraft.player.blockPosition();
+        if (ModServerConfig.obfuscateClockIfNotOverworld && minecraft.level.dimension() != Level.OVERWORLD) {
+            Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, minecraft.level.random.nextInt(4) + 3));
+            renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+            if (ModList.get().isLoaded("sereneseasons"))
+                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+        } else {
+            BlockPos blockPos = minecraft.player.blockPosition();
 
-        MutableComponent dayAndTime = Component.translatable(
-                "gui.accessorify.day",
-                (minecraft.level.getDayTime() / 24000L) + 1
-        );
-        long timeOffset = (minecraft.level.getDayTime() + 6000) % 24000;
-        Component time = Component.translatable(
-                "gui.accessorify.time",
-                timeOffset / 1000,
-                String.format("%02d", (int) ((double) (timeOffset / 10 % 100) / 100 * 60))
-        );
-        dayAndTime.append(", ");
-        dayAndTime.append(time);
-        renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
+            MutableComponent dayAndTime = Component.translatable(
+                    "gui.accessorify.day",
+                    (minecraft.level.getDayTime() / 24000L) + 1
+            );
+            long timeOffset = (minecraft.level.getDayTime() + 6000) % 24000;
+            Component time = Component.translatable(
+                    "gui.accessorify.time",
+                    timeOffset / 1000,
+                    String.format("%02d", (int) ((double) (timeOffset / 10 % 100) / 100 * 60))
+            );
+            dayAndTime.append(", ");
+            dayAndTime.append(time);
+            renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
 
-        if (ModList.get().isLoaded("sereneseasons")) {
-            ObjectIntImmutablePair<Component> seasonStringData = SeasonsCompat.getSeasonStringData(minecraft.level);
-            if (ModClientConfig.coloredSeason) {
-                renderList.add(seasonStringData);
+            if (ModList.get().isLoaded("sereneseasons")) {
+                ObjectIntImmutablePair<Component> seasonStringData = SeasonsCompat.getSeasonStringData(minecraft.level);
+                if (ModClientConfig.coloredSeason) {
+                    renderList.add(seasonStringData);
+                } else {
+                    renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
+                }
             }
-            else {
-                renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
-            }
-        }
 
-        Component weather;
-        int weatherColor;
-        if (minecraft.level.isThundering()) {
-            weather = Component.translatable("gui.accessorify.thundering");
-            weatherColor = ModClientConfig.thundering;
-        }
-        else if (minecraft.level.isRaining()) {
-            //? if <= 1.21.1
-            Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos);
-            //? if > 1.21.1
-            /*Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos, (int) minecraft.player.getY());*/
-            if (precipitation == Biome.Precipitation.RAIN) {
-                weather = Component.translatable("gui.accessorify.raining");
-                weatherColor = ModClientConfig.raining;
+            Component weather;
+            int weatherColor;
+            if (minecraft.level.isThundering()) {
+                weather = Component.translatable("gui.accessorify.thundering");
+                weatherColor = ModClientConfig.thundering;
+            } else if (minecraft.level.isRaining()) {
+                //? if <= 1.21.1
+                Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos);
+                //? if > 1.21.1
+                /*Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos, (int) minecraft.player.getY());*/
+                if (precipitation == Biome.Precipitation.RAIN) {
+                    weather = Component.translatable("gui.accessorify.raining");
+                    weatherColor = ModClientConfig.raining;
+                } else if (precipitation == Biome.Precipitation.SNOW) {
+                    weather = Component.translatable("gui.accessorify.snowing");
+                    weatherColor = ModClientConfig.snowing;
+                } else {
+                    weather = Component.translatable("gui.accessorify.cloudy");
+                    weatherColor = ModClientConfig.cloudy;
+                }
+            } else {
+                weather = Component.translatable("gui.accessorify.clear");
+                weatherColor = 0xffffff;
             }
-            else if (precipitation == Biome.Precipitation.SNOW) {
-                weather = Component.translatable("gui.accessorify.snowing");
-                weatherColor = ModClientConfig.snowing;
+            if (ModClientConfig.coloredWeather) {
+                renderList.add(new ObjectIntImmutablePair<>(weather, weatherColor));
+            } else {
+                renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffff));
             }
-            else {
-                weather = Component.translatable("gui.accessorify.cloudy");
-                weatherColor = ModClientConfig.cloudy;
-            }
-        }
-        else {
-            weather = Component.translatable("gui.accessorify.clear");
-            weatherColor = 0xffffff;
-        }
-        if (ModClientConfig.coloredWeather) {
-            renderList.add(new ObjectIntImmutablePair<>(weather, weatherColor));
-        }
-        else {
-            renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffff));
         }
     }
 
