@@ -19,6 +19,8 @@ public class ConfigModel {
 
     public static class Overlay {
         public boolean showYCoordinate = true;
+        public boolean obfuscateCompassIfNotOverworld = false;
+        public boolean obfuscateClockIfNotOverworld = true;
         @Sync(Option.SyncMode.NONE) public InfoOverlays.OverlayPosition position = InfoOverlays.OverlayPosition.TOP_LEFT;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetX = 0;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetY = 0;

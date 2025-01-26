@@ -18,6 +18,7 @@ public class Main implements ModInitializer {
     public static final boolean DEEPER_DARKER_LOADED = FabricLoader.getInstance().isModLoaded("deeperdarker");
     public static final boolean FRIENDS_AND_FOES_LOADED = FabricLoader.getInstance().isModLoaded("friendsandfoes");
     //?}
+    public static final boolean ELERON_LOADED = FabricLoader.getInstance().isModLoaded("eleron");
 
     @Override
     public void onInitialize() {

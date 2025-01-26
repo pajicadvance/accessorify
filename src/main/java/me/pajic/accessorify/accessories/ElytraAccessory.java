@@ -2,19 +2,23 @@ package me.pajic.accessorify.accessories;
 
 import com.google.common.collect.HashMultimap;
 import io.wispforest.accessories.api.Accessory;
+import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
+import me.pajic.accessorify.Main;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import me.pajic.accessorify.compat.EleronCompat;
 //? if <= 1.21.1 {
 import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.world.item.ElytraItem;
-//?}
+//? }
 //? if > 1.21.1
 /*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
@@ -46,6 +50,11 @@ public class ElytraAccessory implements Accessory {
         var map = HashMultimap.<String, AttributeModifier>create();
         map.put("cape", new AttributeModifier(resourceLocation, 1, AttributeModifier.Operation.ADD_VALUE));
         reference.capability().removeSlotModifiers(map);
+    }
+
+    @Override
+    public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
+        if (Main.ELERON_LOADED) EleronCompat.addModifiers(builder, stack, reference.entity().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT));
     }
 
     @Override
