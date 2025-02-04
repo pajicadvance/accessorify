@@ -17,6 +17,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class InfoOverlays {
 
@@ -49,19 +51,14 @@ public class InfoOverlays {
                     minecraft.player != null && minecraft.level != null &&
                     !minecraft.options.hideGui && !minecraft.gui.getDebugOverlay().showDebugScreen()
             ) {
-                if (
-                        Main.CONFIG.compassAccessory() &&
-                        Main.CONFIG.clockAccessory() &&
-                        ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS) && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)
-                ) {
-                    prepareCompassOverlay(minecraft);
-                    prepareClockOverlay(minecraft);
-                }
-                else if (Main.CONFIG.compassAccessory() && ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS)) {
+                if (Main.CONFIG.compassAccessory() && ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS)) {
                     prepareCompassOverlay(minecraft);
                 }
-                else if (Main.CONFIG.clockAccessory() && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)) {
+                if (Main.CONFIG.clockAccessory() && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)) {
                     prepareClockOverlay(minecraft);
+                }
+                if (Main.CONFIG.recoveryCompassAccessory() && ModUtil.accessoryEquipped(minecraft.player, Items.RECOVERY_COMPASS)) {
+                    prepareRecoveryCompassOverlay(minecraft);
                 }
                 renderLines(guiGraphics, minecraft);
                 renderList.clear();
@@ -166,16 +163,42 @@ public class InfoOverlays {
             }
         }
 
+        private void prepareRecoveryCompassOverlay(Minecraft minecraft) {
+            Optional<GlobalPos> optional = minecraft.player.getLastDeathLocation();
+            Component text;
+            if (optional.isPresent()) {
+                BlockPos lastDeathLocation = optional.get().pos();
+                text = Component.translatable("gui.accessorify.last_death_location");
+                Component coordinates;
+                if (Main.CONFIG.overlay.showYCoordinate()) {
+                    coordinates = Component.translatable(
+                            "gui.accessorify.coordinates_xyz",
+                            lastDeathLocation.getX(), lastDeathLocation.getY(), lastDeathLocation.getZ()
+                    );
+                } else {
+                    coordinates = Component.translatable(
+                            "gui.accessorify.coordinates_xz",
+                            lastDeathLocation.getX(), lastDeathLocation.getZ()
+                    );
+                }
+                renderList.add(new ObjectIntImmutablePair<>(text, 0xffffff));
+                renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
+            } else {
+                text = Component.translatable("gui.accessorify.last_death_location_unavailable");
+                renderList.add(new ObjectIntImmutablePair<>(text, 0xffffff));
+            }
+        }
+
         private void renderLines(GuiGraphics guiGraphics, Minecraft minecraft) {
-            final int[] y = {4};
+            int y = 4;
             OverlayPosition position = Main.CONFIG.overlay.position();
             if (position == OverlayPosition.BOTTOM_LEFT || position == OverlayPosition.BOTTOM_RIGHT) {
                 Collections.reverse(renderList);
             }
-            renderList.forEach(line -> {
-                renderLine(guiGraphics, minecraft.font, line.left(), y[0], line.rightInt(), minecraft);
-                y[0] += 12;
-            });
+            for (ObjectIntImmutablePair<Component> line : renderList) {
+                renderLine(guiGraphics, minecraft.font, line.left(), y, line.rightInt(), minecraft);
+                y += 12;
+            }
         }
 
         private void renderLine(GuiGraphics guiGraphics, Font font, Component text, int lineY, int color, Minecraft minecraft) {

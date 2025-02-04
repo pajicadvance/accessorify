@@ -43,5 +43,6 @@ public class Main implements ModInitializer {
             }
             //?}
         }
+        if (CONFIG.recoveryCompassAccessory()) RecoveryCompassAccessory.init();
     }
 }

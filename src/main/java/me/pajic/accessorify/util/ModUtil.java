@@ -20,6 +20,7 @@ import java.util.Optional;
 public class ModUtil {
 
     public static boolean shouldScope = false;
+    public static float zoomModifier = 1.0F;
 
     public static ItemStack getAccessoryStack(LivingEntity entity, Item item) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(entity);

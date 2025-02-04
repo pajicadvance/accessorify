@@ -14,8 +14,15 @@ public class ConfigModel {
     @RestartRequired public boolean elytraAccessory = true;
     @RestartRequired public boolean spyglassAccessory = true;
     @RestartRequired public boolean totemOfUndyingAccessory = true;
+    @RestartRequired public boolean recoveryCompassAccessory = true;
     public boolean hideDebugInfoInSurvival = false;
     @Nest public Overlay overlay = new Overlay();
+    @Nest public SpyglassZoom spyglassZoom = new SpyglassZoom();
+
+    public static class SpyglassZoom {
+        @Sync(Option.SyncMode.NONE) public boolean scrollableZoom = true;
+        @Sync(Option.SyncMode.NONE) public boolean rememberZoomLevel = true;
+    }
 
     public static class Overlay {
         public boolean showYCoordinate = true;

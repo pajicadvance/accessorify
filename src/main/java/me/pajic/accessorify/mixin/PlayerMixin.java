@@ -69,9 +69,9 @@ public abstract class PlayerMixin extends LivingEntity {
             method = "tick",
             at = @At("HEAD")
     )
-    private void cancelElytraFlyingInWater(CallbackInfo ci) {
+    private void cancelElytraFlyingInLiquid(CallbackInfo ci) {
         if (
-                isInWater() && (
+                isInLiquid() && (
                         //? if <= 1.21.1
                         getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem ||
                         //? if > 1.21.1

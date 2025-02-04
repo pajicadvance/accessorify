@@ -46,6 +46,10 @@ public class ModDatapacks {
                 );
                 //?}
             }
+            if (Main.CONFIG.recoveryCompassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    ResourceLocation.fromNamespaceAndPath("accessorify", "recoverycompass"),
+                    modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+            );
         });
     }
 }

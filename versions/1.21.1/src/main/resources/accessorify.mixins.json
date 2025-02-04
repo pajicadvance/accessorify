@@ -20,7 +20,9 @@
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
     "ElytraLayerMixin",
+    "GameRendererMixin",
     "LocalPlayerMixin",
+    "MouseHandlerMixin",
     "PackSelectionModelMixin",
     "compat.deeperdarker.SoulElytraRendererMixin",
     "compat.notes.EditNoteScreenMixin"
