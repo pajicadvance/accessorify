@@ -64,7 +64,7 @@ public class ModDatapacks {
             event.addPackFinders(
                     ResourceLocation.fromNamespaceAndPath("accessorify", "totem"),
                     PackType.SERVER_DATA,
-                    Component.literal("Accessorify Totem"),
+                    Component.literal("Accessorify Totem of Undying"),
                     PackSource.BUILT_IN,
                     true,
                     Pack.Position.TOP
@@ -82,5 +82,13 @@ public class ModDatapacks {
             }
             //?}
         }
+        if (ModCommonConfig.recoveryCompassAccessory) event.addPackFinders(
+                ResourceLocation.fromNamespaceAndPath("accessorify", "recoverycompass"),
+                PackType.SERVER_DATA,
+                Component.literal("Accessorify Recovery Compass"),
+                PackSource.BUILT_IN,
+                true,
+                Pack.Position.TOP
+        );
     }
 }

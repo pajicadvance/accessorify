@@ -54,6 +54,7 @@ public class Main {
                 }
                 //?}
             }
+            if (ModCommonConfig.recoveryCompassAccessory) RecoveryCompassAccessory.init();
         }
     }
 }

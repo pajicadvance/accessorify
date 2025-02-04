@@ -28,9 +28,10 @@ public class ClientMain {
     }
 
     public void onInitialize(FMLClientSetupEvent event) {
-        if (ModCommonConfig.compassAccessory || ModCommonConfig.clockAccessory) NeoForge.EVENT_BUS.addListener(InfoOverlays::renderInfoOverlays);
+        if (ModCommonConfig.compassAccessory || ModCommonConfig.clockAccessory || ModCommonConfig.recoveryCompassAccessory) NeoForge.EVENT_BUS.addListener(InfoOverlays::renderInfoOverlays);
         if (ModCommonConfig.clockAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.CLOCK);
         if (ModCommonConfig.compassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.COMPASS);
+        if (ModCommonConfig.recoveryCompassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.RECOVERY_COMPASS);
         if (ModCommonConfig.elytraAccessory) {
             AccessoriesRendererRegistry.registerNoRenderer(Items.ELYTRA);
             //? if <= 1.21.1 {

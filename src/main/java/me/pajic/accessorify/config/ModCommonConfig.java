@@ -29,6 +29,10 @@ public class ModCommonConfig {
             .translation("text.config.accessorify.option.totemOfUndyingAccessory")
             .gameRestart()
             .define("totemOfUndyingAccessory", true);
+    private static final ModConfigSpec.BooleanValue RECOVERY_COMPASS_ACCESSORY = BUILDER
+            .translation("text.config.accessorify.option.recoveryCompassAccessory")
+            .gameRestart()
+            .define("recoveryCompassAccessory", true);
 
     public static final ModConfigSpec COMMON_SPEC = BUILDER.build();
 
@@ -37,6 +41,7 @@ public class ModCommonConfig {
     public static boolean elytraAccessory;
     public static boolean spyglassAccessory;
     public static boolean totemOfUndyingAccessory;
+    public static boolean recoveryCompassAccessory;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent.Loading event) {
@@ -55,6 +60,7 @@ public class ModCommonConfig {
             elytraAccessory = ELYTRA_ACCESSORY.get();
             spyglassAccessory = SPYGLASS_ACCESSORY.get();
             totemOfUndyingAccessory = TOTEM_OF_UNDYING_ACCESSORY.get();
+            recoveryCompassAccessory = RECOVERY_COMPASS_ACCESSORY.get();
         }
     }
 }

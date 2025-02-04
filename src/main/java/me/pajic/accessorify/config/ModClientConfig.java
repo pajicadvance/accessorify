@@ -10,6 +10,12 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class ModClientConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    private static final ModConfigSpec.BooleanValue SCROLLABLE_ZOOM = BUILDER
+            .translation("text.config.accessorify.option.spyglassZoom.scrollableZoom")
+            .define("scrollableZoom", true);
+    private static final ModConfigSpec.BooleanValue REMEMBER_ZOOM_LEVEL = BUILDER
+            .translation("text.config.accessorify.option.spyglassZoom.rememberZoomLevel")
+            .define("rememberZoomLevel", true);
     private static final ModConfigSpec.ConfigValue<InfoOverlays.OverlayPosition> POSITION = BUILDER
             .translation("text.config.accessorify.option.overlay.position")
             .defineEnum("position", InfoOverlays.OverlayPosition.TOP_LEFT);
@@ -61,6 +67,8 @@ public class ModClientConfig {
 
     public static final ModConfigSpec CLIENT_SPEC = BUILDER.build();
 
+    public static boolean scrollableZoom;
+    public static boolean rememberZoomLevel;
     public static InfoOverlays.OverlayPosition position;
     public static int offsetX;
     public static int offsetY;
@@ -90,6 +98,8 @@ public class ModClientConfig {
 
     private static void updateConfig(ModConfigEvent event) {
         if (event.getConfig().getSpec() == CLIENT_SPEC) {
+            scrollableZoom = SCROLLABLE_ZOOM.get();
+            rememberZoomLevel = REMEMBER_ZOOM_LEVEL.get();
             position = POSITION.get();
             offsetX = OFFSET_X.get();
             offsetY = OFFSET_Y.get();
