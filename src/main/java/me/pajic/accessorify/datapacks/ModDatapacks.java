@@ -90,5 +90,13 @@ public class ModDatapacks {
                 true,
                 Pack.Position.TOP
         );
+        if (ModCommonConfig.shulkerBoxAccessory) event.addPackFinders(
+                ResourceLocation.fromNamespaceAndPath("accessorify", "shulkerbox"),
+                PackType.SERVER_DATA,
+                Component.literal("Accessorify Shulker Box"),
+                PackSource.BUILT_IN,
+                true,
+                Pack.Position.TOP
+        );
     }
 }

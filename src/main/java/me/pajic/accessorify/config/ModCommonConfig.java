@@ -33,6 +33,14 @@ public class ModCommonConfig {
             .translation("text.config.accessorify.option.recoveryCompassAccessory")
             .gameRestart()
             .define("recoveryCompassAccessory", true);
+    private static final ModConfigSpec.BooleanValue SHULKER_BOX_ACCESSORY = BUILDER
+            .translation("text.config.accessorify.option.shulkerBoxAccessory")
+            .gameRestart()
+            .define("shulkerBoxAccessory", true);
+    private static final ModConfigSpec.IntValue ALLOWED_SHULKER_BOXES = BUILDER
+            .translation("text.config.accessorify.option.allowedShulkerBoxes")
+            .gameRestart()
+            .defineInRange("allowedShulkerBoxes", 3, 1, Integer.MAX_VALUE);
 
     public static final ModConfigSpec COMMON_SPEC = BUILDER.build();
 
@@ -42,6 +50,8 @@ public class ModCommonConfig {
     public static boolean spyglassAccessory;
     public static boolean totemOfUndyingAccessory;
     public static boolean recoveryCompassAccessory;
+    public static boolean shulkerBoxAccessory;
+    public static int allowedShulkerBoxes;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent.Loading event) {
@@ -61,6 +71,8 @@ public class ModCommonConfig {
             spyglassAccessory = SPYGLASS_ACCESSORY.get();
             totemOfUndyingAccessory = TOTEM_OF_UNDYING_ACCESSORY.get();
             recoveryCompassAccessory = RECOVERY_COMPASS_ACCESSORY.get();
+            shulkerBoxAccessory = SHULKER_BOX_ACCESSORY.get();
+            allowedShulkerBoxes = ALLOWED_SHULKER_BOXES.get();
         }
     }
 }

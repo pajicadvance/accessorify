@@ -5,6 +5,7 @@ import me.pajic.accessorify.accessories.*;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.config.ModServerConfig;
 import me.pajic.accessorify.datapacks.ModDatapacks;
+import me.pajic.accessorify.network.ModNetworking;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
@@ -29,6 +30,7 @@ public class Main {
         modContainer.registerConfig(ModConfig.Type.COMMON, ModCommonConfig.COMMON_SPEC);
         modContainer.registerConfig(ModConfig.Type.SERVER, ModServerConfig.SERVER_SPEC);
         modEventBus.addListener(ModDatapacks::registerDatapacks);
+        modEventBus.addListener(ModNetworking::init);
         modEventBus.addListener(this::onInitialize);
     }
 
@@ -55,6 +57,7 @@ public class Main {
                 //?}
             }
             if (ModCommonConfig.recoveryCompassAccessory) RecoveryCompassAccessory.init();
+            if (ModCommonConfig.shulkerBoxAccessory) ShulkerBoxAccessory.init();
         }
     }
 }

@@ -6,6 +6,7 @@ import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.gui.InfoOverlays;
 import me.pajic.accessorify.keybind.ModKeybinds;
+import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -40,5 +41,6 @@ public class ClientMain {
             }
             //?}
         }
+        if (ModCommonConfig.shulkerBoxAccessory) ModUtil.SHULKER_BOXES.forEach(AccessoriesRendererRegistry::registerNoRenderer);
     }
 }
