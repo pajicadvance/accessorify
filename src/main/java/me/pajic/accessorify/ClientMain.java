@@ -1,9 +1,6 @@
 package me.pajic.accessorify;
 
-import me.pajic.accessorify.accessories.ClockAccessory;
-import me.pajic.accessorify.accessories.CompassAccessory;
-import me.pajic.accessorify.accessories.ElytraAccessory;
-import me.pajic.accessorify.accessories.RecoveryCompassAccessory;
+import me.pajic.accessorify.accessories.*;
 import me.pajic.accessorify.gui.InfoOverlays;
 import me.pajic.accessorify.keybind.ModKeybinds;
 import net.fabricmc.api.ClientModInitializer;
@@ -25,6 +22,7 @@ public class ClientMain implements ClientModInitializer {
             //?}
         }
         if (Main.CONFIG.recoveryCompassAccessory()) RecoveryCompassAccessory.clientInit();
+        if (Main.CONFIG.shulkerBoxAccessory()) ShulkerBoxAccessory.clientInit();
         ModKeybinds.initKeybinds();
         if (Main.CONFIG.clockAccessory() || Main.CONFIG.compassAccessory() || Main.CONFIG.recoveryCompassAccessory()) InfoOverlays.initOverlay();
     }

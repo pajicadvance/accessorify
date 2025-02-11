@@ -6,6 +6,8 @@
   "text.config.accessorify.option.spyglassAccessory": "Spyglass accessory",
   "text.config.accessorify.option.totemOfUndyingAccessory": "Totem of Undying accessory",
   "text.config.accessorify.option.recoveryCompassAccessory": "Recovery Compass accessory",
+  "text.config.accessorify.option.shulkerBoxAccessory": "Shulker Box accessory",
+  "text.config.accessorify.option.allowedShulkerBoxes": "Max allowed shulker boxes",
   "text.config.accessorify.option.hideDebugInfoInSurvival": "Hide gameplay info from F3 menu in survival",
   "text.config.accessorify.option.hideDebugInfoInSurvival.tooltip": "This hides most gameplay related info such as coordinates, biome etc.\nfrom the F3 debug screen. Used to make the compass and clock\nthe only source of gameplay information, for immersion.",
   "text.config.accessorify.category.overlay": "Info overlay settings",
@@ -40,6 +42,10 @@
 
   "category.accessorify.keybindings": "Accessorify",
   "key.accessorify.use_spyglass": "Use spyglass accessory",
+  "key.accessorify.open_shulker_box": "Open equipped shulker box",
+
+  "screen.accessorify.shulkerBoxSelection.title": "Select shulker box to open",
+  "screen.accessorify.shulkerBoxSelection.footer": "(Esc to cancel)",
 
   "gui.accessorify.coordinates_xyz": "%s %s %s",
   "gui.accessorify.coordinates_xz": "%s %s",

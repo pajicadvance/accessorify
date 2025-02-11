@@ -15,6 +15,8 @@ public class ConfigModel {
     @RestartRequired public boolean spyglassAccessory = true;
     @RestartRequired public boolean totemOfUndyingAccessory = true;
     @RestartRequired public boolean recoveryCompassAccessory = true;
+    @RestartRequired public boolean shulkerBoxAccessory = true;
+    @RestartRequired @PredicateConstraint("positive") public int allowedShulkerBoxes = 3;
     public boolean hideDebugInfoInSurvival = false;
     @Nest public Overlay overlay = new Overlay();
     @Nest public SpyglassZoom spyglassZoom = new SpyglassZoom();
@@ -52,5 +54,9 @@ public class ConfigModel {
         @Sync(Option.SyncMode.NONE) public int summer = 0xf2f542;
         @Sync(Option.SyncMode.NONE) public int autumn = 0xf57542;
         @Sync(Option.SyncMode.NONE) public int winter = 0x42f5f5;
+    }
+
+    public static boolean positive(int value) {
+        return value >= 0;
     }
 }

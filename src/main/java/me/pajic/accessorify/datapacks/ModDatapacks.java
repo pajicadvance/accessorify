@@ -50,6 +50,10 @@ public class ModDatapacks {
                     ResourceLocation.fromNamespaceAndPath("accessorify", "recoverycompass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
+            if (Main.CONFIG.shulkerBoxAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    ResourceLocation.fromNamespaceAndPath("accessorify", "shulkerbox"),
+                    modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+            );
         });
     }
 }

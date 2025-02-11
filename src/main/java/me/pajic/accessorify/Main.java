@@ -2,6 +2,7 @@ package me.pajic.accessorify;
 
 import me.pajic.accessorify.accessories.*;
 import me.pajic.accessorify.datapacks.ModDatapacks;
+import me.pajic.accessorify.network.ModNetworking;
 import net.fabricmc.api.ModInitializer;
 import me.pajic.accessorify.config.ModConfig;
 import net.fabricmc.loader.api.FabricLoader;
@@ -44,5 +45,7 @@ public class Main implements ModInitializer {
             //?}
         }
         if (CONFIG.recoveryCompassAccessory()) RecoveryCompassAccessory.init();
+        if (CONFIG.shulkerBoxAccessory()) ShulkerBoxAccessory.init();
+        ModNetworking.init();
     }
 }

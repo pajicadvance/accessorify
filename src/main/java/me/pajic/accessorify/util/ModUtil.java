@@ -5,7 +5,6 @@ import io.wispforest.accessories.api.slot.SlotEntryReference;
 import me.pajic.accessorify.Main;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -15,12 +14,33 @@ import me.pajic.accessorify.compat.friendsandfoes.FriendsAndFoesCompat;
 import net.minecraft.world.item.ElytraItem;
 //?}
 
+import java.util.List;
 import java.util.Optional;
 
 public class ModUtil {
 
     public static boolean shouldScope = false;
     public static float zoomModifier = 1.0F;
+
+    public static final List<Item> SHULKER_BOXES = List.of(
+            Items.SHULKER_BOX,
+            Items.WHITE_SHULKER_BOX,
+            Items.ORANGE_SHULKER_BOX,
+            Items.MAGENTA_SHULKER_BOX,
+            Items.LIGHT_BLUE_SHULKER_BOX,
+            Items.YELLOW_SHULKER_BOX,
+            Items.LIME_SHULKER_BOX,
+            Items.PINK_SHULKER_BOX,
+            Items.GRAY_SHULKER_BOX,
+            Items.LIGHT_GRAY_SHULKER_BOX,
+            Items.CYAN_SHULKER_BOX,
+            Items.PURPLE_SHULKER_BOX,
+            Items.BLUE_SHULKER_BOX,
+            Items.BROWN_SHULKER_BOX,
+            Items.GREEN_SHULKER_BOX,
+            Items.RED_SHULKER_BOX,
+            Items.BLACK_SHULKER_BOX
+    );
 
     public static ItemStack getAccessoryStack(LivingEntity entity, Item item) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(entity);
@@ -33,8 +53,8 @@ public class ModUtil {
         return ItemStack.EMPTY;
     }
 
-    public static boolean accessoryEquipped(Player player, Item item) {
-        Optional<AccessoriesCapability> playerCapability = AccessoriesCapability.getOptionally(player);
+    public static boolean accessoryEquipped(LivingEntity entity, Item item) {
+        Optional<AccessoriesCapability> playerCapability = AccessoriesCapability.getOptionally(entity);
         return playerCapability.map(accessoriesCapability -> accessoriesCapability.isEquipped(item)).orElse(false);
     }
 
@@ -68,5 +88,9 @@ public class ModUtil {
         return Main.FRIENDS_AND_FOES_LOADED ? FriendsAndFoesCompat.isTotem(stack) : stack.is(Items.TOTEM_OF_UNDYING);
         //? if > 1.21.1
         /*return stack.is(Items.TOTEM_OF_UNDYING);*/
+    }
+
+    public static boolean isShulkerBox(ItemStack stack) {
+        return SHULKER_BOXES.stream().anyMatch(stack::is);
     }
 }

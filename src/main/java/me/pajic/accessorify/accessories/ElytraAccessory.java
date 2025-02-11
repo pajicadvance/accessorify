@@ -8,7 +8,6 @@ import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -18,9 +17,11 @@ import me.pajic.accessorify.compat.EleronCompat;
 //? if <= 1.21.1 {
 import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.world.item.ElytraItem;
-//? }
-//? if > 1.21.1
-/*import io.wispforest.accessories.api.AccessoryRegistry;*/
+//?}
+//? if > 1.21.1 {
+/*import io.wispforest.accessories.api.AccessoryRegistry;
+import net.minecraft.core.component.DataComponents;
+*///? }
 
 public class ElytraAccessory implements Accessory {
 
