@@ -49,7 +49,7 @@ public class ModKeybinds {
                     ModUtil.shouldScope = true;
                 } else {
                     if (soundPlayed) {
-                        if (client.player != null) client.player.playSound(SoundEvents.SPYGLASS_STOP_USING);
+                        client.player.playSound(SoundEvents.SPYGLASS_STOP_USING);
                         soundPlayed = false;
                     }
                     ModUtil.shouldScope = false;

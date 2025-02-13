@@ -19,7 +19,6 @@ public class ShulkerBoxAccessorySelectionScreen extends Screen {
 
     private final List<SlotEntryReference> shulkerBoxes;
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
-    private ShulkerBoxWidget list;
 
     public ShulkerBoxAccessorySelectionScreen(List<SlotEntryReference> shulkerBoxes) {
         super(Component.translatable("screen.accessorify.shulkerBoxSelection.title"));
@@ -31,7 +30,7 @@ public class ShulkerBoxAccessorySelectionScreen extends Screen {
         LinearLayout linearLayout = layout.addToHeader(LinearLayout.horizontal().spacing(8));
         linearLayout.defaultCellSetting().alignHorizontallyCenter();
         linearLayout.addChild(new StringWidget(getTitle(), font));
-        list = layout.addToContents(new ShulkerBoxWidget());
+        ShulkerBoxWidget list = layout.addToContents(new ShulkerBoxWidget());
         LinearLayout linearLayout2 = this.layout.addToFooter(LinearLayout.horizontal().spacing(8));
         linearLayout2.addChild(new StringWidget(Component.translatable("screen.accessorify.shulkerBoxSelection.footer"), font));
         layout.visitWidgets(this::addRenderableWidget);
@@ -56,8 +55,6 @@ public class ShulkerBoxAccessorySelectionScreen extends Screen {
             );
 
             shulkerBoxes.forEach(entry -> addEntry(new ItemStackEntry(entry.stack(), entry.reference().slot())));
-            //setSelected(children().stream().findFirst().get());
-            //centerScrollOn(children().stream().findFirst().get());
         }
     }
 

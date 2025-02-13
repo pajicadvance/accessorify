@@ -21,11 +21,11 @@ import net.minecraft.world.item.ElytraItem;
 //? if > 1.21.1 {
 /*import io.wispforest.accessories.api.AccessoryRegistry;
 import net.minecraft.core.component.DataComponents;
-*///? }
+*///?}
 
 public class ElytraAccessory implements Accessory {
 
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath("accessorify", "add_cape");
+    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_cape");
 
     public static void init() {
         //? if <= 1.21.1

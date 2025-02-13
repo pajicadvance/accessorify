@@ -28,7 +28,7 @@ public class ShulkerBoxAccessory implements Accessory {
         //? if > 1.21.1
         /*ModUtil.SHULKER_BOXES.forEach(item -> AccessoryRegistry.register(item, new ShulkerBoxAccessory()));*/
         for (int i = 0; i < Main.CONFIG.allowedShulkerBoxes(); i++) {
-            rls.add(ResourceLocation.fromNamespaceAndPath("accessorify", "add_back_" + i));
+            rls.add(ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_back_" + i));
         }
     }
 
