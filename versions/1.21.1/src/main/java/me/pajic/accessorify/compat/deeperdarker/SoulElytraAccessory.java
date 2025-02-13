@@ -5,6 +5,7 @@ import com.kyanite.deeperdarker.content.DDItems;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
+import me.pajic.accessorify.Main;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +18,7 @@ import net.minecraft.world.item.ElytraItem;
 
 public class SoulElytraAccessory implements Accessory {
 
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath("accessorify", "add_cape_1");
+    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_cape_1");
 
     public static void init() {
         AccessoriesAPI.registerAccessory(DDItems.SOUL_ELYTRA, new SoulElytraAccessory());
