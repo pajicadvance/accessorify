@@ -10,13 +10,9 @@
     "compat.citresewn.TypeElytraContainerMixin",
     "compat.deeperdarker.DDNetworkingMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
-    "compat.fabricseasons.FabricSeasonsClientExtrasMixin",
-    "compat.fabricseasons.FabricSeasonsExtrasMixin",
     "compat.fdrf.HUDOverlaysMixin",
     "compat.friendsandfoes.PlayerEntityMixinSquared",
-    "compat.friendsandfoes.TrinketsCompatMixin",
-    "compat.sereneseasons.ModClientMixin",
-    "compat.sereneseasons.ModItemsMixin"
+    "compat.friendsandfoes.TrinketsCompatMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

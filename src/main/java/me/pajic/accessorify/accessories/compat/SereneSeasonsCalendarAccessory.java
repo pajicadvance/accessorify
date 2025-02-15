@@ -7,6 +7,8 @@ import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -21,15 +23,23 @@ public class SereneSeasonsCalendarAccessory implements Accessory {
     private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_charm_4");
 
     public static void init() {
-        //? if <= 1.21.1
-        AccessoriesAPI.registerAccessory(SSItems.CALENDAR, new SereneSeasonsCalendarAccessory());
-        //? if > 1.21.1
-        /*AccessoryRegistry.register(SSItems.CALENDAR, new SereneSeasonsCalendarAccessory());*/
+        RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
+            if (rl.equals(ResourceLocation.parse("sereneseasons:calendar"))) {
+                //? if <= 1.21.1
+                AccessoriesAPI.registerAccessory(item, new SereneSeasonsCalendarAccessory());
+                //? if > 1.21.1
+                /*AccessoryRegistry.register(item, new SereneSeasonsCalendarAccessory());*/
+            }
+        });
     }
 
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
-        AccessoriesRendererRegistry.registerNoRenderer(SSItems.CALENDAR);
+        RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
+            if (rl.equals(ResourceLocation.parse("sereneseasons:calendar"))) {
+                AccessoriesRendererRegistry.registerNoRenderer(item);
+            }
+        });
     }
 
     @Override

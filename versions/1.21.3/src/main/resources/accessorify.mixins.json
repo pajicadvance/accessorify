@@ -5,11 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin",
-    "compat.fabricseasons.FabricSeasonsClientExtrasMixin",
-    "compat.fabricseasons.FabricSeasonsExtrasMixin",
-    "compat.sereneseasons.ModClientMixin",
-    "compat.sereneseasons.ModItemsMixin"
+    "PlayerMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

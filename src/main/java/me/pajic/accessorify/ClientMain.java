@@ -1,6 +1,8 @@
 package me.pajic.accessorify;
 
 import me.pajic.accessorify.accessories.*;
+import me.pajic.accessorify.accessories.compat.FabricSeasonsCalendarAccessory;
+import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.gui.InfoOverlays;
 import me.pajic.accessorify.keybind.ModKeybinds;
 import net.fabricmc.api.ClientModInitializer;
@@ -23,6 +25,10 @@ public class ClientMain implements ClientModInitializer {
         }
         if (Main.CONFIG.recoveryCompassAccessory()) RecoveryCompassAccessory.clientInit();
         if (Main.CONFIG.shulkerBoxAccessory()) ShulkerBoxAccessory.clientInit();
+        if (Main.CONFIG.calendarAccessory()) {
+            if (Main.FABRIC_SEASONS_LOADED && Main.FABRIC_SEASONS_EXTRAS_LOADED) FabricSeasonsCalendarAccessory.clientInit();
+            else if (Main.SERENE_SEASONS_LOADED) SereneSeasonsCalendarAccessory.clientInit();
+        }
         ModKeybinds.initKeybinds();
         InfoOverlays.initOverlay();
     }

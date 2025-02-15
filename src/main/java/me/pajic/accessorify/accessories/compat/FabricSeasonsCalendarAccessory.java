@@ -8,6 +8,8 @@ import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -21,15 +23,23 @@ public class FabricSeasonsCalendarAccessory implements Accessory {
     private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_charm_3");
 
     public static void init() {
-        //? if <= 1.21.1
-        AccessoriesAPI.registerAccessory(FabricSeasonsExtras.SEASON_CALENDAR_ITEM, new FabricSeasonsCalendarAccessory());
-        //? if > 1.21.1
-        /*AccessoryRegistry.register(FabricSeasonsExtras.SEASON_CALENDAR_ITEM, new FabricSeasonsCalendarAccessory());*/
+        RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
+            if (rl.equals(ResourceLocation.parse("seasonsextras:season_calendar"))) {
+                //? if <= 1.21.1
+                AccessoriesAPI.registerAccessory(item, new FabricSeasonsCalendarAccessory());
+                //? if > 1.21.1
+                /*AccessoryRegistry.register(item, new FabricSeasonsCalendarAccessory());*/
+            }
+        });
     }
 
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
-        AccessoriesRendererRegistry.registerNoRenderer(FabricSeasonsExtras.SEASON_CALENDAR_ITEM);
+        RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
+            if (rl.equals(ResourceLocation.parse("seasonsextras:season_calendar"))) {
+                AccessoriesRendererRegistry.registerNoRenderer(item);
+            }
+        });
     }
 
     @Override

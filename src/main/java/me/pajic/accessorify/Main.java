@@ -1,6 +1,8 @@
 package me.pajic.accessorify;
 
 import me.pajic.accessorify.accessories.*;
+import me.pajic.accessorify.accessories.compat.FabricSeasonsCalendarAccessory;
+import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.datapacks.ModDatapacks;
 import me.pajic.accessorify.network.ModNetworking;
 import net.fabricmc.api.ModInitializer;
@@ -49,6 +51,10 @@ public class Main implements ModInitializer {
         }
         if (CONFIG.recoveryCompassAccessory()) RecoveryCompassAccessory.init();
         if (CONFIG.shulkerBoxAccessory()) ShulkerBoxAccessory.init();
+        if (CONFIG.calendarAccessory()) {
+            if (FABRIC_SEASONS_LOADED && FABRIC_SEASONS_EXTRAS_LOADED) FabricSeasonsCalendarAccessory.init();
+            else if (SERENE_SEASONS_LOADED) SereneSeasonsCalendarAccessory.init();
+        }
         ModNetworking.init();
     }
 }
