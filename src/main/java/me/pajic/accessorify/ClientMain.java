@@ -24,6 +24,6 @@ public class ClientMain implements ClientModInitializer {
         if (Main.CONFIG.recoveryCompassAccessory()) RecoveryCompassAccessory.clientInit();
         if (Main.CONFIG.shulkerBoxAccessory()) ShulkerBoxAccessory.clientInit();
         ModKeybinds.initKeybinds();
-        if (Main.CONFIG.clockAccessory() || Main.CONFIG.compassAccessory() || Main.CONFIG.recoveryCompassAccessory()) InfoOverlays.initOverlay();
+        InfoOverlays.initOverlay();
     }
 }

@@ -5,11 +5,12 @@ import io.wispforest.owo.ui.core.Color;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
 import me.pajic.accessorify.Main;
-import me.pajic.accessorify.compat.RaisedCompat;
-import me.pajic.accessorify.compat.SeasonsCompat;
+import me.pajic.accessorify.config.OverlayPosition;
+import me.pajic.accessorify.util.compat.FabricSeasonsCompat;
+import me.pajic.accessorify.util.compat.RaisedCompat;
+import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
 import me.pajic.accessorify.util.ModUtil;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -56,11 +57,16 @@ public class InfoOverlays {
                 if (Main.CONFIG.clockAccessory() && ModUtil.accessoryEquipped(MC.player, Items.CLOCK)) {
                     prepareClockOverlay();
                 }
+                if (ModUtil.calendarUsedForSeasonInfo() && ModUtil.calendarAccessoryEquipped(MC.player)) {
+                    prepareSeasonString();
+                }
                 if (Main.CONFIG.recoveryCompassAccessory() && ModUtil.accessoryEquipped(MC.player, Items.RECOVERY_COMPASS)) {
                     prepareRecoveryCompassOverlay();
                 }
-                renderLines(guiGraphics);
-                renderList.clear();
+                if (!renderList.isEmpty()) {
+                    renderLines(guiGraphics);
+                    renderList.clear();
+                }
             }
         }
 
@@ -103,8 +109,7 @@ public class InfoOverlays {
                 Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
                 renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
                 renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
-                if (FabricLoader.getInstance().isModLoaded("sereneseasons"))
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                if (!ModUtil.calendarUsedForSeasonInfo()) renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
             } else {
                 BlockPos blockPos = MC.player.blockPosition();
                 MutableComponent dayAndTime = Component.translatable(
@@ -120,15 +125,6 @@ public class InfoOverlays {
                 dayAndTime.append(", ");
                 dayAndTime.append(time);
                 renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
-
-                if (Main.SERENE_SEASONS_LOADED) {
-                    ObjectIntImmutablePair<Component> seasonStringData = SeasonsCompat.getSeasonStringData(MC.level);
-                    if (Main.CONFIG.overlay.coloredSeason()) {
-                        renderList.add(seasonStringData);
-                    } else {
-                        renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
-                    }
-                }
 
                 Component weather;
                 int weatherColor;
@@ -158,6 +154,26 @@ public class InfoOverlays {
                     renderList.add(new ObjectIntImmutablePair<>(weather, weatherColor));
                 } else {
                     renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffff));
+                }
+
+                if (!ModUtil.calendarUsedForSeasonInfo()) {
+                    prepareSeasonString();
+                }
+            }
+        }
+
+        private void prepareSeasonString() {
+            ObjectIntImmutablePair<Component> seasonStringData = null;
+            if (Main.SERENE_SEASONS_LOADED) {
+                seasonStringData = SereneSeasonsCompat.getSeasonStringData(MC.level);
+            } else if (Main.FABRIC_SEASONS_LOADED) {
+                seasonStringData = FabricSeasonsCompat.getSeasonStringData(MC.level);
+            }
+            if (seasonStringData != null) {
+                if (Main.CONFIG.overlay.coloredSeason()) {
+                    renderList.add(seasonStringData);
+                } else {
+                    renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
                 }
             }
         }
@@ -249,9 +265,5 @@ public class InfoOverlays {
             guiGraphics.flush();
             RenderSystem.disableBlend();
         }
-    }
-
-    public enum OverlayPosition {
-        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     }
 }

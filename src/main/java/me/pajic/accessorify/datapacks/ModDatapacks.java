@@ -54,6 +54,16 @@ public class ModDatapacks {
                     ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "shulkerbox"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
+            if (Main.CONFIG.calendarAccessory()) {
+                if (Main.SERENE_SEASONS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "sscalendar"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+                if (Main.FABRIC_SEASONS_LOADED && Main.FABRIC_SEASONS_EXTRAS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fscalendar"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+            }
         });
     }
 }

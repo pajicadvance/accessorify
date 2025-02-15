@@ -2,7 +2,6 @@ package me.pajic.accessorify.config;
 
 import io.wispforest.owo.config.Option;
 import io.wispforest.owo.config.annotation.*;
-import me.pajic.accessorify.gui.InfoOverlays;
 
 @Modmenu(modId = "accessorify")
 @Config(name = "accessorify", wrapperName = "ModConfig")
@@ -11,10 +10,11 @@ import me.pajic.accessorify.gui.InfoOverlays;
 public class ConfigModel {
     @RestartRequired public boolean clockAccessory = true;
     @RestartRequired public boolean compassAccessory = true;
+    @RestartRequired public boolean recoveryCompassAccessory = true;
+    @RestartRequired public boolean calendarAccessory = true;
     @RestartRequired public boolean elytraAccessory = true;
     @RestartRequired public boolean spyglassAccessory = true;
     @RestartRequired public boolean totemOfUndyingAccessory = true;
-    @RestartRequired public boolean recoveryCompassAccessory = true;
     @RestartRequired public boolean shulkerBoxAccessory = true;
     @RestartRequired @PredicateConstraint("positive") public int allowedShulkerBoxes = 3;
     public boolean hideDebugInfoInSurvival = false;
@@ -30,7 +30,7 @@ public class ConfigModel {
         public boolean showYCoordinate = true;
         public boolean obfuscateCompassIfNotOverworld = false;
         public boolean obfuscateClockIfNotOverworld = true;
-        @Sync(Option.SyncMode.NONE) public InfoOverlays.OverlayPosition position = InfoOverlays.OverlayPosition.TOP_LEFT;
+        @Sync(Option.SyncMode.NONE) public OverlayPosition position = OverlayPosition.TOP_LEFT;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetX = 0;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetY = 0;
         @Sync(Option.SyncMode.NONE) public boolean textBackground = true;

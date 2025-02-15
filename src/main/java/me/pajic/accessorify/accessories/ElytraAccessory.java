@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import me.pajic.accessorify.compat.EleronCompat;
+import me.pajic.accessorify.util.compat.EleronCompat;
 //? if <= 1.21.1 {
 import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.world.item.ElytraItem;

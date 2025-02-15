@@ -1,4 +1,4 @@
-package me.pajic.accessorify.compat;
+package me.pajic.accessorify.util.compat;
 
 import com.sindercube.eleron.registry.EleronAttributes;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
