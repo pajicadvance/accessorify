@@ -5,11 +5,12 @@ import io.wispforest.owo.ui.core.Color;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
 import me.pajic.accessorify.Main;
-import me.pajic.accessorify.compat.RaisedCompat;
-import me.pajic.accessorify.compat.SeasonsCompat;
+import me.pajic.accessorify.util.compat.RaisedCompat;
+import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.config.ModServerConfig;
+import me.pajic.accessorify.config.OverlayPosition;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -24,7 +25,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
 import java.util.ArrayList;
@@ -35,38 +35,43 @@ import java.util.Optional;
 public class InfoOverlays {
 
     private static final List<ObjectIntImmutablePair<Component>> renderList = new ArrayList<>();
+    private static final Minecraft MC = Minecraft.getInstance();
 
     @SubscribeEvent
     public static void renderInfoOverlays(RenderGuiEvent.Post event) {
         GuiGraphics guiGraphics = event.getGuiGraphics();
-        Minecraft minecraft = Minecraft.getInstance();
         if (
-                minecraft.player != null && minecraft.level != null &&
-                !minecraft.options.hideGui && !minecraft.gui.getDebugOverlay().showDebugScreen()
+                MC.player != null && MC.level != null &&
+                !MC.options.hideGui && !MC.gui.getDebugOverlay().showDebugScreen()
         ) {
-            if (ModCommonConfig.compassAccessory && ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS)) {
-                prepareCompassOverlay(minecraft);
+            if (ModCommonConfig.compassAccessory && ModUtil.accessoryEquipped(MC.player, Items.COMPASS)) {
+                prepareCompassOverlay();
             }
-            if (ModCommonConfig.clockAccessory && ModUtil.accessoryEquipped(minecraft.player, Items.CLOCK)) {
-                prepareClockOverlay(minecraft);
+            if (ModCommonConfig.clockAccessory && ModUtil.accessoryEquipped(MC.player, Items.CLOCK)) {
+                prepareClockOverlay();
             }
-            if (ModCommonConfig.recoveryCompassAccessory && ModUtil.accessoryEquipped(minecraft.player, Items.RECOVERY_COMPASS)) {
-                prepareRecoveryCompassOverlay(minecraft);
+            if (ModUtil.calendarUsedForSeasonInfo() && ModUtil.calendarAccessoryEquipped(MC.player)) {
+                prepareSeasonString();
             }
-            renderLines(guiGraphics, minecraft);
-            renderList.clear();
+            if (ModCommonConfig.recoveryCompassAccessory && ModUtil.accessoryEquipped(MC.player, Items.RECOVERY_COMPASS)) {
+                prepareRecoveryCompassOverlay();
+            }
+            if (!renderList.isEmpty()) {
+                renderLines(guiGraphics);
+                renderList.clear();
+            }
         }
     }
 
-    private static void prepareCompassOverlay(Minecraft minecraft) {
-        if (ModServerConfig.obfuscateCompassIfNotOverworld && minecraft.level.dimension() != Level.OVERWORLD) {
-            Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, minecraft.level.random.nextInt(4) + 3));
+    private static void prepareCompassOverlay() {
+        if (ModServerConfig.obfuscateCompassIfNotOverworld && MC.level.dimension() != Level.OVERWORLD) {
+            Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
         } else {
-            BlockPos blockPos = minecraft.player.blockPosition();
-            ResourceLocation biome = minecraft.player.level().getBiome(blockPos).unwrap().map(
+            BlockPos blockPos = MC.player.blockPosition();
+            ResourceLocation biome = MC.player.level().getBiome(blockPos).unwrap().map(
                     key -> key != null ? key.location() : null, unknown -> null
             );
 
@@ -83,7 +88,7 @@ public class InfoOverlays {
                 );
             }
 
-            Component direction = Component.translatable("gui.accessorify.facing", minecraft.player.getDirection().getName());
+            Component direction = Component.translatable("gui.accessorify.facing", MC.player.getDirection().getName());
             Component biomeName = Component.translatable("biome." + biome.getNamespace() + "." + biome.getPath());
 
             renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
@@ -92,21 +97,20 @@ public class InfoOverlays {
         }
     }
 
-    private static void prepareClockOverlay(Minecraft minecraft) {
-        if (ModServerConfig.obfuscateClockIfNotOverworld && minecraft.level.dimension() != Level.OVERWORLD) {
-            Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, minecraft.level.random.nextInt(4) + 3));
+    private static void prepareClockOverlay() {
+        if (ModServerConfig.obfuscateClockIfNotOverworld && MC.level.dimension() != Level.OVERWORLD) {
+            Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
-            if (ModList.get().isLoaded("sereneseasons"))
-                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+            if (!ModUtil.calendarUsedForSeasonInfo()) renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
         } else {
-            BlockPos blockPos = minecraft.player.blockPosition();
+            BlockPos blockPos = MC.player.blockPosition();
 
             MutableComponent dayAndTime = Component.translatable(
                     "gui.accessorify.day",
-                    (minecraft.level.getDayTime() / 24000L) + 1
+                    (MC.level.getDayTime() / 24000L) + 1
             );
-            long timeOffset = (minecraft.level.getDayTime() + 6000) % 24000;
+            long timeOffset = (MC.level.getDayTime() + 6000) % 24000;
             Component time = Component.translatable(
                     "gui.accessorify.time",
                     timeOffset / 1000,
@@ -116,25 +120,16 @@ public class InfoOverlays {
             dayAndTime.append(time);
             renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
 
-            if (ModList.get().isLoaded("sereneseasons")) {
-                ObjectIntImmutablePair<Component> seasonStringData = SeasonsCompat.getSeasonStringData(minecraft.level);
-                if (ModClientConfig.coloredSeason) {
-                    renderList.add(seasonStringData);
-                } else {
-                    renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
-                }
-            }
-
             Component weather;
             int weatherColor;
-            if (minecraft.level.isThundering()) {
+            if (MC.level.isThundering()) {
                 weather = Component.translatable("gui.accessorify.thundering");
                 weatherColor = ModClientConfig.thundering;
-            } else if (minecraft.level.isRaining()) {
+            } else if (MC.level.isRaining()) {
                 //? if <= 1.21.1
-                Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos);
+                Biome.Precipitation precipitation = MC.level.getBiome(blockPos).value().getPrecipitationAt(blockPos);
                 //? if > 1.21.1
-                /*Biome.Precipitation precipitation = minecraft.level.getBiome(blockPos).value().getPrecipitationAt(blockPos, (int) minecraft.player.getY());*/
+                /*Biome.Precipitation precipitation = MC.level.getBiome(blockPos).value().getPrecipitationAt(blockPos, (int) MC.player.getY());*/
                 if (precipitation == Biome.Precipitation.RAIN) {
                     weather = Component.translatable("gui.accessorify.raining");
                     weatherColor = ModClientConfig.raining;
@@ -154,11 +149,26 @@ public class InfoOverlays {
             } else {
                 renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffff));
             }
+
+            if (!ModUtil.calendarUsedForSeasonInfo()) {
+                prepareSeasonString();
+            }
         }
     }
 
-    private static void prepareRecoveryCompassOverlay(Minecraft minecraft) {
-        Optional<GlobalPos> optional = minecraft.player.getLastDeathLocation();
+    private static void prepareSeasonString() {
+        if (Main.SERENE_SEASONS_LOADED) {
+            ObjectIntImmutablePair<Component> seasonStringData = SereneSeasonsCompat.getSeasonStringData(MC.level);
+            if (ModClientConfig.coloredSeason) {
+                renderList.add(seasonStringData);
+            } else {
+                renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
+            }
+        }
+    }
+
+    private static void prepareRecoveryCompassOverlay() {
+        Optional<GlobalPos> optional = MC.player.getLastDeathLocation();
         Component text;
         if (optional.isPresent()) {
             BlockPos lastDeathLocation = optional.get().pos();
@@ -183,26 +193,26 @@ public class InfoOverlays {
         }
     }
 
-    private static void renderLines(GuiGraphics guiGraphics, Minecraft minecraft) {
+    private static void renderLines(GuiGraphics guiGraphics) {
         int y = 4;
         OverlayPosition position = ModClientConfig.position;
         if (position == OverlayPosition.BOTTOM_LEFT || position == OverlayPosition.BOTTOM_RIGHT) {
             Collections.reverse(renderList);
         }
         for (ObjectIntImmutablePair<Component> line : renderList) {
-            renderLine(guiGraphics, minecraft.font, line.left(), y, line.rightInt(), minecraft);
+            renderLine(guiGraphics, MC.font, line.left(), y, line.rightInt());
             y += 12;
         }
     }
 
-    private static void renderLine(GuiGraphics guiGraphics, Font font, Component text, int lineY, int color, Minecraft minecraft) {
-        int width = minecraft.getWindow().getGuiScaledWidth();
-        int height = minecraft.getWindow().getGuiScaledHeight();
+    private static void renderLine(GuiGraphics guiGraphics, Font font, Component text, int lineY, int color) {
+        int width = MC.getWindow().getGuiScaledWidth();
+        int height = MC.getWindow().getGuiScaledHeight();
         int offsetX = ModClientConfig.offsetX;
         int offsetY = ModClientConfig.offsetY;
         int raisedOffsetX = 0;
         int raisedOffsetY = 0;
-        if (ModList.get().isLoaded("raised")) {
+        if (Main.RAISED_LOADED) {
             IntIntImmutablePair offsets = RaisedCompat.getOtherComponentOffsets();
             raisedOffsetX = offsets.leftInt();
             raisedOffsetY = offsets.rightInt();
@@ -243,9 +253,5 @@ public class InfoOverlays {
 
         guiGraphics.flush();
         RenderSystem.disableBlend();
-    }
-
-    public enum OverlayPosition {
-        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     }
 }

@@ -17,6 +17,14 @@ public class ModCommonConfig {
             .translation("text.config.accessorify.option.compassAccessory")
             .gameRestart()
             .define("compassAccessory", true);
+    private static final ModConfigSpec.BooleanValue RECOVERY_COMPASS_ACCESSORY = BUILDER
+            .translation("text.config.accessorify.option.recoveryCompassAccessory")
+            .gameRestart()
+            .define("recoveryCompassAccessory", true);
+    private static final ModConfigSpec.BooleanValue CALENDAR_ACCESSORY = BUILDER
+            .translation("text.config.accessorify.option.calendarAccessory")
+            .gameRestart()
+            .define("calendarAccessory", true);
     private static final ModConfigSpec.BooleanValue ELYTRA_ACCESSORY = BUILDER
             .translation("text.config.accessorify.option.elytraAccessory")
             .gameRestart()
@@ -29,10 +37,6 @@ public class ModCommonConfig {
             .translation("text.config.accessorify.option.totemOfUndyingAccessory")
             .gameRestart()
             .define("totemOfUndyingAccessory", true);
-    private static final ModConfigSpec.BooleanValue RECOVERY_COMPASS_ACCESSORY = BUILDER
-            .translation("text.config.accessorify.option.recoveryCompassAccessory")
-            .gameRestart()
-            .define("recoveryCompassAccessory", true);
     private static final ModConfigSpec.BooleanValue SHULKER_BOX_ACCESSORY = BUILDER
             .translation("text.config.accessorify.option.shulkerBoxAccessory")
             .gameRestart()
@@ -46,10 +50,11 @@ public class ModCommonConfig {
 
     public static boolean clockAccessory;
     public static boolean compassAccessory;
+    public static boolean recoveryCompassAccessory;
+    public static boolean calendarAccessory;
     public static boolean elytraAccessory;
     public static boolean spyglassAccessory;
     public static boolean totemOfUndyingAccessory;
-    public static boolean recoveryCompassAccessory;
     public static boolean shulkerBoxAccessory;
     public static int allowedShulkerBoxes;
 
@@ -67,10 +72,11 @@ public class ModCommonConfig {
         if (event.getConfig().getSpec() == COMMON_SPEC) {
             clockAccessory = CLOCK_ACCESSORY.get();
             compassAccessory = COMPASS_ACCESSORY.get();
+            recoveryCompassAccessory = RECOVERY_COMPASS_ACCESSORY.get();
+            calendarAccessory = CALENDAR_ACCESSORY.get();
             elytraAccessory = ELYTRA_ACCESSORY.get();
             spyglassAccessory = SPYGLASS_ACCESSORY.get();
             totemOfUndyingAccessory = TOTEM_OF_UNDYING_ACCESSORY.get();
-            recoveryCompassAccessory = RECOVERY_COMPASS_ACCESSORY.get();
             shulkerBoxAccessory = SHULKER_BOX_ACCESSORY.get();
             allowedShulkerBoxes = ALLOWED_SHULKER_BOXES.get();
         }

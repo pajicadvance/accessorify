@@ -3,6 +3,7 @@ package me.pajic.accessorify.accessories;
 import com.google.common.collect.HashMultimap;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.slot.SlotReference;
+import me.pajic.accessorify.Main;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +19,7 @@ import net.minecraft.core.component.DataComponents;
 
 public class ElytraAccessory implements Accessory {
 
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath("accessorify", "add_cape");
+    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_cape");
 
     public static void init() {
         //? if <= 1.21.1

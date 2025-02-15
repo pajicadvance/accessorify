@@ -2,6 +2,7 @@ package me.pajic.accessorify;
 
 import com.kyanite.deeperdarker.content.DDItems;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
+import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.gui.InfoOverlays;
@@ -25,11 +26,12 @@ public class ClientMain {
         modContainer.registerConfig(ModConfig.Type.CLIENT, ModClientConfig.CLIENT_SPEC);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modEventBus.addListener(this::onInitialize);
+        modEventBus.addListener(SereneSeasonsCalendarAccessory::clientInit);
         modEventBus.addListener(ModKeybinds::registerKeybinds);
     }
 
     public void onInitialize(FMLClientSetupEvent event) {
-        if (ModCommonConfig.compassAccessory || ModCommonConfig.clockAccessory || ModCommonConfig.recoveryCompassAccessory) NeoForge.EVENT_BUS.addListener(InfoOverlays::renderInfoOverlays);
+        NeoForge.EVENT_BUS.addListener(InfoOverlays::renderInfoOverlays);
         if (ModCommonConfig.clockAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.CLOCK);
         if (ModCommonConfig.compassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.COMPASS);
         if (ModCommonConfig.recoveryCompassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.RECOVERY_COMPASS);

@@ -3,6 +3,7 @@ package me.pajic.accessorify.accessories;
 import com.google.common.collect.HashMultimap;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.slot.SlotReference;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +26,7 @@ public class ShulkerBoxAccessory implements Accessory {
         //? if > 1.21.1
         /*ModUtil.SHULKER_BOXES.forEach(item -> AccessoryRegistry.register(item, new ShulkerBoxAccessory()));*/
         for (int i = 0; i < ModCommonConfig.allowedShulkerBoxes; i++) {
-            rls.add(ResourceLocation.fromNamespaceAndPath("accessorify", "add_back_" + i));
+            rls.add(ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_back_" + i));
         }
     }
 

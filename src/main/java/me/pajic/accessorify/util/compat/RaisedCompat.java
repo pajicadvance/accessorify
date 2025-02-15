@@ -1,4 +1,4 @@
-package me.pajic.accessorify.compat;
+package me.pajic.accessorify.util.compat;
 
 import dev.yurisuika.raised.api.RaisedApi;
 import dev.yurisuika.raised.util.properties.Element;

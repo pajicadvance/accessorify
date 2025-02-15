@@ -99,11 +99,11 @@ dependencies {
     implementation "maven.modrinth:notes:${property("notes_version")}"
 
     // 1.21.1 exclusive supported mods
-    compileOnly("maven.modrinth:deeperdarker:${property("deeperdarker_version")}")
-    compileOnly("maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}")
+    compileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
+    compileOnly "maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}"
     if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
-        implementation("maven.modrinth:deeperdarker:${property("deeperdarker_version")}")
-        implementation("maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}")
+        implementation "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
+        implementation "maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}"
     }
 }
 

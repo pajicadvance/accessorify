@@ -1,6 +1,5 @@
 package me.pajic.accessorify.config;
 
-import me.pajic.accessorify.gui.InfoOverlays;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -16,9 +15,9 @@ public class ModClientConfig {
     private static final ModConfigSpec.BooleanValue REMEMBER_ZOOM_LEVEL = BUILDER
             .translation("text.config.accessorify.option.spyglassZoom.rememberZoomLevel")
             .define("rememberZoomLevel", true);
-    private static final ModConfigSpec.ConfigValue<InfoOverlays.OverlayPosition> POSITION = BUILDER
+    private static final ModConfigSpec.ConfigValue<OverlayPosition> POSITION = BUILDER
             .translation("text.config.accessorify.option.overlay.position")
-            .defineEnum("position", InfoOverlays.OverlayPosition.TOP_LEFT);
+            .defineEnum("position", OverlayPosition.TOP_LEFT);
     private static final ModConfigSpec.IntValue OFFSET_X = BUILDER
             .translation("text.config.accessorify.option.overlay.offsetX")
             .defineInRange("offsetX", 0, 0, Integer.MAX_VALUE);
@@ -69,7 +68,7 @@ public class ModClientConfig {
 
     public static boolean scrollableZoom;
     public static boolean rememberZoomLevel;
-    public static InfoOverlays.OverlayPosition position;
+    public static OverlayPosition position;
     public static int offsetX;
     public static int offsetY;
     public static boolean textBackground;

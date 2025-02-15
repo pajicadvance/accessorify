@@ -3,8 +3,9 @@ package me.pajic.accessorify.util;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
 import me.pajic.accessorify.Main;
+import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -52,9 +53,14 @@ public class ModUtil {
         return ItemStack.EMPTY;
     }
 
-    public static boolean accessoryEquipped(Player player, Item item) {
-        Optional<AccessoriesCapability> playerCapability = AccessoriesCapability.getOptionally(player);
+    public static boolean accessoryEquipped(LivingEntity entity, Item item) {
+        Optional<AccessoriesCapability> playerCapability = AccessoriesCapability.getOptionally(entity);
         return playerCapability.map(accessoriesCapability -> accessoriesCapability.isEquipped(item)).orElse(false);
+    }
+
+    public static boolean calendarAccessoryEquipped(LivingEntity entity) {
+        if (Main.SERENE_SEASONS_LOADED) return SereneSeasonsCompat.calendarAccessoryEquipped(entity);
+        else return false;
     }
 
     public static ItemStack tryGetElytraAccessory(LivingEntity livingEntity) {
@@ -79,5 +85,9 @@ public class ModUtil {
 
     public static boolean isShulkerBox(ItemStack stack) {
         return SHULKER_BOXES.stream().anyMatch(stack::is);
+    }
+
+    public static boolean calendarUsedForSeasonInfo() {
+        return ModCommonConfig.calendarAccessory && Main.SERENE_SEASONS_LOADED;
     }
 }

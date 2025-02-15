@@ -7,6 +7,7 @@ import com.kyanite.deeperdarker.network.SoulElytraClientPacket;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.slot.SlotReference;
+import me.pajic.accessorify.Main;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,7 +21,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class SoulElytraAccessory implements Accessory {
 
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath("accessorify", "add_cape_1");
+    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_cape_1");
 
     public static void init() {
         AccessoriesAPI.registerAccessory(DDItems.SOUL_ELYTRA.get(), new SoulElytraAccessory());

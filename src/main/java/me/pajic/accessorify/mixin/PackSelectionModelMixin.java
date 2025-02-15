@@ -1,5 +1,6 @@
 package me.pajic.accessorify.mixin;
 
+import me.pajic.accessorify.Main;
 import net.minecraft.client.gui.screens.packs.PackSelectionModel;
 import net.minecraft.server.packs.repository.Pack;
 import org.spongepowered.asm.mixin.Final;
@@ -22,7 +23,7 @@ public class PackSelectionModelMixin {
             at = @At("TAIL")
     )
     private void filterPacks(CallbackInfo ci) {
-        selected.removeIf(pack -> pack.getId().contains("accessorify"));
-        unselected.removeIf(pack -> pack.getId().contains("accessorify"));
+        selected.removeIf(pack -> pack.getId().contains(Main.MOD_ID));
+        unselected.removeIf(pack -> pack.getId().contains(Main.MOD_ID));
     }
 }

@@ -3,11 +3,9 @@ package me.pajic.accessorify.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import me.pajic.accessorify.Main;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.config.ModServerConfig;
 import me.pajic.accessorify.util.ModUtil;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? if <= 1.21.1
 import net.minecraft.world.item.ElytraItem;
+//? if > 1.21.1
+/*import net.minecraft.core.component.DataComponents;*/
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {

@@ -15,7 +15,7 @@ public class ModDatapacks {
     @SubscribeEvent
     public static void registerDatapacks(AddPackFindersEvent event) {
         if (ModCommonConfig.compassAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath("accessorify", "compass"),
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "compass"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Compass"),
                 PackSource.BUILT_IN,
@@ -23,7 +23,7 @@ public class ModDatapacks {
                 Pack.Position.TOP
         );
         if (ModCommonConfig.clockAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath("accessorify", "clock"),
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "clock"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Clock"),
                 PackSource.BUILT_IN,
@@ -32,7 +32,7 @@ public class ModDatapacks {
         );
         if (ModCommonConfig.elytraAccessory) {
             event.addPackFinders(
-                    ResourceLocation.fromNamespaceAndPath("accessorify", "elytra"),
+                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "elytra"),
                     PackType.SERVER_DATA,
                     Component.literal("Accessorify Elytra"),
                     PackSource.BUILT_IN,
@@ -42,7 +42,7 @@ public class ModDatapacks {
             //? if <= 1.21.1 {
             if (Main.DEEPER_DARKER_LOADED) {
                 event.addPackFinders(
-                        ResourceLocation.fromNamespaceAndPath("accessorify", "soulelytra"),
+                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "soulelytra"),
                         PackType.SERVER_DATA,
                         Component.literal("Accessorify Soul Elytra"),
                         PackSource.BUILT_IN,
@@ -53,7 +53,7 @@ public class ModDatapacks {
             //?}
         }
         if (ModCommonConfig.spyglassAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath("accessorify", "spyglass"),
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "spyglass"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Spyglass"),
                 PackSource.BUILT_IN,
@@ -62,7 +62,7 @@ public class ModDatapacks {
         );
         if (ModCommonConfig.totemOfUndyingAccessory) {
             event.addPackFinders(
-                    ResourceLocation.fromNamespaceAndPath("accessorify", "totem"),
+                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "totem"),
                     PackType.SERVER_DATA,
                     Component.literal("Accessorify Totem of Undying"),
                     PackSource.BUILT_IN,
@@ -72,7 +72,7 @@ public class ModDatapacks {
             //? if <= 1.21.1 {
             if (Main.FRIENDS_AND_FOES_LOADED) {
                 event.addPackFinders(
-                        ResourceLocation.fromNamespaceAndPath("accessorify", "fnftotems"),
+                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fnftotems"),
                         PackType.SERVER_DATA,
                         Component.literal("Accessorify FNF Totems"),
                         PackSource.BUILT_IN,
@@ -83,7 +83,7 @@ public class ModDatapacks {
             //?}
         }
         if (ModCommonConfig.recoveryCompassAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath("accessorify", "recoverycompass"),
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "recoverycompass"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Recovery Compass"),
                 PackSource.BUILT_IN,
@@ -91,9 +91,17 @@ public class ModDatapacks {
                 Pack.Position.TOP
         );
         if (ModCommonConfig.shulkerBoxAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath("accessorify", "shulkerbox"),
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "shulkerbox"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Shulker Box"),
+                PackSource.BUILT_IN,
+                true,
+                Pack.Position.TOP
+        );
+        if (ModCommonConfig.calendarAccessory && Main.SERENE_SEASONS_LOADED) event.addPackFinders(
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "sscalendar"),
+                PackType.SERVER_DATA,
+                Component.literal("Accessorify Calendar"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
