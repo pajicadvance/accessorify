@@ -40,7 +40,7 @@ public class ModNetworking {
             ServerPlayer player = context.player();
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
-                player.openMenu(new ShulkerBoxAccessoryContainerMenu(ac.get().getContainers().get("back").getAccessories().getItem(payload.index)));
+                player.openMenu(new ShulkerBoxAccessoryContainerMenu(ac.get().getContainers().get("shulker").getAccessories().getItem(payload.index)));
                 player.awardStat(Stats.OPEN_SHULKER_BOX);
             }
         });

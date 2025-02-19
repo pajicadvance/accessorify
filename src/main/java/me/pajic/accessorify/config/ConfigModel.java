@@ -16,7 +16,6 @@ public class ConfigModel {
     @RestartRequired public boolean spyglassAccessory = true;
     @RestartRequired public boolean totemOfUndyingAccessory = true;
     @RestartRequired public boolean shulkerBoxAccessory = true;
-    @RestartRequired @PredicateConstraint("positive") public int allowedShulkerBoxes = 3;
     public boolean hideDebugInfoInSurvival = false;
     @Nest public Overlay overlay = new Overlay();
     @Nest public SpyglassZoom spyglassZoom = new SpyglassZoom();
