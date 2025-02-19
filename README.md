@@ -26,7 +26,11 @@ The spyglass can now be equipped in the Belt slot. When equipped, pressing and h
 
 ### Shulker boxes
 
-These can now be equipped in the Back slot. When equipped, pressing B (default keybind, configurable) will open the shulker box. Multiple shulker boxes can be equipped, and pressing the keybind in that case will open a small menu where you can choose which shulker box to open. The maximum allowed amount of equipped shulker boxes can be set in the mod config (default is 3).
+These can now be equipped in the Back slot. When equipped, pressing B (default keybind, configurable) will open the shulker box. Multiple shulker boxes can be equipped, and pressing the keybind in that case will open a small menu where you can choose which shulker box to open. By default you have 3 shulker slots. If you want more (or less), follow the instructions below:
+
+Open the Accessories config in-game, scroll down until you see "Slot Amount Modifiers" and do the following:
+
+![slot_modify](https://cdn.modrinth.com/data/cached_images/8a02ab659af3a2afb68c70ec43987064049abb96.png)
 
 ### Clock, compass, recovery compass
 
