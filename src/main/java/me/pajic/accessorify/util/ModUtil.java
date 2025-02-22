@@ -49,7 +49,7 @@ public class ModUtil {
         if (ac.isPresent() && ac.get().isEquipped(item)) {
             SlotEntryReference itemRef = ac.get().getFirstEquipped(item);
             if (itemRef != null) {
-                return ac.get().getContainer(itemRef.reference().type()).getAccessories().getItem(0);
+                return itemRef.stack();
             }
         }
         return ItemStack.EMPTY;
