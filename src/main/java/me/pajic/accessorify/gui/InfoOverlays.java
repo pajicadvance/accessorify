@@ -44,14 +44,16 @@ public class InfoOverlays {
                 MC.player != null && MC.level != null &&
                 !MC.options.hideGui && !MC.gui.getDebugOverlay().showDebugScreen()
         ) {
+            boolean shouldObfuscateCompass = ModServerConfig.obfuscateCompassIfNotOverworld && MC.level.dimension() != Level.OVERWORLD;
+            boolean shouldObfuscateClock = ModServerConfig.obfuscateClockIfNotOverworld && MC.level.dimension() != Level.OVERWORLD;
             if (ModCommonConfig.compassAccessory && ModUtil.accessoryEquipped(MC.player, Items.COMPASS)) {
-                prepareCompassOverlay();
+                prepareCompassOverlay(shouldObfuscateCompass);
             }
             if (ModCommonConfig.clockAccessory && ModUtil.accessoryEquipped(MC.player, Items.CLOCK)) {
-                prepareClockOverlay();
+                prepareClockOverlay(shouldObfuscateClock);
             }
             if (ModUtil.calendarUsedForSeasonInfo() && ModUtil.calendarAccessoryEquipped(MC.player)) {
-                prepareSeasonString();
+                prepareSeasonString(shouldObfuscateClock);
             }
             if (ModCommonConfig.recoveryCompassAccessory && ModUtil.accessoryEquipped(MC.player, Items.RECOVERY_COMPASS)) {
                 prepareRecoveryCompassOverlay();
@@ -63,8 +65,8 @@ public class InfoOverlays {
         }
     }
 
-    private static void prepareCompassOverlay() {
-        if (ModServerConfig.obfuscateCompassIfNotOverworld && MC.level.dimension() != Level.OVERWORLD) {
+    private static void prepareCompassOverlay(boolean shouldObfuscate) {
+        if (shouldObfuscate) {
             Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
@@ -97,12 +99,11 @@ public class InfoOverlays {
         }
     }
 
-    private static void prepareClockOverlay() {
-        if (ModServerConfig.obfuscateClockIfNotOverworld && MC.level.dimension() != Level.OVERWORLD) {
+    private static void prepareClockOverlay(boolean shouldObfuscate) {
+        if (shouldObfuscate) {
             Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
             renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
-            if (!ModUtil.calendarUsedForSeasonInfo()) renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
         } else {
             BlockPos blockPos = MC.player.blockPosition();
 
@@ -149,47 +150,63 @@ public class InfoOverlays {
             } else {
                 renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffff));
             }
-
-            if (!ModUtil.calendarUsedForSeasonInfo()) {
-                prepareSeasonString();
-            }
+        }
+        if (!ModUtil.calendarUsedForSeasonInfo()) {
+            prepareSeasonString(shouldObfuscate);
         }
     }
 
-    private static void prepareSeasonString() {
+    private static void prepareSeasonString(boolean shouldObfuscate) {
         if (Main.SERENE_SEASONS_LOADED) {
-            ObjectIntImmutablePair<Component> seasonStringData = SereneSeasonsCompat.getSeasonStringData(MC.level);
-            if (ModClientConfig.coloredSeason) {
-                renderList.add(seasonStringData);
-            } else {
-                renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
+            if (shouldObfuscate) {
+                Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
+                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+            }
+            else {
+                ObjectIntImmutablePair<Component> seasonStringData = SereneSeasonsCompat.getSeasonStringData(MC.level);
+                if (ModClientConfig.coloredSeason) {
+                    renderList.add(seasonStringData);
+                } else {
+                    renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
+                }
             }
         }
     }
 
     private static void prepareRecoveryCompassOverlay() {
         Optional<GlobalPos> optional = MC.player.getLastDeathLocation();
-        Component text;
         if (optional.isPresent()) {
-            BlockPos lastDeathLocation = optional.get().pos();
-            text = Component.translatable("gui.accessorify.last_death_location");
-            Component coordinates;
-            if (ModServerConfig.showYCoordinate) {
-                coordinates = Component.translatable(
-                        "gui.accessorify.coordinates_xyz",
-                        lastDeathLocation.getX(), lastDeathLocation.getY(), lastDeathLocation.getZ()
-                );
-            } else {
-                coordinates = Component.translatable(
-                        "gui.accessorify.coordinates_xz",
-                        lastDeathLocation.getX(), lastDeathLocation.getZ()
-                );
+            if (optional.get().dimension() == MC.level.dimension()) {
+                BlockPos lastDeathLocation = optional.get().pos();
+                Component coordinates;
+                if (ModServerConfig.showYCoordinate) {
+                    coordinates = Component.translatable(
+                            "gui.accessorify.coordinates_xyz",
+                            lastDeathLocation.getX(), lastDeathLocation.getY(), lastDeathLocation.getZ()
+                    );
+                } else {
+                    coordinates = Component.translatable(
+                            "gui.accessorify.coordinates_xz",
+                            lastDeathLocation.getX(), lastDeathLocation.getZ()
+                    );
+                }
+                renderList.add(new ObjectIntImmutablePair<>(
+                        Component.translatable("gui.accessorify.last_death_location"),
+                        0xffffff
+                ));
+                renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
             }
-            renderList.add(new ObjectIntImmutablePair<>(text, 0xffffff));
-            renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
+            else {
+                renderList.add(new ObjectIntImmutablePair<>(
+                        Component.translatable("gui.accessorify.last_death_location_wrong_dimension"),
+                        0xffffff
+                ));
+            }
         } else {
-            text = Component.translatable("gui.accessorify.last_death_location_unavailable");
-            renderList.add(new ObjectIntImmutablePair<>(text, 0xffffff));
+            renderList.add(new ObjectIntImmutablePair<>(
+                    Component.translatable("gui.accessorify.last_death_location_unavailable"),
+                    0xffffff
+            ));
         }
     }
 
