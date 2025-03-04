@@ -84,8 +84,10 @@ tasks.named('jarJar') {
 dependencies {
     // Hard dependencies
     implementation "net.neoforged:neoforge:${property("neo_version")}"
-    implementation "com.moulberry:mixinconstraints:${project.mixinconstraints_version}"
-    jarJar(group: 'com.moulberry', name: 'mixinconstraints', version: project.mixinconstraints_version)
+    implementation(jarJar("com.moulberry:mixinconstraints:${project.mixinconstraints_version}")) {
+        jarJar.ranged(it, "[1.0.6,)")
+    }
+    //jarJar(group: 'com.moulberry', name: 'mixinconstraints', version: project.mixinconstraints_version)
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${project.mixinsquared_version}"))
     implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:${project.mixinsquared_version}")) {
         jarJar.ranged(it, "[0.2.0,)")
