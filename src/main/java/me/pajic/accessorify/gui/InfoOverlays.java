@@ -74,10 +74,12 @@ public class InfoOverlays {
 
         private void prepareCompassOverlay(boolean shouldObfuscate) {
             if (shouldObfuscate) {
-                Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
-                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
-                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
-                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                if (Main.CONFIG.overlay.useObfuscationEffect()) {
+                    Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                }
             } else {
                 BlockPos blockPos = MC.player.blockPosition();
                 ResourceLocation biome = MC.player.level().getBiome(blockPos).unwrap().map(
@@ -108,9 +110,11 @@ public class InfoOverlays {
 
         private void prepareClockOverlay(boolean shouldObfuscate) {
             if (shouldObfuscate) {
-                Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
-                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
-                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                if (Main.CONFIG.overlay.useObfuscationEffect()) {
+                    Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                }
             } else {
                 BlockPos blockPos = MC.player.blockPosition();
                 MutableComponent dayAndTime = Component.translatable(
@@ -164,8 +168,10 @@ public class InfoOverlays {
 
         private void prepareSeasonString(boolean shouldObfuscate) {
             if (shouldObfuscate && (Main.SERENE_SEASONS_LOADED || Main.FABRIC_SEASONS_LOADED)) {
-                Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
-                renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                if (Main.CONFIG.overlay.useObfuscationEffect()) {
+                    Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                }
             }
             else {
                 ObjectIntImmutablePair<Component> seasonStringData = null;

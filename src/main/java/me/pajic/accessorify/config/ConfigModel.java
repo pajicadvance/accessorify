@@ -29,6 +29,7 @@ public class ConfigModel {
         public boolean showYCoordinate = true;
         public boolean obfuscateCompassIfNotOverworld = false;
         public boolean obfuscateClockIfNotOverworld = true;
+        public boolean useObfuscationEffect = true;
         @Sync(Option.SyncMode.NONE) public OverlayPosition position = OverlayPosition.TOP_LEFT;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetX = 0;
         @Sync(Option.SyncMode.NONE) @PredicateConstraint("positive") public int offsetY = 0;
