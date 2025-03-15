@@ -13,6 +13,7 @@
   "text.config.accessorify.option.showYCoordinate": "Show height (Y) in compass overlay",
   "text.config.accessorify.option.overlay.obfuscateCompassIfNotOverworld": "Obfuscate compass outside overworld",
   "text.config.accessorify.option.overlay.obfuscateClockIfNotOverworld": "Obfuscate clock outside overworld",
+  "text.config.accessorify.option.overlay.useObfuscationEffect": "Use text obfuscation effect",
   "text.config.accessorify.option.overlay.position": "Overlay position",
   "text.config.accessorify.option.overlay.position.value.top_left": "Top left",
   "text.config.accessorify.option.overlay.position.value.top_right": "Top right",

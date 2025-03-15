@@ -24,6 +24,9 @@ public class ModClientConfig {
     private static final ModConfigSpec.IntValue OFFSET_Y = BUILDER
             .translation("text.config.accessorify.option.overlay.offsetY")
             .defineInRange("offsetY", 0, 0, Integer.MAX_VALUE);
+    private static final ModConfigSpec.BooleanValue USE_OBFUSCATION_EFFECT = BUILDER
+            .translation("text.config.accessorify.option.overlay.useObfuscationEffect")
+            .define("useObfuscationEffect", true);
     private static final ModConfigSpec.BooleanValue TEXT_BACKGROUND = BUILDER
             .translation("text.config.accessorify.option.textBackground")
             .define("textBackground", true);
@@ -71,6 +74,7 @@ public class ModClientConfig {
     public static OverlayPosition position;
     public static int offsetX;
     public static int offsetY;
+    public static boolean useObfuscationEffect;
     public static boolean textBackground;
     public static double textBackgroundOpacity;
     public static boolean textShadow;
@@ -102,6 +106,7 @@ public class ModClientConfig {
             position = POSITION.get();
             offsetX = OFFSET_X.get();
             offsetY = OFFSET_Y.get();
+            useObfuscationEffect = USE_OBFUSCATION_EFFECT.get();
             textBackground = TEXT_BACKGROUND.get();
             textBackgroundOpacity = TEXT_BACKGROUND_OPACITY.get();
             textShadow = TEXT_SHADOW.get();
