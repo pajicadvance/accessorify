@@ -13,8 +13,9 @@
   "text.config.accessorify.option.hideDebugInfoInSurvival.tooltip": "Это позволяет скрыть большую часть информации, связанной с игровым процессом, такую как координаты, биом и т.д.,\nс экрана отладки F3. Используется для того, чтобы компас и часы\nбыли единственным источником игровой информации для большего погружения.",
   "text.config.accessorify.category.overlay": "Настройки наложения информации",
   "text.config.accessorify.option.overlay.showYCoordinate": "Показывать высоту(Y)",
-  "text.config.accessorify.option.overlay.obfuscateCompassIfNotOverworld": "Запутывать компас за пределами надземного мира",
-  "text.config.accessorify.option.overlay.obfuscateClockIfNotOverworld": "Запутывать компас за пределами надземного мира",
+  "text.config.accessorify.option.overlay.obfuscateCompassIfNotOverworld": "Запутывать компас за пределами Надземного мира",
+  "text.config.accessorify.option.overlay.obfuscateClockIfNotOverworld": "Запутывать компас за пределами Надземного мира",
+  "text.config.accessorify.option.overlay.useObfuscationEffect": "Использовать эффект запутывания текста",
   "text.config.accessorify.option.overlay.position": "Положение наложения",
   "text.config.accessorify.option.overlay.position.value.top_left": "Вверху слева",
   "text.config.accessorify.option.overlay.position.value.top_right": "Вверху справа",
@@ -78,5 +79,30 @@
   "gui.accessorify.late_winter": "Поздняя зима",
   "gui.accessorify.last_death_location": "Место последней смерти:",
   "gui.accessorify.last_death_location_unavailable": "Место последней смерти недоступно",
-  "gui.accessorify.last_death_location_wrong_dimension": "Место смерти находится в другом измерении"
+  "gui.accessorify.last_death_location_wrong_dimension": "Место смерти находится в другом измерении",
+
+
+
+  "text.config.accessorify.option.showYCoordinate": "Показывать высоту (Y) в наложении компаса",
+  "text.config.accessorify.option.textBackground": "Фон текста",
+  "text.config.accessorify.option.textBackgroundOpacity": "Непрозрачность фона текста",
+  "text.config.accessorify.option.textShadow": "Тень текста",
+  "text.config.accessorify.option.coloredSeason": "Цветной текст сезона",
+  "text.config.accessorify.option.coloredWeather": "Цветной текст погоды",
+  "text.config.accessorify.option.raining": "Дождь",
+  "text.config.accessorify.option.thundering": "Гроза",
+  "text.config.accessorify.option.cloudy": "Облачность",
+  "text.config.accessorify.option.snowing": "Снег",
+  "text.config.accessorify.option.spring": "Весна",
+  "text.config.accessorify.option.summer": "Лето",
+  "text.config.accessorify.option.autumn": "Осень",
+  "text.config.accessorify.option.winter": "Зима",
+  "text.config.accessorify.option.raining.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.option.thundering.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.option.cloudy.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.option.snowing.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.option.spring.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.option.summer.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.option.autumn.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.option.winter.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте шестнадцатеричное значение в десятичное и вставьте его сюда."
 }
