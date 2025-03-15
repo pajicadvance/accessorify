@@ -46,6 +46,7 @@ public class ModKeybinds {
 
     public static void registerKeybinds(RegisterKeyMappingsEvent event) {
         event.register(USE_SPYGLASS.get());
+        event.register(OPEN_SHULKER_BOX.get());
     }
 
     @SubscribeEvent
