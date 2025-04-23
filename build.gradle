@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.9-SNAPSHOT'
+    id 'fabric-loom' version '1.10-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -18,6 +18,8 @@ repositories {
     maven { url = "https://maven.wispforest.io/releases/" }
     maven { url = "https://maven.bawnorton.com/releases" }
     maven { url = "https://maven.kyrptonaught.dev" }
+    maven { url = "https://repo.greenhouse.house/releases/" }
+    maven { url = "https://jitpack.io/" }
     exclusiveContent {
         forRepository {
             maven {
@@ -27,21 +29,6 @@ repositories {
         }
         filter {
             includeGroup "maven.modrinth"
-        }
-    }
-    maven {
-        name = "Greenhouse Maven"
-        url = 'https://repo.greenhouse.house/releases/'
-    }
-    maven {
-        name = "Greenhouse Maven"
-        url = 'https://repo.greenhouse.house/snapshots/' // Porting Lib Hotfixes
-    }
-    maven { url "https://mvn.devos.one/snapshots/" } // Porting Lib Betas
-    maven {
-        url "https://jitpack.io/" // Fabric ASM
-        content {
-            excludeGroup "io.github.fabricators_of_create"
         }
     }
 }
@@ -69,9 +56,7 @@ dependencies {
     modImplementation "maven.modrinth:notes:${property("notes_version")}"
 
     // 1.21.1 exclusive supported mods
-    modCompileOnly("vectorwing:FarmersDelight:${property("fdrf_version")}") {
-        exclude(group: "net.fabricmc")
-    }
+    modCompileOnly "vectorwing:FarmersDelight:${property("fdrf_version")}"
     modCompileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
     modCompileOnly "maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}"
     modCompileOnly "maven.modrinth:eleron:${property("eleron_version")}"
@@ -80,9 +65,7 @@ dependencies {
     if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
         modCompileOnly files("ext_imports/citresewn-defaults-1.2.2+1.21.jar")
         modCompileOnly "maven.modrinth:cit-resewn:${property("citresewn_version")}"
-        modImplementation("vectorwing:FarmersDelight:${property("fdrf_version")}") {
-            exclude(group: "net.fabricmc")
-        }
+        modImplementation "vectorwing:FarmersDelight:${property("fdrf_version")}"
         modImplementation "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
         modImplementation "maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}"
     }
