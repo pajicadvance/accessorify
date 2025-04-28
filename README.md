@@ -52,6 +52,8 @@ Open the Accessories config in-game, scroll down until you see "Slot Amount Modi
 
 ![slot_modify](https://cdn.modrinth.com/data/cached_images/8a02ab659af3a2afb68c70ec43987064049abb96.png)
 
+Type `arrow` in the slot box instead to modify the amount of arrow slots in the same manner.
+
 ## Mod Compatibility
 
 - [Deeper and Darker](https://modrinth.com/mod/deeperdarker): Soul Elytra equippable in Cape slot

@@ -61,12 +61,7 @@ public class ShulkerBoxSelectionWidget {
                                             shulker.getFirst() - ModScrollHandler.selectedShulkerSlot
                                     );
                                     if (shulker.getFirst() == ModScrollHandler.selectedShulkerSlot)
-                                        guiGraphics.drawString(
-                                                MC.font, shulker.getSecond().getHoverName(),
-                                                MC.getWindow().getGuiScaledWidth() / 2 - MC.font.width(shulker.getSecond().getHoverName()) / 2,
-                                                MC.getWindow().getGuiScaledHeight() / 2 - 48,
-                                                16777215
-                                        );
+                                        WidgetUtil.renderCenterText(MC, shulker.getSecond().getHoverName(), guiGraphics, -48);
                                 });
                                 if (MC.player.isShiftKeyDown()) {
                                     guiGraphics.renderTooltip(
@@ -88,24 +83,9 @@ public class ShulkerBoxSelectionWidget {
                                             "gui.accessorify.hint_shulker_exit",
                                             Component.keybind(ModKeybinds.OPEN_SHULKER_BOX.get().getName())
                                     );
-                                    guiGraphics.drawString(
-                                            MC.font, scrollHint,
-                                            MC.getWindow().getGuiScaledWidth() / 2 - MC.font.width(scrollHint) / 2,
-                                            MC.getWindow().getGuiScaledHeight() / 2 + 12,
-                                            16777215
-                                    );
-                                    guiGraphics.drawString(
-                                            MC.font, tooltipHint,
-                                            MC.getWindow().getGuiScaledWidth() / 2 - MC.font.width(tooltipHint) / 2,
-                                            MC.getWindow().getGuiScaledHeight() / 2 + 24,
-                                            16777215
-                                    );
-                                    guiGraphics.drawString(
-                                            MC.font, exitHint,
-                                            MC.getWindow().getGuiScaledWidth() / 2 - MC.font.width(exitHint) / 2,
-                                            MC.getWindow().getGuiScaledHeight() / 2 + 36,
-                                            16777215
-                                    );
+                                    WidgetUtil.renderCenterText(MC, scrollHint, guiGraphics, 12);
+                                    WidgetUtil.renderCenterText(MC, tooltipHint, guiGraphics, 24);
+                                    WidgetUtil.renderCenterText(MC, exitHint, guiGraphics, 36);
                                 }
                                 guiGraphics.flush();
                                 RenderSystem.disableBlend();
