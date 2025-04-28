@@ -40,15 +40,13 @@
   "text.config.accessorify.category.spyglassZoom": "Настройки приближения подзорной трубы",
   "text.config.accessorify.option.spyglassZoom.scrollableZoom": "Прокручиваемый уровень масштабирования",
   "text.config.accessorify.option.spyglassZoom.rememberZoomLevel": "Запоминать уровень масштабирования",
-
-  "category.accessorify.keybindings": "Аксессуарность",
-  "key.accessorify.use_spyglass": "Использовать аксессуар подзорной трубы",
-  "key.accessorify.open_shulker_box": "Открыть надетый шалкеровый ящик",
-
-  "screen.accessorify.shulkerBoxSelection.title": "Выберите шалкеровый ящик для открытия",
-  "screen.accessorify.shulkerBoxSelection.footer": "(Esc для отмены)",
-
-  "accessories.slot.shulker": "Шалкер",
+  "text.config.accessorify.option.enderChestAccessory": "Ender Chest accessory",
+  "text.config.accessorify.option.arrowAccessory": "Arrow accessory",
+  "text.config.accessorify.option.showUIHints": "Show widget keybind hints",
+  "text.config.accessorify.option.showUIHints.tooltip": "Show keybind hints in the shulker box and arrow selection widgets.",
+  "text.config.accessorify.option.shulkerQuickSelect": "Shulker box widget quick select",
+  "text.config.accessorify.option.shulkerQuickSelect.tooltip": "Open the shulker selection widget by holding the keybind\nand open the selected shulker box by releasing the keybind.",
+  "text.config.accessorify.option.overlay.useObfuscationEffect": "Use text obfuscation effect",
 
   "gui.accessorify.coordinates_xyz": "%s %s %s",
   "gui.accessorify.coordinates_xz": "%s %s",
@@ -78,5 +76,20 @@
   "gui.accessorify.late_winter": "Поздняя зима",
   "gui.accessorify.last_death_location": "Место последней смерти:",
   "gui.accessorify.last_death_location_unavailable": "Место последней смерти недоступно",
-  "gui.accessorify.last_death_location_wrong_dimension": "Место смерти находится в другом измерении"
+  "gui.accessorify.last_death_location_wrong_dimension": "Место смерти находится в другом измерении",
+
+  "gui.accessorify.hint_arrow_scroll": "Scroll to select",
+  "gui.accessorify.hint_arrow_exit": "Release %s to close",
+  "gui.accessorify.hint_shulker_scroll": "Scroll to select",
+  "gui.accessorify.hint_shulker_tooltip": "Hold %s for tooltip",
+  "gui.accessorify.hint_shulker_exit": "%s to open",
+  "gui.accessorify.hint_shulker_exit_quick": "Release %s to open",
+
+  "category.accessorify.keybindings": "Аксессуарность",
+  "key.accessorify.use_spyglass": "Использовать аксессуар подзорной трубы",
+  "key.accessorify.open_shulker_box": "Открыть надетый шалкеровый ящик",
+  "key.accessorify.open_ender_chest": "Open equipped ender chest",
+
+  "accessories.slot.shulker": "Шалкер",
+  "accessories.slot.arrow": "Arrow"
 }

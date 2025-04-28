@@ -5,7 +5,6 @@ import io.wispforest.owo.ui.core.Color;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
 import me.pajic.accessorify.Main;
-import me.pajic.accessorify.config.OverlayPosition;
 import me.pajic.accessorify.util.compat.FabricSeasonsCompat;
 import me.pajic.accessorify.util.compat.RaisedCompat;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;

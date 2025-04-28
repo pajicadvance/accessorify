@@ -44,7 +44,6 @@ dependencies {
     // Hard dependencies
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}"
     include(implementation "com.moulberry:mixinconstraints:${project.mixinconstraints_version}")
-    include(implementation annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${project.mixinsquared_version}"))
     modImplementation "com.terraformersmc:modmenu:${property("modmenu_version")}"
     annotationProcessor modImplementation("io.wispforest:owo-lib:${property("owo_version")}")
     modImplementation "io.wispforest:accessories-fabric:${property("accessories_version")}"
@@ -54,20 +53,23 @@ dependencies {
     modCompileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
     modImplementation "maven.modrinth:raised:${property("raised_version")}"
     modImplementation "maven.modrinth:notes:${property("notes_version")}"
+    modCompileOnly "maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}"
 
     // 1.21.1 exclusive supported mods
     modCompileOnly "vectorwing:FarmersDelight:${property("fdrf_version")}"
     modCompileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
-    modCompileOnly "maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}"
     modCompileOnly "maven.modrinth:eleron:${property("eleron_version")}"
     modCompileOnly "maven.modrinth:fabric-seasons:${property("fabricseasons_version")}"
     modCompileOnly "maven.modrinth:fabric-seasons-extras:${property("fabricseasonsextras_version")}"
+    modCompileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
+    modCompileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
     if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
         modCompileOnly files("ext_imports/citresewn-defaults-1.2.2+1.21.jar")
         modCompileOnly "maven.modrinth:cit-resewn:${property("citresewn_version")}"
         modImplementation "vectorwing:FarmersDelight:${property("fdrf_version")}"
         modImplementation "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
-        modImplementation "maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}"
+        modImplementation "maven.modrinth:fragmentum:${property("fragmentum_version")}"
+        modImplementation "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
     }
 }
 

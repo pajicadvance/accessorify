@@ -2,6 +2,7 @@ package me.pajic.accessorify.config;
 
 import io.wispforest.owo.config.Option;
 import io.wispforest.owo.config.annotation.*;
+import me.pajic.accessorify.gui.OverlayPosition;
 
 @Modmenu(modId = "accessorify")
 @Config(name = "accessorify", wrapperName = "ModConfig")
@@ -15,7 +16,11 @@ public class ConfigModel {
     @RestartRequired public boolean elytraAccessory = true;
     @RestartRequired public boolean spyglassAccessory = true;
     @RestartRequired public boolean totemOfUndyingAccessory = true;
+    @RestartRequired public boolean enderChestAccessory = true;
     @RestartRequired public boolean shulkerBoxAccessory = true;
+    @RestartRequired public boolean arrowAccessory = true;
+    @Sync(Option.SyncMode.NONE) public boolean showUIHints = true;
+    @Sync(Option.SyncMode.NONE) public boolean shulkerQuickSelect = true;
     public boolean hideDebugInfoInSurvival = false;
     @Nest public Overlay overlay = new Overlay();
     @Nest public SpyglassZoom spyglassZoom = new SpyglassZoom();

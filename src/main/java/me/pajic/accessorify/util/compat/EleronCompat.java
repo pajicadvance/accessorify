@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 public class EleronCompat {
-
     public static void addModifiers(AccessoryAttributeBuilder builder, ItemStack stack, HolderLookup.RegistryLookup<Enchantment> registry) {
         registry.get(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.parse("eleron:cloudskipper"))).ifPresent(
                 ref -> builder.addExclusive(

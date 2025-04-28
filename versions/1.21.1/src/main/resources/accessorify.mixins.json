@@ -3,16 +3,17 @@
   "minVersion": "0.8",
   "package": "me.pajic.accessorify.mixin",
   "compatibilityLevel": "JAVA_21",
-  "plugin": "me.pajic.accessorify.compat.CompatMixinPlugin",
   "mixins": [
     "LivingEntityMixin",
+    "PlayerSelectedAccessorySlotDataMixin",
     "PlayerMixin",
+    "ProjectileWeaponItemMixin",
+    "ServerGamePacketListenerImplMixin",
+    "compat.arselixirum.LivingEntityHooksMixin",
     "compat.citresewn.TypeElytraContainerMixin",
     "compat.deeperdarker.DDNetworkingMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
-    "compat.fdrf.HUDOverlaysMixin",
-    "compat.friendsandfoes.PlayerEntityMixinSquared",
-    "compat.friendsandfoes.TrinketsCompatMixin"
+    "compat.fdrf.HUDOverlaysMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

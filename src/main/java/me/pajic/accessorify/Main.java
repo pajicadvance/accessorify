@@ -10,8 +10,9 @@ import me.pajic.accessorify.config.ModConfig;
 import net.fabricmc.loader.api.FabricLoader;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
-import me.pajic.accessorify.compat.friendsandfoes.TotemOfFreezingAccessory;
-import me.pajic.accessorify.compat.friendsandfoes.TotemOfIllusionAccessory;
+import me.pajic.accessorify.accessories.compat.TotemOfFreezingAccessory;
+import me.pajic.accessorify.accessories.compat.TotemOfIllusionAccessory;
+import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
 //?}
 
 public class Main implements ModInitializer {
@@ -25,6 +26,7 @@ public class Main implements ModInitializer {
     public static final boolean SERENE_SEASONS_LOADED = FabricLoader.getInstance().isModLoaded("sereneseasons");
     public static final boolean FABRIC_SEASONS_LOADED = FabricLoader.getInstance().isModLoaded("seasons");
     public static final boolean FABRIC_SEASONS_EXTRAS_LOADED = FabricLoader.getInstance().isModLoaded("seasonsextras");
+    public static final boolean ARS_ELIXIRUM_LOADED = FabricLoader.getInstance().isModLoaded("elixirum");
 
     @Override
     public void onInitialize() {
@@ -47,10 +49,15 @@ public class Main implements ModInitializer {
                 TotemOfFreezingAccessory.init();
                 TotemOfIllusionAccessory.init();
             }
+            if (ARS_ELIXIRUM_LOADED) {
+                WitchTotemOfUndyingAccessory.init();
+            }
             //?}
         }
         if (CONFIG.recoveryCompassAccessory()) RecoveryCompassAccessory.init();
+        if (CONFIG.enderChestAccessory()) EnderChestAccessory.init();
         if (CONFIG.shulkerBoxAccessory()) ShulkerBoxAccessory.init();
+        if (CONFIG.arrowAccessory()) ArrowAccessory.init();
         if (CONFIG.calendarAccessory()) {
             if (FABRIC_SEASONS_LOADED && FABRIC_SEASONS_EXTRAS_LOADED) FabricSeasonsCalendarAccessory.init();
             else if (SERENE_SEASONS_LOADED) SereneSeasonsCalendarAccessory.init();

@@ -44,14 +44,26 @@ public class ModDatapacks {
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fnftotems"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
+                if (Main.ARS_ELIXIRUM_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "witchtotem"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
                 //?}
             }
             if (Main.CONFIG.recoveryCompassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
                     ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "recoverycompass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
+            if (Main.CONFIG.enderChestAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "enderchest"),
+                    modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+            );
             if (Main.CONFIG.shulkerBoxAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
                     ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "shulkerbox"),
+                    modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+            );
+            if (Main.CONFIG.arrowAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "arrow"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
             if (Main.CONFIG.calendarAccessory()) {

@@ -11,7 +11,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 public class FabricSeasonsCompat {
-
     public static ObjectIntImmutablePair<Component> getSeasonStringData(Level level) {
         Season season = FabricSeasons.getCurrentSeason(level);
         return ObjectIntImmutablePair.of(

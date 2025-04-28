@@ -6,11 +6,17 @@
   "text.config.accessorify.option.spyglassAccessory": "Spyglass accessory",
   "text.config.accessorify.option.totemOfUndyingAccessory": "Totem of Undying accessory",
   "text.config.accessorify.option.recoveryCompassAccessory": "Recovery Compass accessory",
+  "text.config.accessorify.option.enderChestAccessory": "Ender Chest accessory",
   "text.config.accessorify.option.shulkerBoxAccessory": "Shulker Box accessory",
+  "text.config.accessorify.option.arrowAccessory": "Arrow accessory",
   "text.config.accessorify.option.calendarAccessory": "Calendar accessory",
   "text.config.accessorify.option.calendarAccessory.tooltip": "Requires Serene Seasons or Fabric Seasons + Extras.\n\nIf you have a season mod installed but want the\nvanilla clock to show the season instead,\nturn this option off.",
   "text.config.accessorify.option.hideDebugInfoInSurvival": "Hide gameplay info from F3 menu in survival",
   "text.config.accessorify.option.hideDebugInfoInSurvival.tooltip": "This hides most gameplay related info such as coordinates, biome etc.\nfrom the F3 debug screen. Used to make the compass and clock\nthe only source of gameplay information, for immersion.",
+  "text.config.accessorify.option.showUIHints": "Show widget keybind hints",
+  "text.config.accessorify.option.showUIHints.tooltip": "Show keybind hints in the shulker box and arrow selection widgets.",
+  "text.config.accessorify.option.shulkerQuickSelect": "Shulker box widget quick select",
+  "text.config.accessorify.option.shulkerQuickSelect.tooltip": "Disable to press the keybind to open the menu\nand press it again to open the selected shulker box\ninstead of hold and release to open the selected shulker box.",
   "text.config.accessorify.category.overlay": "Info overlay settings",
   "text.config.accessorify.option.overlay.showYCoordinate": "Show height (Y)",
   "text.config.accessorify.option.overlay.obfuscateCompassIfNotOverworld": "Obfuscate compass outside overworld",
@@ -42,15 +48,6 @@
   "text.config.accessorify.option.spyglassZoom.scrollableZoom": "Scrollable zoom level",
   "text.config.accessorify.option.spyglassZoom.rememberZoomLevel": "Remember zoom level",
 
-  "category.accessorify.keybindings": "Accessorify",
-  "key.accessorify.use_spyglass": "Use spyglass accessory",
-  "key.accessorify.open_shulker_box": "Open equipped shulker box",
-
-  "screen.accessorify.shulkerBoxSelection.title": "Select shulker box to open",
-  "screen.accessorify.shulkerBoxSelection.footer": "(Esc to cancel)",
-
-  "accessories.slot.shulker": "Shulker",
-
   "gui.accessorify.coordinates_xyz": "%s %s %s",
   "gui.accessorify.coordinates_xz": "%s %s",
   "gui.accessorify.facing": "Facing %s",
@@ -79,5 +76,20 @@
   "gui.accessorify.late_winter": "Late Winter",
   "gui.accessorify.last_death_location": "Last death location:",
   "gui.accessorify.last_death_location_unavailable": "Last death location unavailable",
-  "gui.accessorify.last_death_location_wrong_dimension": "Death location is in different dimension"
+  "gui.accessorify.last_death_location_wrong_dimension": "Death location is in different dimension",
+
+  "gui.accessorify.hint_arrow_scroll": "Scroll to select",
+  "gui.accessorify.hint_arrow_exit": "Release %s to close",
+  "gui.accessorify.hint_shulker_scroll": "Scroll to select",
+  "gui.accessorify.hint_shulker_tooltip": "Hold %s for tooltip",
+  "gui.accessorify.hint_shulker_exit": "%s to open",
+  "gui.accessorify.hint_shulker_exit_quick": "Release %s to open",
+
+  "category.accessorify.keybindings": "Accessorify",
+  "key.accessorify.use_spyglass": "Use spyglass accessory",
+  "key.accessorify.open_shulker_box": "Open shulker box selection widget",
+  "key.accessorify.open_ender_chest": "Open equipped ender chest",
+
+  "accessories.slot.shulker": "Shulker",
+  "accessories.slot.arrow": "Arrow"
 }

@@ -1,22 +1,33 @@
-package me.pajic.accessorify.compat.friendsandfoes;
+package me.pajic.accessorify.compat.arselixirum;
 
-import com.faboslav.friendsandfoes.common.init.FriendsAndFoesItems;
 import com.google.common.collect.HashMultimap;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
+//? if <= 1.21.1
 import io.wispforest.accessories.api.AccessoriesAPI;
+//? if > 1.21.1
+/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
-public class TotemOfFreezingAccessory implements Accessory {
+public class WitchTotemOfUndyingAccessory implements Accessory {
 
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_charm_1");
+    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_charm_5");
 
     public static void init() {
-        AccessoriesAPI.registerAccessory(FriendsAndFoesItems.TOTEM_OF_FREEZING.get(), new TotemOfFreezingAccessory());
+        RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
+            if (rl.equals(ResourceLocation.parse("elixirum:witch_totem_of_undying"))) {
+                //? if <= 1.21.1
+                AccessoriesAPI.registerAccessory(item, new WitchTotemOfUndyingAccessory());
+                //? if > 1.21.1
+                /*AccessoryRegistry.register(item, new WitchTotemOfUndyingAccessory());*/
+            }
+        });
     }
 
     @Override

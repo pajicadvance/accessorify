@@ -4,16 +4,16 @@ import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.compat.FabricSeasonsCompat;
+import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
-import me.pajic.accessorify.compat.friendsandfoes.FriendsAndFoesCompat;
-import net.minecraft.world.item.ElytraItem;
+import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
 //?}
 
 import java.util.List;
@@ -42,6 +42,12 @@ public class ModUtil {
             Items.GREEN_SHULKER_BOX,
             Items.RED_SHULKER_BOX,
             Items.BLACK_SHULKER_BOX
+    );
+
+    public static final List<Item> ARROWS = List.of(
+            Items.ARROW,
+            Items.TIPPED_ARROW,
+            Items.SPECTRAL_ARROW
     );
 
     public static ItemStack getAccessoryStack(LivingEntity entity, Item item) {
@@ -92,14 +98,34 @@ public class ModUtil {
     //?}
 
     public static boolean isTotem(ItemStack stack) {
-        //? if <= 1.21.1
-        return Main.FRIENDS_AND_FOES_LOADED ? FriendsAndFoesCompat.isTotem(stack) : stack.is(Items.TOTEM_OF_UNDYING);
+        //? if <= 1.21.1 {
+        if (Main.FRIENDS_AND_FOES_LOADED && Main.ARS_ELIXIRUM_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (Main.ARS_ELIXIRUM_LOADED) {
+            return ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (Main.FRIENDS_AND_FOES_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        }
+        return stack.is(Items.TOTEM_OF_UNDYING);
+        //?}
         //? if > 1.21.1
-        /*return stack.is(Items.TOTEM_OF_UNDYING);*/
+        /*return stack.has(DataComponents.DEATH_PROTECTION);*/
     }
 
-    public static boolean isShulkerBox(ItemStack stack) {
-        return SHULKER_BOXES.stream().anyMatch(stack::is);
+    public static ItemStack tryGetTotemAccessory(LivingEntity livingEntity) {
+        Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(livingEntity);
+        if (ac.isPresent()) {
+            List<SlotEntryReference> totems = ac.get().getEquipped(ModUtil::isTotem);
+            if (!totems.isEmpty()) {
+                return totems.getFirst().stack();
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    public static boolean isHoldingProjectileWeapon(Player player) {
+        for (ItemStack stack : player.getHandSlots()) if (stack.getItem() instanceof ProjectileWeaponItem) return true;
+        return false;
     }
 
     public static boolean calendarUsedForSeasonInfo() {

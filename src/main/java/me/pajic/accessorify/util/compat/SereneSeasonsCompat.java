@@ -11,7 +11,6 @@ import sereneseasons.api.season.Season;
 import sereneseasons.api.season.SeasonHelper;
 
 public class SereneSeasonsCompat {
-
     public static ObjectIntImmutablePair<Component> getSeasonStringData(Level level) {
         Season.SubSeason subSeason = SeasonHelper.getSeasonState(level).getSubSeason();
         return ObjectIntImmutablePair.of(
