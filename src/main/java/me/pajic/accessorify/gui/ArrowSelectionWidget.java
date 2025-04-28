@@ -66,12 +66,8 @@ public class ArrowSelectionWidget {
                                                 arrow.getFirst() - ModScrollHandler.selectedArrowSlot
                                         );
                                     }
-                                    if (arrow.getFirst() == ModScrollHandler.selectedArrowSlot) guiGraphics.drawString(
-                                            MC.font, arrow.getSecond().getHoverName(),
-                                            MC.getWindow().getGuiScaledWidth() / 2 - MC.font.width(arrow.getSecond().getHoverName()) / 2,
-                                            MC.getWindow().getGuiScaledHeight() / 2 - 48,
-                                            16777215
-                                    );
+                                    if (arrow.getFirst() == ModScrollHandler.selectedArrowSlot)
+                                        WidgetUtil.renderCenterText(MC, arrow.getSecond().getHoverName(), guiGraphics, -48);
                                 });
                                 if (Main.CONFIG.showUIHints()) {
                                     Component scrollHint = Component.translatable("gui.accessorify.hint_arrow_scroll");
@@ -79,18 +75,8 @@ public class ArrowSelectionWidget {
                                             "gui.accessorify.hint_arrow_exit",
                                             Component.keybind(MC.options.keyShift.getName())
                                     );
-                                    guiGraphics.drawString(
-                                            MC.font, scrollHint,
-                                            MC.getWindow().getGuiScaledWidth() / 2 - MC.font.width(scrollHint) / 2,
-                                            MC.getWindow().getGuiScaledHeight() / 2 + 12,
-                                            16777215
-                                    );
-                                    guiGraphics.drawString(
-                                            MC.font, exitHint,
-                                            MC.getWindow().getGuiScaledWidth() / 2 - MC.font.width(exitHint) / 2,
-                                            MC.getWindow().getGuiScaledHeight() / 2 + 24,
-                                            16777215
-                                    );
+                                    WidgetUtil.renderCenterText(MC, scrollHint, guiGraphics, 12);
+                                    WidgetUtil.renderCenterText(MC, exitHint, guiGraphics, 24);
                                 }
                                 guiGraphics.flush();
                                 RenderSystem.disableBlend();

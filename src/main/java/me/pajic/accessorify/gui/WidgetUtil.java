@@ -2,6 +2,7 @@ package me.pajic.accessorify.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 //? if >= 1.21.4
@@ -23,6 +24,15 @@ public class WidgetUtil {
                 mc.getWindow().getGuiScaledWidth() / 2 - 18,
                 mc.getWindow().getGuiScaledHeight() / 2 - 32,
                 29, 24
+        );
+    }
+
+    public static void renderCenterText(Minecraft mc, Component text, GuiGraphics guiGraphics, int offset) {
+        guiGraphics.drawString(
+                mc.font, text,
+                mc.getWindow().getGuiScaledWidth() / 2 - mc.font.width(text) / 2,
+                mc.getWindow().getGuiScaledHeight() / 2 + offset,
+                16777215
         );
     }
 }
