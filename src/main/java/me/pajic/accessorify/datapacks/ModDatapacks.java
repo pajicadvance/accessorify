@@ -23,12 +23,10 @@ public class ModDatapacks {
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "elytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                //? if <= 1.21.1 {
                 if (Main.DEEPER_DARKER_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "soulelytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                //?}
             }
             if (Main.CONFIG.spyglassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
                     ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "spyglass"),
@@ -39,7 +37,6 @@ public class ModDatapacks {
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "totem"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                //? if <= 1.21.1 {
                 if (Main.FRIENDS_AND_FOES_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fnftotems"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
@@ -48,7 +45,6 @@ public class ModDatapacks {
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "witchtotem"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                //?}
             }
             if (Main.CONFIG.recoveryCompassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
                     ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "recoverycompass"),
