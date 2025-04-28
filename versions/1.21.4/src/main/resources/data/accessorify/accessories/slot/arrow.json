@@ -3,5 +3,5 @@
   "amount": 3,
   "operation": "set",
   "order": 810,
-  "icon": "accessorify:gui/slot/arrow"
+  "icon": "accessorify:container/slot/arrow"
 }

@@ -39,7 +39,6 @@ public class ModDatapacks {
                     true,
                     Pack.Position.TOP
             );
-            //? if <= 1.21.1 {
             if (Main.DEEPER_DARKER_LOADED) {
                 event.addPackFinders(
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "soulelytra"),
@@ -50,7 +49,6 @@ public class ModDatapacks {
                         Pack.Position.TOP
                 );
             }
-            //?}
         }
         if (ModCommonConfig.spyglassAccessory) event.addPackFinders(
                 ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "spyglass"),
@@ -69,7 +67,6 @@ public class ModDatapacks {
                     true,
                     Pack.Position.TOP
             );
-            //? if <= 1.21.1 {
             if (Main.FRIENDS_AND_FOES_LOADED) {
                 event.addPackFinders(
                         ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fnftotems"),
@@ -80,7 +77,16 @@ public class ModDatapacks {
                         Pack.Position.TOP
                 );
             }
-            //?}
+            if (Main.ARS_ELIXIRUM_LOADED) {
+                event.addPackFinders(
+                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "witchtotem"),
+                        PackType.SERVER_DATA,
+                        Component.literal("Accessorify Witch Totems"),
+                        PackSource.BUILT_IN,
+                        true,
+                        Pack.Position.TOP
+                );
+            }
         }
         if (ModCommonConfig.enderChestAccessory) event.addPackFinders(
                 ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "enderchest"),
