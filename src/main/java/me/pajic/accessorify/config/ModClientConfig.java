@@ -1,5 +1,6 @@
 package me.pajic.accessorify.config;
 
+import me.pajic.accessorify.gui.OverlayPosition;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -9,6 +10,12 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class ModClientConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    private static final ModConfigSpec.BooleanValue SHOW_UI_HINTS = BUILDER
+            .translation("text.config.accessorify.option.showUIHints")
+            .define("showUIHints", true);
+    private static final ModConfigSpec.BooleanValue SHULKER_QUICK_SELECT = BUILDER
+            .translation("text.config.accessorify.option.shulkerQuickSelect")
+            .define("shulkerQuickSelect", true);
     private static final ModConfigSpec.BooleanValue SCROLLABLE_ZOOM = BUILDER
             .translation("text.config.accessorify.option.spyglassZoom.scrollableZoom")
             .define("scrollableZoom", true);
@@ -69,6 +76,8 @@ public class ModClientConfig {
 
     public static final ModConfigSpec CLIENT_SPEC = BUILDER.build();
 
+    public static boolean showUIHints;
+    public static boolean shulkerQuickSelect;
     public static boolean scrollableZoom;
     public static boolean rememberZoomLevel;
     public static OverlayPosition position;
@@ -101,6 +110,8 @@ public class ModClientConfig {
 
     private static void updateConfig(ModConfigEvent event) {
         if (event.getConfig().getSpec() == CLIENT_SPEC) {
+            showUIHints = SHOW_UI_HINTS.get();
+            shulkerQuickSelect = SHULKER_QUICK_SELECT.get();
             scrollableZoom = SCROLLABLE_ZOOM.get();
             rememberZoomLevel = REMEMBER_ZOOM_LEVEL.get();
             position = POSITION.get();

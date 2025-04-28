@@ -6,7 +6,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public class DeeperDarkerCompat {
-
     public static ItemStack getSoulElytraAccessoryStack(LivingEntity entity) {
         return ModUtil.getAccessoryStack(entity, DDItems.SOUL_ELYTRA.get());
     }

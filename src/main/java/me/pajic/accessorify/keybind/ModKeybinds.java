@@ -2,8 +2,9 @@ package me.pajic.accessorify.keybind;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import io.wispforest.accessories.api.AccessoriesCapability;
-import io.wispforest.accessories.api.slot.SlotEntryReference;
-import me.pajic.accessorify.gui.ShulkerBoxAccessorySelectionScreen;
+import me.pajic.accessorify.config.ModClientConfig;
+import me.pajic.accessorify.gui.ArrowSelectionWidget;
+import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
 import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.KeyMapping;
@@ -19,7 +20,6 @@ import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.List;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = "accessorify", value = Dist.CLIENT)
@@ -41,12 +41,21 @@ public class ModKeybinds {
                     "category.accessorify.keybindings"
             )
     );
+    public static final Lazy<KeyMapping> OPEN_ENDER_CHEST = Lazy.of(() ->
+            new KeyMapping(
+                    "key.accessorify.open_ender_chest",
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_V,
+                    "category.accessorify.keybindings"
+            )
+    );
 
     private static boolean soundPlayed = false;
 
     public static void registerKeybinds(RegisterKeyMappingsEvent event) {
         event.register(USE_SPYGLASS.get());
         event.register(OPEN_SHULKER_BOX.get());
+        event.register(OPEN_ENDER_CHEST.get());
     }
 
     @SubscribeEvent
@@ -66,18 +75,28 @@ public class ModKeybinds {
                 }
                 ModUtil.shouldScope = false;
             }
-            if (OPEN_SHULKER_BOX.get().consumeClick()) {
-                Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(client.player);
-                if (ac.isPresent()) {
-                    List<SlotEntryReference> shulkerBoxes = ac.get().getEquipped(ModUtil::isShulkerBox);
-                    if (!shulkerBoxes.isEmpty()) {
+            if (!ModClientConfig.shulkerQuickSelect) {
+                if (OPEN_SHULKER_BOX.get().consumeClick()) {
+                    if (!ShulkerBoxSelectionWidget.widgetOpen && !ArrowSelectionWidget.widgetOpen)
+                        ShulkerBoxSelectionWidget.widgetOpen = true;
+                    else {
+                        PacketDistributor.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
                         client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
-                        if (shulkerBoxes.size() == 1) {
-                            PacketDistributor.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(shulkerBoxes.getFirst().reference().slot()));
-                        } else {
-                            client.setScreen(new ShulkerBoxAccessorySelectionScreen(shulkerBoxes));
-                        }
+                        ShulkerBoxSelectionWidget.widgetOpen = false;
                     }
+                }
+            } else if (!OPEN_SHULKER_BOX.get().isDown()) {
+                if (ShulkerBoxSelectionWidget.widgetOpen) {
+                    PacketDistributor.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
+                    client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
+                    ShulkerBoxSelectionWidget.widgetOpen = false;
+                }
+            }
+            if (OPEN_ENDER_CHEST.get().consumeClick()) {
+                Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(client.player);
+                if (ac.isPresent() && ac.get().isEquipped(Items.ENDER_CHEST)) {
+                    client.player.playSound(SoundEvents.ENDER_CHEST_OPEN);
+                    PacketDistributor.sendToServer(new ModNetworking.C2SOpenEnderContainerPayload());
                 }
             }
         }

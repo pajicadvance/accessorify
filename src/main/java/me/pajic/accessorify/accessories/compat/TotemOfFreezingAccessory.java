@@ -1,22 +1,35 @@
-package me.pajic.accessorify.compat.friendsandfoes;
+package me.pajic.accessorify.accessories.compat;
 
-import com.faboslav.friendsandfoes.common.init.FriendsAndFoesItems;
 import com.google.common.collect.HashMultimap;
-import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.registries.ModifyRegistriesEvent;
+import net.neoforged.neoforge.registries.callback.AddCallback;
+//? if <= 1.21.1
+import io.wispforest.accessories.api.AccessoriesAPI;
+//? if > 1.21.1
+/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
 public class TotemOfFreezingAccessory implements Accessory {
 
     private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_charm_1");
 
-    public static void init() {
-        AccessoriesAPI.registerAccessory(FriendsAndFoesItems.TOTEM_OF_FREEZING.get(), new TotemOfFreezingAccessory());
+    public static void init(ModifyRegistriesEvent event) {
+        event.getRegistry(Registries.ITEM).addCallback((AddCallback<Item>) (registry, id, key, value) -> {
+            if (key.location().equals(ResourceLocation.parse("friendsandfoes:totem_of_freezing"))) {
+                //? if <= 1.21.1
+                AccessoriesAPI.registerAccessory(value, new TotemOfFreezingAccessory());
+                //? if > 1.21.1
+                /*AccessoryRegistry.register(value, new TotemOfFreezingAccessory());*/
+            }
+        });
     }
 
     @Override

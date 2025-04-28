@@ -3,13 +3,14 @@
   "minVersion": "0.8",
   "package": "me.pajic.accessorify.mixin",
   "compatibilityLevel": "JAVA_21",
-  "plugin": "me.pajic.accessorify.compat.CompatMixinPlugin",
   "mixins": [
     "LivingEntityMixin",
     "PlayerMixin",
-    "compat.deeperdarker.SoulElytraBoostPacketMixin",
-    "compat.friendsandfoes.CuriosCompatMixin",
-    "compat.friendsandfoes.PlayerEntityMixinSquared"
+    "PlayerSelectedAccessorySlotDataMixin",
+    "ProjectileWeaponItemMixin",
+    "ServerGamePacketListenerImplMixin",
+    "compat.arselixirum.LivingEntityHooksMixin",
+    "compat.deeperdarker.SoulElytraBoostPacketMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

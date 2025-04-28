@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin"
+    "PlayerSelectedAccessorySlotDataMixin",
+    "PlayerMixin",
+    "ProjectileWeaponItemMixin",
+    "ServerGamePacketListenerImplMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

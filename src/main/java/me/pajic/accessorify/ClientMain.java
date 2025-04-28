@@ -5,8 +5,11 @@ import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.InfoOverlays;
+import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
 import me.pajic.accessorify.keybind.ModKeybinds;
+import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
@@ -26,15 +29,19 @@ public class ClientMain {
         modContainer.registerConfig(ModConfig.Type.CLIENT, ModClientConfig.CLIENT_SPEC);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modEventBus.addListener(this::onInitialize);
+        modEventBus.addListener(ModNetworking::initClient);
         modEventBus.addListener(SereneSeasonsCalendarAccessory::clientInit);
         modEventBus.addListener(ModKeybinds::registerKeybinds);
     }
 
     public void onInitialize(FMLClientSetupEvent event) {
         NeoForge.EVENT_BUS.addListener(InfoOverlays::renderInfoOverlays);
+        NeoForge.EVENT_BUS.addListener(ArrowSelectionWidget::renderArrowSelectionWidget);
+        NeoForge.EVENT_BUS.addListener(ShulkerBoxSelectionWidget::renderShulkerBoxSelectionWidget);
         if (ModCommonConfig.clockAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.CLOCK);
         if (ModCommonConfig.compassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.COMPASS);
         if (ModCommonConfig.recoveryCompassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.RECOVERY_COMPASS);
+        if (ModCommonConfig.enderChestAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.ENDER_CHEST);
         if (ModCommonConfig.elytraAccessory) {
             AccessoriesRendererRegistry.registerNoRenderer(Items.ELYTRA);
             //? if <= 1.21.1 {
@@ -44,5 +51,6 @@ public class ClientMain {
             //?}
         }
         if (ModCommonConfig.shulkerBoxAccessory) ModUtil.SHULKER_BOXES.forEach(AccessoriesRendererRegistry::registerNoRenderer);
+        if (ModCommonConfig.arrowAccessory) ModUtil.ARROWS.forEach(AccessoriesRendererRegistry::registerNoRenderer);
     }
 }

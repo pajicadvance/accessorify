@@ -37,10 +37,18 @@ public class ModCommonConfig {
             .translation("text.config.accessorify.option.totemOfUndyingAccessory")
             .gameRestart()
             .define("totemOfUndyingAccessory", true);
+    private static final ModConfigSpec.BooleanValue ENDER_CHEST_ACCESSORY = BUILDER
+            .translation("text.config.accessorify.option.enderChestAccessory")
+            .gameRestart()
+            .define("enderChestAccessory", true);
     private static final ModConfigSpec.BooleanValue SHULKER_BOX_ACCESSORY = BUILDER
             .translation("text.config.accessorify.option.shulkerBoxAccessory")
             .gameRestart()
             .define("shulkerBoxAccessory", true);
+    private static final ModConfigSpec.BooleanValue ARROW_ACCESSORY = BUILDER
+            .translation("text.config.accessorify.option.arrowAccessory")
+            .gameRestart()
+            .define("arrowAccessory", true);
 
     public static final ModConfigSpec COMMON_SPEC = BUILDER.build();
 
@@ -51,7 +59,9 @@ public class ModCommonConfig {
     public static boolean elytraAccessory;
     public static boolean spyglassAccessory;
     public static boolean totemOfUndyingAccessory;
+    public static boolean enderChestAccessory;
     public static boolean shulkerBoxAccessory;
+    public static boolean arrowAccessory;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent.Loading event) {
@@ -72,7 +82,9 @@ public class ModCommonConfig {
             elytraAccessory = ELYTRA_ACCESSORY.get();
             spyglassAccessory = SPYGLASS_ACCESSORY.get();
             totemOfUndyingAccessory = TOTEM_OF_UNDYING_ACCESSORY.get();
+            enderChestAccessory = ENDER_CHEST_ACCESSORY.get();
             shulkerBoxAccessory = SHULKER_BOX_ACCESSORY.get();
+            arrowAccessory = ARROW_ACCESSORY.get();
         }
     }
 }

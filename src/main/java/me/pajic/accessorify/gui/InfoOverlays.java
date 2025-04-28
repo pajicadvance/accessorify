@@ -10,7 +10,6 @@ import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.config.ModServerConfig;
-import me.pajic.accessorify.config.OverlayPosition;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

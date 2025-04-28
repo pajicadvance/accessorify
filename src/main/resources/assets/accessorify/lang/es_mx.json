@@ -44,15 +44,13 @@
   "text.config.accessorify.category.spyglassZoom": "Configuración de zoom del catalejo",
   "text.config.accessorify.option.spyglassZoom.scrollableZoom": "Nivel de zoom desplazable",
   "text.config.accessorify.option.spyglassZoom.rememberZoomLevel": "Recordar nivel de zoom",
-
-  "category.accessorify.keybindings": "Accessorify",
-  "key.accessorify.use_spyglass": "Usar accesorio de catalejo",
-  "key.accessorify.open_shulker_box": "Abrir caja de shulker equipada",
-
-  "screen.accessorify.shulkerBoxSelection.title": "Seleccionar caja de shulker para abrir",
-  "screen.accessorify.shulkerBoxSelection.footer": "(Esc para cancelar)",
-
-  "accessories.slot.shulker": "Shulker",
+  "text.config.accessorify.option.enderChestAccessory": "Ender Chest accessory",
+  "text.config.accessorify.option.arrowAccessory": "Arrow accessory",
+  "text.config.accessorify.option.showUIHints": "Show widget keybind hints",
+  "text.config.accessorify.option.showUIHints.tooltip": "Show keybind hints in the shulker box and arrow selection widgets.",
+  "text.config.accessorify.option.shulkerQuickSelect": "Shulker box widget quick select",
+  "text.config.accessorify.option.shulkerQuickSelect.tooltip": "Disable to press the keybind to open the menu and press it again to open the selected shulker box instead of hold and release to open the selected shulker box.",
+  "text.config.accessorify.option.overlay.useObfuscationEffect": "Use text obfuscation effect",
 
   "gui.accessorify.coordinates_xyz": "%s %s %s",
   "gui.accessorify.coordinates_xz": "%s %s",
@@ -78,5 +76,20 @@
   "gui.accessorify.late_winter": "Invierno tardío",
   "gui.accessorify.last_death_location": "Última ubicación de muerte:",
   "gui.accessorify.last_death_location_unavailable": "Última ubicación de muerte no disponible",
-  "gui.accessorify.last_death_location_wrong_dimension": "La ubicación de la muerte está en una dimensión diferente"
+  "gui.accessorify.last_death_location_wrong_dimension": "La ubicación de la muerte está en una dimensión diferente",
+
+  "gui.accessorify.hint_arrow_scroll": "Scroll to select",
+  "gui.accessorify.hint_arrow_exit": "Release %s to close",
+  "gui.accessorify.hint_shulker_scroll": "Scroll to select",
+  "gui.accessorify.hint_shulker_tooltip": "Hold %s for tooltip",
+  "gui.accessorify.hint_shulker_exit": "%s to open",
+  "gui.accessorify.hint_shulker_exit_quick": "Release %s to open",
+
+  "category.accessorify.keybindings": "Accessorify",
+  "key.accessorify.use_spyglass": "Usar accesorio de catalejo",
+  "key.accessorify.open_shulker_box": "Abrir caja de shulker equipada",
+  "key.accessorify.open_ender_chest": "Open equipped ender chest",
+
+  "accessories.slot.shulker": "Shulker",
+  "accessories.slot.arrow": "Arrow"
 }

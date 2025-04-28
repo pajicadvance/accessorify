@@ -82,6 +82,14 @@ public class ModDatapacks {
             }
             //?}
         }
+        if (ModCommonConfig.enderChestAccessory) event.addPackFinders(
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "enderchest"),
+                PackType.SERVER_DATA,
+                Component.literal("Accessorify Ender Chest"),
+                PackSource.BUILT_IN,
+                true,
+                Pack.Position.TOP
+        );
         if (ModCommonConfig.recoveryCompassAccessory) event.addPackFinders(
                 ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "recoverycompass"),
                 PackType.SERVER_DATA,
@@ -94,6 +102,14 @@ public class ModDatapacks {
                 ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "shulkerbox"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Shulker Box"),
+                PackSource.BUILT_IN,
+                true,
+                Pack.Position.TOP
+        );
+        if (ModCommonConfig.arrowAccessory) event.addPackFinders(
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "arrow"),
+                PackType.SERVER_DATA,
+                Component.literal("Accessorify Arrows"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP

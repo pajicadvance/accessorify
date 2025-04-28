@@ -5,11 +5,8 @@ import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-//? if <= 1.21.1
-import net.minecraft.world.item.ElytraItem;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
@@ -23,7 +20,7 @@ public class LivingEntityMixin {
     )
     private ItemStack tryConsumeTotemAccessory(ItemStack original) {
         if (ModCommonConfig.totemOfUndyingAccessory) {
-            ItemStack stack = ModUtil.getAccessoryStack((LivingEntity) (Object) this, Items.TOTEM_OF_UNDYING);
+            ItemStack stack = ModUtil.tryGetTotemAccessory((LivingEntity) (Object) this);
             return stack.isEmpty() ? original : stack;
         }
         return original;
