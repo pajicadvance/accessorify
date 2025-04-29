@@ -35,7 +35,7 @@
   "text.config.accessorify.option.overlay.coloredSeason": "Цветной текст сезона",
   "text.config.accessorify.option.overlay.coloredWeather": "Цветной текст погоды",
   "text.config.accessorify.category.overlay.colors": "Цвета наложения",
-  "text.config.accessorify.category.overlay.colors.tooltip": "Чтобы изменить, воспользуйтесь палитрой цветов, преобразуйте\nшестнадцатеричное значение в десятичное и вставьте его сюда.",
+  "text.config.accessorify.category.overlay.colors.tooltip": "Для изменения, воспользуйтесь палитрой, преобразуйте\nшестнадцатеричное значение в десятичное и вставьте сюда.",
   "text.config.accessorify.option.overlay.colors.raining": "Дождь",
   "text.config.accessorify.option.overlay.colors.thundering": "Гроза",
   "text.config.accessorify.option.overlay.colors.cloudy": "Облачность",
