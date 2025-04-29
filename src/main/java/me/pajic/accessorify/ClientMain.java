@@ -9,7 +9,6 @@ import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.InfoOverlays;
 import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
 import me.pajic.accessorify.keybind.ModKeybinds;
-import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
@@ -29,7 +28,6 @@ public class ClientMain {
         modContainer.registerConfig(ModConfig.Type.CLIENT, ModClientConfig.CLIENT_SPEC);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modEventBus.addListener(this::onInitialize);
-        modEventBus.addListener(ModNetworking::initClient);
         modEventBus.addListener(SereneSeasonsCalendarAccessory::clientInit);
         modEventBus.addListener(ModKeybinds::registerKeybinds);
     }

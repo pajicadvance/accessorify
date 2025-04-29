@@ -92,19 +92,19 @@ dependencies {
     // Supported mods
     compileOnly "maven.modrinth:owo-lib:${property("owo_version")}"
     compileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
-    implementation "maven.modrinth:raised:${property("raised_version")}"
-    implementation "maven.modrinth:notes:${property("notes_version")}"
+    compileOnly "maven.modrinth:raised:${property("raised_version")}"
+    compileOnly "maven.modrinth:notes:${property("notes_version")}"
     compileOnly "maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}"
 
     // 1.21.1 exclusive supported mods
     compileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
     compileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
     compileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
-    if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
+    /*if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
         implementation "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
         implementation "maven.modrinth:fragmentum:${property("fragmentum_version")}"
         implementation "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
-    }
+    }*/
 }
 
 tasks.withType(ProcessResources).configureEach {

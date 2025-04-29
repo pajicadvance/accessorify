@@ -149,11 +149,6 @@ public class ModNetworking {
                 (payload, context) ->
                         ((SelectedAccessorySlotAccess) context.player()).accessorify$setArrowSlot(payload.slot)
         );
-    }
-
-    @SubscribeEvent
-    public static void initClient(final RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(
                 S2CSyncShulkerSlot.TYPE,
                 S2CSyncShulkerSlot.CODEC,

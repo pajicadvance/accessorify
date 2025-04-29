@@ -1,7 +1,6 @@
 package me.pajic.accessorify;
 
 import me.pajic.accessorify.accessories.*;
-
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.accessories.compat.TotemOfFreezingAccessory;
 import me.pajic.accessorify.accessories.compat.TotemOfIllusionAccessory;
