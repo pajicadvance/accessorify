@@ -24,7 +24,7 @@ public class DeeperDarkerClientMixin {
     )
     private static ItemStack tryGetSoulElytraAccessory(ItemStack original, @Local Minecraft mc) {
         if (Main.CONFIG.elytraAccessory()) {
-            ItemStack stack = ModUtil.getAccessoryStack(mc.player, DDItems.SOUL_ELYTRA);
+            ItemStack stack = ModUtil.getAccessoryStack(mc.player, DDItems.SOUL_ELYTRA).right();
             return stack.isEmpty() ? original : stack;
         }
         return original;
@@ -39,7 +39,7 @@ public class DeeperDarkerClientMixin {
     )
     private static ItemStack tryGetSoulElytraAccessory1(ItemStack original, @Local Minecraft mc) {
         if (Main.CONFIG.elytraAccessory()) {
-            ItemStack stack = ModUtil.getAccessoryStack(mc.player, DDItems.SOUL_ELYTRA);
+            ItemStack stack = ModUtil.getAccessoryStack(mc.player, DDItems.SOUL_ELYTRA).right();
             return stack.isEmpty() ? original : stack;
         }
         return original;

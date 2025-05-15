@@ -2,9 +2,12 @@ package me.pajic.accessorify.accessories.compat;
 
 import com.google.common.collect.HashMultimap;
 import io.wispforest.accessories.api.Accessory;
+import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 //? if <= 1.21.1
 import io.wispforest.accessories.api.AccessoriesAPI;
+import net.minecraft.world.item.Items;
 //? if > 1.21.1
 /*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
@@ -26,6 +30,15 @@ public class TotemOfFreezingAccessory implements Accessory {
                 AccessoriesAPI.registerAccessory(item, new TotemOfFreezingAccessory());
                 //? if > 1.21.1
                 /*AccessoryRegistry.register(item, new TotemOfFreezingAccessory());*/
+            }
+        });
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void clientInit() {
+        RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
+            if (rl.equals(ResourceLocation.parse("friendsandfoes:totem_of_freezing"))) {
+                AccessoriesRendererRegistry.registerNoRenderer(Items.TOTEM_OF_UNDYING);
             }
         });
     }

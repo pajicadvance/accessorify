@@ -22,6 +22,6 @@ public class DDNetworkingMixin {
             )
     )
     private static boolean checkSoulElytraAccessory(boolean original, @Local ServerPlayer player) {
-        return original || !ModUtil.getAccessoryStack(player, DDItems.SOUL_ELYTRA).isEmpty();
+        return original || !ModUtil.getAccessoryStack(player, DDItems.SOUL_ELYTRA).right().isEmpty();
     }
 }

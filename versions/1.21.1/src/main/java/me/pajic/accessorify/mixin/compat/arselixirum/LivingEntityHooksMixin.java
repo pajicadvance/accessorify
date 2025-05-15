@@ -25,7 +25,7 @@ public class LivingEntityHooksMixin {
     )
     private static ItemStack tryConsumeTotemAccessory(ItemStack original, @Local(argsOnly = true) LivingEntity entity) {
         if (Main.CONFIG.totemOfUndyingAccessory()) {
-            ItemStack stack = ModUtil.getAccessoryStack(entity, ElixirumItems.WITCH_TOTEM_OF_UNDYING.value());
+            ItemStack stack = ModUtil.getAccessoryStack(entity, ElixirumItems.WITCH_TOTEM_OF_UNDYING.value()).right();
             return stack.isEmpty() ? original : stack;
         }
         return original;

@@ -2,6 +2,7 @@ package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -22,8 +23,9 @@ public class CapeLayerMixin {
     )
     private ItemStack tryGetElytraAccessory(ItemStack original, @Local(argsOnly = true) AbstractClientPlayer player) {
         if (Main.CONFIG.elytraAccessory()) {
-            ItemStack stack = ModUtil.tryGetElytraAccessory(player);
-            return stack.isEmpty() ? original : stack;
+            BooleanObjectImmutablePair<ItemStack> stack = ModUtil.tryGetElytraAccessory(player);
+            if (!stack.leftBoolean()) return original;
+            return stack.right().isEmpty() ? original : stack.right();
         }
         return original;
     }
