@@ -22,6 +22,6 @@ public class SoulElytraBoostPacketMixin {
             )
     )
     private static boolean checkSoulElytraAccessory(boolean original, @Local Player player) {
-        return original || !ModUtil.getAccessoryStack(player, DDItems.SOUL_ELYTRA.get()).isEmpty();
+        return original || !ModUtil.getAccessoryStack(player, DDItems.SOUL_ELYTRA.get()).right().isEmpty();
     }
 }

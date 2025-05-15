@@ -1,7 +1,9 @@
 package me.pajic.accessorify.util;
 
 import io.wispforest.accessories.api.AccessoriesCapability;
+import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
+import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 import me.pajic.accessorify.config.ModCommonConfig;
@@ -52,15 +54,18 @@ public class ModUtil {
             Items.SPECTRAL_ARROW
     );
 
-    public static ItemStack getAccessoryStack(LivingEntity entity, Item item) {
+    public static BooleanObjectImmutablePair<ItemStack> getAccessoryStack(LivingEntity entity, Item item) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(entity);
         if (ac.isPresent() && ac.get().isEquipped(item)) {
             SlotEntryReference itemRef = ac.get().getFirstEquipped(item);
             if (itemRef != null) {
-                return itemRef.stack();
+                AccessoriesContainer container = itemRef.reference().slotContainer();
+                boolean visible = true;
+                if (container != null) visible = container.renderOptions().getFirst();
+                return new BooleanObjectImmutablePair<>(visible, itemRef.stack());
             }
         }
-        return ItemStack.EMPTY;
+        return new BooleanObjectImmutablePair<>(false, ItemStack.EMPTY);
     }
 
     public static boolean accessoryEquipped(LivingEntity entity, Item item) {
@@ -73,17 +78,17 @@ public class ModUtil {
         else return false;
     }
 
-    public static ItemStack tryGetElytraAccessory(LivingEntity livingEntity) {
-        ItemStack stack = ItemStack.EMPTY;
+    public static BooleanObjectImmutablePair<ItemStack> tryGetElytraAccessory(LivingEntity livingEntity) {
+        BooleanObjectImmutablePair<ItemStack> pair = new BooleanObjectImmutablePair<>(false, ItemStack.EMPTY);
         //? if <= 1.21.1 {
         if (Main.DEEPER_DARKER_LOADED) {
-            stack = DeeperDarkerCompat.getSoulElytraAccessoryStack(livingEntity);
+            pair = DeeperDarkerCompat.getSoulElytraAccessoryStack(livingEntity);
         }
         //?}
-        if (stack.isEmpty()) {
-            stack = getAccessoryStack(livingEntity, Items.ELYTRA);
+        if (pair.right().isEmpty()) {
+            pair = getAccessoryStack(livingEntity, Items.ELYTRA);
         }
-        return stack;
+        return pair;
     }
 
     public static boolean isTotem(ItemStack stack) {

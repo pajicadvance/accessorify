@@ -3,6 +3,8 @@ package me.pajic.accessorify;
 import com.kyanite.deeperdarker.content.DDItems;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
+import me.pajic.accessorify.accessories.compat.TotemOfFreezingAccessory;
+import me.pajic.accessorify.accessories.compat.TotemOfIllusionAccessory;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.gui.ArrowSelectionWidget;
@@ -20,6 +22,8 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
+//? if <= 1.21.1
+import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
 
 @Mod(value = "accessorify", dist = Dist.CLIENT)
 public class ClientMain {
@@ -29,6 +33,10 @@ public class ClientMain {
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modEventBus.addListener(this::onInitialize);
         modEventBus.addListener(SereneSeasonsCalendarAccessory::clientInit);
+        modEventBus.addListener(TotemOfFreezingAccessory::clientInit);
+        modEventBus.addListener(TotemOfIllusionAccessory::clientInit);
+        //? if <= 1.21.1
+        modEventBus.addListener(WitchTotemOfUndyingAccessory::clientInit);
         modEventBus.addListener(ModKeybinds::registerKeybinds);
     }
 
@@ -39,6 +47,8 @@ public class ClientMain {
         if (ModCommonConfig.clockAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.CLOCK);
         if (ModCommonConfig.compassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.COMPASS);
         if (ModCommonConfig.recoveryCompassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.RECOVERY_COMPASS);
+        if (ModCommonConfig.spyglassAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.SPYGLASS);
+        if (ModCommonConfig.totemOfUndyingAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.TOTEM_OF_UNDYING);
         if (ModCommonConfig.enderChestAccessory) AccessoriesRendererRegistry.registerNoRenderer(Items.ENDER_CHEST);
         if (ModCommonConfig.elytraAccessory) {
             AccessoriesRendererRegistry.registerNoRenderer(Items.ELYTRA);

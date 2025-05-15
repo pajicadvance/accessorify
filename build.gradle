@@ -100,11 +100,11 @@ dependencies {
     compileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
     compileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
     compileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
-    /*if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
+    if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
         implementation "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
         implementation "maven.modrinth:fragmentum:${property("fragmentum_version")}"
         implementation "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
-    }*/
+    }
 }
 
 tasks.withType(ProcessResources).configureEach {

@@ -47,7 +47,7 @@ public abstract class PlayerMixin extends LivingEntity {
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
         if (ModCommonConfig.elytraAccessory) {
-            ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
+            ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right();
             return stack.isEmpty() ? original : stack;
         }
         return original;
@@ -65,7 +65,7 @@ public abstract class PlayerMixin extends LivingEntity {
                         (getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem) ||
                         //? if > 1.21.1
                         /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER) ||*/
-                        !ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).isEmpty()
+                        !ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right().isEmpty()
                 )
         ) {
             stopFallFlying();
