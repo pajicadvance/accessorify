@@ -90,6 +90,8 @@
   "key.accessorify.open_shulker_box": "Open shulker box selection widget",
   "key.accessorify.open_ender_chest": "Open equipped ender chest",
 
-  "accessories.slot.shulker": "Shulker",
-  "accessories.slot.arrow": "Arrow"
+  "accessories.slot.shulker": "Shulker box",
+  "accessories.slot.arrow": "Arrow",
+  "accessories.slot_group.shulkers": "Shulker boxes",
+  "accessories.slot_group.arrows": "Arrows"
 }

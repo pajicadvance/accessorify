@@ -4,9 +4,11 @@
   "package": "me.pajic.accessorify.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractArrowMixin",
+    "ItemEntityMixin",
     "LivingEntityMixin",
-    "PlayerSelectedAccessorySlotDataMixin",
     "PlayerMixin",
+    "PlayerSelectedAccessorySlotDataMixin",
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin"
   ],
