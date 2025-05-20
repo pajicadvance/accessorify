@@ -117,6 +117,10 @@ public class ModUtil {
         return ItemStack.EMPTY;
     }
 
+    public static boolean isArrow(ItemStack stack) {
+        return ARROWS.stream().anyMatch(stack::is);
+    }
+
     public static boolean isHoldingProjectileWeapon(Player player) {
         for (ItemStack stack : player.getHandSlots()) if (stack.getItem() instanceof ProjectileWeaponItem) return true;
         return false;

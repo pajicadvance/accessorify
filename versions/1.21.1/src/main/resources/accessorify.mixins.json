@@ -4,6 +4,8 @@
   "package": "me.pajic.accessorify.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractArrowMixin",
+    "ItemEntityMixin",
     "LivingEntityMixin",
     "PlayerMixin",
     "PlayerSelectedAccessorySlotDataMixin",
