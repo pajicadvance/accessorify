@@ -130,6 +130,52 @@ public class InfoOverlays {
                 dayAndTime.append(time);
                 renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
 
+                if (Main.CONFIG.overlay.displayMoonPhases()) {
+                    /* Decided to flip the emojis around due to how they are displayed in-game;
+                    full moon is a hollow circle, new moon is a filled circle
+                    It doesn't feel right so I shifted them to match the MC moon more -Meep*/
+                    MutableComponent moonPhase;
+                    switch (MC.level.getMoonPhase()) {
+                        case 0 -> {
+                            moonPhase = Component.literal("🌑 ").append(
+                                    Component.translatable("gui.accessorify.full_moon"));
+                        }
+                        case 1 -> {
+                            moonPhase = Component.literal("🌘 ").append(
+                                    Component.translatable("gui.accessorify.waning_gibbous"));
+                        }
+                        case 2 -> {
+                            moonPhase = Component.literal("🌗 ").append(
+                                    Component.translatable("gui.accessorify.last_quarter"));
+                        }
+                        case 3 -> {
+                            moonPhase = Component.literal("🌖 ").append(
+                                    Component.translatable("gui.accessorify.waning_crescent"));
+                        }
+                        case 4 -> {
+                            moonPhase = Component.literal("🌕 ").append(
+                                    Component.translatable("gui.accessorify.new_moon"));
+                        }
+                        case 5 -> {
+                            moonPhase = Component.literal("🌔 ").append(
+                                    Component.translatable("gui.accessorify.waxing_crescent"));
+                        }
+                        case 6 -> {
+                            moonPhase = Component.literal("🌓 ").append(
+                                    Component.translatable("gui.accessorify.first_quarter"));
+                        }
+                        case 7 -> {
+                            moonPhase = Component.literal("🌒 ").append(
+                                    Component.translatable("gui.accessorify.waxing_gibbous"));
+                        }
+                        default -> {
+                            moonPhase = Component.literal("💥").append(
+                                    Component.translatable("gui.accessorify.moon_default"));
+                        }
+                    }
+                    renderList.add(new ObjectIntImmutablePair<>(moonPhase, 0xffffff));
+                }
+
                 Component weather;
                 int weatherColor;
                 if (MC.level.isThundering()) {
