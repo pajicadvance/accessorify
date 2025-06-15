@@ -54,13 +54,26 @@
   "gui.accessorify.coordinates_xyz": "%s %s %s",
   "gui.accessorify.coordinates_xz": "%s %s",
   "gui.accessorify.facing": "Обращён на %s",
+
   "gui.accessorify.day": "День %s",
   "gui.accessorify.time": "%s:%s",
+
+  "gui.accessorify.full_moon": "Полнолуние",
+  "gui.accessorify.waning_gibbous": "Убывающая Луна",
+  "gui.accessorify.last_quarter": "Последняя четверть",
+  "gui.accessorify.waning_crescent": "Убывающий месяц",
+  "gui.accessorify.new_moon": "Новолуние",
+  "gui.accessorify.waxing_crescent": "Растущий месяц",
+  "gui.accessorify.first_quarter": "Первая четверть",
+  "gui.accessorify.waxing_gibbous": "Растущая Луна",
+  "gui.accessorify.moon_default": "нет луны",
+
   "gui.accessorify.clear": "Ясно",
   "gui.accessorify.cloudy": "Облачно",
   "gui.accessorify.raining": "Дождь",
   "gui.accessorify.snowing": "Снег",
   "gui.accessorify.thundering": "Гроза",
+
   "gui.accessorify.spring": "Весна",
   "gui.accessorify.summer": "Лето",
   "gui.accessorify.fall": "Осень",
@@ -77,6 +90,7 @@
   "gui.accessorify.early_winter": "Ранняя зима",
   "gui.accessorify.mid_winter": "Середина зимы",
   "gui.accessorify.late_winter": "Поздняя зима",
+
   "gui.accessorify.last_death_location": "Место последней смерти:",
   "gui.accessorify.last_death_location_unavailable": "Место последней смерти недоступно",
   "gui.accessorify.last_death_location_wrong_dimension": "Место смерти находится в другом измерении",

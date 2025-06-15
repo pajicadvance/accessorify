@@ -47,17 +47,31 @@
   "text.config.accessorify.option.shulkerQuickSelect": "Shulker box widget quick select",
   "text.config.accessorify.option.shulkerQuickSelect.tooltip": "Open the shulker selection widget by holding the keybind\nand open the selected shulker box by releasing the keybind.",
   "text.config.accessorify.option.overlay.useObfuscationEffect": "Use text obfuscation effect",
+  "text.config.accessorify.option.overlay.displayMoonPhases": "Show current moon phase",
 
   "gui.accessorify.coordinates_xyz": "%s %s %s",
   "gui.accessorify.coordinates_xz": "%s %s",
   "gui.accessorify.facing": "Mirando hacia %s",
+
   "gui.accessorify.day": "Día %s",
   "gui.accessorify.time": "%s:%s",
+
+  "gui.accessorify.full_moon": "Luna Llena",
+  "gui.accessorify.waning_gibbous": "Menguante Convexa",
+  "gui.accessorify.last_quarter": "Cuarto Menguante",
+  "gui.accessorify.waning_crescent": "Menguante Cóncava",
+  "gui.accessorify.new_moon": "Luna Nueva",
+  "gui.accessorify.waxing_crescent": "Creciente Cóncava",
+  "gui.accessorify.first_quarter": "Cuarto Creciente",
+  "gui.accessorify.waxing_gibbous": "Creciente Convexa",
+  "gui.accessorify.moon_default": "Extraviado",
+
   "gui.accessorify.clear": "Despejado",
   "gui.accessorify.cloudy": "Nublado",
   "gui.accessorify.raining": "Lluvioso",
   "gui.accessorify.snowing": "Nevando",
   "gui.accessorify.thundering": "Tormenta eléctrica",
+
   "gui.accessorify.spring": "Primavera",
   "gui.accessorify.summer": "Verano",
   "gui.accessorify.fall": "Otoño",
@@ -74,6 +88,7 @@
   "gui.accessorify.early_winter": "Invierno temprano",
   "gui.accessorify.mid_winter": "Invierno medio",
   "gui.accessorify.late_winter": "Invierno tardío",
+
   "gui.accessorify.last_death_location": "Última ubicación de muerte:",
   "gui.accessorify.last_death_location_unavailable": "Última ubicación de muerte no disponible",
   "gui.accessorify.last_death_location_wrong_dimension": "La ubicación de la muerte está en una dimensión diferente",

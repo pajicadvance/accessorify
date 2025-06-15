@@ -113,6 +113,8 @@ public class InfoOverlays {
                     Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
                     renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
                     renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    if (Main.CONFIG.overlay.displayMoonPhases())
+                        renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
                 }
             } else {
                 BlockPos blockPos = MC.player.blockPosition();
@@ -129,6 +131,52 @@ public class InfoOverlays {
                 dayAndTime.append(", ");
                 dayAndTime.append(time);
                 renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
+
+                if (Main.CONFIG.overlay.displayMoonPhases()) {
+                    /* Decided to flip the emojis around due to how they are displayed in-game;
+                    full moon is a hollow circle, new moon is a filled circle
+                    It doesn't feel right so I shifted them to match the MC moon more -Meep*/
+                    MutableComponent moonPhase;
+                    switch (MC.level.getMoonPhase()) {
+                        case 0 -> {
+                            moonPhase = Component.literal("\uD83C\uDF11 ").append(
+                                    Component.translatable("gui.accessorify.full_moon"));
+                        }
+                        case 1 -> {
+                            moonPhase = Component.literal("\uD83C\uDF18 ").append(
+                                    Component.translatable("gui.accessorify.waning_gibbous"));
+                        }
+                        case 2 -> {
+                            moonPhase = Component.literal("\uD83C\uDF17 ").append(
+                                    Component.translatable("gui.accessorify.last_quarter"));
+                        }
+                        case 3 -> {
+                            moonPhase = Component.literal("\uD83C\uDF16 ").append(
+                                    Component.translatable("gui.accessorify.waning_crescent"));
+                        }
+                        case 4 -> {
+                            moonPhase = Component.literal("\uD83C\uDF15 ").append(
+                                    Component.translatable("gui.accessorify.new_moon"));
+                        }
+                        case 5 -> {
+                            moonPhase = Component.literal("\uD83C\uDF14 ").append(
+                                    Component.translatable("gui.accessorify.waxing_crescent"));
+                        }
+                        case 6 -> {
+                            moonPhase = Component.literal("\uD83C\uDF13 ").append(
+                                    Component.translatable("gui.accessorify.first_quarter"));
+                        }
+                        case 7 -> {
+                            moonPhase = Component.literal("\uD83C\uDF12 ").append(
+                                    Component.translatable("gui.accessorify.waxing_gibbous"));
+                        }
+                        default -> {
+                            moonPhase = Component.literal("\uD83D\uDCA5 ").append(
+                                    Component.translatable("gui.accessorify.moon_default"));
+                        }
+                    }
+                    renderList.add(new ObjectIntImmutablePair<>(moonPhase, 0xffffff));
+                }
 
                 Component weather;
                 int weatherColor;

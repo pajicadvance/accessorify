@@ -44,6 +44,7 @@ public class ConfigModel {
         @Sync(Option.SyncMode.NONE) public boolean coloredSeason = true;
         @Sync(Option.SyncMode.NONE) public boolean coloredWeather = true;
         @Sync(Option.SyncMode.NONE) @Nest public Colors colors = new Colors();
+        @Sync(Option.SyncMode.NONE) public boolean displayMoonPhases = true;
 
         public static boolean positive(int value) {
             return value >= 0;
