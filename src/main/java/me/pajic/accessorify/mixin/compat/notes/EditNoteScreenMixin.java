@@ -3,7 +3,7 @@ package me.pajic.accessorify.mixin.compat.notes;
 import com.chaosthedude.notes.gui.EditNoteScreen;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
-import me.pajic.accessorify.config.ModServerConfig;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -29,7 +29,7 @@ public abstract class EditNoteScreenMixin extends Screen {
     )
     private boolean disableButtonsIfNoCompassFound(boolean original) {
         if (
-                ModServerConfig.hideDebugInfoInSurvival &&
+                Main.CONFIG.hideDebugInfoInSurvival.get() &&
                 minecraft != null && minecraft.player != null && minecraft.level != null
         ) {
             return original && ModUtil.accessoryEquipped(minecraft.player, Items.COMPASS);
@@ -37,6 +37,7 @@ public abstract class EditNoteScreenMixin extends Screen {
         return original;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @ModifyArg(
             method = "insertCoords",
             at = @At(
@@ -45,7 +46,7 @@ public abstract class EditNoteScreenMixin extends Screen {
             )
     )
     private String dontAddYIfDisabled(String newText) {
-        if (ModServerConfig.showYCoordinate) return newText.replace(minecraft.player.getBlockY() + ", ", "");
+        if (Main.CONFIG.infoOverlaySettings.showYCoordinate.get()) return newText.replace(minecraft.player.getBlockY() + ", ", "");
         return newText;
     }
 }

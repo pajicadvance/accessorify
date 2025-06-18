@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,7 @@ public class SoulElytraRendererMixin {
             )
     )
     private <E extends LivingEntity> ItemStack tryGetSoulElytraAccessory(ItemStack original, @Local(argsOnly = true) E entity) {
-        if (ModCommonConfig.elytraAccessory) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             BooleanObjectImmutablePair<ItemStack> stack = ModUtil.getAccessoryStack(entity, DDItems.SOUL_ELYTRA.get());
             if (!stack.leftBoolean()) return original;
             return stack.right().isEmpty() ? original : stack.right();

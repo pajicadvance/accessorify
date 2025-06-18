@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.184'
+    id 'net.neoforged.gradle.userdev' version '7.0.185'
 }
 
 version = mod_version + "+" + stonecutter.current.version
@@ -12,9 +12,10 @@ group = mod_group_id
 repositories {
     mavenLocal()
     maven { url 'https://maven.wispforest.io/releases' }
+    maven { url 'https://maven.fzzyhmstrs.me/' }
     maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }
-    maven { url = "https://maven.bawnorton.com/releases" }
+    maven { url 'https://maven.bawnorton.com/releases' }
     maven { url 'https://maven.shedaniel.me/' }
     exclusiveContent {
         forRepository {
@@ -45,9 +46,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 runs {
     configureEach {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
-
         systemProperty 'forge.logging.console.level', 'debug'
-
         modSource project.sourceSets.main
     }
 
@@ -60,9 +59,6 @@ runs {
         programArgument '--nogui'
     }
 
-    gameTestServer {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -87,6 +83,7 @@ dependencies {
     implementation(jarJar("com.moulberry:mixinconstraints:${project.mixinconstraints_version}")) {
         jarJar.ranged(it, "[1.0.6,)")
     }
+    implementation "me.fzzyhmstrs:fzzy_config:${property("fzzy_version")}"
     implementation "io.wispforest:accessories-neoforge:${property("accessories_version")}"
 
     // Supported mods

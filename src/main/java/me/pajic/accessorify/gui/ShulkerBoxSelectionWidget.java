@@ -5,8 +5,8 @@ import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotTypeReference;
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
-import me.pajic.accessorify.config.ModClientConfig;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.ClientMain;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.keybind.ModKeybinds;
 import me.pajic.accessorify.keybind.ModScrollHandler;
 import me.pajic.accessorify.network.ModNetworking;
@@ -27,7 +27,7 @@ public class ShulkerBoxSelectionWidget {
     @SubscribeEvent
     public static void renderShulkerBoxSelectionWidget(RenderGuiEvent.Post event) {
         GuiGraphics guiGraphics = event.getGuiGraphics();
-        if (ModCommonConfig.shulkerBoxAccessory && MC.player != null && MC.level != null) {
+        if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get() && MC.player != null && MC.level != null) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(MC.player);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("shulker"));
@@ -44,14 +44,14 @@ public class ShulkerBoxSelectionWidget {
                             } while (shulkers.getItem(ModScrollHandler.selectedShulkerSlot).isEmpty());
                             PacketDistributor.sendToServer(new ModNetworking.C2SSyncShulkerSlot(ModScrollHandler.selectedShulkerSlot));
                         }
-                        if (widgetOpen || (ModClientConfig.shulkerQuickSelect && ModKeybinds.OPEN_SHULKER_BOX.get().isDown() && !ArrowSelectionWidget.widgetOpen)) {
+                        if (widgetOpen || (ClientMain.CLIENT_CONFIG.widgetSettings.shulkerQuickSelect.get() && ModKeybinds.OPEN_SHULKER_BOX.get().isDown() && !ArrowSelectionWidget.widgetOpen)) {
                             if (count == 1) {
                                 MC.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
                                 PacketDistributor.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
                                 widgetOpen = false;
-                                if (ModClientConfig.shulkerQuickSelect) ModKeybinds.OPEN_SHULKER_BOX.get().setDown(false);
+                                if (ClientMain.CLIENT_CONFIG.widgetSettings.shulkerQuickSelect.get()) ModKeybinds.OPEN_SHULKER_BOX.get().setDown(false);
                             } else {
-                                if (ModClientConfig.shulkerQuickSelect) widgetOpen = true;
+                                if (ClientMain.CLIENT_CONFIG.widgetSettings.shulkerQuickSelect.get()) widgetOpen = true;
                                 guiGraphics.flush();
                                 RenderSystem.enableBlend();
                                 WidgetUtil.renderCenterSlot(MC, guiGraphics);
@@ -70,13 +70,13 @@ public class ShulkerBoxSelectionWidget {
                                             MC.getWindow().getGuiScaledHeight() / 2
                                     );
                                 }
-                                if (ModClientConfig.showUIHints) {
+                                if (ClientMain.CLIENT_CONFIG.widgetSettings.showUIHints.get()) {
                                     Component scrollHint = Component.translatable("gui.accessorify.hint_shulker_scroll");
                                     Component tooltipHint = Component.translatable(
                                             "gui.accessorify.hint_shulker_tooltip",
                                             Component.keybind(MC.options.keyShift.getName())
                                     );
-                                    Component exitHint = ModClientConfig.shulkerQuickSelect ? Component.translatable(
+                                    Component exitHint = ClientMain.CLIENT_CONFIG.widgetSettings.shulkerQuickSelect.get() ? Component.translatable(
                                             "gui.accessorify.hint_shulker_exit_quick",
                                             Component.keybind(ModKeybinds.OPEN_SHULKER_BOX.get().getName())
                                     ) : Component.translatable(

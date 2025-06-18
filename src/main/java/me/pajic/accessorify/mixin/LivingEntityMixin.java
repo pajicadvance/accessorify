@@ -3,7 +3,7 @@ package me.pajic.accessorify.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +25,7 @@ public abstract class LivingEntityMixin {
             )
     )
     private ItemStack tryConsumeTotemAccessory(ItemStack original) {
-        if (ModCommonConfig.totemOfUndyingAccessory) {
+        if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             ItemStack stack = ModUtil.tryGetTotemAccessory((LivingEntity) (Object) this);
             return stack.isEmpty() ? original : stack;
         }
@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        if (ModCommonConfig.elytraAccessory) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right();
             return stack.isEmpty() ? original : stack;
         }

@@ -2,7 +2,7 @@ package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import me.pajic.accessorify.config.ModClientConfig;
+import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.player.AbstractClientPlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +18,7 @@ public class AbstractClientPlayerMixin {
         if (ModUtil.shouldScope) {
             return 0.1F * ModUtil.zoomModifier;
         }
-        else if (ModUtil.zoomModifier != 1.0F && (!ModClientConfig.rememberZoomLevel || !ModClientConfig.scrollableZoom)) {
+        else if (ModUtil.zoomModifier != 1.0F && (!ClientMain.CLIENT_CONFIG.spyglassZoomSettings.rememberZoomLevel.get() || !ClientMain.CLIENT_CONFIG.spyglassZoomSettings.scrollableZoom.get())) {
             ModUtil.zoomModifier = 1.0F;
         }
         //? if <= 1.21.1

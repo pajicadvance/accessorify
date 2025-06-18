@@ -1,9 +1,9 @@
 package me.pajic.accessorify.datapacks;
 
 import me.pajic.accessorify.Main;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.util.MultiVersionUtil;
+import me.pajic.accessorify.util.compat.CompatFlags;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
@@ -14,34 +14,38 @@ public class ModDatapacks {
 
     @SubscribeEvent
     public static void registerDatapacks(AddPackFindersEvent event) {
-        if (ModCommonConfig.compassAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "compass"),
+        String pathPrefix = switch (Main.CONFIG.slotMode.get()) {
+            case DEFAULT_SLOT, DEFAULT_SLOT_NO_COPY -> "default/";
+            case UNIQUE_SLOT -> "unique/";
+        };
+        if (Main.CONFIG.accessorySettings.compassAccessory.get()) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "compass"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Compass"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.clockAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "clock"),
+        if (Main.CONFIG.accessorySettings.clockAccessory.get()) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "clock"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Clock"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.elytraAccessory) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             event.addPackFinders(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "elytra"),
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "elytra"),
                     PackType.SERVER_DATA,
                     Component.literal("Accessorify Elytra"),
                     PackSource.BUILT_IN,
                     true,
                     Pack.Position.TOP
             );
-            if (Main.DEEPER_DARKER_LOADED) {
+            if (CompatFlags.DEEPER_DARKER_LOADED) {
                 event.addPackFinders(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "soulelytra"),
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "soulelytra"),
                         PackType.SERVER_DATA,
                         Component.literal("Accessorify Soul Elytra"),
                         PackSource.BUILT_IN,
@@ -50,26 +54,26 @@ public class ModDatapacks {
                 );
             }
         }
-        if (ModCommonConfig.spyglassAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "spyglass"),
+        if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "spyglass"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Spyglass"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.totemOfUndyingAccessory) {
+        if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             event.addPackFinders(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "totem"),
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "totem"),
                     PackType.SERVER_DATA,
                     Component.literal("Accessorify Totem of Undying"),
                     PackSource.BUILT_IN,
                     true,
                     Pack.Position.TOP
             );
-            if (Main.FRIENDS_AND_FOES_LOADED) {
+            if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
                 event.addPackFinders(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fnftotems"),
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "fnftotems"),
                         PackType.SERVER_DATA,
                         Component.literal("Accessorify FNF Totems"),
                         PackSource.BUILT_IN,
@@ -77,9 +81,9 @@ public class ModDatapacks {
                         Pack.Position.TOP
                 );
             }
-            if (Main.ARS_ELIXIRUM_LOADED) {
+            if (CompatFlags.ARS_ELIXIRUM_LOADED) {
                 event.addPackFinders(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "witchtotem"),
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "witchtotem"),
                         PackType.SERVER_DATA,
                         Component.literal("Accessorify Witch Totems"),
                         PackSource.BUILT_IN,
@@ -88,40 +92,40 @@ public class ModDatapacks {
                 );
             }
         }
-        if (ModCommonConfig.enderChestAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "enderchest"),
+        if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "enderchest"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Ender Chest"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.recoveryCompassAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "recoverycompass"),
+        if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "recoverycompass"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Recovery Compass"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.shulkerBoxAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "shulkerbox"),
+        if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "shulkerbox"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Shulker Box"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.arrowAccessory) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "arrow"),
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "arrow"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Arrows"),
                 PackSource.BUILT_IN,
                 true,
                 Pack.Position.TOP
         );
-        if (ModCommonConfig.calendarAccessory && Main.SERENE_SEASONS_LOADED) event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "sscalendar"),
+        if (Main.CONFIG.accessorySettings.calendarAccessory.get() && CompatFlags.SERENE_SEASONS_LOADED) event.addPackFinders(
+                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "sscalendar"),
                 PackType.SERVER_DATA,
                 Component.literal("Accessorify Calendar"),
                 PackSource.BUILT_IN,

@@ -5,16 +5,16 @@ import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
+import me.pajic.accessorify.util.compat.CompatFlags;
 import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
-import me.pajic.accessorify.config.ModCommonConfig;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.core.component.DataComponents;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
 import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
@@ -74,14 +74,14 @@ public class ModUtil {
     }
 
     public static boolean calendarAccessoryEquipped(LivingEntity entity) {
-        if (Main.SERENE_SEASONS_LOADED) return SereneSeasonsCompat.calendarAccessoryEquipped(entity);
+        if (CompatFlags.SERENE_SEASONS_LOADED) return SereneSeasonsCompat.calendarAccessoryEquipped(entity);
         else return false;
     }
 
     public static BooleanObjectImmutablePair<ItemStack> tryGetElytraAccessory(LivingEntity livingEntity) {
         BooleanObjectImmutablePair<ItemStack> pair = new BooleanObjectImmutablePair<>(false, ItemStack.EMPTY);
         //? if <= 1.21.1 {
-        if (Main.DEEPER_DARKER_LOADED) {
+        if (CompatFlags.DEEPER_DARKER_LOADED) {
             pair = DeeperDarkerCompat.getSoulElytraAccessoryStack(livingEntity);
         }
         //?}
@@ -93,11 +93,11 @@ public class ModUtil {
 
     public static boolean isTotem(ItemStack stack) {
         //? if <= 1.21.1 {
-        if (Main.FRIENDS_AND_FOES_LOADED && Main.ARS_ELIXIRUM_LOADED) {
+        if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
-        } else if (Main.ARS_ELIXIRUM_LOADED) {
+        } else if (CompatFlags.ARS_ELIXIRUM_LOADED) {
             return ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
-        } else if (Main.FRIENDS_AND_FOES_LOADED) {
+        } else if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         }
         return stack.is(Items.TOTEM_OF_UNDYING);
@@ -127,6 +127,6 @@ public class ModUtil {
     }
 
     public static boolean calendarUsedForSeasonInfo() {
-        return ModCommonConfig.calendarAccessory && Main.SERENE_SEASONS_LOADED;
+        return Main.CONFIG.accessorySettings.calendarAccessory.get() && CompatFlags.SERENE_SEASONS_LOADED;
     }
 }

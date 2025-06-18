@@ -1,7 +1,7 @@
 package me.pajic.accessorify.util.compat;
 
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
-import me.pajic.accessorify.config.ModClientConfig;
+import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,10 +30,10 @@ public class SereneSeasonsCompat {
                     case LATE_WINTER -> Component.translatable("gui.accessorify.late_winter");
                 },
                 switch (subSeason.getSeason()) {
-                    case Season.SPRING -> ModClientConfig.spring;
-                    case Season.SUMMER -> ModClientConfig.summer;
-                    case Season.AUTUMN -> ModClientConfig.autumn;
-                    case Season.WINTER -> ModClientConfig.winter;
+                    case Season.SPRING -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.spring.get().argb();
+                    case Season.SUMMER -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.summer.get().argb();
+                    case Season.AUTUMN -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.autumn.get().argb();
+                    case Season.WINTER -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.winter.get().argb();
                 }
         );
     }

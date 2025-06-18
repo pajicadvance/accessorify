@@ -3,8 +3,7 @@ package me.pajic.accessorify.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import me.pajic.accessorify.config.ModCommonConfig;
-import me.pajic.accessorify.config.ModServerConfig;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -46,7 +45,7 @@ public abstract class PlayerMixin extends LivingEntity {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        if (ModCommonConfig.elytraAccessory) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right();
             return stack.isEmpty() ? original : stack;
         }
@@ -78,7 +77,7 @@ public abstract class PlayerMixin extends LivingEntity {
             at = @At("HEAD")
     )
     private void setReducedDebugInfo(CallbackInfo ci) {
-        if (ModServerConfig.hideDebugInfoInSurvival) {
+        if (Main.CONFIG.hideDebugInfoInSurvival.get()) {
             setReducedDebugInfo(!isCreative() && !isSpectator());
         }
     }

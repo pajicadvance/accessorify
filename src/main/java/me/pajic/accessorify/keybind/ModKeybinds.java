@@ -2,7 +2,7 @@ package me.pajic.accessorify.keybind;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import io.wispforest.accessories.api.AccessoriesCapability;
-import me.pajic.accessorify.config.ModClientConfig;
+import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
 import me.pajic.accessorify.network.ModNetworking;
@@ -75,7 +75,7 @@ public class ModKeybinds {
                 }
                 ModUtil.shouldScope = false;
             }
-            if (!ModClientConfig.shulkerQuickSelect) {
+            if (!ClientMain.CLIENT_CONFIG.widgetSettings.shulkerQuickSelect.get()) {
                 if (OPEN_SHULKER_BOX.get().consumeClick()) {
                     if (!ShulkerBoxSelectionWidget.widgetOpen && !ArrowSelectionWidget.widgetOpen)
                         ShulkerBoxSelectionWidget.widgetOpen = true;

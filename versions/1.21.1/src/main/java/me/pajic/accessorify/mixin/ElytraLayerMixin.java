@@ -2,7 +2,7 @@ package me.pajic.accessorify.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,7 +21,7 @@ public class ElytraLayerMixin {
             )
     )
     private <T extends LivingEntity> ItemStack tryGetElytraAccessory(ItemStack original, @Local(argsOnly = true) T livingEntity) {
-        if (ModCommonConfig.elytraAccessory) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             BooleanObjectImmutablePair<ItemStack> stack = ModUtil.tryGetElytraAccessory(livingEntity);
             if (!stack.leftBoolean()) return original;
             return stack.right().isEmpty() ? original : stack.right();

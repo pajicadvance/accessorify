@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "order": 8,
+  "slots": [
+    "clock",
+    "compass",
+    "calendar",
+    "recovery_compass"
+  ],
+  "icon": "accessorify:container/group/info"
+}

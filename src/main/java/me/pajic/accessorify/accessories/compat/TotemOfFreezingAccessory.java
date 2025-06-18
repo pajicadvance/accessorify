@@ -1,36 +1,24 @@
 package me.pajic.accessorify.accessories.compat;
 
-import com.google.common.collect.HashMultimap;
-import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
-import me.pajic.accessorify.Main;
+import me.pajic.accessorify.accessories.SlotCopyingAccessory;
 import me.pajic.accessorify.util.ModUtil;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.registries.ModifyRegistriesEvent;
 import net.neoforged.neoforge.registries.callback.AddCallback;
-//? if <= 1.21.1
-import io.wispforest.accessories.api.AccessoriesAPI;
-//? if > 1.21.1
-/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
-public class TotemOfFreezingAccessory implements Accessory {
-
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_charm_1");
+public class TotemOfFreezingAccessory implements SlotCopyingAccessory {
 
     @SubscribeEvent
     public static void init(ModifyRegistriesEvent event) {
         event.getRegistry(Registries.ITEM).addCallback((AddCallback<Item>) (registry, id, key, value) -> {
-            if (key.location().equals(ResourceLocation.parse("friendsandfoes:totem_of_freezing"))) {
-                //? if <= 1.21.1
-                AccessoriesAPI.registerAccessory(value, new TotemOfFreezingAccessory());
-                //? if > 1.21.1
-                /*AccessoryRegistry.register(value, new TotemOfFreezingAccessory());*/
+            if (key.location().equals(MultiVersionUtil.parse("friendsandfoes:totem_of_freezing"))) {
+                MultiVersionUtil.registerAccessory(value, new TotemOfFreezingAccessory());
             }
         });
     }
@@ -38,28 +26,24 @@ public class TotemOfFreezingAccessory implements Accessory {
     @SubscribeEvent
     public static void clientInit(ModifyRegistriesEvent event) {
         event.getRegistry(Registries.ITEM).addCallback((AddCallback<Item>) (registry, id, key, value) -> {
-            if (key.location().equals(ResourceLocation.parse("friendsandfoes:totem_of_freezing"))) {
+            if (key.location().equals(MultiVersionUtil.parse("friendsandfoes:totem_of_freezing"))) {
                 AccessoriesRendererRegistry.registerNoRenderer(value);
             }
         });
     }
 
     @Override
-    public void onEquip(ItemStack stack, SlotReference reference) {
-        var map = HashMultimap.<String, AttributeModifier>create();
-        map.put("charm", new AttributeModifier(resourceLocation, 1, AttributeModifier.Operation.ADD_VALUE));
-        reference.capability().addPersistentSlotModifiers(map);
+    public String getPath() {
+        return "add_charm_1";
     }
 
     @Override
-    public void onUnequip(ItemStack stack, SlotReference reference) {
-        var map = HashMultimap.<String, AttributeModifier>create();
-        map.put("charm", new AttributeModifier(resourceLocation, 1, AttributeModifier.Operation.ADD_VALUE));
-        reference.capability().removeSlotModifiers(map);
+    public String getSlot() {
+        return "charm";
     }
 
     @Override
     public boolean canEquip(ItemStack stack, SlotReference reference) {
-        return !reference.capability().isAnotherEquipped(stack, reference, ModUtil::isTotem);
+        return !MultiVersionUtil.isAnotherEquipped(stack, reference, ModUtil::isTotem);
     }
 }

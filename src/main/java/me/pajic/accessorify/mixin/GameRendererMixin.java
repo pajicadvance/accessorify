@@ -1,7 +1,7 @@
 package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import me.pajic.accessorify.config.ModClientConfig;
+import me.pajic.accessorify.ClientMain;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Final;
@@ -28,7 +28,7 @@ public class GameRendererMixin {
             )
     )
     private boolean uncapSpyglassZoomLevel(GameRenderer instance, float value) {
-        return !ModClientConfig.scrollableZoom || minecraft.player == null || !minecraft.player.isScoping();
+        return !ClientMain.CLIENT_CONFIG.spyglassZoomSettings.scrollableZoom.get() || minecraft.player == null || !minecraft.player.isScoping();
     }
     //?}
 
@@ -41,7 +41,7 @@ public class GameRendererMixin {
             )
     )
     private float uncapSpyglassZoomLevel(float original) {
-        if (ModClientConfig.scrollableZoom && minecraft.player != null && minecraft.player.isScoping()) {
+        if (ClientMain.CLIENT_CONFIG.spyglassZoomSettings.scrollableZoom.get() && minecraft.player != null && minecraft.player.isScoping()) {
             return fovModifier;
         }
         return original;

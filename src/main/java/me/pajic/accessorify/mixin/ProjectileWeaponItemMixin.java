@@ -11,8 +11,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotTypeReference;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.access.SelectedAccessorySlotAccess;
-import me.pajic.accessorify.config.ModCommonConfig;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -30,7 +30,7 @@ public class ProjectileWeaponItemMixin {
             at = @At(value = "RETURN")
     )
     private static ItemStack getAmmoFromAccessorySlot(ItemStack original, @Local(argsOnly = true) LivingEntity shooter) {
-        if (ModCommonConfig.arrowAccessory && original.isEmpty()) {
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get() && original.isEmpty()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
@@ -56,7 +56,7 @@ public class ProjectileWeaponItemMixin {
             @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed,
             @Share("arrowStack") LocalRef<ItemStack> arrowStack
     ) {
-        if (ModCommonConfig.arrowAccessory) {
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));

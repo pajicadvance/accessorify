@@ -4,8 +4,8 @@ import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotTypeReference;
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
-import me.pajic.accessorify.config.ModClientConfig;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.ClientMain;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
 import me.pajic.accessorify.network.ModNetworking;
@@ -24,7 +24,7 @@ public class ModScrollHandler {
 
     public static boolean handleMouseScroll(Inventory inventory, int direction) {
         Player player = inventory.player;
-        if (ModClientConfig.scrollableZoom && ModUtil.shouldScope) {
+        if (ClientMain.CLIENT_CONFIG.spyglassZoomSettings.scrollableZoom.get() && ModUtil.shouldScope) {
             if (direction != 0) {
                 ModUtil.zoomModifier -= direction * (0.1F * ModUtil.zoomModifier);
                 if (ModUtil.zoomModifier > 10) ModUtil.zoomModifier = 10;
@@ -32,7 +32,7 @@ public class ModScrollHandler {
                 else player.playSound(SoundEvents.SPYGLASS_STOP_USING);
             }
             return false;
-        } else if (ModCommonConfig.arrowAccessory && ArrowSelectionWidget.widgetOpen) {
+        } else if (Main.CONFIG.accessorySettings.arrowAccessory.get() && ArrowSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
@@ -50,7 +50,7 @@ public class ModScrollHandler {
                     }
                 }
             }
-        } else if (ModCommonConfig.shulkerBoxAccessory && ShulkerBoxSelectionWidget.widgetOpen) {
+        } else if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get() && ShulkerBoxSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("shulker"));

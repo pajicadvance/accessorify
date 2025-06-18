@@ -5,8 +5,8 @@ import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotTypeReference;
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
-import me.pajic.accessorify.config.ModClientConfig;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.ClientMain;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.keybind.ModScrollHandler;
 import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
@@ -27,7 +27,7 @@ public class ArrowSelectionWidget {
     @SubscribeEvent
     public static void renderArrowSelectionWidget(RenderGuiEvent.Post event) {
         GuiGraphics guiGraphics = event.getGuiGraphics();
-        if (ModCommonConfig.arrowAccessory && MC.player != null && MC.level != null) {
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get() && MC.player != null && MC.level != null) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(MC.player);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
@@ -61,7 +61,7 @@ public class ArrowSelectionWidget {
                                 if (arrow.getFirst() == ModScrollHandler.selectedArrowSlot)
                                     WidgetUtil.renderCenterText(MC, arrow.getSecond().getHoverName(), guiGraphics, -48);
                             });
-                            if (ModClientConfig.showUIHints) {
+                            if (ClientMain.CLIENT_CONFIG.widgetSettings.showUIHints.get()) {
                                 Component scrollHint = Component.translatable("gui.accessorify.hint_arrow_scroll");
                                 Component exitHint = Component.translatable(
                                         "gui.accessorify.hint_arrow_exit",

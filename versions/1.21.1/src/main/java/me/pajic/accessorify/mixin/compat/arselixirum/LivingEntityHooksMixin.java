@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import dev.obscuria.elixirum.common.hooks.LivingEntityHooks;
 import dev.obscuria.elixirum.registry.ElixirumItems;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,7 @@ public class LivingEntityHooksMixin {
             )
     )
     private static ItemStack tryConsumeTotemAccessory(ItemStack original, @Local(argsOnly = true) LivingEntity entity) {
-        if (ModCommonConfig.totemOfUndyingAccessory) {
+        if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             ItemStack stack = ModUtil.getAccessoryStack(entity, ElixirumItems.WITCH_TOTEM_OF_UNDYING.value()).right();
             return stack.isEmpty() ? original : stack;
         }

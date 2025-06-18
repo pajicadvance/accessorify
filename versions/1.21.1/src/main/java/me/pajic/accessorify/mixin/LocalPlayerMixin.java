@@ -1,7 +1,7 @@
 package me.pajic.accessorify.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
-import me.pajic.accessorify.config.ModCommonConfig;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +20,7 @@ public class LocalPlayerMixin {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        if (ModCommonConfig.elytraAccessory) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             BooleanObjectImmutablePair<ItemStack> stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this);
             return stack.right().isEmpty() ? original : stack.right();
         }
