@@ -26,7 +26,7 @@ public abstract class LivingEntityMixin {
             )
     )
     private ItemStack tryConsumeTotemAccessory(ItemStack original) {
-        if (Main.CONFIG.totemOfUndyingAccessory()) {
+        if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             ItemStack stack = ModUtil.tryGetTotemAccessory((LivingEntity) (Object) this);
             return stack.isEmpty() ? original : stack;
         }
@@ -50,7 +50,7 @@ public abstract class LivingEntityMixin {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        if (Main.CONFIG.elytraAccessory()) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right();
             return stack.isEmpty() ? original : stack;
         }

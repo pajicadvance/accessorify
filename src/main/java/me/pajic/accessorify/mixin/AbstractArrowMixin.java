@@ -8,6 +8,7 @@ import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotTypeReference;
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import me.pajic.accessorify.Main;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -36,13 +37,13 @@ public abstract class AbstractArrowMixin extends Projectile {
     private boolean addArrowToAccessorySlots(
             Inventory instance, ItemStack itemStack, Operation<Boolean> original, @Local(argsOnly = true) Player player
     ) {
-        if (Main.CONFIG.arrowAccessory()) {
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
                 if (container != null) {
                     ExpandedSimpleContainer arrows = container.getAccessories();
-                    if (!arrows.getItems().stream().allMatch(ItemStack::isEmpty) && arrows.canAddItem(itemStack)) {
+                    if (!MultiVersionUtil.getItems(arrows).stream().allMatch(ItemStack::isEmpty) && arrows.canAddItem(itemStack)) {
                         AbstractArrow itemEntity = (AbstractArrow) (Object) this;
                         ItemStack updated = arrows.addItem(itemStack);
                         if (updated.isEmpty()) {

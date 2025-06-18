@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.pajic.accessorify.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AbstractArrowMixin",
+    "BowItemMixin",
+    "CrossbowItemMixin",
+    "ItemEntityMixin",
+    "LivingEntityMixin",
+    "PlayerMixin",
+    "PlayerSelectedAccessorySlotDataMixin",
+    "ProjectileWeaponItemMixin",
+    "ServerGamePacketListenerImplMixin",
+    "compat.deeperdarker.DeeperDarkerClientMixin",
+    "compat.deeperdarker.MessagesMixin"
+  ],
+  "client": [
+    "AbstractClientPlayerMixin",
+    "CapeLayerMixin",
+    "ClientPacketListenerMixin",
+    "DebugScreenOverlayMixin",
+    "ElytraLayerMixin",
+    "GameRendererMixin",
+    "GuiMixin",
+    "LocalPlayerMixin",
+    "MouseHandlerMixin",
+    "PackSelectionModelMixin",
+    "compat.deeperdarker.SoulElytraRendererMixin",
+    "compat.notes.EditNoteScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

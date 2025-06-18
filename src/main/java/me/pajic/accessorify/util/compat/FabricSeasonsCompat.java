@@ -4,7 +4,7 @@ import io.github.lucaargolo.seasons.FabricSeasons;
 import io.github.lucaargolo.seasons.utils.Season;
 import io.github.lucaargolo.seasonsextras.FabricSeasonsExtras;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
-import me.pajic.accessorify.Main;
+import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,10 +21,10 @@ public class FabricSeasonsCompat {
                     case WINTER -> Component.translatable("gui.accessorify.winter");
                 },
                 switch (season) {
-                    case SPRING -> Main.CONFIG.overlay.colors.spring();
-                    case SUMMER -> Main.CONFIG.overlay.colors.summer();
-                    case FALL -> Main.CONFIG.overlay.colors.autumn();
-                    case WINTER -> Main.CONFIG.overlay.colors.winter();
+                    case SPRING -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.spring.get().argb();
+                    case SUMMER -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.summer.get().argb();
+                    case FALL -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.autumn.get().argb();
+                    case WINTER -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.winter.get().argb();
                 }
         );
     }

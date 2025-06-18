@@ -1,7 +1,6 @@
 package me.pajic.accessorify.menu;
 
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
@@ -12,9 +11,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ShulkerBoxMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+//? if >= 1.21.1 {
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.ItemContainerContents;
+//?}
+//? if 1.20.1
+/*import net.minecraft.nbt.CompoundTag;*/
 
 public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider {
 
@@ -28,15 +34,38 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
 
     @Override
     public void startOpen(@NotNull Player player) {
+        //? if >= 1.21.1
         shulker.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(items);
+        //? if 1.20.1 {
+        /*CompoundTag tag = getOrCreateBlockEntityTag();
+        items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        if (tag.contains("Items", 9)) {
+            ContainerHelper.loadAllItems(tag, items);
+        }
+        *///?}
         player.playSound(SoundEvents.SHULKER_BOX_OPEN);
     }
 
     @Override
     public void stopOpen(@NotNull Player player) {
+        //? if >= 1.21.1
         shulker.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
+        //? if 1.20.1
+        /*ContainerHelper.saveAllItems(getOrCreateBlockEntityTag(), items, true);*/
         player.playSound(SoundEvents.SHULKER_BOX_CLOSE);
     }
+
+    //? if 1.20.1 {
+    /*private CompoundTag getOrCreateBlockEntityTag() {
+        CompoundTag tag = shulker.getTagElement("BlockEntityTag");
+        if (tag == null) {
+            tag = new CompoundTag();
+            tag.put("BlockEntityTag", new CompoundTag());
+            shulker.setTag(tag);
+        }
+        return tag;
+    }
+    *///?}
 
     @Override
     public int getContainerSize() {
@@ -92,5 +121,10 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
         return new ShulkerBoxMenu(i, inventory, this);
+    }
+
+    @Override
+    public boolean canPlaceItem(int index, ItemStack stack) {
+        return !(Block.byItem(stack.getItem()) instanceof ShulkerBoxBlock);
     }
 }

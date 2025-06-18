@@ -5,18 +5,20 @@ import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
+import me.pajic.accessorify.util.compat.CompatFlags;
 import me.pajic.accessorify.util.compat.FabricSeasonsCompat;
 import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-//? if <= 1.21.1 {
-import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
+//? if 1.21.1
 import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
-//?}
+//? if <= 1.21.1
+import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
+//? if >= 1.21.1
+import net.minecraft.core.component.DataComponents;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +61,7 @@ public class ModUtil {
             if (itemRef != null) {
                 AccessoriesContainer container = itemRef.reference().slotContainer();
                 boolean visible = true;
-                if (container != null) visible = container.renderOptions().getFirst();
+                if (container != null) visible = container.renderOptions().get(0);
                 return new BooleanObjectImmutablePair<>(visible, itemRef.stack());
             }
         }
@@ -72,15 +74,15 @@ public class ModUtil {
     }
 
     public static boolean calendarAccessoryEquipped(LivingEntity entity) {
-        if (Main.SERENE_SEASONS_LOADED) return SereneSeasonsCompat.calendarAccessoryEquipped(entity);
-        else if (Main.FABRIC_SEASONS_LOADED && Main.FABRIC_SEASONS_EXTRAS_LOADED) return FabricSeasonsCompat.calendarAccessoryEquipped(entity);
+        if (CompatFlags.SERENE_SEASONS_LOADED) return SereneSeasonsCompat.calendarAccessoryEquipped(entity);
+        else if (CompatFlags.FABRIC_SEASONS_LOADED && CompatFlags.FABRIC_SEASONS_EXTRAS_LOADED) return FabricSeasonsCompat.calendarAccessoryEquipped(entity);
         return false;
     }
 
     public static BooleanObjectImmutablePair<ItemStack> tryGetElytraAccessory(LivingEntity livingEntity) {
         BooleanObjectImmutablePair<ItemStack> pair = new BooleanObjectImmutablePair<>(false, ItemStack.EMPTY);
         //? if <= 1.21.1 {
-        if (Main.DEEPER_DARKER_LOADED) {
+        if (CompatFlags.DEEPER_DARKER_LOADED) {
             pair = DeeperDarkerCompat.getSoulElytraAccessoryStack(livingEntity);
         }
         //?}
@@ -103,12 +105,18 @@ public class ModUtil {
     //?}
 
     public static boolean isTotem(ItemStack stack) {
-        //? if <= 1.21.1 {
-        if (Main.FRIENDS_AND_FOES_LOADED && Main.ARS_ELIXIRUM_LOADED) {
+        //? if 1.20.1 {
+        /*if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        }
+        return stack.is(Items.TOTEM_OF_UNDYING);
+        *///?}
+        //? if 1.21.1 {
+        if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
-        } else if (Main.ARS_ELIXIRUM_LOADED) {
+        } else if (CompatFlags.ARS_ELIXIRUM_LOADED) {
             return ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
-        } else if (Main.FRIENDS_AND_FOES_LOADED) {
+        } else if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         }
         return stack.is(Items.TOTEM_OF_UNDYING);
@@ -122,7 +130,7 @@ public class ModUtil {
         if (ac.isPresent()) {
             List<SlotEntryReference> totems = ac.get().getEquipped(ModUtil::isTotem);
             if (!totems.isEmpty()) {
-                return totems.getFirst().stack();
+                return totems.get(0).stack();
             }
         }
         return ItemStack.EMPTY;
@@ -138,6 +146,6 @@ public class ModUtil {
     }
 
     public static boolean calendarUsedForSeasonInfo() {
-        return Main.CONFIG.calendarAccessory() && (Main.SERENE_SEASONS_LOADED || (Main.FABRIC_SEASONS_LOADED && Main.FABRIC_SEASONS_EXTRAS_LOADED));
+        return Main.CONFIG.accessorySettings.calendarAccessory.get() && (CompatFlags.SERENE_SEASONS_LOADED || (CompatFlags.FABRIC_SEASONS_LOADED && CompatFlags.FABRIC_SEASONS_EXTRAS_LOADED));
     }
 }

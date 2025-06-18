@@ -45,7 +45,7 @@ public abstract class PlayerMixin extends LivingEntity {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original) {
-        if (Main.CONFIG.elytraAccessory()) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             ItemStack stack = ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right();
             return stack.isEmpty() ? original : stack;
         }
@@ -70,7 +70,7 @@ public abstract class PlayerMixin extends LivingEntity {
     )
     private void cancelElytraFlyingInLiquid(CallbackInfo ci) {
         if (
-                isInLiquid() && (
+                (isInWaterOrBubble() || isInLava()) && (
                         //? if <= 1.21.1
                         getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem ||
                         //? if > 1.21.1
@@ -88,7 +88,7 @@ public abstract class PlayerMixin extends LivingEntity {
             at = @At("HEAD")
     )
     private void setReducedDebugInfo(CallbackInfo ci) {
-        if (Main.CONFIG.hideDebugInfoInSurvival()) {
+        if (Main.CONFIG.hideDebugInfoInSurvival.get()) {
             setReducedDebugInfo(!isCreative() && !isSpectator());
         }
     }

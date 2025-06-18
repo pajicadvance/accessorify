@@ -1,9 +1,9 @@
 package me.pajic.accessorify.gui;
 
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 //? if >= 1.21.4
 /*import net.minecraft.client.renderer.RenderType;*/
@@ -17,14 +17,24 @@ public class WidgetUtil {
     }
 
     public static void renderCenterSlot(Minecraft mc, GuiGraphics guiGraphics) {
+        //? if >= 1.21.1 {
         guiGraphics.blitSprite(
                 //? if >= 1.21.4
                 /*RenderType::guiTextured,*/
-                ResourceLocation.withDefaultNamespace("hud/hotbar_offhand_right"),
+                MultiVersionUtil.parse("hud/hotbar_offhand_right"),
                 mc.getWindow().getGuiScaledWidth() / 2 - 18,
                 mc.getWindow().getGuiScaledHeight() / 2 - 32,
                 29, 24
         );
+        //?}
+        //? if 1.20.1 {
+        /*guiGraphics.blit(
+                MultiVersionUtil.parse("textures/gui/widgets.png"),
+                mc.getWindow().getGuiScaledWidth() / 2 - 18,
+                mc.getWindow().getGuiScaledHeight() / 2 - 32,
+                53, 22, 29, 24
+        );
+        *///?}
     }
 
     public static void renderCenterText(Minecraft mc, Component text, GuiGraphics guiGraphics, int offset) {

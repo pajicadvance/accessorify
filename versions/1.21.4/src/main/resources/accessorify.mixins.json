@@ -17,6 +17,7 @@
     "ClientPacketListenerMixin",
     "DebugScreenOverlayMixin",
     "GameRendererMixin",
+    "GuiMixin",
     "MouseHandlerMixin",
     "PackSelectionModelMixin",
     "compat.notes.EditNoteScreenMixin"

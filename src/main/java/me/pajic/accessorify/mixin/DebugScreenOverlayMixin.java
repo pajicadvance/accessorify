@@ -23,7 +23,7 @@ public class DebugScreenOverlayMixin {
             at = @At("HEAD")
     )
     private void filterLines(GuiGraphics guiGraphics, List<String> lines, boolean leftSide, CallbackInfo ci) {
-        if (Main.CONFIG.hideDebugInfoInSurvival() && minecraft.showOnlyReducedInfo() && leftSide) {
+        if (Main.CONFIG.hideDebugInfoInSurvival.get() && minecraft.showOnlyReducedInfo() && leftSide) {
             lines.removeIf(text -> text.startsWith("Chunk-relative: "));
             lines.removeIf(text -> text.startsWith("hunger: "));
         }

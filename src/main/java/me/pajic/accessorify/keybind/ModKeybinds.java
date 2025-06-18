@@ -2,14 +2,14 @@ package me.pajic.accessorify.keybind;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import io.wispforest.accessories.api.AccessoriesCapability;
-import me.pajic.accessorify.Main;
+import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
-import me.pajic.accessorify.network.ModNetworking;
+import me.pajic.accessorify.network.Payloads;
 import me.pajic.accessorify.util.ModUtil;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -62,19 +62,19 @@ public class ModKeybinds {
                     }
                     ModUtil.shouldScope = false;
                 }
-                if (!Main.CONFIG.shulkerQuickSelect()) {
+                if (!ClientMain.CLIENT_CONFIG.widgetSettings.shulkerQuickSelect.get()) {
                     if (OPEN_SHULKER_BOX.consumeClick()) {
                         if (!ShulkerBoxSelectionWidget.widgetOpen && !ArrowSelectionWidget.widgetOpen)
                             ShulkerBoxSelectionWidget.widgetOpen = true;
                         else {
-                            ClientPlayNetworking.send(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
+                            MultiVersionUtil.C2S(new Payloads.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
                             client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
                             ShulkerBoxSelectionWidget.widgetOpen = false;
                         }
                     }
                 } else if (!OPEN_SHULKER_BOX.isDown()) {
                     if (ShulkerBoxSelectionWidget.widgetOpen) {
-                        ClientPlayNetworking.send(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
+                        MultiVersionUtil.C2S(new Payloads.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
                         client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
                         ShulkerBoxSelectionWidget.widgetOpen = false;
                     }
@@ -83,7 +83,7 @@ public class ModKeybinds {
                     Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(client.player);
                     if (ac.isPresent() && ac.get().isEquipped(Items.ENDER_CHEST)) {
                         client.player.playSound(SoundEvents.ENDER_CHEST_OPEN);
-                        ClientPlayNetworking.send(new ModNetworking.C2SOpenEnderContainerPayload());
+                        MultiVersionUtil.C2S(new Payloads.C2SOpenEnderContainerPayload());
                     }
                 }
             }

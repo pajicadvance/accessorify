@@ -3,20 +3,14 @@ package me.pajic.accessorify.accessories;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.util.ModUtil;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-//? if <= 1.21.1
-import io.wispforest.accessories.api.AccessoriesAPI;
-//? if > 1.21.1
-/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
 public class ArrowAccessory implements Accessory {
 
     public static void init() {
-        //? if <= 1.21.1
-        ModUtil.ARROWS.forEach(item -> AccessoriesAPI.registerAccessory(item, new ArrowAccessory()));
-        //? if > 1.21.1
-        /*ModUtil.ARROWS.forEach(item -> AccessoryRegistry.register(item, new ArrowAccessory()));*/
+        ModUtil.ARROWS.forEach(item -> MultiVersionUtil.registerAccessory(item, new ArrowAccessory()));
     }
 
     @Environment(EnvType.CLIENT)

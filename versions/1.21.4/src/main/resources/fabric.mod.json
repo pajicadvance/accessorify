@@ -24,6 +24,7 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "1.21.4",
-    "accessories": "*"
+    "accessories": "*",
+    "fzzy_config": "*"
   }
 }

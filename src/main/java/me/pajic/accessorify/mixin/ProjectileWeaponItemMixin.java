@@ -30,7 +30,7 @@ public class ProjectileWeaponItemMixin {
             at = @At(value = "RETURN")
     )
     private static ItemStack getAmmoFromAccessorySlot(ItemStack original, @Local(argsOnly = true) LivingEntity shooter) {
-        if (Main.CONFIG.arrowAccessory() && original.isEmpty()) {
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get() && original.isEmpty()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
@@ -46,6 +46,7 @@ public class ProjectileWeaponItemMixin {
         return original;
     }
 
+    //? if >= 1.21.1 {
     @WrapMethod(method = "useAmmo")
     private static ItemStack useAmmoFromAccessorySlot(
             ItemStack weapon,
@@ -56,7 +57,7 @@ public class ProjectileWeaponItemMixin {
             @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed,
             @Share("arrowStack") LocalRef<ItemStack> arrowStack
     ) {
-        if (Main.CONFIG.arrowAccessory()) {
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
@@ -90,4 +91,5 @@ public class ProjectileWeaponItemMixin {
     ) {
         return !accessorySlotUsed.get();
     }
+    //?}
 }

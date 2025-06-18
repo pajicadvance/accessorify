@@ -15,7 +15,7 @@ public class ClientPacketListenerMixin {
 
     @WrapMethod(method = "findTotem")
     private static ItemStack findTotemAccessory(Player player, Operation<ItemStack> original) {
-        if (Main.CONFIG.totemOfUndyingAccessory() && ModUtil.accessoryEquipped(player, Items.TOTEM_OF_UNDYING)) {
+        if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get() && ModUtil.accessoryEquipped(player, Items.TOTEM_OF_UNDYING)) {
             return new ItemStack(Items.TOTEM_OF_UNDYING);
         }
         return original.call(player);

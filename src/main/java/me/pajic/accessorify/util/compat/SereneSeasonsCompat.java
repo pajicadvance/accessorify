@@ -1,7 +1,7 @@
 package me.pajic.accessorify.util.compat;
 
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
-import me.pajic.accessorify.Main;
+import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,10 +29,10 @@ public class SereneSeasonsCompat {
                     case LATE_WINTER -> Component.translatable("gui.accessorify.late_winter");
                 },
                 switch (subSeason.getSeason()) {
-                    case Season.SPRING -> Main.CONFIG.overlay.colors.spring();
-                    case Season.SUMMER -> Main.CONFIG.overlay.colors.summer();
-                    case Season.AUTUMN -> Main.CONFIG.overlay.colors.autumn();
-                    case Season.WINTER -> Main.CONFIG.overlay.colors.winter();
+                    case /*? if >= 1.21.1 {*/Season./*?}*/SPRING -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.spring.get().argb();
+                    case /*? if >= 1.21.1 {*/Season./*?}*/SUMMER -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.summer.get().argb();
+                    case /*? if >= 1.21.1 {*/Season./*?}*/AUTUMN -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.autumn.get().argb();
+                    case /*? if >= 1.21.1 {*/Season./*?}*/WINTER -> ClientMain.CLIENT_CONFIG.infoOverlaySettings.overlayColors.winter.get().argb();
                 }
         );
     }

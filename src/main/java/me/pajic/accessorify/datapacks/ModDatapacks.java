@@ -1,74 +1,79 @@
 package me.pajic.accessorify.datapacks;
 
 import me.pajic.accessorify.Main;
+import me.pajic.accessorify.util.MultiVersionUtil;
+import me.pajic.accessorify.util.compat.CompatFlags;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resources.ResourceLocation;
 
 public class ModDatapacks {
 
     public static void init() {
         FabricLoader.getInstance().getModContainer(Main.MOD_ID).ifPresent(modContainer -> {
-            if (Main.CONFIG.compassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "compass"),
+            String pathPrefix = switch (Main.CONFIG.slotMode.get()) {
+                case DEFAULT_SLOT, DEFAULT_SLOT_NO_COPY -> "default/";
+                case UNIQUE_SLOT -> "unique/";
+            };
+            if (Main.CONFIG.accessorySettings.compassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "compass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.clockAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "clock"),
+            if (Main.CONFIG.accessorySettings.clockAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "clock"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.elytraAccessory()) {
+            if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
                 ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "elytra"),
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "elytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                if (Main.DEEPER_DARKER_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "soulelytra"),
+                if (CompatFlags.DEEPER_DARKER_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "soulelytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }
-            if (Main.CONFIG.spyglassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "spyglass"),
+            if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "spyglass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.totemOfUndyingAccessory()) {
+            if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
                 ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "totem"),
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "totem"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                if (Main.FRIENDS_AND_FOES_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fnftotems"),
+                if (CompatFlags.FRIENDS_AND_FOES_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "fnftotems"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                if (Main.ARS_ELIXIRUM_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "witchtotem"),
+                if (CompatFlags.ARS_ELIXIRUM_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "witchtotem"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }
-            if (Main.CONFIG.recoveryCompassAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "recoverycompass"),
+            if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "recoverycompass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.enderChestAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "enderchest"),
+            if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "enderchest"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.shulkerBoxAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "shulkerbox"),
+            if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "shulkerbox"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.arrowAccessory()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "arrow"),
+            if (Main.CONFIG.accessorySettings.arrowAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "arrow"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.calendarAccessory()) {
-                if (Main.SERENE_SEASONS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "sscalendar"),
+            if (Main.CONFIG.accessorySettings.calendarAccessory.get()) {
+                if (CompatFlags.SERENE_SEASONS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "sscalendar"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
-                if (Main.FABRIC_SEASONS_LOADED && Main.FABRIC_SEASONS_EXTRAS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "fscalendar"),
+                if (CompatFlags.FABRIC_SEASONS_LOADED && CompatFlags.FABRIC_SEASONS_EXTRAS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "fscalendar"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }

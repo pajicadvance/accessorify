@@ -24,7 +24,7 @@ public class TypeElytraContainerMixin {
             )
     )
     private ItemStack tryGetElytraAccessory(ItemStack original, @Local(argsOnly = true) LivingEntity entity) {
-        if (Main.CONFIG.elytraAccessory()) {
+        if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             BooleanObjectImmutablePair<ItemStack> stack = ModUtil.tryGetElytraAccessory(entity);
             if (!stack.leftBoolean()) return original;
             return stack.right().isEmpty() ? original : stack.right();

@@ -24,6 +24,7 @@
     "DebugScreenOverlayMixin",
     "ElytraLayerMixin",
     "GameRendererMixin",
+    "GuiMixin",
     "LocalPlayerMixin",
     "MouseHandlerMixin",
     "PackSelectionModelMixin",

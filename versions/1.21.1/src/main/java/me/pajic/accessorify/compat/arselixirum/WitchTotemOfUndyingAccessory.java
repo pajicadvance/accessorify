@@ -1,35 +1,23 @@
 package me.pajic.accessorify.compat.arselixirum;
 
-import com.google.common.collect.HashMultimap;
-import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
-import me.pajic.accessorify.Main;
+import me.pajic.accessorify.accessories.SlotCopyingAccessory;
 import me.pajic.accessorify.util.ModUtil;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
-//? if <= 1.21.1
-import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.world.item.Items;
-//? if > 1.21.1
-/*import io.wispforest.accessories.api.AccessoryRegistry;*/
 
-public class WitchTotemOfUndyingAccessory implements Accessory {
-
-    private static final ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "add_charm_5");
+public class WitchTotemOfUndyingAccessory implements SlotCopyingAccessory {
 
     public static void init() {
         RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
-            if (rl.equals(ResourceLocation.parse("elixirum:witch_totem_of_undying"))) {
-                //? if <= 1.21.1
-                AccessoriesAPI.registerAccessory(item, new WitchTotemOfUndyingAccessory());
-                //? if > 1.21.1
-                /*AccessoryRegistry.register(item, new WitchTotemOfUndyingAccessory());*/
+            if (rl.equals(MultiVersionUtil.parse("elixirum:witch_totem_of_undying"))) {
+                MultiVersionUtil.registerAccessory(item, new WitchTotemOfUndyingAccessory());
             }
         });
     }
@@ -37,28 +25,24 @@ public class WitchTotemOfUndyingAccessory implements Accessory {
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
         RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
-            if (rl.equals(ResourceLocation.parse("elixirum:witch_totem_of_undying"))) {
+            if (rl.equals(MultiVersionUtil.parse("elixirum:witch_totem_of_undying"))) {
                 AccessoriesRendererRegistry.registerNoRenderer(Items.TOTEM_OF_UNDYING);
             }
         });
     }
 
     @Override
-    public void onEquip(ItemStack stack, SlotReference reference) {
-        var map = HashMultimap.<String, AttributeModifier>create();
-        map.put("charm", new AttributeModifier(resourceLocation, 1, AttributeModifier.Operation.ADD_VALUE));
-        reference.capability().addPersistentSlotModifiers(map);
+    public String getPath() {
+        return "add_charm_5";
     }
 
     @Override
-    public void onUnequip(ItemStack stack, SlotReference reference) {
-        var map = HashMultimap.<String, AttributeModifier>create();
-        map.put("charm", new AttributeModifier(resourceLocation, 1, AttributeModifier.Operation.ADD_VALUE));
-        reference.capability().removeSlotModifiers(map);
+    public String getSlot() {
+        return "charm";
     }
 
     @Override
     public boolean canEquip(ItemStack stack, SlotReference reference) {
-        return !reference.capability().isAnotherEquipped(stack, reference, ModUtil::isTotem);
+        return !MultiVersionUtil.isAnotherEquipped(stack, reference, ModUtil::isTotem);
     }
 }
