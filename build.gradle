@@ -86,6 +86,9 @@ dependencies {
     implementation(jarJar("com.moulberry:mixinconstraints:${project.mixinconstraints_version}")) {
         jarJar.ranged(it, "[1.0.9,)")
     }
+    compileOnly(jarJar("dev.su5ed.sinytra.fabric-api:fabric-resource-loader-v0:${project.fresloader_version}")) {
+        jarJar.ranged(it, "[0.11.10,)")
+    }
     compileOnly "io.wispforest:accessories-neoforge:${project.accessories_version}"
     compileOnly "me.fzzyhmstrs:fzzy_config:${project.fzzy_version}"
 }
@@ -119,4 +122,15 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+tasks.named('jarJar').configure {
+    finalizedBy 'copyBuiltJars'
+}
+
+tasks.register("copyBuiltJars", Copy) {
+    def jarJar = project.tasks.named('jarJar')
+    dependsOn jarJar
+    from jarJar
+    into 'D:/PrismInstances/fgdgfdgf/minecraft/mods'
 }
