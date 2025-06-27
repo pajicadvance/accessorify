@@ -89,7 +89,7 @@ dependencies {
     // Supported mods
     compileOnly "maven.modrinth:owo-lib:${property("owo_version")}"
     compileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
-    compileOnly "maven.modrinth:raised:${property("raised_version")}"
+    implementation "maven.modrinth:raised:${property("raised_version")}"
     compileOnly "maven.modrinth:notes:${property("notes_version")}"
     compileOnly "maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}"
 

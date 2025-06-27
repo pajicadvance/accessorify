@@ -1,14 +1,14 @@
 package me.pajic.accessorify.util.compat;
 
 import dev.yurisuika.raised.api.RaisedApi;
-import dev.yurisuika.raised.util.properties.Element;
+import dev.yurisuika.raised.registry.LayerRegistry;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 
 public class RaisedCompat {
     public static IntIntImmutablePair getOtherComponentOffsets() {
         return new IntIntImmutablePair(
-                RaisedApi.getX(Element.OTHER) * -RaisedApi.getPosition(Element.OTHER).getX(),
-                RaisedApi.getY(Element.OTHER) * -RaisedApi.getPosition(Element.OTHER).getY()
+                -RaisedApi.getX(LayerRegistry.OTHER),
+                -RaisedApi.getY(LayerRegistry.OTHER)
         );
     }
 }
