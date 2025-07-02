@@ -37,6 +37,10 @@ public class ClientMain implements ClientModInitializer {
         }
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) RecoveryCompassAccessory.clientInit();
         if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.clientInit();
+        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
+            LanternAccessory.clientInit();
+            SoulLanternAccessory.clientInit();
+        }
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             TotemOfUndyingAccessory.clientInit();
             if (CompatFlags.FRIENDS_AND_FOES_LOADED) {

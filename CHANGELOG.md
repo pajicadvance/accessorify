@@ -1,0 +1,1 @@
+- Added lantern accessory: Equipping a lantern or soul lantern in the Belt slot (or lantern slot in unique slot mode) lights up the area around the player. **Requires a dynamic lights mod**.

@@ -8,7 +8,9 @@ This mod lets you equip some vanilla items as accessories using [Accessories](ht
 
 You can choose which items will be turned into accessories in the configuration menu, among some other configuration options, if you want to pick and choose. By default, all of the items listed below are turned into accessories.
 
-Both Fabric and NeoForge versions require [Fzzy Config](https://modrinth.com/mod/fzzy-config) and [Accessories](https://modrinth.com/mod/accessories) and all of its dependencies. The configuration menu can be accessed using [ModMenu](https://modrinth.com/mod/modmenu) on Fabric, and the built-in Mods menu on NeoForge.
+Both Fabric and NeoForge versions require [Fzzy Config](https://modrinth.com/mod/fzzy-config) and [Accessories](https://modrinth.com/mod/accessories) and all of its dependencies. A dynamic lights mod such as [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights) is required for the lantern accessory to emit light around the player.
+
+The configuration menu can be accessed using [ModMenu](https://modrinth.com/mod/modmenu) on Fabric, and the built-in Mods menu on NeoForge.
 
 ## Slot modes
 
@@ -57,6 +59,12 @@ When equipped, the totem will be triggered and consumed to save you from death, 
 Can now be equipped in the Belt slot, or the Spyglass slot in unique slot mode.
 
 When equipped, pressing and holding C (default keybind, configurable) uses the spyglass to zoom in. Using the scroll wheel while zooming in with the spyglass changes the zoom level.
+
+### Lantern
+
+Can now be equipped in the Belt slot, or the Lantern slot in unique slot mode.
+
+When equipped, the lantern will show up on the player and emit light matching the lantern's light level. A dynamic lights mod needs to be installed for the lantern to emit light.
 
 ### Ender chest
 

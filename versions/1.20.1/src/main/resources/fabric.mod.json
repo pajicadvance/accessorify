@@ -26,5 +26,9 @@
     "minecraft": "1.20.1",
     "accessories": "*",
     "fzzy_config": "*"
+  },
+  "recommends": {
+    "lambdynamiclights": "*",
+    "modmenu": "*"
   }
 }

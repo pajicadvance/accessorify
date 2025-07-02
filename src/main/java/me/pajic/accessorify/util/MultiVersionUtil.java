@@ -9,8 +9,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -38,6 +41,17 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class MultiVersionUtil {
+
+    //? if 1.20.1 {
+    /*public static final TagKey<Item> CHEST_ARMOR = TagKey.create(
+            Registries.ITEM,
+            new ResourceLocation("chest_armor")
+    );
+    public static final TagKey<Item> LEG_ARMOR = TagKey.create(
+            Registries.ITEM,
+            new ResourceLocation("leg_armor")
+    );
+    *///?}
 
     public static ResourceLocation parse(String location) {
         //? if >= 1.21.1
@@ -145,5 +159,17 @@ public class MultiVersionUtil {
         return Minecraft.getInstance().gui.getDebugOverlay().showDebugScreen();
         //? if 1.20.1
         /*return Minecraft.getInstance().options.renderDebug;*/
+    }
+
+    public static boolean hasArmor(SlotReference reference) {
+        if (reference.entity() instanceof Player player) {
+            for (ItemStack item : player.getArmorSlots()) {
+                //? if >= 1.21.1
+                if (item.is(ItemTags.CHEST_ARMOR) || item.is(ItemTags.LEG_ARMOR)) return true;
+                //? if 1.20.1
+                /*if (item.is(CHEST_ARMOR) || item.is(LEG_ARMOR)) return true;*/
+            }
+        }
+        return false;
     }
 }

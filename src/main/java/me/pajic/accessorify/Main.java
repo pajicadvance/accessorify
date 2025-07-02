@@ -38,6 +38,10 @@ public class Main implements ModInitializer {
             //?}
         }
         if (CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.init();
+        if (CONFIG.accessorySettings.lanternAccessory.get()) {
+            LanternAccessory.init();
+            SoulLanternAccessory.init();
+        }
         if (CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             TotemOfUndyingAccessory.init();
             //? if <= 1.21.1 {

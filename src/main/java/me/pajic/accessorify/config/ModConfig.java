@@ -29,6 +29,7 @@ public class ModConfig extends Config {
         public ValidatedBoolean calendarAccessory = new ValidatedBoolean(true);
         public ValidatedBoolean elytraAccessory = new ValidatedBoolean(true);
         public ValidatedBoolean spyglassAccessory = new ValidatedBoolean(true);
+        public ValidatedBoolean lanternAccessory = new ValidatedBoolean(true);
         public ValidatedBoolean totemOfUndyingAccessory = new ValidatedBoolean(true);
         public ValidatedBoolean enderChestAccessory = new ValidatedBoolean(true);
         public ValidatedBoolean shulkerBoxAccessory = new ValidatedBoolean(true);

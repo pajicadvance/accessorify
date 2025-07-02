@@ -54,6 +54,11 @@ public class ModUtil {
             Items.SPECTRAL_ARROW
     );
 
+    public static final List<Item> LANTERNS = List.of(
+            Items.LANTERN,
+            Items.SOUL_LANTERN
+    );
+
     public static BooleanObjectImmutablePair<ItemStack> getAccessoryStack(LivingEntity entity, Item item) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(entity);
         if (ac.isPresent() && ac.get().isEquipped(item)) {
@@ -138,6 +143,10 @@ public class ModUtil {
 
     public static boolean isArrow(ItemStack stack) {
         return ARROWS.stream().anyMatch(stack::is);
+    }
+
+    public static boolean isLantern(ItemStack stack) {
+        return LANTERNS.stream().anyMatch(stack::is);
     }
 
     public static boolean isHoldingProjectileWeapon(Player player) {
