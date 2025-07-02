@@ -4,6 +4,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.gradle.userdev' version '7.0.185'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 version = mod_version + "+" + stonecutter.current.version
@@ -87,6 +88,7 @@ dependencies {
     implementation "io.wispforest:accessories-neoforge:${property("accessories_version")}"
 
     // Supported mods
+    compileOnly "maven.modrinth:sodium-dynamic-lights:${property("sdl_version")}"
     compileOnly "maven.modrinth:owo-lib:${property("owo_version")}"
     compileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
     implementation "maven.modrinth:raised:${property("raised_version")}"
@@ -133,5 +135,33 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+    }
+}
+
+publishMods {
+    file = tasks.jarJar.archiveFile
+    changelog = file(getRootDir().path + "/CHANGELOG.md").text
+    type = STABLE
+    modLoaders.add("neoforge")
+    displayName = project.mod_version + " for NeoForge " + stonecutter.current.version
+
+    modrinth {
+        accessToken = providers.environmentVariable("MR_KEY")
+        projectId = "CVRzrXGP"
+        minecraftVersions.add(stonecutter.current.version)
+        requires("fzzy-config", "accessories")
+        optional("sodium-dynamic-lights")
+    }
+
+    curseforge {
+        accessToken = providers.environmentVariable("CF_KEY")
+        projectId = "1169634"
+        minecraftVersions.add(stonecutter.current.version)
+        javaVersions.add(stonecutter.eval(stonecutter.current.version, ">=1.20.5")
+                ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17)
+        clientRequired = true
+        serverRequired = true
+        requires("fzzy-config", "accessories")
+        optional("dynamiclights-reforged")
     }
 }

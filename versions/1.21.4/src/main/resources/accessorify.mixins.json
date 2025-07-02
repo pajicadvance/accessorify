@@ -11,6 +11,7 @@
     "PlayerMixin",
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin"
+    "compat.dynlight.DynamicLightsHandlerMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

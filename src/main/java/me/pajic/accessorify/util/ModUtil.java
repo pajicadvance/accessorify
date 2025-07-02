@@ -3,11 +3,13 @@ package me.pajic.accessorify.util;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
+import io.wispforest.accessories.api.slot.SlotReference;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.compat.CompatFlags;
 import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -52,6 +54,11 @@ public class ModUtil {
             Items.ARROW,
             Items.TIPPED_ARROW,
             Items.SPECTRAL_ARROW
+    );
+
+    public static final List<Item> LANTERNS = List.of(
+            Items.LANTERN,
+            Items.SOUL_LANTERN
     );
 
     public static BooleanObjectImmutablePair<ItemStack> getAccessoryStack(LivingEntity entity, Item item) {
@@ -119,6 +126,19 @@ public class ModUtil {
 
     public static boolean isArrow(ItemStack stack) {
         return ARROWS.stream().anyMatch(stack::is);
+    }
+
+    public static boolean isLantern(ItemStack stack) {
+        return LANTERNS.stream().anyMatch(stack::is);
+    }
+
+    public static boolean hasArmor(SlotReference reference) {
+        if (reference.entity() instanceof Player player) {
+            for (ItemStack item : player.getArmorSlots()) {
+                if (item.is(ItemTags.CHEST_ARMOR) || item.is(ItemTags.LEG_ARMOR)) return true;
+            }
+        }
+        return false;
     }
 
     public static boolean isHoldingProjectileWeapon(Player player) {

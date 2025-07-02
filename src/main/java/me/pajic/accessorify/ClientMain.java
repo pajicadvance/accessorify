@@ -12,6 +12,7 @@ import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.InfoOverlays;
 import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
 import me.pajic.accessorify.keybind.ModKeybinds;
+import me.pajic.accessorify.renderer.LanternAccessoryRenderer;
 import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import me.pajic.accessorify.util.compat.CompatFlags;
@@ -49,6 +50,7 @@ public class ClientMain {
         if (Main.CONFIG.accessorySettings.compassAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.COMPASS);
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.RECOVERY_COMPASS);
         if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.SPYGLASS);
+        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) ModUtil.LANTERNS.forEach(item -> AccessoriesRendererRegistry.registerRenderer(item, LanternAccessoryRenderer::new));
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.TOTEM_OF_UNDYING);
         if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.ENDER_CHEST);
         if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {

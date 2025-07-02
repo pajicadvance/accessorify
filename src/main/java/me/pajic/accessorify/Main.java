@@ -48,6 +48,10 @@ public class Main {
             //?}
         }
         if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.init();
+        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
+            LanternAccessory.init();
+            SoulLanternAccessory.init();
+        }
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) TotemOfUndyingAccessory.init();
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) RecoveryCompassAccessory.init();
         if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) EnderChestAccessory.init();
