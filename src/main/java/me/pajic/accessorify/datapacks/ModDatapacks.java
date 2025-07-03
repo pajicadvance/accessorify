@@ -62,14 +62,24 @@ public class ModDatapacks {
                 true,
                 Pack.Position.TOP
         );
-        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) event.addPackFinders(
-                MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "lantern"),
-                PackType.SERVER_DATA,
-                Component.literal("Accessorify Lantern"),
-                PackSource.BUILT_IN,
-                true,
-                Pack.Position.TOP
-        );
+        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
+            event.addPackFinders(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "lantern"),
+                    PackType.SERVER_DATA,
+                    Component.literal("Accessorify Lantern"),
+                    PackSource.BUILT_IN,
+                    true,
+                    Pack.Position.TOP
+            );
+            if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) event.addPackFinders(
+                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "additionallanterns"),
+                    PackType.SERVER_DATA,
+                    Component.literal("Accessorify Additional Lanterns"),
+                    PackSource.BUILT_IN,
+                    true,
+                    Pack.Position.TOP
+            );
+        }
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             event.addPackFinders(
                     MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "totem"),

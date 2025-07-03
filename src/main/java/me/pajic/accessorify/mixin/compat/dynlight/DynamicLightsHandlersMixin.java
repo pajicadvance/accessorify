@@ -20,6 +20,7 @@ public class DynamicLightsHandlersMixin {
         DynamicLightHandlers.registerDynamicLightHandler(EntityType.PLAYER, DynamicLightHandler.makeHandler(player -> {
             if (ModUtil.accessoryEquipped(player, Items.LANTERN)) return 15;
             if (ModUtil.accessoryEquipped(player, Items.SOUL_LANTERN)) return 10;
+            if (ModUtil.isLanternEquipped(player)) return 15;
             return 0;
         }, player -> true));
     }

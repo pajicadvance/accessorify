@@ -22,6 +22,7 @@ import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
 import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
 //?}
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,10 +57,10 @@ public class ModUtil {
             Items.SPECTRAL_ARROW
     );
 
-    public static final List<Item> LANTERNS = List.of(
+    public static final List<Item> LANTERNS = new ArrayList<>(List.of(
             Items.LANTERN,
             Items.SOUL_LANTERN
-    );
+    ));
 
     public static BooleanObjectImmutablePair<ItemStack> getAccessoryStack(LivingEntity entity, Item item) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(entity);
@@ -83,6 +84,11 @@ public class ModUtil {
     public static boolean calendarAccessoryEquipped(LivingEntity entity) {
         if (CompatFlags.SERENE_SEASONS_LOADED) return SereneSeasonsCompat.calendarAccessoryEquipped(entity);
         else return false;
+    }
+
+    public static boolean isLanternEquipped(LivingEntity entity) {
+        for (Item item : ModUtil.LANTERNS) if (ModUtil.accessoryEquipped(entity, item)) return true;
+        return false;
     }
 
     public static BooleanObjectImmutablePair<ItemStack> tryGetElytraAccessory(LivingEntity livingEntity) {

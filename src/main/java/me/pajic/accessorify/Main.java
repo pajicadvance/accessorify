@@ -2,6 +2,7 @@ package me.pajic.accessorify;
 
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.pajic.accessorify.accessories.*;
+import me.pajic.accessorify.accessories.compat.AdditionalLanternAccessory;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.accessories.compat.TotemOfFreezingAccessory;
 import me.pajic.accessorify.accessories.compat.TotemOfIllusionAccessory;
@@ -29,6 +30,7 @@ public class Main {
         modEventBus.addListener(ModDatapacks::registerDatapacks);
         modEventBus.addListener(ModNetworking::init);
         modEventBus.addListener(this::onInitialize);
+        modEventBus.addListener(AdditionalLanternAccessory::init);
         modEventBus.addListener(SereneSeasonsCalendarAccessory::init);
         modEventBus.addListener(TotemOfFreezingAccessory::init);
         modEventBus.addListener(TotemOfIllusionAccessory::init);
