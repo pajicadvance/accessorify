@@ -3,10 +3,7 @@ package me.pajic.accessorify;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.pajic.accessorify.accessories.*;
-import me.pajic.accessorify.accessories.compat.FabricSeasonsCalendarAccessory;
-import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
-import me.pajic.accessorify.accessories.compat.TotemOfFreezingAccessory;
-import me.pajic.accessorify.accessories.compat.TotemOfIllusionAccessory;
+import me.pajic.accessorify.accessories.compat.*;
 import me.pajic.accessorify.config.ModClientConfig;
 import me.pajic.accessorify.keybind.ModKeybinds;
 import me.pajic.accessorify.network.ModNetworking;
@@ -40,6 +37,9 @@ public class ClientMain implements ClientModInitializer {
         if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
             LanternAccessory.clientInit();
             SoulLanternAccessory.clientInit();
+            if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) {
+                AdditionalLanternAccessory.clientInit();
+            }
         }
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             TotemOfUndyingAccessory.clientInit();

@@ -20,6 +20,7 @@ import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
 //? if >= 1.21.1
 import net.minecraft.core.component.DataComponents;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,10 +55,10 @@ public class ModUtil {
             Items.SPECTRAL_ARROW
     );
 
-    public static final List<Item> LANTERNS = List.of(
+    public static final List<Item> LANTERNS = new ArrayList<>(List.of(
             Items.LANTERN,
             Items.SOUL_LANTERN
-    );
+    ));
 
     public static BooleanObjectImmutablePair<ItemStack> getAccessoryStack(LivingEntity entity, Item item) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(entity);

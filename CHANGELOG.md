@@ -1,1 +1,2 @@
-- Added lantern accessory: Equipping a lantern or soul lantern in the Belt slot (or lantern slot in unique slot mode) lights up the area around the player. **Requires a dynamic lights mod**.
+- Added compatibility for lanterns added by Additional Lanterns.
+    - When using this mod with Accessorify, it's recommended to **not use the vanilla lantern** and instead **use any other lantern added by the mod**. Additional Lanterns modifies the vanilla lantern and it causes several issues. On NeoForge, the lantern doesn't emit light when equipped as an accessory, and on both loaders the slot equipping rules don't work as expected with it.

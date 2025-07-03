@@ -2,8 +2,7 @@ package me.pajic.accessorify;
 
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.pajic.accessorify.accessories.*;
-import me.pajic.accessorify.accessories.compat.FabricSeasonsCalendarAccessory;
-import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
+import me.pajic.accessorify.accessories.compat.*;
 import me.pajic.accessorify.config.ModConfig;
 import me.pajic.accessorify.datapacks.ModDatapacks;
 import me.pajic.accessorify.network.ModNetworking;
@@ -15,8 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
-import me.pajic.accessorify.accessories.compat.TotemOfFreezingAccessory;
-import me.pajic.accessorify.accessories.compat.TotemOfIllusionAccessory;
 //?}
 
 public class Main implements ModInitializer {
@@ -41,6 +38,9 @@ public class Main implements ModInitializer {
         if (CONFIG.accessorySettings.lanternAccessory.get()) {
             LanternAccessory.init();
             SoulLanternAccessory.init();
+            if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) {
+                AdditionalLanternAccessory.init();
+            }
         }
         if (CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             TotemOfUndyingAccessory.init();

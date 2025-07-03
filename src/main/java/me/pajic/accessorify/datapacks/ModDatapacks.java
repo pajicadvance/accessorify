@@ -37,10 +37,16 @@ public class ModDatapacks {
                     MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "spyglass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.accessorySettings.lanternAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
+            if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
+                ResourceManagerHelper.registerBuiltinResourcePack(
                         MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "lantern"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
-            );
+                );
+                if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "additionallanterns"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+            }
             if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
                 ResourceManagerHelper.registerBuiltinResourcePack(
                         MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "totem"),
