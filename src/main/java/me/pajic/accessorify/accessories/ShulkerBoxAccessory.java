@@ -20,7 +20,7 @@ public class ShulkerBoxAccessory implements Accessory {
     }
 
     @Override
-    public int maxStackSize(ItemStack stack){
+    public int maxStackSize(ItemStack stack) {
         return 1;
     }
 }
