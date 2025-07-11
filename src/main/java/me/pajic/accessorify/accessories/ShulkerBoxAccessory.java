@@ -6,6 +6,7 @@ import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.world.item.ItemStack;
 
 public class ShulkerBoxAccessory implements Accessory {
 
@@ -16,5 +17,10 @@ public class ShulkerBoxAccessory implements Accessory {
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
         ModUtil.SHULKER_BOXES.forEach(AccessoriesRendererRegistry::registerNoRenderer);
+    }
+
+    @Override
+    public int maxStackSize(ItemStack stack) {
+        return 1;
     }
 }
