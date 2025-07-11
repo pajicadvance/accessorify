@@ -1,2 +1,1 @@
-- Added compatibility for lanterns added by Additional Lanterns.
-    - When using this mod with Accessorify, it's recommended to **not use the vanilla lantern** and instead **use any other lantern added by the mod**. Additional Lanterns modifies the vanilla lantern and it causes several issues. On NeoForge, the lantern doesn't emit light when equipped as an accessory, and on both loaders the slot equipping rules don't work as expected with it.
+- Limited shulker box stack size in accessory slots to 1 to prevent issues with mods which make shulker boxes stackable.
