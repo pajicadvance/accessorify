@@ -13,6 +13,8 @@
   "accessorify.config.accessorySettings.compassAccessory": "Аксессуар компаса",
   "accessorify.config.accessorySettings.elytraAccessory": "Аксессуар элитр",
   "accessorify.config.accessorySettings.spyglassAccessory": "Аксессуар подзорной трубы",
+  "accessorify.config.accessorySettings.lanternAccessory": "Аксессуар фонаря",
+  "accessorify.config.accessorySettings.lanternAccessory.desc": "Для работы динамического освещения требуется мод LambDynamicLights.",
   "accessorify.config.accessorySettings.totemOfUndyingAccessory": "Аксессуар тотема бессмертия",
   "accessorify.config.accessorySettings.recoveryCompassAccessory": "Аксессуар возвратного компаса",
   "accessorify.config.accessorySettings.enderChestAccessory": "Аксессуар эндер-сундука",
@@ -71,11 +73,14 @@
   "accessorify.client_config.infoOverlaySettings.overlayColors.summer": "Лето",
   "accessorify.client_config.infoOverlaySettings.overlayColors.autumn": "Осень",
   "accessorify.client_config.infoOverlaySettings.overlayColors.winter": "Зима",
+
   "gui.accessorify.coordinates_xyz": "%s %s %s",
   "gui.accessorify.coordinates_xz": "%s %s",
   "gui.accessorify.facing": "Направление: %s",
+
   "gui.accessorify.day": "День %s",
   "gui.accessorify.time": "%s:%s",
+
   "gui.accessorify.full_moon": "Полнолуние",
   "gui.accessorify.waning_gibbous": "Убывающая луна",
   "gui.accessorify.last_quarter": "Последняя четверть",
@@ -85,11 +90,13 @@
   "gui.accessorify.first_quarter": "Первая четверть",
   "gui.accessorify.waxing_gibbous": "Растущая луна",
   "gui.accessorify.moon_default": "Неизвестно",
+
   "gui.accessorify.clear": "Ясно",
   "gui.accessorify.cloudy": "Облачно",
   "gui.accessorify.raining": "Дождь",
   "gui.accessorify.snowing": "Снег",
   "gui.accessorify.thundering": "Гроза",
+
   "gui.accessorify.spring": "Весна",
   "gui.accessorify.summer": "Лето",
   "gui.accessorify.fall": "Осень",
@@ -106,19 +113,23 @@
   "gui.accessorify.early_winter": "Ранняя зима",
   "gui.accessorify.mid_winter": "Середина зимы",
   "gui.accessorify.late_winter": "Поздняя зима",
+
   "gui.accessorify.last_death_location": "Место последней смерти:",
   "gui.accessorify.last_death_location_unavailable": "Место последней смерти недоступно",
   "gui.accessorify.last_death_location_wrong_dimension": "Место последней смерти находится в другом измерении",
+
   "gui.accessorify.hint_arrow_scroll": "Прокрутка для выбора",
   "gui.accessorify.hint_arrow_exit": "Отпустите %s для закрытия",
   "gui.accessorify.hint_shulker_scroll": "Прокрутка для выбора",
   "gui.accessorify.hint_shulker_tooltip": "Удерживайте %s для подсказки",
   "gui.accessorify.hint_shulker_exit": "%s для открытия",
   "gui.accessorify.hint_shulker_exit_quick": "Отпустите %s для открытия",
+
   "category.accessorify.keybindings": "Аксессуарность",
   "key.accessorify.use_spyglass": "Использовать подзорную трубу",
   "key.accessorify.open_shulker_box": "Открыть выбор шалкерового ящика",
   "key.accessorify.open_ender_chest": "Открыть надетый эндер-сундук",
+
   "accessories.slot.shulker": "Шалкеровый ящик",
   "accessories.slot.arrow": "Стрела",
   "accessories.slot.calendar": "Календарь",
@@ -126,9 +137,11 @@
   "accessories.slot.compass": "Компас",
   "accessories.slot.elytra": "Элитры",
   "accessories.slot.ender_chest": "Эндер-сундук",
+  "accessories.slot.lantern": "Фонарь",
   "accessories.slot.recovery_compass": "Возвратный компас",
   "accessories.slot.spyglass": "Подзорная труба",
   "accessories.slot.totem": "Тотем",
+
   "accessories.slot_group.storage": "Хранилище",
   "accessories.slot_group.arrows": "Стрелы",
   "accessories.slot_group.info": "Информация",
