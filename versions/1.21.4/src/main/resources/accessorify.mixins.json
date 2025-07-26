@@ -10,8 +10,9 @@
     "PlayerSelectedAccessorySlotDataMixin",
     "PlayerMixin",
     "ProjectileWeaponItemMixin",
-    "ServerGamePacketListenerImplMixin"
-    "compat.dynlight.DynamicLightsHandlerMixin"
+    "ServerGamePacketListenerImplMixin",
+    "compat.dynlight.DynamicLightsHandlerMixin",
+    "compat.extrasounds.SoundManagerMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

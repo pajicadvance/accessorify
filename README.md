@@ -94,8 +94,9 @@ Type `arrow` in the slot box instead to modify the amount of arrow slots in the 
 
 ## Mod compatibility
 
-- [Deeper and Darker](https://modrinth.com/mod/deeperdarker): Soul Elytra equippable in Cape slot
-- [Friends and Foes](https://modrinth.com/mod/friends-and-foes): Totem of Freezing and Totem of Illusion equippable in Charm slot
-- [Ars Elixirum](https://modrinth.com/mod/ars-elixirum): Witch Totems equippable in Charm slot
-- [Serene Seasons](https://modrinth.com/mod/serene-seasons) or [Fabric Seasons](https://modrinth.com/mod/fabric-seasons) + [Fabric Seasons Extras](https://modrinth.com/mod/fabric-seasons-extras): Calendar equippable in the Charm slot and shows the current season in the info overlay
+- [Deeper and Darker](https://modrinth.com/mod/deeperdarker): Soul Elytra equippable in Cape/Elytra slot
+- [Friends and Foes](https://modrinth.com/mod/friends-and-foes): Totem of Freezing and Totem of Illusion equippable in Charm/Totem slot
+- [Reinforced Shulker Boxes](https://modrinth.com/mod/reinforced-shulker-boxes): Reinforced shulkers equippable in Shulker slot and can be opened like vanilla shulkers
+- [Ars Elixirum](https://modrinth.com/mod/ars-elixirum): Witch Totems equippable in Charm/Totem slot
+- [Serene Seasons](https://modrinth.com/mod/serene-seasons) or [Fabric Seasons](https://modrinth.com/mod/fabric-seasons) + [Fabric Seasons Extras](https://modrinth.com/mod/fabric-seasons-extras): Calendar equippable in the Charm/Calendar slot and shows the current season in the info overlay
 - [Notes](https://modrinth.com/mod/notes): If "Hide gameplay info from F3 menu in survival" is on, the buttons used to add info such as coordinates to notes will be disabled unless you have a compass equipped
