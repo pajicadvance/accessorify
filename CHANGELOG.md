@@ -1,1 +1,4 @@
-- Limited shulker box stack size in accessory slots to 1 to prevent issues with mods which make shulker boxes stackable.
+- [Fabric] Added compatibility for Reinforced Shulker Boxes.
+- Fixed a bug with ExtraSounds causing scrolling sounds to play when zooming in and out while using the spyglass.
+- [Fabric] Fixed a bug with the config where the spyglass accessory toggle was mapped to the shulker box accessory by accident.
+- Updated Russian translation ([#44](https://github.com/pajicadvance/accessorify/pull/44), [#45](https://github.com/pajicadvance/accessorify/pull/45)).

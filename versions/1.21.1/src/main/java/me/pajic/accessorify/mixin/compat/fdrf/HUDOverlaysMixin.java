@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import vectorwing.farmersdelight.client.gui.HUDOverlays;
 
 @IfModLoaded("farmersdelight")
-@Mixin(HUDOverlays.class)
+@Mixin(value = HUDOverlays.class, remap = false)
 public class HUDOverlaysMixin {
 
     @Redirect(

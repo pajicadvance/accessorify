@@ -15,6 +15,7 @@
     "compat.citresewn.TypeElytraContainerMixin",
     "compat.deeperdarker.DDNetworkingMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
+    "compat.extrasounds.SoundManagerMixin",
     "compat.fdrf.HUDOverlaysMixin"
   ],
   "client": [

@@ -69,10 +69,16 @@ public class ModDatapacks {
                     MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "enderchest"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
-            if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "shulkerbox"),
-                    modContainer, ResourcePackActivationType.ALWAYS_ENABLED
-            );
+            if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) {
+                ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "shulkerbox"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+                if (CompatFlags.REINFORCED_SHULKERS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "reinfshulker"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
+            }
             if (Main.CONFIG.accessorySettings.arrowAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
                     MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "arrow"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED

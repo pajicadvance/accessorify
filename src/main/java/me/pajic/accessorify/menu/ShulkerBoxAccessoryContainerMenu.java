@@ -1,5 +1,7 @@
 package me.pajic.accessorify.menu;
 
+import me.pajic.accessorify.util.compat.CompatFlags;
+import me.pajic.accessorify.util.compat.ReinfShulkerCompat;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -27,9 +29,9 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
     private final ItemStack shulker;
     protected NonNullList<ItemStack> items;
 
-    public ShulkerBoxAccessoryContainerMenu(ItemStack shulker) {
+    public ShulkerBoxAccessoryContainerMenu(ItemStack shulker, int size) {
         this.shulker = shulker;
-        this.items = NonNullList.withSize(27, ItemStack.EMPTY);
+        this.items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
     @Override
@@ -120,7 +122,8 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
-        return new ShulkerBoxMenu(i, inventory, this);
+        if (CompatFlags.REINFORCED_SHULKERS_LOADED) return ReinfShulkerCompat.createMenu(i, inventory, this, shulker.getItem());
+        else return new ShulkerBoxMenu(i, inventory, this);
     }
 
     @Override

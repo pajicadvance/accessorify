@@ -14,7 +14,8 @@
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
-    "compat.deeperdarker.MessagesMixin"
+    "compat.deeperdarker.MessagesMixin",
+    "compat.extrasounds.SoundManagerMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

@@ -4,6 +4,8 @@ import io.wispforest.accessories.api.AccessoriesCapability;
 import me.fzzyhmstrs.fzzy_config.networking.api.ServerPlayNetworkContext;
 import me.pajic.accessorify.access.SelectedAccessorySlotAccess;
 import me.pajic.accessorify.menu.ShulkerBoxAccessoryContainerMenu;
+import me.pajic.accessorify.util.compat.CompatFlags;
+import me.pajic.accessorify.util.compat.ReinfShulkerCompat;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,6 +14,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
 
@@ -48,7 +51,9 @@ public class NetworkEvents {
     private static void openShulkerBox(ServerPlayer player, int index) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
         if (ac.isPresent()) {
-            player.openMenu(new ShulkerBoxAccessoryContainerMenu(ac.get().getContainers().get("shulker").getAccessories().getItem(index)));
+            ItemStack shulker = ac.get().getContainers().get("shulker").getAccessories().getItem(index);
+            int size = (CompatFlags.REINFORCED_SHULKERS_LOADED) ? ReinfShulkerCompat.getInventorySizeForReinfShulker(shulker.getItem()) : 27;
+            player.openMenu(new ShulkerBoxAccessoryContainerMenu(shulker, size));
             player.awardStat(Stats.OPEN_SHULKER_BOX);
         }
     }

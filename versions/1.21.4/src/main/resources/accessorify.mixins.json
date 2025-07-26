@@ -10,7 +10,8 @@
     "PlayerMixin",
     "PlayerSelectedAccessorySlotDataMixin",
     "ProjectileWeaponItemMixin",
-    "ServerGamePacketListenerImplMixin"
+    "ServerGamePacketListenerImplMixin",
+    "compat.extrasounds.SoundManagerMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",
