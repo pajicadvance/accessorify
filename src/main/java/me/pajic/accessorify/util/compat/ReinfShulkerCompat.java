@@ -17,7 +17,7 @@ public class ReinfShulkerCompat {
         for (Map.Entry<ReinforcingMaterial, Map<DyeColor, Item>> entry : ModItems.REINFORCED_SHULKER_BOX_MAP.entrySet()) {
             if (entry.getValue().containsValue(shulker)) return entry.getKey().getSize();
         }
-        return 0;
+        return 27;
     }
 
     public static AbstractContainerMenu createMenu(int syncId, Inventory inventory, ShulkerBoxAccessoryContainerMenu menu, Item shulker) {
