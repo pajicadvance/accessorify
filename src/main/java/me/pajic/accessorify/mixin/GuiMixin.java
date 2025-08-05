@@ -1,8 +1,7 @@
 package me.pajic.accessorify.mixin;
 
-import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.InfoOverlays;
-import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
+import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,7 +27,6 @@ public class GuiMixin {
             CallbackInfo ci
     ) {
         InfoOverlays.render(guiGraphics);
-        ArrowSelectionWidget.render(guiGraphics);
-        ShulkerBoxSelectionWidget.render(guiGraphics);
+        ContextualSelectionWidget.render(guiGraphics);
     }
 }

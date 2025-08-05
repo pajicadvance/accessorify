@@ -28,8 +28,8 @@
   "accessorify.client_config.widgetSettings.desc": "Configure the behavior of the shulker box and arrow selection widgets.",
   "accessorify.client_config.widgetSettings.showUIHints": "Show widget keybind hints",
   "accessorify.client_config.widgetSettings.showUIHints.desc": "Show keybind hints in the shulker box and arrow selection widgets.",
-  "accessorify.client_config.widgetSettings.shulkerQuickSelect": "Shulker box widget quick select",
-  "accessorify.client_config.widgetSettings.shulkerQuickSelect.desc": "Disable to press the keybind to open the menu and press it again to open the selected shulker box instead of hold and release to open the selected shulker box.",
+  "accessorify.client_config.widgetSettings.quickSelect": "Quick selection",
+  "accessorify.client_config.widgetSettings.quickSelect.desc": "Disable to press the keybind to open the menu and press it again to select menu items instead of hold and release.",
   "accessorify.client_config.spyglassZoomSettings": "Spyglass zoom settings",
   "accessorify.client_config.spyglassZoomSettings.scrollableZoom": "Scrollable zoom level",
   "accessorify.client_config.spyglassZoomSettings.rememberZoomLevel": "Remember zoom level",
@@ -127,7 +127,7 @@
 
   "category.accessorify.keybindings": "Accessorify",
   "key.accessorify.use_spyglass": "Use spyglass accessory",
-  "key.accessorify.open_shulker_box": "Open shulker box selection widget",
+  "key.accessorify.open_widget": "Open contextual selection widget",
   "key.accessorify.open_ender_chest": "Open equipped ender chest",
 
   "accessories.slot.shulker": "Shulker box",

@@ -3,8 +3,7 @@ package me.pajic.accessorify.keybind;
 import com.mojang.blaze3d.platform.InputConstants;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import me.pajic.accessorify.ClientMain;
-import me.pajic.accessorify.gui.ArrowSelectionWidget;
-import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
+import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.network.Payloads;
 import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
@@ -27,11 +26,11 @@ public class ModKeybinds {
                     "category.accessorify.keybindings"
             )
     );
-    public static final KeyMapping OPEN_SHULKER_BOX = KeyBindingHelper.registerKeyBinding(
+    public static final KeyMapping OPEN_WIDGET = KeyBindingHelper.registerKeyBinding(
             new KeyMapping(
-                    "key.accessorify.open_shulker_box",
+                    "key.accessorify.open_widget",
                     InputConstants.Type.KEYSYM,
-                    GLFW.GLFW_KEY_B,
+                    GLFW.GLFW_KEY_X,
                     "category.accessorify.keybindings"
             )
     );
@@ -62,21 +61,26 @@ public class ModKeybinds {
                     }
                     ModUtil.shouldScope = false;
                 }
-                if (!ClientMain.CLIENT_CONFIG.widgetSettings.shulkerQuickSelect.get()) {
-                    if (OPEN_SHULKER_BOX.consumeClick()) {
-                        if (!ShulkerBoxSelectionWidget.widgetOpen && !ArrowSelectionWidget.widgetOpen)
-                            ShulkerBoxSelectionWidget.widgetOpen = true;
+                boolean isShulkerWidget = !ModUtil.isHoldingProjectileWeapon(client.player);
+                if (!ClientMain.CLIENT_CONFIG.widgetSettings.quickSelect.get()) {
+                    if (OPEN_WIDGET.consumeClick()) {
+                        if (!ContextualSelectionWidget.widgetOpen)
+                            ContextualSelectionWidget.widgetOpen = true;
                         else {
-                            MultiVersionUtil.C2S(new Payloads.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
-                            client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
-                            ShulkerBoxSelectionWidget.widgetOpen = false;
+                            if (isShulkerWidget) {
+                                MultiVersionUtil.C2S(new Payloads.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
+                                client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
+                            }
+                            ContextualSelectionWidget.widgetOpen = false;
                         }
                     }
-                } else if (!OPEN_SHULKER_BOX.isDown()) {
-                    if (ShulkerBoxSelectionWidget.widgetOpen) {
-                        MultiVersionUtil.C2S(new Payloads.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
-                        client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
-                        ShulkerBoxSelectionWidget.widgetOpen = false;
+                } else if (!OPEN_WIDGET.isDown()) {
+                    if (ContextualSelectionWidget.widgetOpen) {
+                        if (isShulkerWidget) {
+                            MultiVersionUtil.C2S(new Payloads.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
+                            client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
+                        }
+                        ContextualSelectionWidget.widgetOpen = false;
                     }
                 }
                 if (OPEN_ENDER_CHEST.consumeClick()) {
