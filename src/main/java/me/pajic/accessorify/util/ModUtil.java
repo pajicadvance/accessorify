@@ -51,12 +51,6 @@ public class ModUtil {
             Items.BLACK_SHULKER_BOX
     );
 
-    public static final List<Item> ARROWS = List.of(
-            Items.ARROW,
-            Items.TIPPED_ARROW,
-            Items.SPECTRAL_ARROW
-    );
-
     public static final List<Item> LANTERNS = new ArrayList<>(List.of(
             Items.LANTERN,
             Items.SOUL_LANTERN
@@ -128,10 +122,6 @@ public class ModUtil {
             }
         }
         return ItemStack.EMPTY;
-    }
-
-    public static boolean isArrow(ItemStack stack) {
-        return ARROWS.stream().anyMatch(stack::is);
     }
 
     public static boolean isLantern(ItemStack stack) {

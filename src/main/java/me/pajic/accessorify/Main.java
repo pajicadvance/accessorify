@@ -12,12 +12,12 @@ import me.pajic.accessorify.util.MultiVersionUtil;
 import me.pajic.accessorify.util.compat.CompatFlags;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
 import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
+import net.neoforged.neoforge.common.NeoForge;
 //?}
 
 @Mod("accessorify")
@@ -26,10 +26,11 @@ public class Main {
     public static final ResourceLocation CONFIG_RL = MultiVersionUtil.fromNamespaceAndPath("config");
     public static me.pajic.accessorify.config.ModConfig CONFIG = ConfigApiJava.registerAndLoadConfig(me.pajic.accessorify.config.ModConfig::new);
 
-    public Main(IEventBus modEventBus, ModContainer modContainer) {
+    public Main(IEventBus modEventBus) {
         modEventBus.addListener(ModDatapacks::registerDatapacks);
         modEventBus.addListener(ModNetworking::init);
         modEventBus.addListener(this::onInitialize);
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) NeoForge.EVENT_BUS.addListener(ArrowAccessory::init);
         modEventBus.addListener(AdditionalLanternAccessory::init);
         modEventBus.addListener(SereneSeasonsCalendarAccessory::init);
         modEventBus.addListener(TotemOfFreezingAccessory::init);
@@ -58,6 +59,5 @@ public class Main {
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) RecoveryCompassAccessory.init();
         if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) EnderChestAccessory.init();
         if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) ShulkerBoxAccessory.init();
-        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) ArrowAccessory.init();
     }
 }

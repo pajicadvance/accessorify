@@ -16,24 +16,28 @@ import me.pajic.accessorify.renderer.LanternAccessoryRenderer;
 import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import me.pajic.accessorify.util.compat.CompatFlags;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 //? if <= 1.21.1
 import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
 
 @Mod(value = "accessorify", dist = Dist.CLIENT)
 public class ClientMain {
     public static final ResourceLocation CLIENT_CONFIG_RL = MultiVersionUtil.fromNamespaceAndPath(Main.MOD_ID, "client_config");
     public static ModClientConfig CLIENT_CONFIG = ConfigApiJava.registerAndLoadConfig(ModClientConfig::new, RegisterType.CLIENT);
 
-    public ClientMain(IEventBus modEventBus, ModContainer modContainer) {
+    public ClientMain(IEventBus modEventBus) {
         modEventBus.addListener(this::onInitialize);
+        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) NeoForge.EVENT_BUS.addListener(this::initArrows);
         modEventBus.addListener(SereneSeasonsCalendarAccessory::clientInit);
         modEventBus.addListener(TotemOfFreezingAccessory::clientInit);
         modEventBus.addListener(TotemOfIllusionAccessory::clientInit);
@@ -62,6 +66,12 @@ public class ClientMain {
             //?}
         }
         if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) ModUtil.SHULKER_BOXES.forEach(AccessoriesRendererRegistry::registerNoRenderer);
-        if (Main.CONFIG.accessorySettings.arrowAccessory.get()) ModUtil.ARROWS.forEach(AccessoriesRendererRegistry::registerNoRenderer);
+    }
+
+    @SubscribeEvent
+    private void initArrows(TagsUpdatedEvent event) {
+        event.getRegistryAccess().lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
+                AccessoriesRendererRegistry.registerNoRenderer(itemHolder.value())
+        );
     }
 }
