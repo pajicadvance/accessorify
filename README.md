@@ -76,13 +76,13 @@ When equipped, pressing V (default keybind, configurable) opens the player's end
 
 Can now be equipped in the Shulker slot, which is added by this mod.
 
-When equipped, holding B (default keybind, configurable) brings up a shulker box selection widget. Scrolling with the mouse wheel while the widget is open selects which shulker box to open. Holding the sneak key shows the tooltip of the currently selected shulker box. Releasing the keybind opens the selected shulker box. The selection is saved, so opening the shulker box you previously opened only requires pressing B. Having one shulker box equipped skips the widget and immediately opens it. By default you have 3 shulker slots. If you want more (or less), follow the instructions near the bottom of the page.
+When equipped, holding X (default keybind, configurable) brings up a shulker box selection widget. Scrolling with the mouse wheel while the widget is open selects which shulker box to open. Holding the sneak key shows the tooltip of the currently selected shulker box. Releasing the keybind opens the selected shulker box. The selection is saved, so opening the shulker box you previously opened only requires pressing B. Having one shulker box equipped skips the widget and immediately opens it. By default you have 3 shulker slots. If you want more (or less), follow the instructions near the bottom of the page.
 
 ### Arrows
 
-Can now be equipped in the Arrow slot, which is added by this mod.
+Can now be equipped in the Arrow slot, which is added by this mod. Modded arrows are supported if the mod adds them to the `minecraft:arrows` tag.
 
-When holding a ranged weapon, holding the sneak key brings up an arrow selection widget. Scrolling with the mouse wheel while the widget is open selects the arrow slot to be used by the weapon. Releasing the sneak key closes the widget. By default you have 3 arrow slots. If you want more (or less), follow the instructions near the bottom of the page.
+When holding a ranged weapon, holding X brings up an arrow selection widget. Scrolling with the mouse wheel while the widget is open selects the arrow slot to be used by the weapon. Releasing the sneak key closes the widget. By default you have 3 arrow slots. If you want more (or less), follow the instructions near the bottom of the page.
 
 ## Configuring shulker box and arrow slot amounts
 
