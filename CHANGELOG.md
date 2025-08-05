@@ -1,1 +1,2 @@
-- Fixed trident duplication bug.
+- Modded arrows can now be equipped in and used from the arrow accessory slots, granted the mod adds them to the `minecraft:arrows` tag.
+- The arrow selection widget is no longer opened by sneaking while holding a bow, as it was intrusive during gameplay. Instead, it's opened by holding the same key that opens the shulker selection widget while holding a bow. This keybind has been renamed to "Open contextual selection widget" as it's no longer unique to shulkers, and the default key for it is now X for easier accessibility.
