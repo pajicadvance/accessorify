@@ -68,8 +68,12 @@ public class ClientMain {
 
     @SubscribeEvent
     private void initArrows(TagsUpdatedEvent event) {
-        event.getRegistryAccess().lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
-                AccessoriesRendererRegistry.registerNoRenderer(itemHolder.value())
+        //? if <= 1.21.1
+        event.getRegistryAccess()
+        //? if >= 1.21.4
+        /*event.getLookupProvider()*/
+                .lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
+                        AccessoriesRendererRegistry.registerNoRenderer(itemHolder.value())
         );
     }
 }

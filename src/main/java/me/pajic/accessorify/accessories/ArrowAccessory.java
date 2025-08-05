@@ -10,9 +10,12 @@ import net.neoforged.neoforge.event.TagsUpdatedEvent;
 public class ArrowAccessory implements Accessory {
     @SubscribeEvent
     public static void init(TagsUpdatedEvent event) {
-        event.getRegistryAccess().lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
-                MultiVersionUtil.registerAccessory(itemHolder.value(), new ArrowAccessory())
+        //? if <= 1.21.1
+        event.getRegistryAccess()
+        //? if >= 1.21.4
+        /*event.getLookupProvider()*/
+                .lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
+                        MultiVersionUtil.registerAccessory(itemHolder.value(), new ArrowAccessory())
         );
-        //ModUtil.ARROWS.forEach(item -> MultiVersionUtil.registerAccessory(item, new ArrowAccessory()));
     }
 }

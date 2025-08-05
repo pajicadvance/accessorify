@@ -14,10 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
 import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
-import net.neoforged.neoforge.common.NeoForge;
 //?}
 
 @Mod("accessorify")
