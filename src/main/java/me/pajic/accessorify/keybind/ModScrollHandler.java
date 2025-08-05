@@ -6,8 +6,7 @@ import io.wispforest.accessories.api.slot.SlotTypeReference;
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.Main;
-import me.pajic.accessorify.gui.ArrowSelectionWidget;
-import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
+import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.sounds.SoundEvents;
@@ -32,7 +31,7 @@ public class ModScrollHandler {
                 else player.playSound(SoundEvents.SPYGLASS_STOP_USING);
             }
             return false;
-        } else if (Main.CONFIG.accessorySettings.arrowAccessory.get() && ArrowSelectionWidget.widgetOpen) {
+        } else if (Main.CONFIG.accessorySettings.arrowAccessory.get() && ModUtil.isHoldingProjectileWeapon(player) && ContextualSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
@@ -50,7 +49,7 @@ public class ModScrollHandler {
                     }
                 }
             }
-        } else if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get() && ShulkerBoxSelectionWidget.widgetOpen) {
+        } else if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get() && ContextualSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("shulker"));

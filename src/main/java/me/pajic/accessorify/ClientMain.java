@@ -8,9 +8,8 @@ import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.accessories.compat.TotemOfFreezingAccessory;
 import me.pajic.accessorify.accessories.compat.TotemOfIllusionAccessory;
 import me.pajic.accessorify.config.ModClientConfig;
-import me.pajic.accessorify.gui.ArrowSelectionWidget;
 import me.pajic.accessorify.gui.InfoOverlays;
-import me.pajic.accessorify.gui.ShulkerBoxSelectionWidget;
+import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.keybind.ModKeybinds;
 import me.pajic.accessorify.renderer.LanternAccessoryRenderer;
 import me.pajic.accessorify.util.ModUtil;
@@ -48,8 +47,7 @@ public class ClientMain {
 
     public void onInitialize(FMLClientSetupEvent event) {
         NeoForge.EVENT_BUS.addListener(InfoOverlays::renderInfoOverlays);
-        NeoForge.EVENT_BUS.addListener(ArrowSelectionWidget::renderArrowSelectionWidget);
-        NeoForge.EVENT_BUS.addListener(ShulkerBoxSelectionWidget::renderShulkerBoxSelectionWidget);
+        NeoForge.EVENT_BUS.addListener(ContextualSelectionWidget::renderContextualSelectionWidget);
         if (Main.CONFIG.accessorySettings.clockAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.CLOCK);
         if (Main.CONFIG.accessorySettings.compassAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.COMPASS);
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) AccessoriesRendererRegistry.registerNoRenderer(Items.RECOVERY_COMPASS);

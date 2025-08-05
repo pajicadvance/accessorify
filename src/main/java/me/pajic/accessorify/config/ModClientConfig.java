@@ -25,7 +25,7 @@ public class ModClientConfig extends Config {
 
     public static class WidgetSettings extends ConfigSection {
         public ValidatedBoolean showUIHints = new ValidatedBoolean(true);
-        public ValidatedBoolean shulkerQuickSelect = new ValidatedBoolean(true);
+        public ValidatedBoolean quickSelect = new ValidatedBoolean(true);
     }
 
     public static class SpyglassZoomSettings extends ConfigSection {
