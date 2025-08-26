@@ -23,7 +23,7 @@ import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
 @Mod("accessorify")
 public class Main {
     public static final String MOD_ID = "accessorify";
-    public static final ResourceLocation CONFIG_RL = MultiVersionUtil.fromNamespaceAndPath("config");
+    public static final ResourceLocation CONFIG_RL = MultiVersionUtil.withModNamespace("config");
     public static me.pajic.accessorify.config.ModConfig CONFIG = ConfigApiJava.registerAndLoadConfig(me.pajic.accessorify.config.ModConfig::new);
 
     public Main(IEventBus modEventBus) {

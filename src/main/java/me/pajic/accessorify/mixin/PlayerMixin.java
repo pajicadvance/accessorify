@@ -32,9 +32,10 @@ public abstract class PlayerMixin extends LivingEntity {
     @Shadow public abstract boolean isCreative();
     @Shadow public abstract boolean isSpectator();
     @Shadow public abstract void setReducedDebugInfo(boolean reducedDebugInfo);
+    //? if < 1.21.8 {
     @Shadow public abstract @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot);
-
     @Shadow public abstract void stopFallFlying();
+    //?}
 
     //? if <= 1.21.1 {
     @ModifyExpressionValue(

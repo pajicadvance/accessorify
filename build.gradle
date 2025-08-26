@@ -1,9 +1,7 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
     id 'idea'
-    id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.185'
+    id 'net.neoforged.gradle.userdev' version '7.0.192'
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
@@ -50,16 +48,13 @@ runs {
         systemProperty 'forge.logging.console.level', 'debug'
         modSource project.sourceSets.main
     }
-
     client {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
     }
-
     server {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         programArgument '--nogui'
     }
-
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -138,6 +133,24 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+stonecutter {
+    swaps["Accessory"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.Accessory;"
+            : "import io.wispforest.accessories.api.core.Accessory;"
+    swaps["AccessoryRegistry"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.AccessoryRegistry;"
+            : "import io.wispforest.accessories.api.core.AccessoryRegistry;"
+    swaps["AccessoryRenderer"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.client.AccessoryRenderer;"
+            : "import io.wispforest.accessories.api.client.renderers.AccessoryRenderer;"
+    swaps["SimpleAccessoryRenderer"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.client.SimpleAccessoryRenderer;"
+            : "import io.wispforest.accessories.api.client.renderers.SimpleAccessoryRenderer;"
+    swaps["ExpandedContainerImport"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.impl.ExpandedSimpleContainer;"
+            : "import io.wispforest.accessories.impl.core.ExpandedContainer;"
 }
 
 publishMods {

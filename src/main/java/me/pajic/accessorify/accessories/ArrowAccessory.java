@@ -1,5 +1,6 @@
 package me.pajic.accessorify.accessories;
 
+//$ Accessory
 import io.wispforest.accessories.api.Accessory;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.core.registries.Registries;

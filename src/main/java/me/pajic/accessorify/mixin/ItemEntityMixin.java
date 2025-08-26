@@ -5,8 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
-import io.wispforest.accessories.api.slot.SlotTypeReference;
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.data.SlotTypeLoader;
 import me.pajic.accessorify.Main;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
@@ -20,6 +19,8 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+//$ ExpandedContainerImport
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 
 import java.util.Optional;
 
@@ -45,9 +46,9 @@ public abstract class ItemEntityMixin extends Entity {
         if (itemStack.is(ItemTags.ARROWS) && Main.CONFIG.accessorySettings.arrowAccessory.get()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(player, "arrow"));
                 if (container != null) {
-                    ExpandedSimpleContainer arrows = container.getAccessories();
+                    /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ arrows = container.getAccessories();
                     if (!arrows.getItems().stream().allMatch(ItemStack::isEmpty) && arrows.canAddItem(itemStack)) {
                         ItemEntity itemEntity = (ItemEntity) (Object) this;
                         int i = itemStack.getCount();

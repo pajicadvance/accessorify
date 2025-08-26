@@ -2,18 +2,20 @@ package me.pajic.accessorify.keybind;
 
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
-import io.wispforest.accessories.api.slot.SlotTypeReference;
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.data.SlotTypeLoader;
 import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
+//$ ExpandedContainerImport
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 
 import java.util.Optional;
 
@@ -34,9 +36,9 @@ public class ModScrollHandler {
         } else if (Main.CONFIG.accessorySettings.arrowAccessory.get() && ModUtil.isHoldingProjectileWeapon(player) && ContextualSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(player, "arrow"));
                 if (container != null) {
-                    ExpandedSimpleContainer arrows = container.getAccessories();
+                    /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ arrows = container.getAccessories();
                     if (!arrows.getItems().stream().allMatch(ItemStack::isEmpty)) {
                         int size = arrows.getItems().size();
                         do {
@@ -44,7 +46,7 @@ public class ModScrollHandler {
                             if (selectedArrowSlot < 0) selectedArrowSlot = size - 1;
                             if (selectedArrowSlot >= size) selectedArrowSlot = 0;
                         } while (arrows.getItem(selectedArrowSlot).isEmpty());
-                        PacketDistributor.sendToServer(new ModNetworking.C2SSyncArrowSlot(selectedArrowSlot));
+                        MultiVersionUtil.sendToServer(new ModNetworking.C2SSyncArrowSlot(selectedArrowSlot));
                         return false;
                     }
                 }
@@ -52,9 +54,9 @@ public class ModScrollHandler {
         } else if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get() && ContextualSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("shulker"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(player, "shulker"));
                 if (container != null) {
-                    ExpandedSimpleContainer shulkers = container.getAccessories();
+                    /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ shulkers = container.getAccessories();
                     if (!shulkers.getItems().stream().allMatch(ItemStack::isEmpty)) {
                         int size = shulkers.getItems().size();
                         do {
@@ -62,7 +64,7 @@ public class ModScrollHandler {
                             if (selectedShulkerSlot < 0) selectedShulkerSlot = size - 1;
                             if (selectedShulkerSlot >= size) selectedShulkerSlot = 0;
                         } while (shulkers.getItem(selectedShulkerSlot).isEmpty());
-                        PacketDistributor.sendToServer(new ModNetworking.C2SSyncShulkerSlot(selectedShulkerSlot));
+                        MultiVersionUtil.sendToServer(new ModNetworking.C2SSyncShulkerSlot(selectedShulkerSlot));
                         return false;
                     }
                 }

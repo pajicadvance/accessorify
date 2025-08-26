@@ -1,0 +1,33 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  },
+  "package": "me.pajic.accessorify.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AbstractArrowMixin",
+    "ItemEntityMixin",
+    "LivingEntityMixin",
+    "PlayerSelectedAccessorySlotDataMixin",
+    "PlayerMixin",
+    "ProjectileWeaponItemMixin",
+    "ServerGamePacketListenerImplMixin",
+    "compat.dynlight.DynamicLightsHandlersMixin",
+    "compat.extrasounds.SoundManagerMixin"
+  ],
+  "client": [
+    "AbstractClientPlayerMixin",
+    "ClientPacketListenerMixin",
+    "DebugScreenOverlayMixin",
+    "GameRendererMixin",
+    "MinecraftMixin",
+    "MouseHandlerMixin",
+    "PackSelectionModelMixin",
+    "compat.notes.EditNoteScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

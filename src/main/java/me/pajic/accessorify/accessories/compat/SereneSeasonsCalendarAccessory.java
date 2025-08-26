@@ -1,6 +1,5 @@
 package me.pajic.accessorify.accessories.compat;
 
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.accessories.SlotCopyingAccessory;
 import me.pajic.accessorify.util.MultiVersionUtil;
@@ -26,7 +25,7 @@ public class SereneSeasonsCalendarAccessory implements SlotCopyingAccessory {
     public static void clientInit(ModifyRegistriesEvent event) {
         event.getRegistry(Registries.ITEM).addCallback((AddCallback<Item>) (registry, id, key, value) -> {
             if (key.location().equals(MultiVersionUtil.parse("sereneseasons:calendar"))) {
-                AccessoriesRendererRegistry.registerNoRenderer(value);
+                MultiVersionUtil.noRenderer(value);
             }
         });
     }

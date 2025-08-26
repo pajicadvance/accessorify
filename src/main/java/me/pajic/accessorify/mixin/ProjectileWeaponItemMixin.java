@@ -10,7 +10,7 @@ import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
-import io.wispforest.accessories.api.slot.SlotTypeReference;
+import io.wispforest.accessories.data.SlotTypeLoader;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.access.SelectedAccessorySlotAccess;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,7 +33,7 @@ public class ProjectileWeaponItemMixin {
         if (Main.CONFIG.accessorySettings.arrowAccessory.get() && original.isEmpty()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(shooter, "arrow"));
                 if (container != null) {
                     int slot = ((SelectedAccessorySlotAccess) shooter).accessorify$getArrowSlot();
                     ItemStack arrows = container.getAccessories().getItem(slot);
@@ -59,7 +59,7 @@ public class ProjectileWeaponItemMixin {
         if (Main.CONFIG.accessorySettings.arrowAccessory.get()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(shooter, "shulker"));
                 if (container != null) {
                     int slot = ((SelectedAccessorySlotAccess) shooter).accessorify$getArrowSlot();
                     ItemStack arrows = container.getAccessories().getItem(slot);

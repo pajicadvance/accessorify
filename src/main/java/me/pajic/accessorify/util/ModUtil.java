@@ -9,6 +9,7 @@ import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.compat.CompatFlags;
 import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -63,7 +64,7 @@ public class ModUtil {
             if (itemRef != null) {
                 AccessoriesContainer container = itemRef.reference().slotContainer();
                 boolean visible = true;
-                if (container != null) visible = container.renderOptions().getFirst();
+                if (container != null) visible = container.renderOptions().get(0);
                 return new BooleanObjectImmutablePair<>(visible, itemRef.stack());
             }
         }
@@ -128,17 +129,11 @@ public class ModUtil {
         return LANTERNS.stream().anyMatch(stack::is);
     }
 
-    public static boolean hasArmor(SlotReference reference) {
-        if (reference.entity() instanceof Player player) {
-            for (ItemStack item : player.getArmorSlots()) {
-                if (item.is(ItemTags.CHEST_ARMOR) || item.is(ItemTags.LEG_ARMOR)) return true;
-            }
-        }
-        return false;
-    }
-
     public static boolean isHoldingProjectileWeapon(Player player) {
+        //? if < 1.21.8
         for (ItemStack stack : player.getHandSlots()) if (stack.getItem() instanceof ProjectileWeaponItem) return true;
+        //? if >= 1.21.8
+        /*if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem || player.getOffhandItem().getItem() instanceof ProjectileWeaponItem) return true;*/
         return false;
     }
 

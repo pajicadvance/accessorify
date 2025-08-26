@@ -6,8 +6,10 @@ import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
@@ -81,7 +83,7 @@ public class ModKeybinds {
                         ContextualSelectionWidget.widgetOpen = true;
                     else {
                         if (isShulkerWidget) {
-                            PacketDistributor.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
+                            MultiVersionUtil.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
                             client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
                         }
                         ContextualSelectionWidget.widgetOpen = false;
@@ -90,7 +92,7 @@ public class ModKeybinds {
             } else if (!OPEN_WIDGET.get().isDown()) {
                 if (ContextualSelectionWidget.widgetOpen) {
                     if (isShulkerWidget) {
-                        PacketDistributor.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
+                        MultiVersionUtil.sendToServer(new ModNetworking.C2SOpenShulkerBoxPayload(ModScrollHandler.selectedShulkerSlot));
                         client.player.playSound(SoundEvents.SHULKER_BOX_OPEN);
                     }
                     ContextualSelectionWidget.widgetOpen = false;
@@ -100,7 +102,7 @@ public class ModKeybinds {
                 Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(client.player);
                 if (ac.isPresent() && ac.get().isEquipped(Items.ENDER_CHEST)) {
                     client.player.playSound(SoundEvents.ENDER_CHEST_OPEN);
-                    PacketDistributor.sendToServer(new ModNetworking.C2SOpenEnderContainerPayload());
+                    MultiVersionUtil.sendToServer(new ModNetworking.C2SOpenEnderContainerPayload());
                 }
             }
         }

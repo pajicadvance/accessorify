@@ -1,10 +1,10 @@
 package me.pajic.accessorify.network;
 
 import io.wispforest.accessories.api.AccessoriesCapability;
-import me.pajic.accessorify.Main;
 import me.pajic.accessorify.access.SelectedAccessorySlotAccess;
 import me.pajic.accessorify.keybind.ModScrollHandler;
 import me.pajic.accessorify.menu.ShulkerBoxAccessoryContainerMenu;
+import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -26,12 +26,12 @@ import java.util.Optional;
 
 public class ModNetworking {
 
-    public static final ResourceLocation OPEN_SHULKER_BOX = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "open_shulker_box");
-    public static final ResourceLocation OPEN_ENDER_CONTAINER = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "open_ender_container");
-    public static final ResourceLocation C2S_SYNC_SHULKER_SLOT = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "c2s_sync_shulker_slot");
-    public static final ResourceLocation S2C_SYNC_SHULKER_SLOT = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "s2c_sync_shulker_slot");
-    public static final ResourceLocation C2S_SYNC_ARROW_SLOT = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "c2s_sync_arrow_slot");
-    public static final ResourceLocation S2C_SYNC_ARROW_SLOT = ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "s2c_sync_arrow_slot");
+    public static final ResourceLocation OPEN_SHULKER_BOX = MultiVersionUtil.withModNamespace(  "open_shulker_box");
+    public static final ResourceLocation OPEN_ENDER_CONTAINER = MultiVersionUtil.withModNamespace(  "open_ender_container");
+    public static final ResourceLocation C2S_SYNC_SHULKER_SLOT = MultiVersionUtil.withModNamespace(  "c2s_sync_shulker_slot");
+    public static final ResourceLocation S2C_SYNC_SHULKER_SLOT = MultiVersionUtil.withModNamespace(  "s2c_sync_shulker_slot");
+    public static final ResourceLocation C2S_SYNC_ARROW_SLOT = MultiVersionUtil.withModNamespace(  "c2s_sync_arrow_slot");
+    public static final ResourceLocation S2C_SYNC_ARROW_SLOT = MultiVersionUtil.withModNamespace(  "s2c_sync_arrow_slot");
 
     public record C2SOpenShulkerBoxPayload(int index) implements CustomPacketPayload {
         public static final Type<C2SOpenShulkerBoxPayload> TYPE = new Type<>(OPEN_SHULKER_BOX);
