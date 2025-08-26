@@ -33,8 +33,10 @@ public abstract class PlayerMixin extends LivingEntity {
     @Shadow public abstract boolean isCreative();
     @Shadow public abstract boolean isSpectator();
     @Shadow public abstract void setReducedDebugInfo(boolean reducedDebugInfo);
+    //? if < 1.21.8 {
     @Shadow public abstract @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot);
     @Shadow public abstract void stopFallFlying();
+    //?}
 
     //? if <= 1.21.1 {
     @ModifyExpressionValue(
@@ -70,7 +72,7 @@ public abstract class PlayerMixin extends LivingEntity {
     )
     private void cancelElytraFlyingInLiquid(CallbackInfo ci) {
         if (
-                (isInWaterOrBubble() || isInLava()) && (
+                (isInWater() || isInLava()) && (
                         //? if <= 1.21.1
                         getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem ||
                         //? if > 1.21.1

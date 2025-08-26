@@ -2,7 +2,6 @@ package me.pajic.accessorify.util.compat;
 
 import com.sindercube.eleron.registry.EleronAttributes;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
-import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +18,7 @@ public class EleronCompat {
                         EleronAttributes.ALTITUDE_DRAG_REDUCTION/*? if 1.20.1 {*//*.value()*//*?}*/,
                         new AttributeModifier(
                                 //? if >= 1.21.1
-                                MultiVersionUtil.fromNamespaceAndPath(Main.MOD_ID, "cloudskipper_modifier"),
+                                MultiVersionUtil.withModNamespace("cloudskipper_modifier"),
                                 //? if 1.20.1
                                 /*"cloudskipper_modifier",*/
                                 EnchantmentHelper.getItemEnchantmentLevel(ref/*? if 1.20.1 {*//*.value()*//*?}*/, stack),
@@ -32,7 +31,7 @@ public class EleronCompat {
                         EleronAttributes.MAX_SMOKESTACK_CHARGES/*? if 1.20.1 {*//*.value()*//*?}*/,
                         new AttributeModifier(
                                 //? if >= 1.21.1
-                                MultiVersionUtil.fromNamespaceAndPath(Main.MOD_ID, "smokestack_modifier"),
+                                MultiVersionUtil.withModNamespace("smokestack_modifier"),
                                 //? if 1.20.1
                                 /*"smokestack_modifier",*/
                                 EnchantmentHelper.getItemEnchantmentLevel(ref/*? if 1.20.1 {*//*.value()*//*?}*/, stack),

@@ -1,7 +1,7 @@
 package me.pajic.accessorify.accessories;
 
+//$ Accessory
 import io.wispforest.accessories.api.Accessory;
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
@@ -16,7 +16,7 @@ public class ShulkerBoxAccessory implements Accessory {
 
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
-        ModUtil.SHULKER_BOXES.forEach(AccessoriesRendererRegistry::registerNoRenderer);
+        ModUtil.SHULKER_BOXES.forEach(MultiVersionUtil::noRenderer);
     }
 
     @Override

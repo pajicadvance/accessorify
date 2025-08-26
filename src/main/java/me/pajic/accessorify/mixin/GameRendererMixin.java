@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 
-    @Shadow @Final Minecraft minecraft;
+    @Shadow @Final /*? >= 1.21.8 {*//*private*//*?}*/ Minecraft minecraft;
     //? if > 1.21.1
     /*@Shadow private float fovModifier;*/
 

@@ -7,9 +7,11 @@ import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.network.Payloads;
 import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Options;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
 import org.lwjgl.glfw.GLFW;
@@ -90,6 +92,15 @@ public class ModKeybinds {
                         MultiVersionUtil.C2S(new Payloads.C2SOpenEnderContainerPayload());
                     }
                 }
+            }
+        });
+        ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
+            Options options = client.options;
+            if (options.keyLoadHotbarActivator.matches(KeyBindingHelper.getBoundKeyOf(OPEN_WIDGET).getValue(), -1)) {
+                options.keyLoadHotbarActivator.setKey(InputConstants.UNKNOWN);
+            }
+            if (options.keySaveHotbarActivator.matches(KeyBindingHelper.getBoundKeyOf(USE_SPYGLASS).getValue(), -1)) {
+                options.keySaveHotbarActivator.setKey(InputConstants.UNKNOWN);
             }
         });
     }

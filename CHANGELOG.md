@@ -1,2 +1,4 @@
-- Modded arrows can now be equipped in and used from the arrow accessory slots, granted the mod adds them to the `minecraft:arrows` tag.
-- The arrow selection widget is no longer opened by sneaking while holding a bow, as it was intrusive during gameplay. Instead, it's opened by holding the same key that opens the shulker selection widget while holding a bow. This keybind has been renamed to "Open contextual selection widget" as it's no longer unique to shulkers, and the default key for it is now X for easier accessibility.
+- Added support for Minecraft 1.21.8.
+- Fixed an incorrect keybind hint in the contextual selection widget.
+- The mod will now unbind the vanilla save/load hotbar activator keys (X and C) on game launch if they conflict with mod keybinds.
+- Some internals have changed, which affects all MC versions. If you run into any issues, please report them.

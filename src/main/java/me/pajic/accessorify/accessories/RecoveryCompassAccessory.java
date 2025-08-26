@@ -1,6 +1,5 @@
 package me.pajic.accessorify.accessories;
 
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
@@ -16,7 +15,7 @@ public class RecoveryCompassAccessory implements SlotCopyingAccessory {
 
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
-        AccessoriesRendererRegistry.registerNoRenderer(Items.RECOVERY_COMPASS);
+        MultiVersionUtil.noRenderer(Items.RECOVERY_COMPASS);
     }
 
     @Override

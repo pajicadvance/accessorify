@@ -1,7 +1,9 @@
 package me.pajic.accessorify.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+//$ AccessoryRenderer
 import io.wispforest.accessories.api.client.AccessoryRenderer;
+//$ SimpleAccessoryRenderer
 import io.wispforest.accessories.api.client.SimpleAccessoryRenderer;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.util.MultiVersionUtil;
@@ -18,6 +20,9 @@ import net.minecraft.world.entity.LivingEntity;
 //? if > 1.21.1 {
 /*import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+*///?}
+//? if >= 1.21.8 {
+/*import io.wispforest.accessories.api.slot.SlotPath;
 *///?}
 
 public class LanternAccessoryRenderer implements SimpleAccessoryRenderer {
@@ -56,7 +61,10 @@ public class LanternAccessoryRenderer implements SimpleAccessoryRenderer {
     /*@Override
     public <S extends LivingEntityRenderState> void render(
             ItemStack stack,
+            //? if < 1.21.8
             SlotReference reference,
+            //? if >= 1.21.8
+            /^SlotPath reference,^/
             PoseStack matrices,
             EntityModel<S> model,
             S renderState,
@@ -72,9 +80,18 @@ public class LanternAccessoryRenderer implements SimpleAccessoryRenderer {
     }
 
     @Override
-    public <S extends LivingEntityRenderState> void align(ItemStack itemStack, SlotReference slotReference, EntityModel<S> entityModel, S s, PoseStack poseStack) {
+    public <S extends LivingEntityRenderState> void align(
+            ItemStack itemStack,
+            //? if < 1.21.8
+            SlotReference reference,
+            //? if >= 1.21.8
+            /^SlotPath reference,^/
+            EntityModel<S> entityModel,
+            S renderState,
+            PoseStack poseStack
+    ) {
         if (entityModel instanceof HumanoidModel<? extends HumanoidRenderState> humanoidModel) {
-            Vec3 offset = MultiVersionUtil.hasArmor(slotReference) ? new Vec3(0.05f, -1.25f, 0.05f) : new Vec3(-0.1f, -1.25f, -0.1f);
+            Vec3 offset = MultiVersionUtil.hasArmor(/^? < 1.21.8 {^/reference/^?} else {^//^renderState^//^?}^/) ? new Vec3(0.05f, -1.25f, 0.05f) : new Vec3(-0.1f, -1.25f, -0.1f);
             AccessoryRenderer.transformToModelPart(poseStack, humanoidModel.body, offset.x, offset.y, offset.z);
         }
     }

@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id 'fabric-loom' version '1.11-SNAPSHOT'
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
@@ -53,26 +53,52 @@ dependencies {
     modImplementation "io.wispforest:owo-lib:${property("owo_version")}"
 
     // Supported mods
-    modLocalRuntime "dev.lambdaurora.lambdynamiclights:lambdynamiclights-runtime:${property("ldl_version")}"
-    modImplementation "net.kyrptonaught:customportalapi:${property("customportalapi_version")}"
-    modCompileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
-    modImplementation "maven.modrinth:raised:${property("raised_version")}"
-    modImplementation "maven.modrinth:notes:${property("notes_version")}"
-    modCompileOnly "maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}"
-    modImplementation "maven.modrinth:reinforced-shulker-boxes:${property("rsb_version")}"
-    modImplementation "atonkish.reinfcore:reinforced-core:${property("rfcore_version")}"
+    modLocalRuntime("dev.lambdaurora.lambdynamiclights:lambdynamiclights-runtime:${property("ldl_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modCompileOnly("maven.modrinth:serene-seasons:${property("sereneseasons_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modImplementation("maven.modrinth:raised:${property("raised_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modImplementation("maven.modrinth:notes:${property("notes_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modCompileOnly("maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modImplementation("maven.modrinth:reinforced-shulker-boxes:${property("rsb_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modImplementation("atonkish.reinfcore:reinforced-core:${property("rfcore_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
 
     // 1.21.1 exclusive supported mods
-    if (stonecutter.eval(stonecutter.current.version, "1.21.1")) modCompileOnly "vectorwing:FarmersDelight:${property("fdrf_version")}"
-    modCompileOnly "maven.modrinth:eleron:${property("eleron_version")}"
-    modCompileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
-    modCompileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
+    if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
+        modCompileOnly "vectorwing:FarmersDelight:${property("fdrf_version")}"
+        modCompileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
+        modCompileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
+    }
+    modCompileOnly("maven.modrinth:eleron:${property("eleron_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
 
     // 1.20.1-1.21.1 exclusive supported mods
-    modCompileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
-    modCompileOnly "maven.modrinth:fabric-seasons:${property("fabricseasons_version")}"
-    modCompileOnly "maven.modrinth:fabric-seasons-extras:${property("fabricseasonsextras_version")}"
-    modCompileOnly "maven.modrinth:extrasoundsforge:${property("extrasounds_version")}"
+    if (stonecutter.eval(stonecutter.current.version, ">= 1.20.1 <= 1.21.1")) {
+        modImplementation "net.kyrptonaught:customportalapi:${property("customportalapi_version")}"
+        modCompileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
+    }
+    modCompileOnly("maven.modrinth:fabric-seasons:${property("fabricseasons_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modCompileOnly("maven.modrinth:fabric-seasons-extras:${property("fabricseasonsextras_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modCompileOnly("maven.modrinth:extrasoundsforge:${property("extrasounds_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
 
     if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
         modCompileOnly files("ext_imports/citresewn-defaults-1.2.2+1.21.jar")
@@ -122,6 +148,24 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
+}
+
+stonecutter {
+    swaps["Accessory"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.Accessory;"
+            : "import io.wispforest.accessories.api.core.Accessory;"
+    swaps["AccessoryRegistry"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.AccessoryRegistry;"
+            : "import io.wispforest.accessories.api.core.AccessoryRegistry;"
+    swaps["AccessoryRenderer"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.client.AccessoryRenderer;"
+            : "import io.wispforest.accessories.api.client.renderers.AccessoryRenderer;"
+    swaps["SimpleAccessoryRenderer"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.api.client.SimpleAccessoryRenderer;"
+            : "import io.wispforest.accessories.api.client.renderers.SimpleAccessoryRenderer;"
+    swaps["ExpandedContainerImport"] = eval(current.version, "< 1.21.8")
+            ? "import io.wispforest.accessories.impl.ExpandedSimpleContainer;"
+            : "import io.wispforest.accessories.impl.core.ExpandedContainer;"
 }
 
 publishMods {

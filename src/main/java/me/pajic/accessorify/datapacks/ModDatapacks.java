@@ -16,80 +16,80 @@ public class ModDatapacks {
                 case UNIQUE_SLOT -> "unique/";
             };
             if (Main.CONFIG.accessorySettings.compassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "compass"),
+                    MultiVersionUtil.withModNamespace(pathPrefix + "compass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
             if (Main.CONFIG.accessorySettings.clockAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "clock"),
+                    MultiVersionUtil.withModNamespace(pathPrefix + "clock"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
             if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
                 ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "elytra"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "elytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
                 if (CompatFlags.DEEPER_DARKER_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "soulelytra"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "soulelytra"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }
             if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "spyglass"),
+                    MultiVersionUtil.withModNamespace(pathPrefix + "spyglass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
             if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
                 ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "lantern"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "lantern"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
                 if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "additionallanterns"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "additionallanterns"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }
             if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
                 ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "totem"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "totem"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
                 if (CompatFlags.FRIENDS_AND_FOES_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "fnftotems"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "fnftotems"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
                 if (CompatFlags.ARS_ELIXIRUM_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "witchtotem"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "witchtotem"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }
             if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "recoverycompass"),
+                    MultiVersionUtil.withModNamespace(pathPrefix + "recoverycompass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
             if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "enderchest"),
+                    MultiVersionUtil.withModNamespace(pathPrefix + "enderchest"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
             if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) {
                 ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "shulkerbox"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "shulkerbox"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
                 if (CompatFlags.REINFORCED_SHULKERS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "reinfshulker"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "reinfshulker"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }
             if (Main.CONFIG.accessorySettings.arrowAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
-                    MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "arrow"),
+                    MultiVersionUtil.withModNamespace(pathPrefix + "arrow"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
             );
             if (Main.CONFIG.accessorySettings.calendarAccessory.get()) {
                 if (CompatFlags.SERENE_SEASONS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "sscalendar"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "sscalendar"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
                 if (CompatFlags.FABRIC_SEASONS_LOADED && CompatFlags.FABRIC_SEASONS_EXTRAS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
-                        MultiVersionUtil.fromNamespaceAndPath(pathPrefix + "fscalendar"),
+                        MultiVersionUtil.withModNamespace(pathPrefix + "fscalendar"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
             }

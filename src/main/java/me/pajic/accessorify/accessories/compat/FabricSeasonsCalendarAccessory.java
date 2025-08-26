@@ -1,7 +1,6 @@
 package me.pajic.accessorify.accessories.compat;
 
 import io.github.lucaargolo.seasonsextras.FabricSeasonsExtras;
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.accessories.SlotCopyingAccessory;
 import me.pajic.accessorify.util.MultiVersionUtil;
@@ -25,7 +24,7 @@ public class FabricSeasonsCalendarAccessory implements SlotCopyingAccessory {
     public static void clientInit() {
         RegistryEntryAddedCallback.event(BuiltInRegistries.ITEM).register((i, rl, item) -> {
             if (rl.equals(MultiVersionUtil.parse("seasonsextras:season_calendar"))) {
-                AccessoriesRendererRegistry.registerNoRenderer(item);
+                MultiVersionUtil.noRenderer(item);
             }
         });
     }

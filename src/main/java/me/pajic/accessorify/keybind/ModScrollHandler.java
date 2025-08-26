@@ -2,8 +2,7 @@ package me.pajic.accessorify.keybind;
 
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
-import io.wispforest.accessories.api.slot.SlotTypeReference;
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.data.SlotTypeLoader;
 import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.gui.ContextualSelectionWidget;
@@ -14,6 +13,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+//$ ExpandedContainerImport
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 
 import java.util.Optional;
 
@@ -34,9 +35,9 @@ public class ModScrollHandler {
         } else if (Main.CONFIG.accessorySettings.arrowAccessory.get() && ModUtil.isHoldingProjectileWeapon(player) && ContextualSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(player, "arrow"));
                 if (container != null) {
-                    ExpandedSimpleContainer arrows = container.getAccessories();
+                    /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ arrows = container.getAccessories();
                     if (!MultiVersionUtil.getItems(arrows).stream().allMatch(ItemStack::isEmpty)) {
                         int size = MultiVersionUtil.getItems(arrows).size();
                         do {
@@ -52,9 +53,9 @@ public class ModScrollHandler {
         } else if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get() && ContextualSelectionWidget.widgetOpen) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("shulker"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(player, "shulker"));
                 if (container != null) {
-                    ExpandedSimpleContainer shulkers = container.getAccessories();
+                    /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ shulkers = container.getAccessories();
                     if (!MultiVersionUtil.getItems(shulkers).stream().allMatch(ItemStack::isEmpty)) {
                         int size = MultiVersionUtil.getItems(shulkers).size();
                         do {

@@ -1,7 +1,7 @@
 package me.pajic.accessorify.accessories;
 
+//$ Accessory
 import io.wispforest.accessories.api.Accessory;
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -23,7 +23,7 @@ public class ArrowAccessory implements Accessory {
     public static void clientInit() {
         CommonLifecycleEvents.TAGS_LOADED.register((registries, client) ->
                 registries.lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
-                        AccessoriesRendererRegistry.registerNoRenderer(itemHolder.value())
+                        MultiVersionUtil.noRenderer(itemHolder.value())
                 )
         );
     }

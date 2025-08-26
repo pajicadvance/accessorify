@@ -17,7 +17,7 @@ import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
 import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
 
 public class ClientMain implements ClientModInitializer {
-    public static final ResourceLocation CLIENT_CONFIG_RL = MultiVersionUtil.fromNamespaceAndPath(Main.MOD_ID, "client_config");
+    public static final ResourceLocation CLIENT_CONFIG_RL = MultiVersionUtil.withModNamespace("client_config");
     public static ModClientConfig CLIENT_CONFIG = ConfigApiJava.registerAndLoadConfig(ModClientConfig::new, RegisterType.CLIENT);
 
     @Override
@@ -34,13 +34,7 @@ public class ClientMain implements ClientModInitializer {
         }
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) RecoveryCompassAccessory.clientInit();
         if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.clientInit();
-        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
-            LanternAccessory.clientInit();
-            SoulLanternAccessory.clientInit();
-            if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) {
-                AdditionalLanternAccessory.clientInit();
-            }
-        }
+        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) LanternAccessory.clientInit();
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             TotemOfUndyingAccessory.clientInit();
             if (CompatFlags.FRIENDS_AND_FOES_LOADED) {

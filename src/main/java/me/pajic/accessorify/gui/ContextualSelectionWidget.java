@@ -1,10 +1,8 @@
 package me.pajic.accessorify.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
-import io.wispforest.accessories.api.slot.SlotTypeReference;
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.data.SlotTypeLoader;
 import me.pajic.accessorify.ClientMain;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.keybind.ModKeybinds;
@@ -17,6 +15,15 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
+//$ ExpandedContainerImport
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+//? if >= 1.21.8 {
+/*import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.Util;
+*///?}
 
 import java.util.Optional;
 
@@ -30,9 +37,9 @@ public class ContextualSelectionWidget {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(MC.player);
             if (ac.isPresent()) {
                 if (ModUtil.isHoldingProjectileWeapon(MC.player)) {
-                    AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("arrow"));
+                    AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(MC.level, "arrow"));
                     if (container != null) {
-                        ExpandedSimpleContainer arrows = container.getAccessories();
+                        /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ arrows = container.getAccessories();
                         if (!MultiVersionUtil.getItems(arrows).stream().allMatch(ItemStack::isEmpty)) {
                             if (arrows.getItem(ModScrollHandler.selectedArrowSlot).isEmpty()) {
                                 do {
@@ -46,39 +53,39 @@ public class ContextualSelectionWidget {
                             if (widgetOpen || (ClientMain.CLIENT_CONFIG.widgetSettings.quickSelect.get() && !MC.player.isUsingItem() && !MC.options.hideGui && ModKeybinds.OPEN_WIDGET.isDown())) {
                                 if (ClientMain.CLIENT_CONFIG.widgetSettings.quickSelect.get())
                                     widgetOpen = true;
-                                guiGraphics.flush();
-                                RenderSystem.enableBlend();
+                                MultiVersionUtil.startRender(guiGraphics);
                                 WidgetUtil.renderCenterSlot(MC, guiGraphics);
-                                arrows.forEach(arrow -> {
-                                    if (!arrow.getSecond().isEmpty()) {
+                                arrows./*? < 1.21.8 {*/forEach(stack -> {/*?} else {*//*foreach((i, stack) -> {*//*?}*/
+                                    int index = /*? < 1.21.8 {*/stack.getFirst()/*?} else {*//*i*//*?}*/;
+                                    ItemStack arrow = /*? < 1.21.8 {*/stack.getSecond()/*?} else {*//*stack*//*?}*/;
+                                    if (!arrow.isEmpty()) {
                                         WidgetUtil.renderItemStack(
-                                                MC, guiGraphics, arrow.getSecond(),
-                                                arrow.getFirst() - ModScrollHandler.selectedArrowSlot
+                                                MC, guiGraphics, arrow,
+                                                index - ModScrollHandler.selectedArrowSlot
                                         );
                                     }
-                                    if (arrow.getFirst() == ModScrollHandler.selectedArrowSlot)
-                                        WidgetUtil.renderCenterText(MC, arrow.getSecond().getHoverName(), guiGraphics, -48);
+                                    if (index == ModScrollHandler.selectedArrowSlot)
+                                        WidgetUtil.renderCenterText(MC, arrow.getHoverName(), guiGraphics, -48);
                                 });
                                 if (ClientMain.CLIENT_CONFIG.widgetSettings.showUIHints.get()) {
                                     Component scrollHint = Component.translatable("gui.accessorify.hint_arrow_scroll");
                                     Component exitHint = Component.translatable(
                                             "gui.accessorify.hint_arrow_exit",
-                                            Component.keybind(MC.options.keyShift.getName())
+                                            Component.keybind(ModKeybinds.OPEN_WIDGET.getName())
                                     );
                                     WidgetUtil.renderCenterText(MC, scrollHint, guiGraphics, 12);
                                     WidgetUtil.renderCenterText(MC, exitHint, guiGraphics, 24);
                                 }
-                                guiGraphics.flush();
-                                RenderSystem.disableBlend();
+                                MultiVersionUtil.stopRender(guiGraphics);
                             } else {
                                 widgetOpen = false;
                             }
                         }
                     }
                 } else {
-                    AccessoriesContainer container = ac.get().getContainer(new SlotTypeReference("shulker"));
+                    AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(MC.level, "shulker"));
                     if (container != null) {
-                        ExpandedSimpleContainer shulkers = container.getAccessories();
+                        /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ shulkers = container.getAccessories();
                         int count = Math.toIntExact(MultiVersionUtil.getItems(shulkers).stream().filter(shulker -> !shulker.isEmpty()).count());
                         if (count > 0) {
                             if (shulkers.getItem(ModScrollHandler.selectedShulkerSlot).isEmpty()) {
@@ -100,24 +107,18 @@ public class ContextualSelectionWidget {
                                 } else {
                                     if (ClientMain.CLIENT_CONFIG.widgetSettings.quickSelect.get())
                                         widgetOpen = true;
-                                    guiGraphics.flush();
-                                    RenderSystem.enableBlend();
+                                    MultiVersionUtil.startRender(guiGraphics);
                                     WidgetUtil.renderCenterSlot(MC, guiGraphics);
-                                    shulkers.forEach(shulker -> {
-                                        if (!shulker.getSecond().isEmpty()) WidgetUtil.renderItemStack(
-                                                MC, guiGraphics, shulker.getSecond(),
-                                                shulker.getFirst() - ModScrollHandler.selectedShulkerSlot
+                                    shulkers./*? < 1.21.8 {*/forEach(stack -> {/*?} else {*//*foreach((i, stack) -> {*//*?}*/
+                                        int index = /*? < 1.21.8 {*/stack.getFirst()/*?} else {*//*i*//*?}*/;
+                                        ItemStack shulker = /*? < 1.21.8 {*/stack.getSecond()/*?} else {*//*stack*//*?}*/;
+                                        if (!shulker.isEmpty()) WidgetUtil.renderItemStack(
+                                                MC, guiGraphics, shulker,
+                                                index - ModScrollHandler.selectedShulkerSlot
                                         );
-                                        if (shulker.getFirst() == ModScrollHandler.selectedShulkerSlot)
-                                            WidgetUtil.renderCenterText(MC, shulker.getSecond().getHoverName(), guiGraphics, -48);
+                                        if (index == ModScrollHandler.selectedShulkerSlot)
+                                            WidgetUtil.renderCenterText(MC, shulker.getHoverName(), guiGraphics, -48);
                                     });
-                                    if (MC.player.isShiftKeyDown()) {
-                                        guiGraphics.renderTooltip(
-                                                MC.font, shulkers.getItem(ModScrollHandler.selectedShulkerSlot),
-                                                MC.getWindow().getGuiScaledWidth() / 2,
-                                                MC.getWindow().getGuiScaledHeight() / 2
-                                        );
-                                    }
                                     if (ClientMain.CLIENT_CONFIG.widgetSettings.showUIHints.get()) {
                                         Component scrollHint = Component.translatable("gui.accessorify.hint_shulker_scroll");
                                         Component tooltipHint = Component.translatable(
@@ -135,8 +136,31 @@ public class ContextualSelectionWidget {
                                         WidgetUtil.renderCenterText(MC, tooltipHint, guiGraphics, 24);
                                         WidgetUtil.renderCenterText(MC, exitHint, guiGraphics, 36);
                                     }
-                                    guiGraphics.flush();
-                                    RenderSystem.disableBlend();
+                                    if (MC.player.isShiftKeyDown()) {
+                                        ItemStack stack = shulkers.getItem(ModScrollHandler.selectedShulkerSlot);
+                                        //? if < 1.21.8 {
+                                        guiGraphics.renderTooltip(
+                                                MC.font,
+                                                stack,
+                                                MC.getWindow().getGuiScaledWidth() / 2,
+                                                MC.getWindow().getGuiScaledHeight() / 2
+                                        );
+                                        //?}
+                                        //? if >= 1.21.8 {
+                                        /*guiGraphics.renderTooltip(
+                                                MC.font,
+                                                Screen.getTooltipFromItem(MC, stack).stream()
+                                                        .map(Component::getVisualOrderText)
+                                                        .map(ClientTooltipComponent::create)
+                                                        .collect(Util.toMutableList()),
+                                                MC.getWindow().getGuiScaledWidth() / 2,
+                                                MC.getWindow().getGuiScaledHeight() / 2,
+                                                DefaultTooltipPositioner.INSTANCE,
+                                                stack.get(DataComponents.TOOLTIP_STYLE)
+                                        );
+                                        *///?}
+                                    }
+                                    MultiVersionUtil.stopRender(guiGraphics);
                                 }
                             }
                         }

@@ -1,6 +1,5 @@
 package me.pajic.accessorify.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
 import me.pajic.accessorify.ClientMain;
@@ -65,11 +64,11 @@ public class InfoOverlays {
             if (Main.CONFIG.infoOverlaySettings.useObfuscationEffect.get()) {
                 Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
                 if (Main.CONFIG.infoOverlaySettings.overlayFields.coordinates.get())
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffffff));
                 if (Main.CONFIG.infoOverlaySettings.overlayFields.direction.get())
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffffff));
                 if (Main.CONFIG.infoOverlaySettings.overlayFields.biome.get())
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffffff));
             }
         } else {
             BlockPos blockPos = MC.player.blockPosition();
@@ -87,12 +86,12 @@ public class InfoOverlays {
                             blockPos.getX(), blockPos.getZ()
                     );
                 }
-                renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
+                renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffffff));
             }
 
             if (Main.CONFIG.infoOverlaySettings.overlayFields.direction.get()) {
                 Component direction = Component.translatable("gui.accessorify.facing", MC.player.getDirection().getName());
-                renderList.add(new ObjectIntImmutablePair<>(direction, 0xffffff));
+                renderList.add(new ObjectIntImmutablePair<>(direction, 0xffffffff));
             }
 
             if (Main.CONFIG.infoOverlaySettings.overlayFields.biome.get()) {
@@ -100,7 +99,7 @@ public class InfoOverlays {
                         key -> key != null ? key.location() : null, unknown -> null
                 );
                 Component biomeName = Component.translatable("biome." + biome.getNamespace() + "." + biome.getPath());
-                renderList.add(new ObjectIntImmutablePair<>(biomeName, 0xffffff));
+                renderList.add(new ObjectIntImmutablePair<>(biomeName, 0xffffffff));
             }
         }
     }
@@ -110,11 +109,11 @@ public class InfoOverlays {
             if (Main.CONFIG.infoOverlaySettings.useObfuscationEffect.get()) {
                 Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
                 if (Main.CONFIG.infoOverlaySettings.overlayFields.dayAndTime.get())
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffffff));
                 if (Main.CONFIG.infoOverlaySettings.overlayFields.weather.get())
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffffff));
                 if (Main.CONFIG.infoOverlaySettings.overlayFields.moonPhase.get())
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffffff));
             }
         } else {
             BlockPos blockPos = MC.player.blockPosition();
@@ -132,7 +131,7 @@ public class InfoOverlays {
                 );
                 dayAndTime.append(", ");
                 dayAndTime.append(time);
-                renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffff));
+                renderList.add(new ObjectIntImmutablePair<>(dayAndTime, 0xffffffff));
             }
 
             if (Main.CONFIG.infoOverlaySettings.overlayFields.weather.get()) {
@@ -158,12 +157,12 @@ public class InfoOverlays {
                     }
                 } else {
                     weather = Component.translatable("gui.accessorify.clear");
-                    weatherColor = 0xffffff;
+                    weatherColor = 0xffffffff;
                 }
                 if (ClientMain.CLIENT_CONFIG.infoOverlaySettings.coloredWeather.get()) {
                     renderList.add(new ObjectIntImmutablePair<>(weather, weatherColor));
                 } else {
-                    renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(weather, 0xffffffff));
                 }
             }
 
@@ -192,7 +191,7 @@ public class InfoOverlays {
                     default -> moonPhase = Component.literal("\uD83D\uDCA5 ").append(
                             Component.translatable("gui.accessorify.moon_default"));
                 }
-                renderList.add(new ObjectIntImmutablePair<>(moonPhase, 0xffffff));
+                renderList.add(new ObjectIntImmutablePair<>(moonPhase, 0xffffffff));
             }
         }
         if (!ModUtil.calendarUsedForSeasonInfo()) {
@@ -205,7 +204,7 @@ public class InfoOverlays {
             if (Main.CONFIG.infoOverlaySettings.useObfuscationEffect.get()) {
                 Component obfuscatedText = Component.literal("" + ChatFormatting.WHITE + ChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, MC.level.random.nextInt(4) + 3));
                 if (Main.CONFIG.infoOverlaySettings.overlayFields.season.get())
-                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(obfuscatedText, 0xffffffff));
             }
         }
         else {
@@ -220,7 +219,7 @@ public class InfoOverlays {
                     if (ClientMain.CLIENT_CONFIG.infoOverlaySettings.coloredSeason.get()) {
                         renderList.add(seasonStringData);
                     } else {
-                        renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffff));
+                        renderList.add(new ObjectIntImmutablePair<>(seasonStringData.left(), 0xffffffff));
                     }
                 }
             }
@@ -247,19 +246,19 @@ public class InfoOverlays {
                     }
                     renderList.add(new ObjectIntImmutablePair<>(
                             Component.translatable("gui.accessorify.last_death_location"),
-                            0xffffff
+                            0xffffffff
                     ));
-                    renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffff));
+                    renderList.add(new ObjectIntImmutablePair<>(coordinates, 0xffffffff));
                 } else {
                     renderList.add(new ObjectIntImmutablePair<>(
                             Component.translatable("gui.accessorify.last_death_location_wrong_dimension"),
-                            0xffffff
+                            0xffffffff
                     ));
                 }
             } else {
                 renderList.add(new ObjectIntImmutablePair<>(
                         Component.translatable("gui.accessorify.last_death_location_unavailable"),
-                        0xffffff
+                        0xffffffff
                 ));
             }
         }
@@ -312,8 +311,7 @@ public class InfoOverlays {
         int x = position.leftInt();
         int y = position.rightInt();
 
-        guiGraphics.flush();
-        RenderSystem.enableBlend();
+        MultiVersionUtil.startRender(guiGraphics);
 
         if (ClientMain.CLIENT_CONFIG.infoOverlaySettings.textBackground.get()) {
             guiGraphics.fill(
@@ -326,7 +324,6 @@ public class InfoOverlays {
         }
         guiGraphics.drawString(font, text, x, y, color, ClientMain.CLIENT_CONFIG.infoOverlaySettings.textShadow.get());
 
-        guiGraphics.flush();
-        RenderSystem.disableBlend();
+        MultiVersionUtil.stopRender(guiGraphics);
     }
 }

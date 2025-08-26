@@ -18,7 +18,7 @@ import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
 
 public class Main implements ModInitializer {
     public static final String MOD_ID = "accessorify";
-    public static final ResourceLocation CONFIG_RL = MultiVersionUtil.fromNamespaceAndPath("config");
+    public static final ResourceLocation CONFIG_RL = MultiVersionUtil.withModNamespace("config");
     public static ModConfig CONFIG = ConfigApiJava.registerAndLoadConfig(ModConfig::new);
 
     @Override

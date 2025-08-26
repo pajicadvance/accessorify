@@ -31,7 +31,10 @@ public class MouseHandlerMixin {
             method = "onScroll",
             at = @At(
                     value = "INVOKE",
+                    //? if < 1.21.8
                     target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedHotbarSlot(I)V"
+                    //? if >= 1.21.8
+                    /^target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedSlot(I)V"^/
             )
     )
     private void redirectScroll(Inventory instance, int selectedHotbarSlot, Operation<Void> original, @Local int i) {

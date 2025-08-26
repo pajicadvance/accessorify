@@ -1,7 +1,6 @@
 package me.pajic.accessorify.accessories;
 
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import me.pajic.accessorify.util.compat.CompatFlags;
@@ -24,7 +23,7 @@ public class ElytraAccessory implements SlotCopyingAccessory {
 
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
-        AccessoriesRendererRegistry.registerNoRenderer(Items.ELYTRA);
+        MultiVersionUtil.noRenderer(Items.ELYTRA);
     }
 
     @Override

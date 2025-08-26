@@ -7,11 +7,11 @@ import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.compat.CompatFlags;
 import me.pajic.accessorify.util.compat.FabricSeasonsCompat;
-import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 //? if 1.21.1
 import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
@@ -19,6 +19,8 @@ import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
 import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
 //? if >= 1.21.1
 import net.minecraft.core.component.DataComponents;
+//? if < 1.21.8
+import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +143,10 @@ public class ModUtil {
     }
 
     public static boolean isHoldingProjectileWeapon(Player player) {
+        //? if < 1.21.8
         for (ItemStack stack : player.getHandSlots()) if (stack.getItem() instanceof ProjectileWeaponItem) return true;
+        //? if >= 1.21.8
+        /*if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem || player.getOffhandItem().getItem() instanceof ProjectileWeaponItem) return true;*/
         return false;
     }
 
