@@ -1,7 +1,6 @@
 package me.pajic.accessorify.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.sugar.Local;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
@@ -27,16 +26,5 @@ public class LocalPlayerMixin {
             return stack.right().isEmpty() ? original : stack.right();
         }
         return original;
-    }
-
-    @ModifyExpressionValue(
-            method = "aiStep",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
-            )
-    )
-    private boolean modifyElytraCheck(boolean original, @Local ItemStack itemStack) {
-        return ModUtil.moddedElytraCheck(itemStack, (LivingEntity) (Object) this, original);
     }
 }

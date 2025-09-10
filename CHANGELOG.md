@@ -1,4 +1,2 @@
-- Added support for Minecraft 1.21.8.
-- Fixed an incorrect keybind hint in the contextual selection widget.
-- The mod will now unbind the vanilla save/load hotbar activator keys (X and C) on game launch if they conflict with mod keybinds.
-- Some internals have changed, which affects all MC versions. If you run into any issues, please report them.
+- Fixed crash when flying into water with elytra in 1.21.8.
+- [Fabric 1.20.1] This version is now compatible with Sinytra Connector, allowing it to be played on Forge 1.20.1. 

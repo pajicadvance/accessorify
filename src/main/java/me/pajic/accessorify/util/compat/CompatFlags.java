@@ -13,4 +13,5 @@ public class CompatFlags {
     public static final boolean ARS_ELIXIRUM_LOADED = FabricLoader.getInstance().isModLoaded("elixirum");
     public static final boolean ADDITIONAL_LANTERNS_LOADED = FabricLoader.getInstance().isModLoaded("additionallanterns");
     public static final boolean REINFORCED_SHULKERS_LOADED = FabricLoader.getInstance().isModLoaded("reinfshulker");
+    public static final boolean CONNECTOR_PRESENT =  FabricLoader.getInstance().isModLoaded("fabric_api");
 }

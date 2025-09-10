@@ -3,7 +3,6 @@ package me.pajic.accessorify.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.sugar.Local;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.ModUtil;
 import net.minecraft.world.entity.LivingEntity;
@@ -55,17 +54,6 @@ public abstract class LivingEntityMixin {
             return stack.isEmpty() ? original : stack;
         }
         return original;
-    }
-
-    @ModifyExpressionValue(
-            method = "updateFallFlying",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
-            )
-    )
-    private boolean modifyElytraCheck(boolean original, @Local ItemStack itemStack) {
-        return ModUtil.moddedElytraCheck(itemStack, (LivingEntity) (Object) this, original);
     }
     //?}
 }
