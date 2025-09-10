@@ -7,3 +7,8 @@ tasks.register("activeClient") {
     group = "neogradle/runs"
     dependsOn(":${stonecutter.current.project}:runClient")
 }
+
+tasks.register("activeServer") {
+    group = "neogradle/runs"
+    dependsOn(":${stonecutter.current.project}:runServer")
+}
