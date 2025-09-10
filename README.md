@@ -12,6 +12,15 @@ Both Fabric and NeoForge versions require [Fzzy Config](https://modrinth.com/mod
 
 The configuration menu can be accessed using [ModMenu](https://modrinth.com/mod/modmenu) on Fabric, and the built-in Mods menu on NeoForge.
 
+Since version 2.2.1, Accessorify now works on Forge for Minecraft 1.20.1 using [Sinytra Connector](https://modrinth.com/mod/connector). Tested on Forge 47.4.8 with the following setup:
+- `accessories-neoforge-1.0.0-beta.46+1.20.1`
+- `accessorify-2.2.1+1.20.1`
+- `cloth-config-11.1.136-forge`
+- `Connector-1.0.0-beta.46+1.20.1`
+- `fabric-api-0.92.6+1.11.14+1.20.1`
+- `fzzy_config-0.7.2+1.20.1+forge`
+- `kotlinforforge-4.11.0-all`
+
 ## Slot modes
 
 Accessories from Accessorify can be equipped in a few different ways depending on what you need by selecting one of the slot modes:

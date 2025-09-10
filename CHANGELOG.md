@@ -1,2 +1,9 @@
 - Fixed crash when flying into water with elytra in 1.21.8.
-- [Fabric 1.20.1] This version is now compatible with Sinytra Connector, allowing it to be played on Forge 1.20.1. 
+- [Fabric 1.20.1] This version is now compatible with Sinytra Connector, making it usable on Forge for MC 1.20.1. Tested on Forge 47.4.8 with the following setup:
+    - `accessories-neoforge-1.0.0-beta.46+1.20.1`
+    - `accessorify-2.2.1+1.20.1`
+    - `cloth-config-11.1.136-forge`
+    - `Connector-1.0.0-beta.46+1.20.1`
+    - `fabric-api-0.92.6+1.11.14+1.20.1`
+    - `fzzy_config-0.7.2+1.20.1+forge`
+    - `kotlinforforge-4.11.0-all`
