@@ -7,3 +7,8 @@ tasks.register("runActiveClient") {
     group = "fabric"
     dependsOn(":${stonecutter.current.project}:runClient")
 }
+
+tasks.register("runActiveServer") {
+    group = "fabric"
+    dependsOn(":${stonecutter.current.project}:runServer")
+}

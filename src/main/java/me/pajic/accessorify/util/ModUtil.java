@@ -81,6 +81,13 @@ public class ModUtil {
         return false;
     }
 
+    //? if >= 1.21.8 {
+    /*public static boolean elytraEquipped(LivingEntity entity) {
+        Optional<AccessoriesCapability> playerCapability = AccessoriesCapability.getOptionally(entity);
+        return playerCapability.map(accessoriesCapability -> accessoriesCapability.isEquipped(stack -> stack.has(DataComponents.GLIDER))).orElse(false);
+    }
+    *///?}
+
     public static BooleanObjectImmutablePair<ItemStack> tryGetElytraAccessory(LivingEntity livingEntity) {
         BooleanObjectImmutablePair<ItemStack> pair = new BooleanObjectImmutablePair<>(false, ItemStack.EMPTY);
         //? if <= 1.21.1 {

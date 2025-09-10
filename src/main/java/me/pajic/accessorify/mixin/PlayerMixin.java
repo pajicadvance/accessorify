@@ -77,7 +77,10 @@ public abstract class PlayerMixin extends LivingEntity {
                         getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem ||
                         //? if > 1.21.1
                         /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER) ||*/
+                        //? if < 1.21.8
                         !ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right().isEmpty()
+                        //? if >= 1.21.8
+                        /*ModUtil.elytraEquipped((LivingEntity) (Object) this)*/
                 )
         ) {
             stopFallFlying();
