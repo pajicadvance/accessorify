@@ -22,6 +22,7 @@
   "accessorify.config.accessorySettings.calendarAccessory.desc": "Requiere Serene Seasons o Fabric Seasons + Extras. Si tienes un mod de estaciones instalado pero quieres que el reloj de vainilla muestre la estación en su lugar, deshabilita esta opción.",
   "accessorify.config.hideDebugInfoInSurvival": "Ocultar información de juego del menú F3 en supervivencia",
   "accessorify.config.hideDebugInfoInSurvival.desc": "Esto oculta la mayor parte de la información de juego, como coordenadas, bioma, etc. del menú de depuración F3. Se usa para hacer que la brújula y el reloj sean la única fuente de información de juego, para mayor inmersión.",
+  "accessorify.config.cancelElytraFlyingInLiquid": "Cancel elytra flight when inside a liquid",
   "accessorify.client_config.widgetSettings": "Widget settings",
   "accessorify.client_config.widgetSettings.desc": "Configure the behavior of the shulker box and arrow selection widgets.",
   "accessorify.client_config.widgetSettings.showUIHints": "Show widget keybind hints",

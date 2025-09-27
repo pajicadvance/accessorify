@@ -20,6 +20,7 @@ public class ModConfig extends Config {
     public AccessorySettings accessorySettings = new AccessorySettings();
     public InfoOverlaySettings infoOverlaySettings = new InfoOverlaySettings();
     public ValidatedBoolean hideDebugInfoInSurvival = new ValidatedBoolean(false);
+    public ValidatedBoolean cancelElytraFlyingInLiquid = new ValidatedBoolean(true);
 
     @RequiresAction(action = Action.RESTART)
     public static class AccessorySettings extends ConfigSection {
