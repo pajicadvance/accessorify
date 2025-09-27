@@ -24,6 +24,7 @@
   "accessorify.config.accessorySettings.calendarAccessory.desc": "Требует Serene Seasons или Fabric Seasons + Extras. Если у вас установлен мод, добавляющий сезоны, но вы хотите, чтобы ванильные часы показывали сезон, отключите эту опцию.",
   "accessorify.config.hideDebugInfoInSurvival": "Скрыть информацию об игровом процессе из меню F3 в режиме выживания",
   "accessorify.config.hideDebugInfoInSurvival.desc": "Скрывает большую часть информации об игре: координаты, биом и т.д. с экрана отладки F3. Используется для того, чтобы компас и часы были единственными источниками информации для большего погружения.",
+  "accessorify.config.cancelElytraFlyingInLiquid": "Cancel elytra flight when inside a liquid",
   "accessorify.client_config.widgetSettings": "Настройки виджетов",
   "accessorify.client_config.widgetSettings.desc": "Настройте поведение виджетов шалкеровых ящиков и стрел.",
   "accessorify.client_config.widgetSettings.showUIHints": "Показывать подсказки клавиш в виджете",

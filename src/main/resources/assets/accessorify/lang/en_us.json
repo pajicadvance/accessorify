@@ -24,6 +24,7 @@
   "accessorify.config.accessorySettings.calendarAccessory.desc": "Requires Serene Seasons or Fabric Seasons + Extras. If you have a season mod installed but want the vanilla clock to show the season instead, turn this option off.",
   "accessorify.config.hideDebugInfoInSurvival": "Hide gameplay info from F3 menu in survival",
   "accessorify.config.hideDebugInfoInSurvival.desc": "This hides most gameplay related info such as coordinates, biome etc. from the F3 debug screen. Used to make the compass and clock the only source of gameplay information, for immersion.",
+  "accessorify.config.cancelElytraFlyingInLiquid": "Cancel elytra flight when inside a liquid",
   "accessorify.client_config.widgetSettings": "Widget settings",
   "accessorify.client_config.widgetSettings.desc": "Configure the behavior of the shulker box and arrow selection widgets.",
   "accessorify.client_config.widgetSettings.showUIHints": "Show widget keybind hints",
