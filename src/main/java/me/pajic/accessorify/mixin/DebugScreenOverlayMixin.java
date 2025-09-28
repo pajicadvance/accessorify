@@ -1,5 +1,6 @@
 package me.pajic.accessorify.mixin;
 
+import com.google.common.base.Strings;
 import me.pajic.accessorify.Main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,9 +24,9 @@ public class DebugScreenOverlayMixin {
             at = @At("HEAD")
     )
     private void filterLines(GuiGraphics guiGraphics, List<String> lines, boolean leftSide, CallbackInfo ci) {
-        if (Main.CONFIG.hideDebugInfoInSurvival.get() && minecraft.showOnlyReducedInfo() && leftSide) {
-            lines.removeIf(text -> text.startsWith("Chunk-relative: "));
-            lines.removeIf(text -> text.startsWith("hunger: "));
+        if (Main.CONFIG.hideDebugInfoInSurvival.get() && minecraft.showOnlyReducedInfo()) {
+            lines.removeIf(text -> !Strings.isNullOrEmpty(text) && text.startsWith("Chunk-relative: "));
+            lines.removeIf(text -> !Strings.isNullOrEmpty(text) && text.startsWith("hunger: "));
         }
     }
 }

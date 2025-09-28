@@ -17,8 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-//$ ExpandedContainerImport
+//$ expanded_simple_container
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 //? if >= 1.21.8 {
 /*import net.minecraft.client.gui.screens.Screen;

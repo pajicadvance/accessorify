@@ -1,6 +1,5 @@
 package me.pajic.accessorify.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
 import me.pajic.accessorify.ClientMain;

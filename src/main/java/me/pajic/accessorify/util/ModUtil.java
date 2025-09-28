@@ -3,24 +3,22 @@ package me.pajic.accessorify.util;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
-import io.wispforest.accessories.api.slot.SlotReference;
 import it.unimi.dsi.fastutil.booleans.BooleanObjectImmutablePair;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.util.compat.CompatFlags;
-import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 import me.pajic.accessorify.util.compat.SereneSeasonsCompat;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.core.component.DataComponents;
+//? if > 1.21.1
+/*import net.minecraft.core.component.DataComponents;*/
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
 import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
+import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
 //?}
 
 import java.util.ArrayList;

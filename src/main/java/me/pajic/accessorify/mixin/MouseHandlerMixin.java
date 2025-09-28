@@ -1,14 +1,17 @@
 package me.pajic.accessorify.mixin;
 
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.pajic.accessorify.keybind.ModScrollHandler;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.world.entity.player.Inventory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+//? if <= 1.21.1
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+//? if > 1.21.1 {
+/*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+*///?}
 
 @Mixin(MouseHandler.class)
 public class MouseHandlerMixin {

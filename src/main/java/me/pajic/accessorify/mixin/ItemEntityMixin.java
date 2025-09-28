@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-//$ ExpandedContainerImport
+//$ expanded_simple_container
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 
 import java.util.Optional;

@@ -9,7 +9,6 @@ import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
@@ -18,7 +17,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Optional;

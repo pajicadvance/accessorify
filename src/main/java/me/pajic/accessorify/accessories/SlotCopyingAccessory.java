@@ -1,7 +1,7 @@
 package me.pajic.accessorify.accessories;
 
 import com.google.common.collect.HashMultimap;
-//$ Accessory
+//$ accessory
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
@@ -10,6 +10,7 @@ import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 
+@SuppressWarnings("ConstantConditions")
 public interface SlotCopyingAccessory extends Accessory {
     String getPath();
     String getSlot();

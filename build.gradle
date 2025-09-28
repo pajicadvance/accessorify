@@ -83,7 +83,7 @@ dependencies {
     implementation "io.wispforest:accessories-neoforge:${property("accessories_version")}"
 
     // Supported mods
-    compileOnly "maven.modrinth:sodium-dynamic-lights:${property("sdl_version")}"
+    implementation "maven.modrinth:lambdynamiclights:${property("ldl_version")}"
     compileOnly "maven.modrinth:owo-lib:${property("owo_version")}"
     compileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
     implementation "maven.modrinth:raised:${property("raised_version")}"
@@ -136,19 +136,19 @@ idea {
 }
 
 stonecutter {
-    swaps["Accessory"] = eval(current.version, "< 1.21.8")
+    swaps["accessory"] = eval(current.version, "< 1.21.8")
             ? "import io.wispforest.accessories.api.Accessory;"
             : "import io.wispforest.accessories.api.core.Accessory;"
-    swaps["AccessoryRegistry"] = eval(current.version, "< 1.21.8")
+    swaps["accessory_registry"] = eval(current.version, "< 1.21.8")
             ? "import io.wispforest.accessories.api.AccessoryRegistry;"
             : "import io.wispforest.accessories.api.core.AccessoryRegistry;"
-    swaps["AccessoryRenderer"] = eval(current.version, "< 1.21.8")
+    swaps["accessory_renderer"] = eval(current.version, "< 1.21.8")
             ? "import io.wispforest.accessories.api.client.AccessoryRenderer;"
             : "import io.wispforest.accessories.api.client.renderers.AccessoryRenderer;"
-    swaps["SimpleAccessoryRenderer"] = eval(current.version, "< 1.21.8")
+    swaps["simple_accessory_renderer"] = eval(current.version, "< 1.21.8")
             ? "import io.wispforest.accessories.api.client.SimpleAccessoryRenderer;"
             : "import io.wispforest.accessories.api.client.renderers.SimpleAccessoryRenderer;"
-    swaps["ExpandedContainerImport"] = eval(current.version, "< 1.21.8")
+    swaps["expanded_simple_container"] = eval(current.version, "< 1.21.8")
             ? "import io.wispforest.accessories.impl.ExpandedSimpleContainer;"
             : "import io.wispforest.accessories.impl.core.ExpandedContainer;"
 }
@@ -165,18 +165,17 @@ publishMods {
         projectId = "CVRzrXGP"
         minecraftVersions.add(stonecutter.current.version)
         requires("fzzy-config", "accessories")
-        optional("sodium-dynamic-lights")
+        optional("lambdynamiclights")
     }
 
     curseforge {
         accessToken = providers.environmentVariable("CF_KEY")
         projectId = "1169634"
         minecraftVersions.add(stonecutter.current.version)
-        javaVersions.add(stonecutter.eval(stonecutter.current.version, ">=1.20.5")
-                ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17)
+        javaVersions.add(JavaVersion.VERSION_21)
         clientRequired = true
         serverRequired = true
         requires("fzzy-config", "accessories")
-        optional("dynamiclights-reforged")
+        optional("lambdynamiclights")
     }
 }

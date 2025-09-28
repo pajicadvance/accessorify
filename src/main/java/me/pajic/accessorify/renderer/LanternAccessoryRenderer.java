@@ -1,33 +1,33 @@
 package me.pajic.accessorify.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-//$ AccessoryRenderer
+//$ accessory_renderer
 import io.wispforest.accessories.api.client.AccessoryRenderer;
-//$ SimpleAccessoryRenderer
+//$ simple_accessory_renderer
 import io.wispforest.accessories.api.client.SimpleAccessoryRenderer;
-import io.wispforest.accessories.api.slot.SlotReference;
-import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
+//? if <= 1.21.1 {
+import net.minecraft.world.entity.LivingEntity;
+import io.wispforest.accessories.api.slot.SlotReference;
+//?}
 //? if > 1.21.1 {
 /*import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 *///?}
-//? if >= 1.21.8 {
-/*import io.wispforest.accessories.api.slot.SlotPath;
- *///?}
+//? if >= 1.21.8
+/*import io.wispforest.accessories.api.slot.SlotPath;*/
 
 public class LanternAccessoryRenderer implements SimpleAccessoryRenderer {
     //? if <= 1.21.1 {
-    @Override
+    @Override @SuppressWarnings("deprecation")
     public <M extends LivingEntity> void render(
             ItemStack stack,
             SlotReference reference,
@@ -58,7 +58,7 @@ public class LanternAccessoryRenderer implements SimpleAccessoryRenderer {
     }
     //?}
     //? > 1.21.1 {
-    /*@Override
+    /*@Override @SuppressWarnings("deprecation")
     public <S extends LivingEntityRenderState> void render(
             ItemStack stack,
             //? if < 1.21.8
