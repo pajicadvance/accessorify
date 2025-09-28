@@ -1,9 +1,9 @@
 package me.pajic.accessorify.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-//$ AccessoryRenderer
+//$ accessory_renderer
 import io.wispforest.accessories.api.client.AccessoryRenderer;
-//$ SimpleAccessoryRenderer
+//$ simple_accessory_renderer
 import io.wispforest.accessories.api.client.SimpleAccessoryRenderer;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.util.MultiVersionUtil;

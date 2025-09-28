@@ -15,7 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
-//$ ExpandedContainerImport
+//$ expanded_simple_container
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 //? if >= 1.21.8 {
 /*import net.minecraft.client.gui.screens.Screen;

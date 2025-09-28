@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "order": 5,
-  "slots": [
-    "ender_chest",
-    "shulker"
-  ],
-  "icon": "accessorify:container/group/storage"
-}

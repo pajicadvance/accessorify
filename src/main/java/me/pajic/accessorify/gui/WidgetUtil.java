@@ -5,8 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-//? if >= 1.21.4 < 1.21.8
-/*import net.minecraft.client.renderer.RenderType;*/
 //? if >= 1.21.8
 /*import net.minecraft.client.renderer.RenderPipelines;*/
 
@@ -21,8 +19,6 @@ public class WidgetUtil {
     public static void renderCenterSlot(Minecraft mc, GuiGraphics guiGraphics) {
         //? if >= 1.21.1 {
         guiGraphics.blitSprite(
-                //? if >= 1.21.4 < 1.21.8
-                /*RenderType::guiTextured,*/
                 //? if >= 1.21.8
                 /*RenderPipelines.GUI_TEXTURED,*/
                 MultiVersionUtil.parse("hud/hotbar_offhand_right"),

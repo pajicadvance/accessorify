@@ -13,7 +13,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-//$ ExpandedContainerImport
+//$ expanded_simple_container
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 
 import java.util.Optional;

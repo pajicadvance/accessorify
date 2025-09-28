@@ -2,11 +2,11 @@ package me.pajic.accessorify.util;
 
 import com.google.common.collect.HashMultimap;
 import com.mojang.blaze3d.systems.RenderSystem;
-//$ Accessory
+//$ accessory
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
-//$ ExpandedContainerImport
+//$ expanded_simple_container
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import me.pajic.accessorify.Main;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -30,7 +30,7 @@ import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.util.FastColor;
 //?}
 //? if > 1.21.1 {
-/*//$ AccessoryRegistry
+/*//$ accessory_registry
 import io.wispforest.accessories.api.AccessoryRegistry;
 import net.minecraft.util.ARGB;
 *///?}
