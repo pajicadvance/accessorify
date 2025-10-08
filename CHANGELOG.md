@@ -1,9 +1,4 @@
-- Fixed crash when flying into water with elytra in 1.21.8.
-- [Fabric 1.20.1] This version is now compatible with Sinytra Connector, making it usable on Forge for MC 1.20.1. Tested on Forge 47.4.8 with the following setup:
-    - `accessories-neoforge-1.0.0-beta.46+1.20.1`
-    - `accessorify-2.2.1+1.20.1`
-    - `cloth-config-11.1.136-forge`
-    - `Connector-1.0.0-beta.46+1.20.1`
-    - `fabric-api-0.92.6+1.11.14+1.20.1`
-    - `fzzy_config-0.7.2+1.20.1+forge`
-    - `kotlinforforge-4.11.0-all`
+- Added option "Cancel elytra flight when inside a liquid". This was always in the mod and enabled, now it's toggleable.
+- Improved compatibility of "Cancel elytra flight when inside a liquid" with other mods.
+- Improved compatibility of "Hide gameplay info from F3 menu in survival" with mods which modify the debug screen.
+- [NeoForge] Removed compatibility for SodiumDynamicLights as LambDynamicLights is now available on NeoForge.
