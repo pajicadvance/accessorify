@@ -1,4 +1,1 @@
-- Added option "Cancel elytra flight when inside a liquid". This was always in the mod and enabled, now it's toggleable.
-- Improved compatibility of "Cancel elytra flight when inside a liquid" with other mods.
-- Improved compatibility of "Hide gameplay info from F3 menu in survival" with mods which modify the debug screen.
-- [NeoForge] Removed compatibility for SodiumDynamicLights as LambDynamicLights is now available on NeoForge.
+- [NeoForge] Fixed crash on launch.

@@ -14,7 +14,6 @@
     "PlayerMixin",
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin",
-    "compat.dynlight.DynamicLightsHandlersMixin",
     "compat.extrasounds.SoundManagerMixin"
   ],
   "client": [

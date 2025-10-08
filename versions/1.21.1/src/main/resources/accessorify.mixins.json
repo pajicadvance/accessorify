@@ -16,7 +16,6 @@
     "ServerGamePacketListenerImplMixin",
     "compat.arselixirum.LivingEntityHooksMixin",
     "compat.deeperdarker.SoulElytraBoostPacketMixin",
-    "compat.dynlight.DynamicLightsHandlersMixin",
     "compat.extrasounds.SoundManagerMixin"
   ],
   "client": [
