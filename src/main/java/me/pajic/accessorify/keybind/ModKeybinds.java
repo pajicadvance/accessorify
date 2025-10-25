@@ -3,6 +3,7 @@ package me.pajic.accessorify.keybind;
 import com.mojang.blaze3d.platform.InputConstants;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import me.pajic.accessorify.ClientMain;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.network.Payloads;
 import me.pajic.accessorify.util.ModUtil;
@@ -12,6 +13,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Options;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
 import org.lwjgl.glfw.GLFW;
@@ -20,12 +22,15 @@ import java.util.Optional;
 
 public class ModKeybinds {
 
+    //? if >= 1.21.10
+    public static final KeyMapping.Category MOD_KEYS = KeyMapping.Category.register(ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "keys"));
+
     public static final KeyMapping USE_SPYGLASS = KeyBindingHelper.registerKeyBinding(
             new KeyMapping(
                     "key.accessorify.use_spyglass",
                     InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_C,
-                    "category.accessorify.keybindings"
+                    /*? if < 1.21.10 {*//*"category.accessorify.keybindings"*//*?} else {*/MOD_KEYS/*?}*/
             )
     );
     public static final KeyMapping OPEN_WIDGET = KeyBindingHelper.registerKeyBinding(
@@ -33,7 +38,7 @@ public class ModKeybinds {
                     "key.accessorify.open_widget",
                     InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_X,
-                    "category.accessorify.keybindings"
+                    /*? if < 1.21.10 {*//*"category.accessorify.keybindings"*//*?} else {*/MOD_KEYS/*?}*/
             )
     );
     public static final KeyMapping OPEN_ENDER_CHEST = KeyBindingHelper.registerKeyBinding(
@@ -41,7 +46,7 @@ public class ModKeybinds {
                     "key.accessorify.open_ender_chest",
                     InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_V,
-                    "category.accessorify.keybindings"
+                    /*? if < 1.21.10 {*//*"category.accessorify.keybindings"*//*?} else {*/MOD_KEYS/*?}*/
             )
     );
 
@@ -96,10 +101,10 @@ public class ModKeybinds {
         });
         ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
             Options options = client.options;
-            if (options.keyLoadHotbarActivator.matches(KeyBindingHelper.getBoundKeyOf(OPEN_WIDGET).getValue(), -1)) {
+            if (options.keyLoadHotbarActivator.same(OPEN_WIDGET)) {
                 options.keyLoadHotbarActivator.setKey(InputConstants.UNKNOWN);
             }
-            if (options.keySaveHotbarActivator.matches(KeyBindingHelper.getBoundKeyOf(USE_SPYGLASS).getValue(), -1)) {
+            if (options.keySaveHotbarActivator.same(USE_SPYGLASS)) {
                 options.keySaveHotbarActivator.setKey(InputConstants.UNKNOWN);
             }
         });

@@ -14,13 +14,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 //? if 1.21.1
-import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
+/*import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;*/
 //? if <= 1.21.1
-import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
+/*import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;*/
 //? if >= 1.21.1
 import net.minecraft.core.component.DataComponents;
 //? if < 1.21.8
-import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
+/*import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,19 +82,19 @@ public class ModUtil {
     }
 
     //? if >= 1.21.8 {
-    /*public static boolean elytraEquipped(LivingEntity entity) {
+    public static boolean elytraEquipped(LivingEntity entity) {
         Optional<AccessoriesCapability> playerCapability = AccessoriesCapability.getOptionally(entity);
         return playerCapability.map(accessoriesCapability -> accessoriesCapability.isEquipped(stack -> stack.has(DataComponents.GLIDER))).orElse(false);
     }
-    *///?}
+    //?}
 
     public static BooleanObjectImmutablePair<ItemStack> tryGetElytraAccessory(LivingEntity livingEntity) {
         BooleanObjectImmutablePair<ItemStack> pair = new BooleanObjectImmutablePair<>(false, ItemStack.EMPTY);
         //? if <= 1.21.1 {
-        if (CompatFlags.DEEPER_DARKER_LOADED) {
+        /*if (CompatFlags.DEEPER_DARKER_LOADED) {
             pair = DeeperDarkerCompat.getSoulElytraAccessoryStack(livingEntity);
         }
-        //?}
+        *///?}
         if (pair.right().isEmpty()) {
             pair = getAccessoryStack(livingEntity, Items.ELYTRA);
         }
@@ -102,7 +102,7 @@ public class ModUtil {
     }
 
     //? if <= 1.21.1 {
-    public static boolean moddedElytraCheck(ItemStack stack, LivingEntity livingEntity, boolean original) {
+    /*public static boolean moddedElytraCheck(ItemStack stack, LivingEntity livingEntity, boolean original) {
         if (
                 !tryGetElytraAccessory(livingEntity).right().isEmpty() &&
                 !(livingEntity.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem)
@@ -111,7 +111,7 @@ public class ModUtil {
         }
         return original;
     }
-    //?}
+    *///?}
 
     public static boolean isTotem(ItemStack stack) {
         //? if 1.20.1 {
@@ -121,7 +121,7 @@ public class ModUtil {
         return stack.is(Items.TOTEM_OF_UNDYING);
         *///?}
         //? if 1.21.1 {
-        if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
+        /*if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         } else if (CompatFlags.ARS_ELIXIRUM_LOADED) {
             return ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
@@ -129,9 +129,9 @@ public class ModUtil {
             return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         }
         return stack.is(Items.TOTEM_OF_UNDYING);
-        //?}
+        *///?}
         //? if > 1.21.1
-        /*return stack.has(DataComponents.DEATH_PROTECTION);*/
+        return stack.has(DataComponents.DEATH_PROTECTION);
     }
 
     public static ItemStack tryGetTotemAccessory(LivingEntity livingEntity) {
@@ -151,9 +151,9 @@ public class ModUtil {
 
     public static boolean isHoldingProjectileWeapon(Player player) {
         //? if < 1.21.8
-        for (ItemStack stack : player.getHandSlots()) if (stack.getItem() instanceof ProjectileWeaponItem) return true;
+        /*for (ItemStack stack : player.getHandSlots()) if (stack.getItem() instanceof ProjectileWeaponItem) return true;*/
         //? if >= 1.21.8
-        /*if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem || player.getOffhandItem().getItem() instanceof ProjectileWeaponItem) return true;*/
+        if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem || player.getOffhandItem().getItem() instanceof ProjectileWeaponItem) return true;
         return false;
     }
 

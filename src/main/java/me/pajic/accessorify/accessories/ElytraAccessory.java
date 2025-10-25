@@ -11,9 +11,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import me.pajic.accessorify.util.compat.EleronCompat;
 //? if <= 1.21.1
-import net.minecraft.world.item.ElytraItem;
+/*import net.minecraft.world.item.ElytraItem;*/
 //? if > 1.21.1
-/*import net.minecraft.core.component.DataComponents;*/
+import net.minecraft.core.component.DataComponents;
 
 public class ElytraAccessory implements SlotCopyingAccessory {
 
@@ -45,9 +45,9 @@ public class ElytraAccessory implements SlotCopyingAccessory {
     public boolean canEquip(ItemStack stack, SlotReference reference) {
         return !MultiVersionUtil.isAnotherEquipped(stack, reference,
                 //? if <= 1.21.1
-                itemStack -> itemStack.getItem() instanceof ElytraItem
+                /*itemStack -> itemStack.getItem() instanceof ElytraItem*/
                 //? if > 1.21.1
-                /*itemStack -> itemStack.has(DataComponents.GLIDER)*/
+                itemStack -> itemStack.has(DataComponents.GLIDER)
         );
     }
 }

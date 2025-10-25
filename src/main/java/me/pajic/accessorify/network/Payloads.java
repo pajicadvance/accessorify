@@ -90,9 +90,7 @@ public class Payloads {
             return TYPE;
         }
     }
-    //?}
-
-    //? if 1.20.1 {
+    //?} else {
     /*public record C2SOpenShulkerBoxPayload(int index) implements FzzyPayload {
         C2SOpenShulkerBoxPayload(FriendlyByteBuf buf) {
             this(buf.readInt());

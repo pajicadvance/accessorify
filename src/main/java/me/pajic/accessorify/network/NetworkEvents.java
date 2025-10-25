@@ -32,8 +32,7 @@ public class NetworkEvents {
     public static void handleSyncArrowSlotToServerPayload(Payloads.C2SSyncArrowSlot payload, ServerPlayNetworking.Context context) {
         syncArrowSlotToServer(context.player(), payload.slot());
     }
-    //?}
-    //? if 1.20.1 {
+    //?} else {
     /*public static void handleOpenShulkerBoxPayload(Payloads.C2SOpenShulkerBoxPayload payload, ServerPlayNetworkContext context) {
         openShulkerBox(context.player(), payload.index());
     }

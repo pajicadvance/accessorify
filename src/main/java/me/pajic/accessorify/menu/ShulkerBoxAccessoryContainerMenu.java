@@ -17,6 +17,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+//? if >= 1.21.10
+import net.minecraft.world.entity.ContainerUser;
 //? if >= 1.21.1 {
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -34,28 +36,44 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
         this.items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
-    @Override
+    //? if < 1.21.10 {
+    /*@Override
     public void startOpen(@NotNull Player player) {
         //? if >= 1.21.1
         shulker.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(items);
         //? if 1.20.1 {
-        /*CompoundTag tag = getOrCreateBlockEntityTag();
+        /^CompoundTag tag = getOrCreateBlockEntityTag();
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         if (tag.contains("Items", 9)) {
             ContainerHelper.loadAllItems(tag, items);
         }
-        *///?}
+        ^///?}
         player.playSound(SoundEvents.SHULKER_BOX_OPEN);
     }
-
     @Override
     public void stopOpen(@NotNull Player player) {
         //? if >= 1.21.1
         shulker.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
         //? if 1.20.1
-        /*ContainerHelper.saveAllItems(getOrCreateBlockEntityTag(), items, true);*/
+        /^ContainerHelper.saveAllItems(getOrCreateBlockEntityTag(), items, true);^/
         player.playSound(SoundEvents.SHULKER_BOX_CLOSE);
     }
+    *///?} else {
+    @Override
+    public void startOpen(@NotNull ContainerUser user) {
+        if (user instanceof Player player) {
+            shulker.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(items);
+            player.playSound(SoundEvents.SHULKER_BOX_OPEN);
+        }
+    }
+    @Override
+    public void stopOpen(@NotNull ContainerUser user) {
+        if (user instanceof Player player) {
+            shulker.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
+            player.playSound(SoundEvents.SHULKER_BOX_CLOSE);
+        }
+    }
+    //?}
 
     //? if 1.20.1 {
     /*private CompoundTag getOrCreateBlockEntityTag() {

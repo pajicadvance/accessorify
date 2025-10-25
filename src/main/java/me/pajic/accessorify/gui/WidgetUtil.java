@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 //? if >= 1.21.8
-/*import net.minecraft.client.renderer.RenderPipelines;*/
+import net.minecraft.client.renderer.RenderPipelines;
 
 public class WidgetUtil {
     public static void renderItemStack(Minecraft mc, GuiGraphics guiGraphics, ItemStack stack, int offset) {
@@ -20,14 +20,13 @@ public class WidgetUtil {
         //? if >= 1.21.1 {
         guiGraphics.blitSprite(
                 //? if >= 1.21.8
-                /*RenderPipelines.GUI_TEXTURED,*/
+                RenderPipelines.GUI_TEXTURED,
                 MultiVersionUtil.parse("hud/hotbar_offhand_right"),
                 mc.getWindow().getGuiScaledWidth() / 2 - 18,
                 mc.getWindow().getGuiScaledHeight() / 2 - 32,
                 29, 24
         );
-        //?}
-        //? if 1.20.1 {
+        //?} else {
         /*guiGraphics.blit(
                 MultiVersionUtil.parse("textures/gui/widgets.png"),
                 mc.getWindow().getGuiScaledWidth() / 2 - 18,

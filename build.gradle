@@ -49,8 +49,12 @@ dependencies {
     include(implementation "com.moulberry:mixinconstraints:${project.mixinconstraints_version}")
     modImplementation "com.terraformersmc:modmenu:${property("modmenu_version")}"
     modImplementation "me.fzzyhmstrs:fzzy_config:${property("fzzy_version")}"
-    modImplementation "io.wispforest:accessories-fabric:${property("accessories_version")}"
-    modImplementation "io.wispforest:owo-lib:${property("owo_version")}"
+    modImplementation("io.wispforest:accessories-fabric:${property("accessories_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
+    modImplementation("io.wispforest:owo-lib:${property("owo_version")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
 
     // Supported mods
     modLocalRuntime("dev.lambdaurora.lambdynamiclights:lambdynamiclights-runtime:${property("ldl_version")}") {
@@ -59,19 +63,19 @@ dependencies {
     modCompileOnly("maven.modrinth:serene-seasons:${property("sereneseasons_version")}") {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
-    modImplementation("maven.modrinth:raised:${property("raised_version")}") {
+    modCompileOnly("maven.modrinth:raised:${property("raised_version")}") {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
-    modImplementation("maven.modrinth:notes:${property("notes_version")}") {
+    modCompileOnly("maven.modrinth:notes:${property("notes_version")}") {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
     modCompileOnly("maven.modrinth:friends-and-foes:${property("friendsandfoes_version")}") {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
-    modImplementation("maven.modrinth:reinforced-shulker-boxes:${property("rsb_version")}") {
+    modCompileOnly("maven.modrinth:reinforced-shulker-boxes:${property("rsb_version")}") {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
-    modImplementation("atonkish.reinfcore:reinforced-core:${property("rfcore_version")}") {
+    modCompileOnly("atonkish.reinfcore:reinforced-core:${property("rfcore_version")}") {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
 
@@ -87,7 +91,7 @@ dependencies {
 
     // 1.20.1-1.21.1 exclusive supported mods
     if (stonecutter.eval(stonecutter.current.version, ">= 1.20.1 <= 1.21.1")) {
-        modImplementation "net.kyrptonaught:customportalapi:${property("customportalapi_version")}"
+        modCompileOnly "net.kyrptonaught:customportalapi:${property("customportalapi_version")}"
         modCompileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
     }
     modCompileOnly("maven.modrinth:fabric-seasons:${property("fabricseasons_version")}") {
@@ -103,11 +107,11 @@ dependencies {
     if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
         modCompileOnly files("ext_imports/citresewn-defaults-1.2.2+1.21.jar")
         modCompileOnly "maven.modrinth:cit-resewn:${property("citresewn_version")}"
-        modImplementation "vectorwing:FarmersDelight:${property("fdrf_version")}"
-        modImplementation "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
-        modImplementation "maven.modrinth:fragmentum:${property("fragmentum_version")}"
-        modImplementation "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
-        modImplementation "maven.modrinth:extrasoundsforge:${property("extrasounds_version")}"
+        modCompileOnly "vectorwing:FarmersDelight:${property("fdrf_version")}"
+        modCompileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
+        modCompileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
+        modCompileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
+        modCompileOnly "maven.modrinth:extrasoundsforge:${property("extrasounds_version")}"
     }
 }
 

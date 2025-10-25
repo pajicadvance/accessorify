@@ -3,11 +3,11 @@ package me.pajic.accessorify.util;
 import com.google.common.collect.HashMultimap;
 import com.mojang.blaze3d.systems.RenderSystem;
 //$ accessory
-import io.wispforest.accessories.api.Accessory;
+import io.wispforest.accessories.api.core.Accessory;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import io.wispforest.accessories.api.slot.SlotReference;
 //$ expanded_simple_container
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.impl.core.ExpandedContainer;
 import me.pajic.accessorify.Main;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -26,14 +26,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //? if <= 1.21.1 {
-import io.wispforest.accessories.api.AccessoriesAPI;
+/*import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.util.FastColor;
-//?}
-//? if > 1.21.1 {
-/*//$ accessory_registry
-import io.wispforest.accessories.api.AccessoryRegistry;
-import net.minecraft.util.ARGB;
 *///?}
+//? if > 1.21.1 {
+//$ accessory_registry
+import io.wispforest.accessories.api.core.AccessoryRegistry;
+import net.minecraft.util.ARGB;
+//?}
 //? if 1.20.1 {
 /*import me.fzzyhmstrs.fzzy_config.networking.FzzyPayload;
 import io.wispforest.accessories.utils.AttributeUtils;
@@ -43,11 +43,11 @@ import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 //? if >= 1.21.1
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 //? if >= 1.21.8 {
-/*import com.mojang.blaze3d.opengl.GlStateManager;
+import com.mojang.blaze3d.opengl.GlStateManager;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-*///?}
+//?}
 
 import java.util.List;
 import java.util.Optional;
@@ -97,16 +97,16 @@ public class MultiVersionUtil {
 
     public static void registerAccessory(Item item, Accessory accessory) {
         //? if <= 1.21.1
-        AccessoriesAPI.registerAccessory(item, accessory);
+        /*AccessoriesAPI.registerAccessory(item, accessory);*/
         //? if > 1.21.1
-        /*AccessoryRegistry.register(item, accessory);*/
+        AccessoryRegistry.register(item, accessory);
     }
 
     public static void noRenderer(Item item) {
         //? if < 1.21.8
-        AccessoriesRendererRegistry.registerNoRenderer(item);
+        /*AccessoriesRendererRegistry.registerNoRenderer(item);*/
         //? if >= 1.21.8
-        /*AccessoriesRendererRegistry.bindItemToEmptyRenderer(item);*/
+        AccessoriesRendererRegistry.bindItemToEmptyRenderer(item);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -135,18 +135,18 @@ public class MultiVersionUtil {
     }
 
     //? if < 1.21.8 {
-    public static NonNullList<ItemStack> getItems(ExpandedSimpleContainer container) {
+    /*public static NonNullList<ItemStack> getItems(ExpandedSimpleContainer container) {
         //? if 1.20.1
-        /*return container.items;*/
+        /^return container.items;^/
         //? if >= 1.21.1
         return container.getItems();
     }
-    //?}
+    *///?}
     //? if >= 1.21.8 {
-    /*public static List<ItemStack> getItems(ExpandedContainer container) {
+    public static List<ItemStack> getItems(ExpandedContainer container) {
         return container.getItems();
     }
-    *///?}
+    //?}
 
     //? if >= 1.21.1 {
     public static void C2S(CustomPacketPayload payload) {
@@ -168,16 +168,16 @@ public class MultiVersionUtil {
 
     public static int color(int a, int r, int g, int b) {
         //? if <= 1.21.1
-        return FastColor.ARGB32.color(a, r, g, b);
+        /*return FastColor.ARGB32.color(a, r, g, b);*/
         //? if > 1.21.1
-        /*return ARGB.color(a, r, g, b);*/
+        return ARGB.color(a, r, g, b);
     }
 
     public static int as8BitChannel(float value) {
         //? if > 1.21.1
-        /*return ARGB.as8BitChannel(value);*/
+        return ARGB.as8BitChannel(value);
         //? if 1.21.1
-        return FastColor.as8BitChannel(value);
+        /*return FastColor.as8BitChannel(value);*/
         //? if 1.20.1
         /*return Mth.floor(value * 255.0F);*/
     }
@@ -189,26 +189,14 @@ public class MultiVersionUtil {
         /*return Minecraft.getInstance().options.renderDebug;*/
     }
 
-    //? if < 1.21.8 {
-    public static boolean hasArmor(SlotReference reference) {
+    //? if < 1.21.10 {
+    /*public static boolean hasArmor(SlotReference reference) {
         if (reference.entity() instanceof Player player) {
             for (ItemStack item : player.getArmorSlots()) {
                 //? if >= 1.21.1
                 if (item.is(ItemTags.CHEST_ARMOR) || item.is(ItemTags.LEG_ARMOR)) return true;
                 //? if 1.20.1
-                /*if (item.is(CHEST_ARMOR) || item.is(LEG_ARMOR)) return true;*/
-            }
-        }
-        return false;
-    }
-    //?}
-    //? if >= 1.21.8 {
-    /*public static boolean hasArmor(LivingEntityRenderState renderState) {
-        if (renderState.entityType == EntityType.PLAYER) {
-            Optional<LivingEntity> optional = renderState.getEntityForState();
-            if (optional.isPresent()) {
-                Player player = (Player) optional.get();
-                return player.hasItemInSlot(EquipmentSlot.CHEST) || player.hasItemInSlot(EquipmentSlot.LEGS);
+                /^if (item.is(CHEST_ARMOR) || item.is(LEG_ARMOR)) return true;^/
             }
         }
         return false;
@@ -217,21 +205,21 @@ public class MultiVersionUtil {
 
     public static void startRender(GuiGraphics guiGraphics) {
         //? if < 1.21.8 {
-        guiGraphics.flush();
+        /*guiGraphics.flush();
         RenderSystem.enableBlend();
-        //?}
-        //? if >= 1.21.8 {
-        /*guiGraphics.nextStratum();
-        GlStateManager._enableBlend();
         *///?}
+        //? if >= 1.21.8 {
+        guiGraphics.nextStratum();
+        GlStateManager._enableBlend();
+        //?}
     }
 
     public static void stopRender(GuiGraphics guiGraphics) {
         //? if < 1.21.8 {
-        guiGraphics.flush();
+        /*guiGraphics.flush();
         RenderSystem.disableBlend();
-        //?}
+        *///?}
         //? if >= 1.21.8
-        /*GlStateManager._disableBlend();*/
+        GlStateManager._disableBlend();
     }
 }

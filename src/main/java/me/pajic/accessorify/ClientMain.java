@@ -12,9 +12,9 @@ import me.pajic.accessorify.util.compat.CompatFlags;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.resources.ResourceLocation;
 //? if 1.21.1
-import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
+/*import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;*/
 //? if <= 1.21.1
-import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
+/*import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;*/
 
 public class ClientMain implements ClientModInitializer {
     public static final ResourceLocation CLIENT_CONFIG_RL = MultiVersionUtil.withModNamespace("client_config");
@@ -27,10 +27,10 @@ public class ClientMain implements ClientModInitializer {
         if (Main.CONFIG.accessorySettings.elytraAccessory.get()) {
             ElytraAccessory.clientInit();
             //? if <= 1.21.1 {
-            if (CompatFlags.DEEPER_DARKER_LOADED) {
+            /*if (CompatFlags.DEEPER_DARKER_LOADED) {
                 SoulElytraAccessory.clientInit();
             }
-            //?}
+            *///?}
         }
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) RecoveryCompassAccessory.clientInit();
         if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.clientInit();
@@ -42,10 +42,10 @@ public class ClientMain implements ClientModInitializer {
                 TotemOfIllusionAccessory.clientInit();
             }
             //? if 1.21.1 {
-            if (CompatFlags.ARS_ELIXIRUM_LOADED) {
+            /*if (CompatFlags.ARS_ELIXIRUM_LOADED) {
                 WitchTotemOfUndyingAccessory.clientInit();
             }
-            //?}
+            *///?}
         }
         if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) EnderChestAccessory.clientInit();
         if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) ShulkerBoxAccessory.clientInit();

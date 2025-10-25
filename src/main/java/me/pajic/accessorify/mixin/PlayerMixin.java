@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? if <= 1.21.1
-import net.minecraft.world.item.ElytraItem;
+/*import net.minecraft.world.item.ElytraItem;*/
 //? if > 1.21.1
-/*import net.minecraft.core.component.DataComponents;*/
+import net.minecraft.core.component.DataComponents;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
@@ -34,12 +34,12 @@ public abstract class PlayerMixin extends LivingEntity {
     @Shadow public abstract boolean isSpectator();
     @Shadow public abstract void setReducedDebugInfo(boolean reducedDebugInfo);
     //? if < 1.21.8 {
-    @Shadow public abstract @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot);
+    /*@Shadow public abstract @NotNull ItemStack getItemBySlot(@NotNull EquipmentSlot slot);
     @Shadow public abstract void stopFallFlying();
-    //?}
+    *///?}
 
     //? if <= 1.21.1 {
-    @ModifyExpressionValue(
+    /*@ModifyExpressionValue(
             method = "tryToStartFallFlying",
             at = @At(
                     value = "INVOKE",
@@ -64,7 +64,7 @@ public abstract class PlayerMixin extends LivingEntity {
     private boolean modifyElytraCheck(boolean original, @Local ItemStack itemStack) {
         return ModUtil.moddedElytraCheck(itemStack, (LivingEntity) (Object) this, original);
     }
-    //?}
+    *///?}
 
     @Inject(
             method = "tick",
@@ -76,13 +76,13 @@ public abstract class PlayerMixin extends LivingEntity {
                 (isInWater() || isInLava()) &&
                 isFallFlying() && (
                         //? if <= 1.21.1
-                        getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem ||
+                        /*getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ElytraItem ||*/
                         //? if > 1.21.1
-                        /*getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER) ||*/
+                        getItemBySlot(EquipmentSlot.CHEST).has(DataComponents.GLIDER) ||
                         //? if < 1.21.8
-                        !ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right().isEmpty()
+                        /*!ModUtil.tryGetElytraAccessory((LivingEntity) (Object) this).right().isEmpty()*/
                         //? if >= 1.21.8
-                        /*ModUtil.elytraEquipped((LivingEntity) (Object) this)*/
+                        ModUtil.elytraEquipped((LivingEntity) (Object) this)
                 )
         ) {
             stopFallFlying();

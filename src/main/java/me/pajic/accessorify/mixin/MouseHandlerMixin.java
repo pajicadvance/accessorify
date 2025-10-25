@@ -14,7 +14,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 public class MouseHandlerMixin {
 
     //? if <= 1.21.1 {
-    @WrapWithCondition(
+    /*@WrapWithCondition(
             method = "onScroll",
             at = @At(
                     value = "INVOKE",
@@ -24,21 +24,19 @@ public class MouseHandlerMixin {
     private boolean redirectScroll(Inventory instance, double direction) {
         return ModScrollHandler.handleMouseScroll(instance, (int) Math.signum(direction));
     }
-    //?}
-
-    //? if > 1.21.1 {
-    /*@WrapOperation(
+    *///?} else {
+    @WrapOperation(
             method = "onScroll",
             at = @At(
                     value = "INVOKE",
                     //? if < 1.21.8
-                    target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedHotbarSlot(I)V"
+                    /*target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedHotbarSlot(I)V"*/
                     //? if >= 1.21.8
-                    /^target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedSlot(I)V"^/
+                    target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedSlot(I)V"
             )
     )
     private void redirectScroll(Inventory instance, int selectedHotbarSlot, Operation<Void> original, @Local int i) {
         if (ModScrollHandler.handleMouseScroll(instance, (int) Math.signum(i))) original.call(instance, selectedHotbarSlot);
     }
-    *///?}
+    //?}
 }

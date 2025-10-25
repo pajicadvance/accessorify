@@ -67,6 +67,7 @@ public class ProjectileWeaponItemMixin {
                     if (!arrows.isEmpty()) {
                         accessorySlotUsed.set(true);
                         arrowStack.set(arrows);
+                        //noinspection MixinExtrasOperationParameters
                         return original.call(weapon, container.getAccessories().getItem(slot), shooter, intangable);
                     }
                 }

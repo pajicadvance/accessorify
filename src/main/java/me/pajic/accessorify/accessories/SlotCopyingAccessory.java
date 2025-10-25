@@ -2,7 +2,7 @@ package me.pajic.accessorify.accessories;
 
 import com.google.common.collect.HashMultimap;
 //$ accessory
-import io.wispforest.accessories.api.Accessory;
+import io.wispforest.accessories.api.core.Accessory;
 import io.wispforest.accessories.api.slot.SlotReference;
 import me.pajic.accessorify.Main;
 import me.pajic.accessorify.config.SlotMode;

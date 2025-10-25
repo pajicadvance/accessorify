@@ -1,7 +1,7 @@
 package me.pajic.accessorify.accessories;
 
 //$ accessory
-import io.wispforest.accessories.api.Accessory;
+import io.wispforest.accessories.api.core.Accessory;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

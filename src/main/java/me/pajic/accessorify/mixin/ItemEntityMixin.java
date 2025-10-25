@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 //$ expanded_simple_container
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.impl.core.ExpandedContainer;
 
 import java.util.Optional;
 
@@ -49,7 +49,7 @@ public abstract class ItemEntityMixin extends Entity {
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(player, "arrow"));
                 if (container != null) {
-                    /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ arrows = container.getAccessories();
+                    /*? if < 1.21.8 {*//*ExpandedSimpleContainer*//*?} else {*/ExpandedContainer/*?}*/ arrows = container.getAccessories();
                     if (!MultiVersionUtil.getItems(arrows).stream().allMatch(ItemStack::isEmpty) && arrows.canAddItem(itemStack)) {
                         ItemEntity itemEntity = (ItemEntity) (Object) this;
                         int i = itemStack.getCount();

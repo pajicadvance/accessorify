@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 //$ expanded_simple_container
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.impl.core.ExpandedContainer;
 
 import java.util.Optional;
 
@@ -44,7 +44,7 @@ public abstract class AbstractArrowMixin extends Projectile {
             if (ac.isPresent()) {
                 AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(player, "arrow"));
                 if (container != null) {
-                    /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ arrows = container.getAccessories();
+                    /*? if < 1.21.8 {*//*ExpandedSimpleContainer*//*?} else {*/ExpandedContainer/*?}*/ arrows = container.getAccessories();
                     if (!MultiVersionUtil.getItems(arrows).stream().allMatch(ItemStack::isEmpty) && arrows.canAddItem(itemStack)) {
                         AbstractArrow itemEntity = (AbstractArrow) (Object) this;
                         ItemStack updated = arrows.addItem(itemStack);

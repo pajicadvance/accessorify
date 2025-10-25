@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin {
     }
 
     //? if <= 1.21.1 {
-    @ModifyExpressionValue(
+    /*@ModifyExpressionValue(
             method = "updateFallFlying",
             at = @At(
                     value = "INVOKE",
@@ -55,5 +55,5 @@ public abstract class LivingEntityMixin {
         }
         return original;
     }
-    //?}
+    *///?}
 }

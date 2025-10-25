@@ -44,8 +44,7 @@ public class ModNetworking {
                 NetworkClientEvents::handleSyncArrowSlotToClientPayload
         );
     }
-    //?}
-    //? if 1.20.1 {
+    //?} else {
     /*public static void init() {
         ConfigApiJava.network().registerLenientC2S(
                 NetworkConstants.OPEN_SHULKER_BOX,

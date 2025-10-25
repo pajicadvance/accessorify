@@ -16,14 +16,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 //$ expanded_simple_container
-import io.wispforest.accessories.impl.ExpandedSimpleContainer;
+import io.wispforest.accessories.impl.core.ExpandedContainer;
 //? if >= 1.21.8 {
-/*import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.Util;
-*///?}
+//?}
 
 import java.util.Optional;
 
@@ -39,7 +39,7 @@ public class ContextualSelectionWidget {
                 if (ModUtil.isHoldingProjectileWeapon(MC.player)) {
                     AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(MC.level, "arrow"));
                     if (container != null) {
-                        /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ arrows = container.getAccessories();
+                        /*? if < 1.21.8 {*//*ExpandedSimpleContainer*//*?} else {*/ExpandedContainer/*?}*/ arrows = container.getAccessories();
                         if (!MultiVersionUtil.getItems(arrows).stream().allMatch(ItemStack::isEmpty)) {
                             if (arrows.getItem(ModScrollHandler.selectedArrowSlot).isEmpty()) {
                                 do {
@@ -55,9 +55,9 @@ public class ContextualSelectionWidget {
                                     widgetOpen = true;
                                 MultiVersionUtil.startRender(guiGraphics);
                                 WidgetUtil.renderCenterSlot(MC, guiGraphics);
-                                arrows./*? < 1.21.8 {*/forEach(stack -> {/*?} else {*//*foreach((i, stack) -> {*//*?}*/
-                                    int index = /*? < 1.21.8 {*/stack.getFirst()/*?} else {*//*i*//*?}*/;
-                                    ItemStack arrow = /*? < 1.21.8 {*/stack.getSecond()/*?} else {*//*stack*//*?}*/;
+                                arrows./*? if < 1.21.8 {*//*forEach(stack -> {*//*?} else {*/foreach((i, stack) -> {/*?}*/
+                                    int index = /*? if < 1.21.8 {*//*stack.getFirst()*//*?} else {*/i/*?}*/;
+                                    ItemStack arrow = /*? if < 1.21.8 {*//*stack.getSecond()*//*?} else {*/stack/*?}*/;
                                     if (!arrow.isEmpty()) {
                                         WidgetUtil.renderItemStack(
                                                 MC, guiGraphics, arrow,
@@ -85,7 +85,7 @@ public class ContextualSelectionWidget {
                 } else {
                     AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(MC.level, "shulker"));
                     if (container != null) {
-                        /*? < 1.21.8 {*/ExpandedSimpleContainer/*?} else {*//*ExpandedContainer*//*?}*/ shulkers = container.getAccessories();
+                        /*? if < 1.21.8 {*//*ExpandedSimpleContainer*//*?} else {*/ExpandedContainer/*?}*/ shulkers = container.getAccessories();
                         int count = Math.toIntExact(MultiVersionUtil.getItems(shulkers).stream().filter(shulker -> !shulker.isEmpty()).count());
                         if (count > 0) {
                             if (shulkers.getItem(ModScrollHandler.selectedShulkerSlot).isEmpty()) {
@@ -109,9 +109,9 @@ public class ContextualSelectionWidget {
                                         widgetOpen = true;
                                     MultiVersionUtil.startRender(guiGraphics);
                                     WidgetUtil.renderCenterSlot(MC, guiGraphics);
-                                    shulkers./*? < 1.21.8 {*/forEach(stack -> {/*?} else {*//*foreach((i, stack) -> {*//*?}*/
-                                        int index = /*? < 1.21.8 {*/stack.getFirst()/*?} else {*//*i*//*?}*/;
-                                        ItemStack shulker = /*? < 1.21.8 {*/stack.getSecond()/*?} else {*//*stack*//*?}*/;
+                                    shulkers./*? if < 1.21.8 {*//*forEach(stack -> {*//*?} else {*/foreach((i, stack) -> {/*?}*/
+                                        int index = /*? if < 1.21.8 {*//*stack.getFirst()*//*?} else {*/i/*?}*/;
+                                        ItemStack shulker = /*? if < 1.21.8 {*//*stack.getSecond()*//*?} else {*/stack/*?}*/;
                                         if (!shulker.isEmpty()) WidgetUtil.renderItemStack(
                                                 MC, guiGraphics, shulker,
                                                 index - ModScrollHandler.selectedShulkerSlot
@@ -139,15 +139,14 @@ public class ContextualSelectionWidget {
                                     if (MC.player.isShiftKeyDown()) {
                                         ItemStack stack = shulkers.getItem(ModScrollHandler.selectedShulkerSlot);
                                         //? if < 1.21.8 {
-                                        guiGraphics.renderTooltip(
+                                        /*guiGraphics.renderTooltip(
                                                 MC.font,
                                                 stack,
                                                 MC.getWindow().getGuiScaledWidth() / 2,
                                                 MC.getWindow().getGuiScaledHeight() / 2
                                         );
-                                        //?}
-                                        //? if >= 1.21.8 {
-                                        /*guiGraphics.renderTooltip(
+                                        *///?} else {
+                                        guiGraphics.renderTooltip(
                                                 MC.font,
                                                 Screen.getTooltipFromItem(MC, stack).stream()
                                                         .map(Component::getVisualOrderText)
@@ -158,7 +157,7 @@ public class ContextualSelectionWidget {
                                                 DefaultTooltipPositioner.INSTANCE,
                                                 stack.get(DataComponents.TOOLTIP_STYLE)
                                         );
-                                        *///?}
+                                        //?}
                                     }
                                     MultiVersionUtil.stopRender(guiGraphics);
                                 }

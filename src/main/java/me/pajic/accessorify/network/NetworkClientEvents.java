@@ -12,8 +12,7 @@ public class NetworkClientEvents {
     public static void handleSyncArrowSlotToClientPayload(Payloads.S2CSyncArrowSlot payload, ClientPlayNetworking.Context context) {
         syncArrowSlotToClient(payload.slot());
     }
-    //?}
-    //? if 1.20.1 {
+    //?} else {
     /*public static void handleSyncShulkerSlotToClientPayload(Payloads.S2CSyncShulkerSlot payload, ClientPlayNetworkContext context) {
         syncShulkerSlotToClient(payload.slot());
     }

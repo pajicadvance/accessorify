@@ -8,11 +8,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? if < 1.21.8
-import net.minecraft.nbt.CompoundTag;
+/*import net.minecraft.nbt.CompoundTag;*/
 //? if >= 1.21.8 {
-/*import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-*///?}
+//?}
 
 @Mixin(Player.class)
 public class PlayerSelectedAccessorySlotDataMixin implements SelectedAccessorySlotAccess {
@@ -40,7 +40,7 @@ public class PlayerSelectedAccessorySlotDataMixin implements SelectedAccessorySl
     }
 
     //? if < 1.21.8 {
-    @Inject(
+    /*@Inject(
             method = "addAdditionalSaveData",
             at = @At("TAIL")
     )
@@ -57,9 +57,8 @@ public class PlayerSelectedAccessorySlotDataMixin implements SelectedAccessorySl
         shulkerSlot = compound.getInt("ShulkerSlot");
         arrowSlot = compound.getInt("ArrowSlot");
     }
-    //?}
-    //? if >= 1.21.8 {
-    /*@Inject(
+    *///?} else {
+    @Inject(
             method = "addAdditionalSaveData",
             at = @At("TAIL")
     )
@@ -76,5 +75,5 @@ public class PlayerSelectedAccessorySlotDataMixin implements SelectedAccessorySl
         shulkerSlot = input.getIntOr("ShulkerSlot", 0);
         arrowSlot = input.getIntOr("ArrowSlot", 0);
     }
-    *///?}
+    //?}
 }

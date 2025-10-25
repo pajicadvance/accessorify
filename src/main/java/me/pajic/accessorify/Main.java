@@ -11,10 +11,10 @@ import me.pajic.accessorify.util.compat.CompatFlags;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
 //? if 1.21.1
-import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
+/*import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;*/
 //? if <= 1.21.1 {
-import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
-//?}
+/*import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
+*///?}
 
 public class Main implements ModInitializer {
     public static final String MOD_ID = "accessorify";
@@ -29,10 +29,10 @@ public class Main implements ModInitializer {
         if (CONFIG.accessorySettings.elytraAccessory.get()) {
             ElytraAccessory.init();
             //? if <= 1.21.1 {
-            if (CompatFlags.DEEPER_DARKER_LOADED) {
+            /*if (CompatFlags.DEEPER_DARKER_LOADED) {
                 SoulElytraAccessory.init();
             }
-            //?}
+            *///?}
         }
         if (CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.init();
         if (CONFIG.accessorySettings.lanternAccessory.get()) {
@@ -45,16 +45,16 @@ public class Main implements ModInitializer {
         if (CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
             TotemOfUndyingAccessory.init();
             //? if <= 1.21.1 {
-            if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
+            /*if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
                 TotemOfFreezingAccessory.init();
                 TotemOfIllusionAccessory.init();
             }
-            //?}
+            *///?}
             //? if 1.21.1 {
-            if (CompatFlags.ARS_ELIXIRUM_LOADED) {
+            /*if (CompatFlags.ARS_ELIXIRUM_LOADED) {
                 WitchTotemOfUndyingAccessory.init();
             }
-            //?}
+            *///?}
         }
         if (CONFIG.accessorySettings.recoveryCompassAccessory.get()) RecoveryCompassAccessory.init();
         if (CONFIG.accessorySettings.enderChestAccessory.get()) EnderChestAccessory.init();

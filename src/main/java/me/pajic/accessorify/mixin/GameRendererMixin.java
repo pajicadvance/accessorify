@@ -9,17 +9,17 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 //? if > 1.21.1
-/*import com.llamalad7.mixinextras.injector.ModifyExpressionValue;*/
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 
-    @Shadow @Final /*? >= 1.21.8 {*//*private*//*?}*/ Minecraft minecraft;
+    @Shadow @Final /*? if >= 1.21.8 {*/private/*?}*/ Minecraft minecraft;
     //? if > 1.21.1
-    /*@Shadow private float fovModifier;*/
+    @Shadow private float fovModifier;
 
     //? if <= 1.21.1 {
-    @WrapWithCondition(
+    /*@WrapWithCondition(
             method = "tickFov",
             at = @At(
                     value = "FIELD",
@@ -30,10 +30,8 @@ public class GameRendererMixin {
     private boolean uncapSpyglassZoomLevel(GameRenderer instance, float value) {
         return !ClientMain.CLIENT_CONFIG.spyglassZoomSettings.scrollableZoom.get() || minecraft.player == null || !minecraft.player.isScoping();
     }
-    //?}
-
-    //? if > 1.21.1 {
-    /*@ModifyExpressionValue(
+    *///?} else {
+    @ModifyExpressionValue(
             method = "tickFov",
             at = @At(
                     value = "INVOKE",
@@ -46,5 +44,5 @@ public class GameRendererMixin {
         }
         return original;
     }
-    *///?}
+    //?}
 }
