@@ -25,7 +25,7 @@ public class DebugScreenOverlayMixin {
     )
     private void filterLines(GuiGraphics guiGraphics, List<String> lines, boolean leftSide, CallbackInfo ci) {
         if (Main.CONFIG.hideDebugInfoInSurvival.get() && minecraft.showOnlyReducedInfo()) {
-            lines.removeIf(text -> !Strings.isNullOrEmpty(text) && text.startsWith("Chunk-relative: "));
+            lines.removeIf(text -> !Strings.isNullOrEmpty(text) && text.startsWith(/*? < 1.21.10 {*//*"Chunk-relative: "*//*?} else {*/"Section-relative: "/*?}*/));
             lines.removeIf(text -> !Strings.isNullOrEmpty(text) && text.startsWith("hunger: "));
         }
     }

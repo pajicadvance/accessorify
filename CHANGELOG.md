@@ -1,2 +1,2 @@
-- Updated to Minecraft 1.21.10.
-- Compass and clock overlays are now hidden when Immersive Overlays is installed.
+- Made copper lanterns and all their variants equippable.
+- Fixed keybind menu text in 1.21.10.

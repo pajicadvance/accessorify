@@ -7,22 +7,37 @@ import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class LanternAccessory implements SlotCopyingAccessory{
 
     public static void init() {
+        //? if > 1.21.1 {
+        CommonLifecycleEvents.TAGS_LOADED.register((registries, client) ->
+                registries.lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.LANTERNS).forEach(itemHolder ->
+                        MultiVersionUtil.registerAccessory(itemHolder.value(), new LanternAccessory())
+                )
+        );
+        //?}
+        //? if <= 1.21.1
         MultiVersionUtil.registerAccessory(Items.LANTERN, new LanternAccessory());
     }
 
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
-        //? if > 1.21.4 {
+        //? if > 1.21.1 {
         AccessoriesRendererRegistry.registerRenderer(MultiVersionUtil.withModNamespace("lantern_renderer"), LanternAccessoryRenderer::new);
-        ModUtil.LANTERNS.forEach(item -> AccessoriesRendererRegistry.bindItemToRenderer(item, MultiVersionUtil.withModNamespace("lantern_renderer")));
+        CommonLifecycleEvents.TAGS_LOADED.register((registries, client) ->
+                registries.lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.LANTERNS).forEach(itemHolder ->
+                        AccessoriesRendererRegistry.bindItemToRenderer(itemHolder.value(), MultiVersionUtil.withModNamespace("lantern_renderer"))
+                )
+        );
         //?}
-        //? if <= 1.21.4
+        //? if <= 1.21.1
         /*ModUtil.LANTERNS.forEach(item -> AccessoriesRendererRegistry.registerRenderer(item, LanternAccessoryRenderer::new));*/
     }
 

@@ -37,7 +37,6 @@ public class Main implements ModInitializer {
         if (CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.init();
         if (CONFIG.accessorySettings.lanternAccessory.get()) {
             LanternAccessory.init();
-            SoulLanternAccessory.init();
             if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) {
                 AdditionalLanternAccessory.init();
             }
