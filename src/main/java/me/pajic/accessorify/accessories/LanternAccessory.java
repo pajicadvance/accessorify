@@ -24,7 +24,7 @@ public class LanternAccessory implements SlotCopyingAccessory{
         );
         //?}
         //? if <= 1.21.1
-        MultiVersionUtil.registerAccessory(Items.LANTERN, new LanternAccessory());
+        /*MultiVersionUtil.registerAccessory(Items.LANTERN, new LanternAccessory());*/
     }
 
     @Environment(EnvType.CLIENT)

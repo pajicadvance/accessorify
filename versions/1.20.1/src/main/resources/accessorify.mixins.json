@@ -17,6 +17,7 @@
     "ServerGamePacketListenerImplMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
     "compat.deeperdarker.MessagesMixin",
+    "compat.dynlights.DynamicLightsHandlersMixin",
     "compat.extrasounds.SoundManagerMixin"
   ],
   "client": [

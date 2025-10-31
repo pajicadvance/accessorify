@@ -149,6 +149,13 @@ public class ModUtil {
         return LANTERNS.stream().anyMatch(stack::is);
     }
 
+    //? if 1.20.1 {
+    /*public static boolean isLanternEquipped(LivingEntity entity) {
+        for (Item item : ModUtil.LANTERNS) if (ModUtil.accessoryEquipped(entity, item)) return true;
+        return false;
+    }
+    *///?}
+
     public static boolean isHoldingProjectileWeapon(Player player) {
         //? if < 1.21.8
         /*for (ItemStack stack : player.getHandSlots()) if (stack.getItem() instanceof ProjectileWeaponItem) return true;*/

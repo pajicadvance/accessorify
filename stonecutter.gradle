@@ -12,3 +12,8 @@ tasks.register("runActiveServer") {
     group = "fabric"
     dependsOn(":${stonecutter.current.project}:runServer")
 }
+
+tasks.register("publishActive") {
+    group = "publishing"
+    dependsOn(":${stonecutter.current.project}:publishMods")
+}

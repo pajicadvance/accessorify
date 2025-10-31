@@ -38,7 +38,7 @@ public class Main implements ModInitializer {
         if (CONFIG.accessorySettings.lanternAccessory.get()) {
             LanternAccessory.init();
             //? if < 1.21.10
-            SoulLanternAccessory.init();
+            /*SoulLanternAccessory.init();*/
             if (CompatFlags.ADDITIONAL_LANTERNS_LOADED) {
                 AdditionalLanternAccessory.init();
             }

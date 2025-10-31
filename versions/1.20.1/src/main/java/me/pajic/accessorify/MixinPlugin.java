@@ -16,6 +16,10 @@ public class MixinPlugin implements IMixinConfigPlugin {
             "me.pajic.accessorify.mixin.CapeLayerElytraCheckMixin"
     );
 
+    private static final List<String> DISABLE_IF_FABRIC = List.of(
+            "me.pajic.accessorify.mixin.compat.dynlights.DynamicLightsHandlersMixin"
+    );
+
     @Override
     public void onLoad(String s) {}
 
@@ -26,7 +30,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return !CompatFlags.CONNECTOR_PRESENT || !DISABLE_IF_FORGE.contains(mixinClassName);
+        if (CompatFlags.CONNECTOR_PRESENT) {
+            return !DISABLE_IF_FORGE.contains(mixinClassName);
+        } else {
+            return !DISABLE_IF_FABRIC.contains(mixinClassName);
+        }
     }
 
     @Override
