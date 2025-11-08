@@ -14,16 +14,20 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
+//? if >= 1.21.10 {
+/*import io.wispforest.accessories.api.client.AccessoryRenderState;
+import io.wispforest.accessories.api.client.renderers.AccessoryRenderer;
+*///?}
 //? if <= 1.21.1 {
 import net.minecraft.world.entity.LivingEntity;
 import io.wispforest.accessories.api.slot.SlotReference;
 //?}
 //? if > 1.21.1 {
-/*import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+/*import io.wispforest.accessories.api.client.AccessoriesRenderStateKeys;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 *///?}
-//? if >= 1.21.8
-/*import io.wispforest.accessories.api.slot.SlotPath;*/
 
 public class LanternAccessoryRenderer implements SimpleAccessoryRenderer {
     //? if <= 1.21.1 {
@@ -56,42 +60,28 @@ public class LanternAccessoryRenderer implements SimpleAccessoryRenderer {
             AccessoryRenderer.transformToModelPart(matrices, humanoidModel.body, offset.x, offset.y, offset.z);
         }
     }
-    //?}
-    //? > 1.21.1 {
-    /*@Override @SuppressWarnings("deprecation")
+    //?} else {
+    /*@Override
     public <S extends LivingEntityRenderState> void render(
-            ItemStack stack,
-            //? if < 1.21.8
-            SlotReference reference,
-            //? if >= 1.21.8
-            /^SlotPath reference,^/
-            PoseStack matrices,
-            EntityModel<S> model,
-            S renderState,
-            MultiBufferSource multiBufferSource,
-            int light,
-            float partialTicks
+            AccessoryRenderState accessoryState, S renderState, EntityModel<S> entityModel, PoseStack matrices, SubmitNodeCollector collector
     ) {
-        align(stack, reference, model, renderState, matrices);
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(
-                Block.byItem(stack.getItem()).defaultBlockState(),
-                matrices, multiBufferSource, light, OverlayTexture.NO_OVERLAY
+        align(accessoryState, renderState, entityModel, matrices);
+        collector.submitBlock(
+                matrices,
+                Block.byItem(accessoryState.getStateData(AccessoriesRenderStateKeys.ITEM_STACK).getItem()).defaultBlockState(),
+                renderState.lightCoords,
+                OverlayTexture.NO_OVERLAY,
+                renderState.outlineColor
         );
     }
 
     @Override
     public <S extends LivingEntityRenderState> void align(
-            ItemStack itemStack,
-            //? if < 1.21.8
-            SlotReference reference,
-            //? if >= 1.21.8
-            /^SlotPath reference,^/
-            EntityModel<S> entityModel,
-            S renderState,
-            PoseStack poseStack
+            AccessoryRenderState accessoryState, S renderState, EntityModel<S> entityModel, PoseStack poseStack
     ) {
-        if (entityModel instanceof HumanoidModel<? extends HumanoidRenderState> humanoidModel) {
-            Vec3 offset = MultiVersionUtil.hasArmor(/^? < 1.21.8 {^/reference/^?} else {^//^(HumanoidRenderState) renderState^//^?}^/) ? new Vec3(0.05f, -1.25f, 0.05f) : new Vec3(-0.1f, -1.25f, -0.1f);
+        if (entityModel instanceof HumanoidModel<? extends HumanoidRenderState> humanoidModel && renderState instanceof HumanoidRenderState humanoidRenderState) {
+            Vec3 offset = !humanoidRenderState.chestEquipment.isEmpty() || !humanoidRenderState.legsEquipment.isEmpty() ?
+                    new Vec3(0.05f, -1.25f, 0.05f) : new Vec3(-0.1f, -1.25f, -0.1f);
             AccessoryRenderer.transformToModelPart(poseStack, humanoidModel.body, offset.x, offset.y, offset.z);
         }
     }

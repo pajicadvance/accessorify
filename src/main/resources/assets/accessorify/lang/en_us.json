@@ -127,6 +127,7 @@
   "gui.accessorify.hint_shulker_exit_quick": "Release %s to open",
 
   "category.accessorify.keybindings": "Accessorify",
+  "key.category.accessorify.keys": "Accessorify",
   "key.accessorify.use_spyglass": "Use spyglass accessory",
   "key.accessorify.open_widget": "Open contextual selection widget",
   "key.accessorify.open_ender_chest": "Open equipped ender chest",

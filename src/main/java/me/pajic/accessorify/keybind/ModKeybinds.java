@@ -3,12 +3,14 @@ package me.pajic.accessorify.keybind;
 import com.mojang.blaze3d.platform.InputConstants;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import me.pajic.accessorify.ClientMain;
+import me.pajic.accessorify.Main;
 import me.pajic.accessorify.gui.ContextualSelectionWidget;
 import me.pajic.accessorify.network.ModNetworking;
 import me.pajic.accessorify.util.ModUtil;
 import me.pajic.accessorify.util.MultiVersionUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
@@ -24,12 +26,15 @@ import java.util.Optional;
 @EventBusSubscriber(modid = "accessorify", value = Dist.CLIENT)
 public class ModKeybinds {
 
+    //? if >= 1.21.10
+    /*public static final KeyMapping.Category MOD_KEYS = new KeyMapping.Category(ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "keys"));*/
+
     public static final Lazy<KeyMapping> USE_SPYGLASS = Lazy.of(() ->
             new KeyMapping(
                     "key.accessorify.use_spyglass",
                     InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_C,
-                    "category.accessorify.keybindings"
+                    /*? if < 1.21.10 {*/"category.accessorify.keybindings"/*?} else {*//*MOD_KEYS*//*?}*/
             )
     );
     public static final Lazy<KeyMapping> OPEN_WIDGET = Lazy.of(() ->
@@ -37,7 +42,7 @@ public class ModKeybinds {
                     "key.accessorify.open_widget",
                     InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_X,
-                    "category.accessorify.keybindings"
+                    /*? if < 1.21.10 {*/"category.accessorify.keybindings"/*?} else {*//*MOD_KEYS*//*?}*/
             )
     );
     public static final Lazy<KeyMapping> OPEN_ENDER_CHEST = Lazy.of(() ->
@@ -45,7 +50,7 @@ public class ModKeybinds {
                     "key.accessorify.open_ender_chest",
                     InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_V,
-                    "category.accessorify.keybindings"
+                    /*? if < 1.21.10 {*/"category.accessorify.keybindings"/*?} else {*//*MOD_KEYS*//*?}*/
             )
     );
 
@@ -55,6 +60,8 @@ public class ModKeybinds {
         event.register(USE_SPYGLASS.get());
         event.register(OPEN_WIDGET.get());
         event.register(OPEN_ENDER_CHEST.get());
+        //? if >= 1.21.10
+        /*event.registerCategory(MOD_KEYS);*/
     }
 
     @SubscribeEvent

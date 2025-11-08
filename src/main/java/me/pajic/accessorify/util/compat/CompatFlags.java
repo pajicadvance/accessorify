@@ -9,4 +9,5 @@ public class CompatFlags {
     public static final boolean FRIENDS_AND_FOES_LOADED = ModList.get().isLoaded("friendsandfoes");
     public static final boolean ARS_ELIXIRUM_LOADED = ModList.get().isLoaded("elixirum");
     public static final boolean ADDITIONAL_LANTERNS_LOADED = ModList.get().isLoaded("additionallanterns");
+    public static final boolean IMMERSIVE_OVERLAYS_LOADED = ModList.get().isLoaded("immersiveoverlays");
 }

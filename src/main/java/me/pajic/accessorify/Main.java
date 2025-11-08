@@ -31,6 +31,7 @@ public class Main {
         modEventBus.addListener(ModNetworking::init);
         modEventBus.addListener(this::onInitialize);
         if (Main.CONFIG.accessorySettings.arrowAccessory.get()) NeoForge.EVENT_BUS.addListener(ArrowAccessory::init);
+        if (Main.CONFIG.accessorySettings.lanternAccessory.get()) NeoForge.EVENT_BUS.addListener(LanternAccessory::init);
         modEventBus.addListener(AdditionalLanternAccessory::init);
         modEventBus.addListener(SereneSeasonsCalendarAccessory::init);
         modEventBus.addListener(TotemOfFreezingAccessory::init);
@@ -51,10 +52,11 @@ public class Main {
             //?}
         }
         if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) SpyglassAccessory.init();
+        //? if < 1.21.10 {
         if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
-            LanternAccessory.init();
             SoulLanternAccessory.init();
         }
+        //?}
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) TotemOfUndyingAccessory.init();
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) RecoveryCompassAccessory.init();
         if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) EnderChestAccessory.init();

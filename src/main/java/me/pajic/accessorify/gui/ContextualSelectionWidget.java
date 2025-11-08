@@ -148,8 +148,7 @@ public class ContextualSelectionWidget {
                                                 MC.getWindow().getGuiScaledWidth() / 2,
                                                 MC.getWindow().getGuiScaledHeight() / 2
                                         );
-                                        //?}
-                                        //? if >= 1.21.8 {
+                                        //?} else {
                                         /*guiGraphics.renderTooltip(
                                                 MC.font,
                                                 Screen.getTooltipFromItem(MC, stack).stream()

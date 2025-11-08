@@ -49,6 +49,8 @@ When equipped, relevant info will be shown in the top left corner of the screen:
 
 Overlay appearance can be extensively configured in the configuration screen, such as which information to display, text background, shadow and color.
 
+For a more refined and visually appealing overlay, [Immersive Overlays](https://modrinth.com/mod/immersive-overlays) can be used. Accessorify's compass and clock overlay will be replaced by this mod.
+
 There is also an option to hide information shown by the accessories from the F3 debug screen in survival mode, so that they are the only sources of such information.
 
 ### Elytra

@@ -27,10 +27,10 @@ public class MinecraftMixin {
             )
     )
     private void onClientStart(CallbackInfo ci) {
-        if (options.keyLoadHotbarActivator.matches(ModKeybinds.OPEN_WIDGET.get().getKey().getValue(), -1)) {
+        if (options.keyLoadHotbarActivator.same(ModKeybinds.OPEN_WIDGET.get())) {
             options.keyLoadHotbarActivator.setKey(InputConstants.UNKNOWN);
         }
-        if (options.keySaveHotbarActivator.matches(ModKeybinds.USE_SPYGLASS.get().getKey().getValue(), -1)) {
+        if (options.keySaveHotbarActivator.same(ModKeybinds.USE_SPYGLASS.get())) {
             options.keySaveHotbarActivator.setKey(InputConstants.UNKNOWN);
         }
     }

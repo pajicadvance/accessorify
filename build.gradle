@@ -83,10 +83,10 @@ dependencies {
     implementation "io.wispforest:accessories-neoforge:${property("accessories_version")}"
 
     // Supported mods
-    implementation "maven.modrinth:lambdynamiclights:${property("ldl_version")}"
+    runtimeOnly "maven.modrinth:lambdynamiclights:${property("ldl_version")}"
     compileOnly "maven.modrinth:owo-lib:${property("owo_version")}"
     compileOnly "maven.modrinth:serene-seasons:${property("sereneseasons_version")}"
-    implementation "maven.modrinth:raised:${property("raised_version")}"
+    compileOnly "maven.modrinth:raised:${property("raised_version")}"
     compileOnly "maven.modrinth:notes:${property("notes_version")}"
     compileOnly "maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}"
 
@@ -95,12 +95,6 @@ dependencies {
     compileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
     compileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
     compileOnly "maven.modrinth:extrasoundsforge:${property("extrasounds_version")}"
-    if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
-        implementation "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
-        implementation "maven.modrinth:fragmentum:${property("fragmentum_version")}"
-        implementation "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
-        implementation "maven.modrinth:extrasoundsforge:${property("extrasounds_version")}"
-    }
 }
 
 tasks.withType(ProcessResources).configureEach {

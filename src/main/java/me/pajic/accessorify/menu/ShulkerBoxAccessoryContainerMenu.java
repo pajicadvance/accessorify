@@ -15,6 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+//? if >= 1.21.10
+/*import net.minecraft.world.entity.ContainerUser;*/
 
 public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider {
 
@@ -26,6 +28,7 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
         this.items = NonNullList.withSize(27, ItemStack.EMPTY);
     }
 
+    //? if < 1.21.10 {
     @Override
     public void startOpen(@NotNull Player player) {
         shulker.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(items);
@@ -37,6 +40,22 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
         shulker.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
         player.playSound(SoundEvents.SHULKER_BOX_CLOSE);
     }
+    //?} else {
+    /*@Override
+    public void startOpen(@NotNull ContainerUser user) {
+        if (user instanceof Player player) {
+            shulker.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(items);
+            player.playSound(SoundEvents.SHULKER_BOX_OPEN);
+        }
+    }
+    @Override
+    public void stopOpen(@NotNull ContainerUser user) {
+        if (user instanceof Player player) {
+            shulker.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
+            player.playSound(SoundEvents.SHULKER_BOX_CLOSE);
+        }
+    }
+    *///?}
 
     @Override
     public int getContainerSize() {

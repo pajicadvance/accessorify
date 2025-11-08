@@ -44,13 +44,13 @@ public class InfoOverlays {
         ) {
             boolean shouldObfuscateCompass = Main.CONFIG.infoOverlaySettings.obfuscateCompassIfNotOverworld.get() && MC.level.dimension() != Level.OVERWORLD;
             boolean shouldObfuscateClock = Main.CONFIG.infoOverlaySettings.obfuscateClockIfNotOverworld.get() && MC.level.dimension() != Level.OVERWORLD;
-            if (Main.CONFIG.accessorySettings.compassAccessory.get() && ModUtil.accessoryEquipped(MC.player, Items.COMPASS)) {
+            if (Main.CONFIG.accessorySettings.compassAccessory.get() && ModUtil.accessoryEquipped(MC.player, Items.COMPASS) && !CompatFlags.IMMERSIVE_OVERLAYS_LOADED) {
                 prepareCompassOverlay(shouldObfuscateCompass);
             }
-            if (Main.CONFIG.accessorySettings.clockAccessory.get() && ModUtil.accessoryEquipped(MC.player, Items.CLOCK)) {
+            if (Main.CONFIG.accessorySettings.clockAccessory.get() && ModUtil.accessoryEquipped(MC.player, Items.CLOCK) && !CompatFlags.IMMERSIVE_OVERLAYS_LOADED) {
                 prepareClockOverlay(shouldObfuscateClock);
             }
-            if (ModUtil.calendarUsedForSeasonInfo() && ModUtil.calendarAccessoryEquipped(MC.player)) {
+            if (ModUtil.calendarUsedForSeasonInfo() && ModUtil.calendarAccessoryEquipped(MC.player) && !CompatFlags.IMMERSIVE_OVERLAYS_LOADED) {
                 prepareSeasonString(shouldObfuscateClock);
             }
             if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get() && ModUtil.accessoryEquipped(MC.player, Items.RECOVERY_COMPASS)) {

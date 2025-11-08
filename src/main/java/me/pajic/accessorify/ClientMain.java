@@ -38,6 +38,8 @@ public class ClientMain {
     public ClientMain(IEventBus modEventBus) {
         modEventBus.addListener(this::onInitialize);
         if (Main.CONFIG.accessorySettings.arrowAccessory.get()) NeoForge.EVENT_BUS.addListener(this::initArrows);
+        //? if > 1.21.1
+        /*if (Main.CONFIG.accessorySettings.lanternAccessory.get()) NeoForge.EVENT_BUS.addListener(this::initLanterns);*/
         modEventBus.addListener(SereneSeasonsCalendarAccessory::clientInit);
         modEventBus.addListener(TotemOfFreezingAccessory::clientInit);
         modEventBus.addListener(TotemOfIllusionAccessory::clientInit);
@@ -54,11 +56,9 @@ public class ClientMain {
         if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) MultiVersionUtil.noRenderer(Items.RECOVERY_COMPASS);
         if (Main.CONFIG.accessorySettings.spyglassAccessory.get()) MultiVersionUtil.noRenderer(Items.SPYGLASS);
         if (Main.CONFIG.accessorySettings.lanternAccessory.get()) {
-            //? if > 1.21.4 {
-            /*AccessoriesRendererRegistry.registerRenderer(MultiVersionUtil.withModNamespace("lantern_renderer"), LanternAccessoryRenderer::new);
-            ModUtil.LANTERNS.forEach(item -> AccessoriesRendererRegistry.bindItemToRenderer(item, MultiVersionUtil.withModNamespace("lantern_renderer")));
-            *///?}
-            //? if <= 1.21.4
+            //? if > 1.21.4
+            /*AccessoriesRendererRegistry.registerRenderer(MultiVersionUtil.withModNamespace("lantern_renderer"), LanternAccessoryRenderer::new);*/
+            //? if <= 1.21.1
             ModUtil.LANTERNS.forEach(item -> AccessoriesRendererRegistry.registerRenderer(item, LanternAccessoryRenderer::new));
         }
         if (Main.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) MultiVersionUtil.noRenderer(Items.TOTEM_OF_UNDYING);
@@ -84,4 +84,14 @@ public class ClientMain {
                         MultiVersionUtil.noRenderer(itemHolder.value())
         );
     }
+
+    //? if > 1.21.1 {
+    /*@SubscribeEvent
+    private void initLanterns(TagsUpdatedEvent event) {
+        event.getLookupProvider()
+                .lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.LANTERNS).forEach(itemHolder ->
+                        AccessoriesRendererRegistry.bindItemToRenderer(itemHolder.value(), MultiVersionUtil.withModNamespace("lantern_renderer"))
+                );
+    }
+    *///?}
 }

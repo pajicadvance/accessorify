@@ -166,7 +166,7 @@ public class MultiVersionUtil {
         /*return Minecraft.getInstance().options.renderDebug;*/
     }
 
-    //? if < 1.21.8 {
+    //? if < 1.21.10 {
     public static boolean hasArmor(SlotReference reference) {
         if (reference.entity() instanceof Player player) {
             for (ItemStack item : player.getArmorSlots()) {
@@ -179,14 +179,6 @@ public class MultiVersionUtil {
         return false;
     }
     //?}
-    //? if >= 1.21.8 {
-    /*public static boolean hasArmor(HumanoidRenderState renderState) {
-        if (renderState.entityType == EntityType.PLAYER) {
-            return !renderState.chestEquipment.isEmpty() || !renderState.legsEquipment.isEmpty();
-        }
-        return false;
-    }
-    *///?}
 
     public static void startRender(GuiGraphics guiGraphics) {
         //? if < 1.21.8 {
