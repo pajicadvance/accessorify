@@ -1,3 +1,1 @@
-- Updated to Minecraft 1.21.10.
-- Made copper lanterns and all their variants equippable.
-- Compass and clock overlays are now hidden when Immersive Overlays is installed.
+- Added compatibility for Aileron.

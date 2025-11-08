@@ -14,6 +14,7 @@
     "PlayerSelectedAccessorySlotDataMixin",
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin",
+    "compat.aileron.AileronMixin",
     "compat.arselixirum.LivingEntityHooksMixin",
     "compat.deeperdarker.SoulElytraBoostPacketMixin",
     "compat.extrasounds.SoundManagerMixin"

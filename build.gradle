@@ -89,6 +89,7 @@ dependencies {
     compileOnly "maven.modrinth:raised:${property("raised_version")}"
     compileOnly "maven.modrinth:notes:${property("notes_version")}"
     compileOnly "maven.modrinth:friends-and-foes-forge:${property("friendsandfoes_version")}"
+    compileOnly "maven.modrinth:aileron:${property("aileron_version")}"
 
     // 1.21.1 exclusive supported mods
     compileOnly "maven.modrinth:deeperdarker:${property("deeperdarker_version")}"
