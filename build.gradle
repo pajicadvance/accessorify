@@ -92,7 +92,7 @@ dependencies {
         modCompileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
         modCompileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
     }
-    modCompileOnly("maven.modrinth:eleron:${property("eleron_version")}") {
+    modCompileOnly("maven.modrinth:aileron:${property("aileron_version")}") {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
 

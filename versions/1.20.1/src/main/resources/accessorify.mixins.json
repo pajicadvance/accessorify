@@ -15,6 +15,7 @@
     "PlayerSelectedAccessorySlotDataMixin",
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin",
+    "compat.aileron.AileronMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
     "compat.deeperdarker.MessagesMixin",
     "compat.dynlights.DynamicLightsHandlersMixin",

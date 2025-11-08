@@ -5,7 +5,7 @@ import net.fabricmc.loader.api.FabricLoader;
 public class CompatFlags {
     public static final boolean DEEPER_DARKER_LOADED = FabricLoader.getInstance().isModLoaded("deeperdarker");
     public static final boolean FRIENDS_AND_FOES_LOADED = FabricLoader.getInstance().isModLoaded("friendsandfoes");
-    public static final boolean ELERON_LOADED = FabricLoader.getInstance().isModLoaded("eleron");
+    public static final boolean AILERON_LOADED = FabricLoader.getInstance().isModLoaded("aileron");
     public static final boolean RAISED_LOADED = FabricLoader.getInstance().isModLoaded("raised");
     public static final boolean SERENE_SEASONS_LOADED = FabricLoader.getInstance().isModLoaded("sereneseasons");
     public static final boolean FABRIC_SEASONS_LOADED = FabricLoader.getInstance().isModLoaded("seasons");

@@ -13,6 +13,7 @@
     "PlayerSelectedAccessorySlotDataMixin",
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin",
+    "compat.aileron.AileronMixin",
     "compat.arselixirum.LivingEntityHooksMixin",
     "compat.citresewn.TypeElytraContainerMixin",
     "compat.deeperdarker.DDNetworkingMixin",

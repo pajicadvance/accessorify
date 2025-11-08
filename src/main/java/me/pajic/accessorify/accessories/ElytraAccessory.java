@@ -9,7 +9,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import me.pajic.accessorify.util.compat.EleronCompat;
+import me.pajic.accessorify.util.compat.AileronCompat;
 //? if <= 1.21.1
 /*import net.minecraft.world.item.ElytraItem;*/
 //? if > 1.21.1
@@ -38,7 +38,8 @@ public class ElytraAccessory implements SlotCopyingAccessory {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        if (CompatFlags.ELERON_LOADED) EleronCompat.addModifiers(builder, stack, reference.entity().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT));
+        //? if 1.21.1
+        /*if (CompatFlags.AILERON_LOADED) AileronCompat.addModifiers(builder, stack, reference.entity().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT));*/
     }
 
     @Override

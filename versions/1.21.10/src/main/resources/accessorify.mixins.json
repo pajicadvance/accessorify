@@ -11,6 +11,7 @@
     "PlayerSelectedAccessorySlotDataMixin",
     "ProjectileWeaponItemMixin",
     "ServerGamePacketListenerImplMixin",
+    "compat.aileron.AileronMixin",
     "compat.extrasounds.SoundManagerMixin"
   ],
   "client": [
