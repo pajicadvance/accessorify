@@ -1,1 +1,1 @@
-- Added compatibility for Aileron.
+- Removed ability to load shulker boxes into crossbows (this was definitely an intended feature).

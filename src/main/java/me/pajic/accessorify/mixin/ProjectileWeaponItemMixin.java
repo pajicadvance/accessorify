@@ -59,13 +59,14 @@ public class ProjectileWeaponItemMixin {
         if (Main.CONFIG.accessorySettings.arrowAccessory.get()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
             if (ac.isPresent()) {
-                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(shooter, "shulker"));
+                AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(shooter, "arrow"));
                 if (container != null) {
                     int slot = ((SelectedAccessorySlotAccess) shooter).accessorify$getArrowSlot();
                     ItemStack arrows = container.getAccessories().getItem(slot);
                     if (!arrows.isEmpty()) {
                         accessorySlotUsed.set(true);
                         arrowStack.set(arrows);
+                        //noinspection MixinExtrasOperationParameters
                         return original.call(weapon, container.getAccessories().getItem(slot), shooter, intangable);
                     }
                 }
@@ -85,8 +86,7 @@ public class ProjectileWeaponItemMixin {
     private static boolean emptyAccessorySlot(
             Inventory instance,
             ItemStack stack,
-            @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed,
-            @Share("arrowStack") LocalRef<ItemStack> arrowStack
+            @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed
     ) {
         return !accessorySlotUsed.get();
     }
