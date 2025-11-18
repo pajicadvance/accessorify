@@ -13,8 +13,10 @@ import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.resources.ResourceLocation;
 //? if 1.21.1
 /*import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;*/
-//? if <= 1.21.1
-/*import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;*/
+//? if <= 1.21.1 {
+/*import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
+import me.pajic.accessorify.compat.netheriteextras.TotemOfNeverdyingAccessory;
+ *///?}
 
 public class ClientMain implements ClientModInitializer {
     public static final ResourceLocation CLIENT_CONFIG_RL = MultiVersionUtil.withModNamespace("client_config");
@@ -29,6 +31,9 @@ public class ClientMain implements ClientModInitializer {
             //? if <= 1.21.1 {
             /*if (CompatFlags.DEEPER_DARKER_LOADED) {
                 SoulElytraAccessory.clientInit();
+            }
+            if (CompatFlags.NETHERITE_EXTRAS_LOADED) {
+                TotemOfNeverdyingAccessory.clientInit();
             }
             *///?}
         }

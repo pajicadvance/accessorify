@@ -15,8 +15,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 //? if 1.21.1
 /*import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;*/
-//? if <= 1.21.1
-/*import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;*/
+//? if <= 1.21.1 {
+/*import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
+import me.pajic.accessorify.compat.netheriteextras.NetheriteExtrasCompat;
+ *///?}
 //? if >= 1.21.1
 import net.minecraft.core.component.DataComponents;
 //? if < 1.21.8
@@ -115,18 +117,31 @@ public class ModUtil {
 
     public static boolean isTotem(ItemStack stack) {
         //? if 1.20.1 {
-        /*if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
+         /*if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         }
         return stack.is(Items.TOTEM_OF_UNDYING);
         *///?}
         //? if 1.21.1 {
-        /*if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
+        
+        /*if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED && CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.ARS_ELIXIRUM_LOADED && CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return ArsElixirumCompat.isTotem(stack) || NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         } else if (CompatFlags.ARS_ELIXIRUM_LOADED) {
             return ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         } else if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         }
         return stack.is(Items.TOTEM_OF_UNDYING);
         *///?}

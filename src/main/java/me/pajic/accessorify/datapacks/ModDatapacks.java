@@ -60,6 +60,10 @@ public class ModDatapacks {
                         MultiVersionUtil.withModNamespace(pathPrefix + "witchtotem"),
                         modContainer, ResourcePackActivationType.ALWAYS_ENABLED
                 );
+                if (CompatFlags.NETHERITE_EXTRAS_LOADED) ResourceManagerHelper.registerBuiltinResourcePack(
+                        MultiVersionUtil.withModNamespace(pathPrefix + "totemofneverdying"),
+                        modContainer, ResourcePackActivationType.ALWAYS_ENABLED
+                );
             }
             if (Main.CONFIG.accessorySettings.recoveryCompassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
                     MultiVersionUtil.withModNamespace(pathPrefix + "recoverycompass"),

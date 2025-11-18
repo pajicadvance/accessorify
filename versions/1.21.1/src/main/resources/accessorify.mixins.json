@@ -19,7 +19,8 @@
     "compat.deeperdarker.DDNetworkingMixin",
     "compat.deeperdarker.DeeperDarkerClientMixin",
     "compat.extrasounds.SoundManagerMixin",
-    "compat.fdrf.HUDOverlaysMixin"
+    "compat.fdrf.HUDOverlaysMixin",
+    "compat.netheriteextras.ModEventsMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",
@@ -35,6 +36,7 @@
     "MouseHandlerMixin",
     "PackSelectionModelMixin",
     "compat.deeperdarker.SoulElytraRendererMixin",
+    "compat.netheriteextras.TotemFloatingDisplayMixin",
     "compat.notes.EditNoteScreenMixin"
   ],
   "injectors": {

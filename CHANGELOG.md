@@ -1,1 +1,1 @@
-- Added compatibility for Aileron.
+- Added compatibility for Netherite Extras.

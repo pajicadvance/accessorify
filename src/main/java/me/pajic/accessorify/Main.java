@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 /*import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;*/
 //? if <= 1.21.1 {
 /*import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
+import me.pajic.accessorify.compat.netheriteextras.TotemOfNeverdyingAccessory;
 *///?}
 
 public class Main implements ModInitializer {
@@ -49,6 +50,9 @@ public class Main implements ModInitializer {
             /*if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
                 TotemOfFreezingAccessory.init();
                 TotemOfIllusionAccessory.init();
+            }
+            if (CompatFlags.NETHERITE_EXTRAS_LOADED) {
+                TotemOfNeverdyingAccessory.init();
             }
             *///?}
             //? if 1.21.1 {
