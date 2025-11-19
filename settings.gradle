@@ -3,6 +3,10 @@ pluginManagement {
         mavenLocal()
         gradlePluginPortal()
         maven { url = 'https://maven.neoforged.net/releases' }
+        maven {
+            name = "Sinytra"
+            url = "https://maven.sinytra.org/"
+        }
     }
 }
 
@@ -17,3 +21,4 @@ stonecutter {
         vcsVersion = "1.21.1"
     }
 }
+include '1.21.1-Connector-Remap'

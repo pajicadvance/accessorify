@@ -19,6 +19,7 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
 import me.pajic.accessorify.compat.arselixirum.ArsElixirumCompat;
 import me.pajic.accessorify.util.compat.FriendsAndFoesCompat;
+import me.pajic.accessorify.compat.netheriteextras.NetheriteExtrasCompat;
 //?}
 
 import java.util.ArrayList;
@@ -105,13 +106,22 @@ public class ModUtil {
     }
 
     public static boolean isTotem(ItemStack stack) {
-        //? if <= 1.21.1 {
-        if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
+        //? if 1.21.1 {
+        
+        if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED && CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.ARS_ELIXIRUM_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.ARS_ELIXIRUM_LOADED && CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return ArsElixirumCompat.isTotem(stack) || NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.FRIENDS_AND_FOES_LOADED && CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return FriendsAndFoesCompat.isTotem(stack) || NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         } else if (CompatFlags.ARS_ELIXIRUM_LOADED) {
             return ArsElixirumCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         } else if (CompatFlags.FRIENDS_AND_FOES_LOADED) {
             return FriendsAndFoesCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
+        } else if (CompatFlags.NETHERITE_EXTRAS_LOADED) {
+            return NetheriteExtrasCompat.isTotem(stack) || stack.is(Items.TOTEM_OF_UNDYING);
         }
         return stack.is(Items.TOTEM_OF_UNDYING);
         //?}

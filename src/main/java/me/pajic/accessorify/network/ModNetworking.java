@@ -5,6 +5,7 @@ import me.pajic.accessorify.access.SelectedAccessorySlotAccess;
 import me.pajic.accessorify.keybind.ModScrollHandler;
 import me.pajic.accessorify.menu.ShulkerBoxAccessoryContainerMenu;
 import me.pajic.accessorify.util.MultiVersionUtil;
+import me.pajic.accessorify.util.compat.CompatFlags;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -17,12 +18,14 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Optional;
+//? if <= 1.21.1
+import me.pajic.accessorify.compat.reinfshulker.ReinfShulkerCompat;
 
 public class ModNetworking {
 
@@ -119,10 +122,20 @@ public class ModNetworking {
                 (payload, context) -> {
                     Player player = context.player();
                     Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);
-                    if (ac.isPresent()) {
+                    //? if > 1.21.1 {
+                    /*if (ac.isPresent()) {
                         player.openMenu(new ShulkerBoxAccessoryContainerMenu(ac.get().getContainers().get("shulker").getAccessories().getItem(payload.index)));
                         player.awardStat(Stats.OPEN_SHULKER_BOX);
                     }
+                    *///?}
+                    //? if <= 1.21.1 {
+                    if (ac.isPresent()) {
+                        ItemStack shulker = ac.get().getContainers().get("shulker").getAccessories().getItem(payload.index);
+                        int size = (CompatFlags.REINFORCED_SHULKERS_LOADED) ? ReinfShulkerCompat.getInventorySizeForReinfShulker(shulker.getItem()) : 27;
+                        player.openMenu(new ShulkerBoxAccessoryContainerMenu(shulker, size));
+                        player.awardStat(Stats.OPEN_SHULKER_BOX);
+                    }
+                    //?}
                 }
         );
         registrar.playToServer(

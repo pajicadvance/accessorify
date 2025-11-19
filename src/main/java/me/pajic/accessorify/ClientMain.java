@@ -27,6 +27,7 @@ import net.neoforged.neoforge.common.NeoForge;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
 import me.pajic.accessorify.compat.deeperdarker.DeeperDarkerCompat;
+import me.pajic.accessorify.compat.netheriteextras.TotemOfNeverdyingAccessory;
 //?}
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
 
@@ -43,8 +44,10 @@ public class ClientMain {
         modEventBus.addListener(SereneSeasonsCalendarAccessory::clientInit);
         modEventBus.addListener(TotemOfFreezingAccessory::clientInit);
         modEventBus.addListener(TotemOfIllusionAccessory::clientInit);
-        //? if <= 1.21.1
+        //? if <= 1.21.1 {
         modEventBus.addListener(WitchTotemOfUndyingAccessory::clientInit);
+        modEventBus.addListener(TotemOfNeverdyingAccessory::clientInit);
+        //?}
         modEventBus.addListener(ModKeybinds::registerKeybinds);
     }
 

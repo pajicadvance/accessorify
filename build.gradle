@@ -16,6 +16,10 @@ repositories {
     maven { url 'https://maven.fabricmc.net' }
     maven { url 'https://maven.bawnorton.com/releases' }
     maven { url 'https://maven.shedaniel.me/' }
+    maven {
+        name = "Sinytra"
+        url = "https://maven.sinytra.org/"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -96,6 +100,7 @@ dependencies {
     compileOnly "maven.modrinth:fragmentum:${property("fragmentum_version")}"
     compileOnly "maven.modrinth:ars-elixirum:${property("arselixirum_version")}"
     compileOnly "maven.modrinth:extrasoundsforge:${property("extrasounds_version")}"
+    compileOnly files("fabric-remaps/").getAsFileTree()
 }
 
 tasks.withType(ProcessResources).configureEach {

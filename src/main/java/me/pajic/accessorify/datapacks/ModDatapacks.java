@@ -109,6 +109,16 @@ public class ModDatapacks {
                         Pack.Position.TOP
                 );
             }
+            if (CompatFlags.NETHERITE_EXTRAS_LOADED) {
+                event.addPackFinders(
+                        MultiVersionUtil.withModNamespace(pathPrefix + "totemofneverdying"),
+                        PackType.SERVER_DATA,
+                        Component.literal("Accessorify Totem of Neverdying"),
+                        PackSource.BUILT_IN,
+                        true,
+                        Pack.Position.TOP
+                );
+            }
         }
         if (Main.CONFIG.accessorySettings.enderChestAccessory.get()) event.addPackFinders(
                 MultiVersionUtil.withModNamespace(pathPrefix + "enderchest"),
@@ -126,14 +136,26 @@ public class ModDatapacks {
                 true,
                 Pack.Position.TOP
         );
-        if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) event.addPackFinders(
-                MultiVersionUtil.withModNamespace(pathPrefix + "shulkerbox"),
-                PackType.SERVER_DATA,
-                Component.literal("Accessorify Shulker Box"),
-                PackSource.BUILT_IN,
-                true,
-                Pack.Position.TOP
-        );
+        if (Main.CONFIG.accessorySettings.shulkerBoxAccessory.get()) {
+            event.addPackFinders(
+                    MultiVersionUtil.withModNamespace(pathPrefix + "shulkerbox"),
+                    PackType.SERVER_DATA,
+                    Component.literal("Accessorify Shulker Box"),
+                    PackSource.BUILT_IN,
+                    true,
+                    Pack.Position.TOP
+            );
+            if (CompatFlags.REINFORCED_SHULKERS_LOADED) {
+                event.addPackFinders(
+                        MultiVersionUtil.withModNamespace(pathPrefix + "reinfshulker"),
+                        PackType.SERVER_DATA,
+                        Component.literal("Accessorify Reinforced Shulker"),
+                        PackSource.BUILT_IN,
+                        true,
+                        Pack.Position.TOP
+                );
+            }
+        }
         if (Main.CONFIG.accessorySettings.arrowAccessory.get()) event.addPackFinders(
                 MultiVersionUtil.withModNamespace(pathPrefix + "arrow"),
                 PackType.SERVER_DATA,

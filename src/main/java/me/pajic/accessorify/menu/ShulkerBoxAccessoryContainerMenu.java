@@ -1,5 +1,6 @@
 package me.pajic.accessorify.menu;
 
+import me.pajic.accessorify.util.compat.CompatFlags;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -17,17 +18,26 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 //? if >= 1.21.10
 /*import net.minecraft.world.entity.ContainerUser;*/
+//? if <= 1.21.1
+import me.pajic.accessorify.compat.reinfshulker.ReinfShulkerCompat;
 
 public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider {
 
     private final ItemStack shulker;
     protected NonNullList<ItemStack> items;
 
-    public ShulkerBoxAccessoryContainerMenu(ItemStack shulker) {
+    //? if > 1.21.1 {
+    /*public ShulkerBoxAccessoryContainerMenu(ItemStack shulker) {
         this.shulker = shulker;
         this.items = NonNullList.withSize(27, ItemStack.EMPTY);
     }
-
+    *///?}
+    //? if <= 1.21.1 {
+    public ShulkerBoxAccessoryContainerMenu(ItemStack shulker, int size) {
+        this.shulker = shulker;
+        this.items = NonNullList.withSize(size, ItemStack.EMPTY);
+    }
+    //?}
     //? if < 1.21.10 {
     @Override
     public void startOpen(@NotNull Player player) {
@@ -110,6 +120,11 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
-        return new ShulkerBoxMenu(i, inventory, this);
+        //? if > 1.21.1
+        /*return new ShulkerBoxMenu(i, inventory, this);*/
+        //? if <= 1.21.1 {
+        if (CompatFlags.REINFORCED_SHULKERS_LOADED) return ReinfShulkerCompat.createMenu(i, inventory, this, shulker.getItem());
+        else return new ShulkerBoxMenu(i, inventory, this);
+        //?}
     }
 }

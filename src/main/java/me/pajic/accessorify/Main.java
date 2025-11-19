@@ -18,6 +18,7 @@ import net.neoforged.neoforge.common.NeoForge;
 //? if <= 1.21.1 {
 import me.pajic.accessorify.compat.deeperdarker.SoulElytraAccessory;
 import me.pajic.accessorify.compat.arselixirum.WitchTotemOfUndyingAccessory;
+import me.pajic.accessorify.compat.netheriteextras.TotemOfNeverdyingAccessory;
 //?}
 
 @Mod("accessorify")
@@ -36,8 +37,10 @@ public class Main {
         modEventBus.addListener(SereneSeasonsCalendarAccessory::init);
         modEventBus.addListener(TotemOfFreezingAccessory::init);
         modEventBus.addListener(TotemOfIllusionAccessory::init);
-        //? if <= 1.21.1
+        //? if <= 1.21.1 {
         modEventBus.addListener(WitchTotemOfUndyingAccessory::init);
+        modEventBus.addListener(TotemOfNeverdyingAccessory::init);
+        //?}
     }
 
     public void onInitialize(FMLCommonSetupEvent event) {

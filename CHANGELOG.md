@@ -1,1 +1,1 @@
-- Removed ability to load shulker boxes into crossbows (this was definitely an intended feature).
+- Added compat for multiple Fabric mods that have compats on the Fabric version. 
