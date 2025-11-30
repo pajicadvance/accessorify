@@ -23,9 +23,9 @@ public class ShulkerBoxAccessoryContainerMenu implements Container, MenuProvider
     private final ItemStack shulker;
     protected NonNullList<ItemStack> items;
 
-    public ShulkerBoxAccessoryContainerMenu(ItemStack shulker) {
+    public ShulkerBoxAccessoryContainerMenu(ItemStack shulker, int size) {
         this.shulker = shulker;
-        this.items = NonNullList.withSize(27, ItemStack.EMPTY);
+        this.items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
     //? if < 1.21.10 {

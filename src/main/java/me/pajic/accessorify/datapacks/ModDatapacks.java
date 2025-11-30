@@ -10,14 +10,13 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 
+import static me.pajic.accessorify.config.SlotMode.UNIQUE_SLOT;
+
 public class ModDatapacks {
 
     @SubscribeEvent
     public static void registerDatapacks(AddPackFindersEvent event) {
-        String pathPrefix = switch (Main.CONFIG.slotMode.get()) {
-            case DEFAULT_SLOT, DEFAULT_SLOT_NO_COPY -> "default/";
-            case UNIQUE_SLOT -> "unique/";
-        };
+        String pathPrefix = (Main.CONFIG.slotMode.get() == UNIQUE_SLOT) ? "unique/" : "default/";
         if (Main.CONFIG.accessorySettings.compassAccessory.get()) event.addPackFinders(
                 MultiVersionUtil.withModNamespace(pathPrefix + "compass"),
                 PackType.SERVER_DATA,
