@@ -7,14 +7,13 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 
+import static me.pajic.accessorify.config.SlotMode.UNIQUE_SLOT;
+
 public class ModDatapacks {
 
     public static void init() {
         FabricLoader.getInstance().getModContainer(Main.MOD_ID).ifPresent(modContainer -> {
-            String pathPrefix = switch (Main.CONFIG.slotMode.get()) {
-                case DEFAULT_SLOT, DEFAULT_SLOT_NO_COPY -> "default/";
-                case UNIQUE_SLOT -> "unique/";
-            };
+            String pathPrefix = (Main.CONFIG.slotMode.get() == UNIQUE_SLOT) ? "unique/" : "default/";
             if (Main.CONFIG.accessorySettings.compassAccessory.get()) ResourceManagerHelper.registerBuiltinResourcePack(
                     MultiVersionUtil.withModNamespace(pathPrefix + "compass"),
                     modContainer, ResourcePackActivationType.ALWAYS_ENABLED
