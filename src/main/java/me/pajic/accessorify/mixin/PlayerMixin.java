@@ -57,7 +57,7 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
 	//? fabric {
-    /^@ModifyExpressionValue(
+    @ModifyExpressionValue(
             method = "tryToStartFallFlying",
             at = @At(
                     value = "INVOKE",
@@ -67,7 +67,7 @@ public abstract class PlayerMixin extends LivingEntity {
     private boolean modifyElytraCheck(boolean original, @Local ItemStack itemStack) {
         return AccessoryUtil.moddedElytraCheck(itemStack, (LivingEntity) (Object) this, original);
     }
-	^///?}
+	//?}
     *///?}
 
     @Inject(

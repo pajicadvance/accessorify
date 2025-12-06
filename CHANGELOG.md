@@ -1,9 +1,4 @@
-- A bunch of internal changes. This should not affect anything in the mod in any way. Please report any bugs or discrepancies at the issue tracker.
-- Modded lantern compatibility has been streamlined, simply add the lanterns to the `minecraft:lanterns` (MC 1.21.10 and above only) or `accessorify:lanterns` item tags via a datapack.
-- Added option "Prevent Elytra right-click equip" (disabled by default). You only really want to enable this if you want to allow "elytra macing".
-- Several mod compatibility plugins have been disabled for now:
-  - Deeper and Darker Soul Elytra
-  - Friends and Foes totems
-  - Reinforced Shulker Boxes
-  - Ars Elixirum totems
-- They will be added back later, so if these compatibilities are important to you, do not update to 2.4.0 until it's out of beta.
+**Please read the changelog for 2.4.0-beta.1 first**
+
+- Downgraded required Fabric Loader on MC 1.20.1 to 0.16.14 (Fixes crash on Forge 1.20.1 through Connector)
+- Fixed mod loading issue on NeoForge 1.21.1

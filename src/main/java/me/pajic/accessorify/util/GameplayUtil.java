@@ -13,7 +13,7 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.core.component.DataComponents;
 //? if < 1.21.10 {
 /*//? if fabric
-//import me.pajic.accessorify.util.compat.FabricSeasonsCompat;
+import me.pajic.accessorify.util.compat.FabricSeasonsCompat;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.ArmorItem;
 *///?}

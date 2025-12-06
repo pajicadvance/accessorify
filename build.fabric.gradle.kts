@@ -17,7 +17,7 @@ platform {
 			versionRange = ">=${prop("deps.fabric-api")}"
 		}
 		required("fabricloader") {
-			versionRange = ">=${libs.fabric.loader.get().version}"
+			versionRange = ">=${prop("deps.fabric")}"
 		}
 		required("fzzy_config") {
 			slug("fzzy-config")
@@ -119,7 +119,7 @@ dependencies {
 			officialMojangMappings()
 			if (hasProperty("deps.parchment")) parchment("org.parchmentmc.data:parchment-${prop("deps.parchment")}@zip")
 		})
-	modImplementation(libs.fabric.loader)
+	modImplementation("net.fabricmc:fabric-loader:${prop("deps.fabric")}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
 	modImplementation("me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}")
 	modImplementation("com.terraformersmc:modmenu:${prop("deps.modmenu")}")

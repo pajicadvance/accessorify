@@ -4,6 +4,7 @@ package me.pajic.accessorify.platform.fabric;
 
 import me.pajic.accessorify.platform.Platform;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.SharedConstants;
 
 public class FabricPlatform implements Platform {
 
@@ -19,7 +20,10 @@ public class FabricPlatform implements Platform {
 
 	@Override
 	public String mcVersion() {
+		//? if > 1.20.1
 		return FabricLoader.getInstance().getRawGameVersion();
+		//? if 1.20.1
+		//return SharedConstants.VERSION_STRING;
 	}
 
 	@Override

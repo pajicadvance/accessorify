@@ -25,6 +25,7 @@ platform {
 		}
 		optional("lambdynlights") {
 			slug("lambdynamiclights")
+			forgeVersionRange = "[0,)"
 		}
 	}
 }
