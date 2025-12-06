@@ -7,7 +7,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.data.SlotTypeLoader;
@@ -54,8 +53,7 @@ public class ProjectileWeaponItemMixin {
             LivingEntity shooter,
             boolean intangable,
             Operation<ItemStack> original,
-            @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed,
-            @Share("arrowStack") LocalRef<ItemStack> arrowStack
+            @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed
     ) {
         if (Accessorify.CONFIG.accessorySettings.arrowAccessory.get()) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(shooter);
@@ -64,9 +62,9 @@ public class ProjectileWeaponItemMixin {
                 if (container != null) {
                     int slot = ((PlayerExtension) shooter).accessorify$getArrowSlot();
                     ItemStack arrows = container.getAccessories().getItem(slot);
+					Accessorify.debugLog("useAmmoFromAccessorySlot {}", arrows.toString());
                     if (!arrows.isEmpty()) {
                         accessorySlotUsed.set(true);
-                        arrowStack.set(arrows);
                         //noinspection MixinExtrasOperationParameters
                         return original.call(weapon, container.getAccessories().getItem(slot), shooter, intangable);
                     }
@@ -87,8 +85,7 @@ public class ProjectileWeaponItemMixin {
     private static boolean emptyAccessorySlot(
             Inventory instance,
             ItemStack stack,
-            @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed,
-            @Share("arrowStack") LocalRef<ItemStack> arrowStack
+            @Share("accessorySlotUsed") LocalBooleanRef accessorySlotUsed
     ) {
         return !accessorySlotUsed.get();
     }

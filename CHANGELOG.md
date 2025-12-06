@@ -1,0 +1,9 @@
+- A bunch of internal changes. This should not affect anything in the mod in any way. Please report any bugs or discrepancies at the issue tracker.
+- Modded lantern compatibility has been streamlined, simply add the lanterns to the `minecraft:lanterns` (MC 1.21.10 and above only) or `accessorify:lanterns` item tags via a datapack.
+- Added option "Prevent Elytra right-click equip" (disabled by default). You only really want to enable this if you want to allow "elytra macing".
+- Several mod compatibility plugins have been disabled for now:
+  - Deeper and Darker Soul Elytra
+  - Friends and Foes totems
+  - Reinforced Shulker Boxes
+  - Ars Elixirum totems
+- They will be added back later, so if these compatibilities are important to you, do not update to 2.4.0 until it's out of beta.

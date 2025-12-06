@@ -133,9 +133,6 @@ dependencies {
 	}
 
 	// Supported mods
-	modLocalRuntime("maven.modrinth:lambdynamiclights:${prop("deps.ldl")}") {
-		exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
-	}
 	modCompileOnly("maven.modrinth:serene-seasons:${prop("deps.ss")}") {
 		exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
 	}

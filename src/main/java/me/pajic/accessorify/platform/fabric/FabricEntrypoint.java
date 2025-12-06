@@ -2,7 +2,7 @@ package me.pajic.accessorify.platform.fabric;
 
 //? fabric {
 
-import me.pajic.accessorify.Accessorify;
+/*import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.accessories.*;
 import me.pajic.accessorify.accessories.compat.FabricSeasonsCalendarAccessory;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
@@ -27,9 +27,9 @@ import net.minecraft.world.item.Items;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 //?} else {
-/*import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
+/^import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.pajic.accessorify.network.NetworkConstants;
-*///?}
+^///?}
 
 @SuppressWarnings("unused")
 public class FabricEntrypoint implements ModInitializer {
@@ -179,7 +179,7 @@ public class FabricEntrypoint implements ModInitializer {
 				NetworkEvents::handleSyncArrowSlotToServerPayload
 		);
 		//?} else {
-		/*ConfigApiJava.network().registerLenientC2S(
+		/^ConfigApiJava.network().registerLenientC2S(
 				NetworkConstants.OPEN_SHULKER_BOX,
 				Payloads.C2SOpenShulkerBoxPayload.class,
 				buf -> new Payloads.C2SOpenShulkerBoxPayload(buf.readInt()),
@@ -203,7 +203,7 @@ public class FabricEntrypoint implements ModInitializer {
 				buf -> new Payloads.C2SSyncArrowSlot(buf.readInt()),
 				NetworkEvents::handleSyncArrowSlotToServerPayload
 		);
-		*///?}
+		^///?}
 	}
 }
-//?}
+*///?}

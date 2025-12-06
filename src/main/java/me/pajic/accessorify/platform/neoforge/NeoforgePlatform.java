@@ -2,7 +2,7 @@ package me.pajic.accessorify.platform.neoforge;
 
 //? neoforge {
 
-/*import me.pajic.accessorify.platform.Platform;
+import me.pajic.accessorify.platform.Platform;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 
@@ -20,7 +20,7 @@ public class NeoforgePlatform implements Platform {
 
 	@Override
 	public String mcVersion() {
-		return FMLLoader/^? if 1.21.1 {^//^.versionInfo()^//^?} else {^/.getCurrent().getVersionInfo()/^?}^/.mcVersion();
+		return FMLLoader/*? if 1.21.1 {*//*.versionInfo()*//*?} else {*/.getCurrent().getVersionInfo()/*?}*/.mcVersion();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class NeoforgePlatform implements Platform {
 
 	@Override
 	public boolean isDebug() {
-		return !FMLLoader/^? if > 1.21.1 {^/.getCurrent()/^?}^/.isProduction();
+		return !FMLLoader/*? if > 1.21.1 {*/.getCurrent()/*?}*/.isProduction();
 	}
 }
-*///?}
+//?}

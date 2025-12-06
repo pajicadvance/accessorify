@@ -8,10 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //? fabric {
-import me.pajic.accessorify.platform.fabric.FabricPlatform;
-//?} neoforge {
-/*import me.pajic.accessorify.platform.neoforge.NeoforgePlatform;
-*///?}
+/*import me.pajic.accessorify.platform.fabric.FabricPlatform;
+*///?} neoforge {
+import me.pajic.accessorify.platform.neoforge.NeoforgePlatform;
+//?}
 
 @SuppressWarnings("LoggingSimilarMessage")
 public class Accessorify {
@@ -37,10 +37,10 @@ public class Accessorify {
 
 	private static Platform createPlatformInstance() {
 		//? fabric {
-		return new FabricPlatform();
-		//?} neoforge {
-		/*return new NeoforgePlatform();
-		*///?}
+		/*return new FabricPlatform();
+		*///?} neoforge {
+		return new NeoforgePlatform();
+		//?}
 	}
 
 	public static ResourceLocation id(String path) {

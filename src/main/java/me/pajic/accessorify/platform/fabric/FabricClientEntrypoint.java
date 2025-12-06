@@ -2,7 +2,7 @@ package me.pajic.accessorify.platform.fabric;
 
 //? fabric {
 
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
+/*import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.accessories.compat.FabricSeasonsCalendarAccessory;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
@@ -32,9 +32,9 @@ import net.minecraft.world.item.Items;
 //? if > 1.20.1 {
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 //?} else {
-/*import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
+/^import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.pajic.accessorify.network.NetworkConstants;
-*///?}
+^///?}
 
 @SuppressWarnings("unused")
 public class FabricClientEntrypoint implements ClientModInitializer {
@@ -106,7 +106,6 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 		KeyBindingHelper.registerKeyBinding(ModKeybinds.USE_SPYGLASS);
 		KeyBindingHelper.registerKeyBinding(ModKeybinds.OPEN_WIDGET);
 		ClientTickEvents.END_CLIENT_TICK.register(ModKeybinds::onClientTick);
-		ClientLifecycleEvents.CLIENT_STARTED.register(ModKeybinds::onClientStarted);
 	}
 
 	private static void initNetworking() {
@@ -120,7 +119,7 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 				NetworkClientEvents::handleSyncArrowSlotToClientPayload
 		);
 		//?} else {
-		/*ConfigApiJava.network().registerLenientS2C(
+		/^ConfigApiJava.network().registerLenientS2C(
 				NetworkConstants.S2C_SYNC_SHULKER_SLOT,
 				Payloads.S2CSyncShulkerSlot.class,
 				buf -> new Payloads.S2CSyncShulkerSlot(buf.readInt()),
@@ -132,7 +131,7 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 				buf -> new Payloads.S2CSyncArrowSlot(buf.readInt()),
 				NetworkClientEvents::handleSyncArrowSlotToClientPayload
 		);
-		*///?}
+		^///?}
 	}
 }
-//?}
+*///?}

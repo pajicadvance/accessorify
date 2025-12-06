@@ -124,7 +124,6 @@ dependencies {
 	implementation("io.wispforest:owo-lib-neoforge:${prop("deps.owo")}")
 
 	// Supported mods
-	runtimeOnly("maven.modrinth:lambdynamiclights:${prop("deps.ldl")}")
 	compileOnly("maven.modrinth:serene-seasons:${prop("deps.ss")}")
 	compileOnly("maven.modrinth:raised:${prop("deps.raised")}")
 	compileOnly("maven.modrinth:notes:${prop("deps.notes")}")

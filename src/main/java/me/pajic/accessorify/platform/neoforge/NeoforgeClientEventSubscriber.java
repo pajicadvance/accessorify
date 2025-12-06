@@ -2,7 +2,7 @@ package me.pajic.accessorify.platform.neoforge;
 
 //? neoforge {
 
-/*import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
+import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.keybind.ModKeybinds;
@@ -11,6 +11,7 @@ import me.pajic.accessorify.renderer.LanternAccessoryRenderer;
 import me.pajic.accessorify.util.AccessoryUtil;
 import me.pajic.accessorify.util.CompatFlags;
 import me.pajic.accessorify.util.GeneralUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -24,6 +25,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
@@ -53,7 +55,7 @@ public class NeoforgeClientEventSubscriber {
 	}
 
 	@SubscribeEvent
-	private void initRegistry(FMLClientSetupEvent event) {
+	private static void initRegistry(FMLClientSetupEvent event) {
 		//? if > 1.21.1
 		AccessoriesRendererRegistry.registerRenderer(Accessorify.id("lantern_renderer"), LanternAccessoryRenderer::new);
 		AccessoryUtil.registerEmptyRenderer(
@@ -74,7 +76,7 @@ public class NeoforgeClientEventSubscriber {
 	@SubscribeEvent
 	private static void initTagsLoadedEvents(TagsUpdatedEvent event) {
 		if (!tagEventsProcessed) {
-			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^//^getRegistryAccess()^//^?} else {^/getLookupProvider()/^?}^/.lookupOrThrow(Registries.ITEM);
+			HolderLookup<Item> lookup = event./*? if < 1.21.10 {*//*getRegistryAccess()*//*?} else {*/getLookupProvider()/*?}*/.lookupOrThrow(Registries.ITEM);
 			lookup.getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
 					AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 			);
@@ -89,12 +91,17 @@ public class NeoforgeClientEventSubscriber {
 	}
 
 	@SubscribeEvent
-	public static void initKeybinds(RegisterKeyMappingsEvent event) {
+	private static void initKeybinds(RegisterKeyMappingsEvent event) {
 		//? if >= 1.21.10
 		event.registerCategory(ModKeybinds.MOD_KEYS);
 		event.register(ModKeybinds.OPEN_WIDGET);
 		event.register(ModKeybinds.OPEN_ENDER_CHEST);
 		event.register(ModKeybinds.USE_SPYGLASS);
 	}
+
+	@SubscribeEvent
+	private static void onClientTick(ClientTickEvent.Post event) {
+		ModKeybinds.onClientTick(Minecraft.getInstance());
+	}
 }
-*///?}
+//?}

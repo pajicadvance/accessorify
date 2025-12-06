@@ -2,7 +2,7 @@ package me.pajic.accessorify.platform.fabric;
 
 //? fabric {
 
-import me.pajic.accessorify.platform.Platform;
+/*import me.pajic.accessorify.platform.Platform;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatform implements Platform {
@@ -32,4 +32,4 @@ public class FabricPlatform implements Platform {
 		return FabricLoader.getInstance().isDevelopmentEnvironment();
 	}
 }
-//?}
+*///?}

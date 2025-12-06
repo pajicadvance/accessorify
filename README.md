@@ -68,7 +68,7 @@ When equipped, pressing and holding C (default keybind, configurable) uses the s
 
 ### Lantern
 
-Can now be equipped in the Belt slot, or the Lantern slot in unique slot mode. Modded lanterns are supported if the mod adds them to the `minecraft:lanterns` (MC 1.21.10 and above only) or `accessorify:lanterns` item tags.
+Can now be equipped in the Belt slot, or the Lantern slot in unique slot mode.
 
 When equipped, the lantern will show up on the player and emit light matching the lantern's light level. A dynamic lights mod needs to be installed for the lantern to emit light.
 
@@ -86,7 +86,7 @@ When equipped, holding X (default keybind, configurable) brings up a shulker box
 
 ### Arrows
 
-Can now be equipped in the Arrow slot, which is added by this mod. Modded arrows are supported if the mod adds them to the `minecraft:arrows` tag.
+Can now be equipped in the Arrow slot, which is added by this mod.
 
 When holding a ranged weapon, holding X brings up an arrow selection widget. Scrolling with the mouse wheel while the widget is open selects the arrow slot to be used by the weapon. Releasing the sneak key closes the widget. By default you have 3 arrow slots. If you want more (or less), follow the instructions near the bottom of the page.
 
@@ -100,8 +100,8 @@ Type `arrow` in the slot box instead to modify the amount of arrow slots in the 
 
 ## Mod compatibility
 
-- Compatible with most lantern types added by other mods.
-- Compatible with most arrow types added by other mods.
+- Add modded lanterns to the `minecraft:lanterns` (MC 1.21.10 and above only) or `accessorify:lanterns` item tags via a datapack to add mod support. Lanterns from [Additional Lanterns](https://modrinth.com/mod/additional-lanterns) and [Aurora's Lanterns](https://modrinth.com/mod/auroraslanterns) are supported out of the box.
+- Add modded arrows to the `minecraft:arrows` item tag via a datapack to add mod support.
 - [Serene Seasons](https://modrinth.com/mod/serene-seasons) or [Fabric Seasons](https://modrinth.com/mod/fabric-seasons) + [Fabric Seasons Extras](https://modrinth.com/mod/fabric-seasons-extras): Calendar equippable in the Charm/Calendar slot and shows the current season in the info overlay.
 - [Notes](https://modrinth.com/mod/notes): If "Hide gameplay info from F3 menu in survival" is on, the buttons used to add info such as coordinates to notes will be disabled unless you have a compass equipped.
 - For specific compatibility with certain mods, check out [Accessorify Plus](https://modrinth.com/mod/gk1h-accessorify+).

@@ -2,10 +2,11 @@ package me.pajic.accessorify;
 
 import com.moulberry.mixinconstraints.MixinConstraints;
 import com.moulberry.mixinconstraints.mixin.MixinConstraintsBootstrap;
-import me.pajic.accessorify.util.CompatFlags;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+//? if fabric
+//import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.List;
 import java.util.Set;
@@ -30,11 +31,11 @@ public class AccessorifyMixinPlugin implements IMixinConfigPlugin {
 				//? if > 1.21.1 || neoforge {
 				true
 				 //?} else if 1.20.1 {
-				/*CompatFlags.CONNECTOR_PRESENT ?
+				/*connectorPresent() ?
 						!DISABLE_IF_FORGE.contains(mixinClassName) :
 						!DISABLE_IF_FABRIC.contains(mixinClassName)
 				*///?} else if 1.21.1 {
-				/*!CompatFlags.CONNECTOR_PRESENT || !DISABLE_IF_FORGE.contains(mixinClassName)
+				/*!connectorPresent() || !DISABLE_IF_FORGE.contains(mixinClassName)
 				*///?}
 				, mixinClassName
 		);
@@ -47,6 +48,13 @@ public class AccessorifyMixinPlugin implements IMixinConfigPlugin {
 		return b && MixinConstraints.shouldApplyMixin(mixinClassName);
 	}
 
+	private boolean connectorPresent() {
+		//? if fabric
+		//return FabricLoader.getInstance().isModLoaded("fabric_api");
+		//? if neoforge
+		return false;
+	}
+
     @Override
     public void onLoad(String mixinPackage) {
 		this.mixinPackage = mixinPackage;
@@ -55,7 +63,7 @@ public class AccessorifyMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public String getRefMapperConfig() {
-        return "";
+        return null;
     }
 
     @Override
