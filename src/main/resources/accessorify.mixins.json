@@ -1,0 +1,12 @@
+{
+  "package": "me.pajic.accessorify.mixin",
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "me.pajic.accessorify.AccessorifyMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [],
+  "client": []
+}

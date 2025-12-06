@@ -19,18 +19,50 @@ platform {
 			slug("fzzy-config")
 			forgeVersionRange = "[0,)"
 		}
+		required("accessories") {
+			slug("accessories")
+			forgeVersionRange = "[0,)"
+		}
+		optional("lambdynlights") {
+			slug("lambdynamiclights")
+		}
 	}
 }
 
 stonecutter {
-	val dir = eval(current.version, ">1.21.10")
+	val dir1 = eval(current.version, ">1.21.10")
 	replacements.string {
-		direction = dir
+		direction = dir1
 		replace("ValidatedIdentifier", "ValidatedIdentifier")
 	}
 	replacements.string {
-		direction = dir
+		direction = dir1
 		replace("ResourceLocation", "Identifier")
+	}
+	val dir2 = eval(current.version, ">=1.21.10")
+	replacements.string {
+		direction = dir2
+		replace("ExpandedSimpleContainer ", "ExpandedContainer ")
+	}
+	replacements.string {
+		direction = dir2
+		replace("io.wispforest.accessories.impl.ExpandedSimpleContainer", "io.wispforest.accessories.impl.core.ExpandedContainer")
+	}
+	replacements.string {
+		direction = dir2
+		replace("io.wispforest.accessories.api.Accessory", "io.wispforest.accessories.api.core.Accessory")
+	}
+	replacements.string {
+		direction = dir2
+		replace("io.wispforest.accessories.api.AccessoryRegistry", "io.wispforest.accessories.api.core.AccessoryRegistry")
+	}
+	replacements.string {
+		direction = dir2
+		replace("io.wispforest.accessories.api.client.AccessoryRenderer", "io.wispforest.accessories.api.client.renderers.AccessoryRenderer")
+	}
+	replacements.string {
+		direction = dir2
+		replace("io.wispforest.accessories.api.client.SimpleAccessoryRenderer", "io.wispforest.accessories.api.client.renderers.SimpleAccessoryRenderer")
 	}
 }
 
@@ -42,7 +74,6 @@ fletchingTable {
 
 neoForge {
 	version = property("deps.neoforge") as String
-	accessTransformers.from(rootProject.file("src/main/resources/aw/${stonecutter.current.version}.cfg"))
 	validateAccessTransformers = true
 
 	if (hasProperty("deps.parchment")) parchment {
@@ -75,6 +106,8 @@ neoForge {
 repositories {
 	maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
 	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
+	maven("https://maven.wispforest.io/releases/") { name = "Wisp Forest" }
+	maven("https://maven.su5ed.dev/releases") { name = "Su5ed" }
 	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
 	maven("https://jitpack.io") { name = "Jitpack" }
 	exclusiveContent {
@@ -87,8 +120,19 @@ dependencies {
 	implementation( "me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}+neoforge")
 	implementation("com.moulberry:mixinconstraints:${prop("deps.mixinconstraints")}")
 	jarJar("com.moulberry:mixinconstraints:${prop("deps.mixinconstraints")}")
-	implementation("com.github.ramixin:mixson-neoforge:${prop("deps.mixson")}")
-	jarJar("com.github.ramixin:mixson-neoforge:${prop("deps.mixson")}")
+	implementation("io.wispforest:accessories-neoforge:${prop("deps.accessories")}")
+	implementation("io.wispforest:owo-lib-neoforge:${prop("deps.owo")}")
+
+	// Supported mods
+	runtimeOnly("maven.modrinth:lambdynamiclights:${prop("deps.ldl")}")
+	compileOnly("maven.modrinth:serene-seasons:${prop("deps.ss")}")
+	compileOnly("maven.modrinth:raised:${prop("deps.raised")}")
+	compileOnly("maven.modrinth:notes:${prop("deps.notes")}")
+	// 1.21.1 only mods
+	if (stonecutter.eval(stonecutter.current.version, "1.21.1")) {
+		compileOnly("maven.modrinth:aileron:${prop("deps.aileron")}")
+		compileOnly("maven.modrinth:extrasoundsforge:${prop("deps.extrasounds")}")
+	}
 }
 
 tasks.named("createMinecraftArtifacts") {
