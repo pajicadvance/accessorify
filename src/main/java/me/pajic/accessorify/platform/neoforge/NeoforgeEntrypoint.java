@@ -2,7 +2,7 @@ package me.pajic.accessorify.platform.neoforge;
 
 //? neoforge {
 
-import me.pajic.accessorify.Accessorify;
+/*import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.accessories.*;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.config.SlotMode;
@@ -180,7 +180,7 @@ public class NeoforgeEntrypoint {
 	@SubscribeEvent
 	private static void initTagsLoadedEvents(TagsUpdatedEvent event) {
 		if (!tagEventsProcessed) {
-			HolderLookup<Item> lookup = event./*? if < 1.21.10 {*//*getRegistryAccess()*//*?} else {*/getLookupProvider()/*?}*/.lookupOrThrow(Registries.ITEM);
+			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^//^getRegistryAccess()^//^?} else {^/getLookupProvider()/^?}^/.lookupOrThrow(Registries.ITEM);
 			lookup.getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
 					AccessoryUtil.registerAccessory(itemHolder.value(), new ArrowAccessory())
 			);
@@ -235,4 +235,4 @@ public class NeoforgeEntrypoint {
 		);
 	}
 }
-//?}
+*///?}

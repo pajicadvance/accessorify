@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.item.ItemStack;
 //? if >= 1.21.1 && fabric
-//import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 //? if < 1.21.1
 //import me.fzzyhmstrs.fzzy_config.networking.api.ServerPlayNetworkContext;
 
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 public class NetworkEvents {
 	//? if fabric {
-    /*//? if >= 1.21.1 {
+    //? if >= 1.21.1 {
     public static void handleOpenShulkerBoxPayload(Payloads.C2SOpenShulkerBoxPayload payload, ServerPlayNetworking.Context context) {
         openShulkerBox(context.player(), payload.index());
     }
@@ -34,7 +34,7 @@ public class NetworkEvents {
         syncArrowSlotToServer(context.player(), payload.slot());
     }
     //?} else {
-    /^public static void handleOpenShulkerBoxPayload(Payloads.C2SOpenShulkerBoxPayload payload, ServerPlayNetworkContext context) {
+    /*public static void handleOpenShulkerBoxPayload(Payloads.C2SOpenShulkerBoxPayload payload, ServerPlayNetworkContext context) {
         openShulkerBox(context.player(), payload.index());
     }
     public static void handleOpenEnderContainerPayload(Payloads.C2SOpenEnderContainerPayload payload, ServerPlayNetworkContext context) {
@@ -46,8 +46,8 @@ public class NetworkEvents {
     public static void handleSyncArrowSlotToServerPayload(Payloads.C2SSyncArrowSlot payload, ServerPlayNetworkContext context) {
         syncArrowSlotToServer(context.player(), payload.slot());
     }
-    ^///?}
-	*///?}
+    *///?}
+	//?}
 
     public static void openShulkerBox(ServerPlayer player, int index) {
         Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(player);

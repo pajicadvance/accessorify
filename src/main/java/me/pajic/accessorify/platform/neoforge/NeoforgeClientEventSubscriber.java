@@ -2,7 +2,7 @@ package me.pajic.accessorify.platform.neoforge;
 
 //? neoforge {
 
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
+/*import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.keybind.ModKeybinds;
@@ -76,7 +76,7 @@ public class NeoforgeClientEventSubscriber {
 	@SubscribeEvent
 	private static void initTagsLoadedEvents(TagsUpdatedEvent event) {
 		if (!tagEventsProcessed) {
-			HolderLookup<Item> lookup = event./*? if < 1.21.10 {*//*getRegistryAccess()*//*?} else {*/getLookupProvider()/*?}*/.lookupOrThrow(Registries.ITEM);
+			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^//^getRegistryAccess()^//^?} else {^/getLookupProvider()/^?}^/.lookupOrThrow(Registries.ITEM);
 			lookup.getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
 					AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 			);
@@ -104,4 +104,4 @@ public class NeoforgeClientEventSubscriber {
 		ModKeybinds.onClientTick(Minecraft.getInstance());
 	}
 }
-//?}
+*///?}

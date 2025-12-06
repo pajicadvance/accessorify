@@ -6,7 +6,7 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 //? if fabric
-//import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.List;
 import java.util.Set;
@@ -50,9 +50,9 @@ public class AccessorifyMixinPlugin implements IMixinConfigPlugin {
 
 	private boolean connectorPresent() {
 		//? if fabric
-		//return FabricLoader.getInstance().isModLoaded("fabric_api");
+		return FabricLoader.getInstance().isModLoaded("fabric_api");
 		//? if neoforge
-		return false;
+		//return false;
 	}
 
     @Override
