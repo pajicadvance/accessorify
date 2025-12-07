@@ -67,7 +67,7 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 		AccessoriesRendererRegistry.registerRenderer(Accessorify.id("lantern_renderer"), LanternAccessoryRenderer::new);
 		AccessoryUtil.registerEmptyRenderer(
 				Items.CLOCK, Items.COMPASS, Items.ELYTRA, Items.ENDER_CHEST,
-				Items.RECOVERY_COMPASS, Items.SPYGLASS, Items.TOTEM_OF_UNDYING
+				Items.RECOVERY_COMPASS, Items.SPYGLASS
 		);
 	}
 
@@ -91,8 +91,11 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.LANTERNS).forEach(itemHolder ->
 						AccessoryUtil.bindItemToLanternRenderer(itemHolder.value())
 				);
-				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(blockHolder ->
-						AccessoryUtil.registerEmptyRenderer(blockHolder.value().asItem())
+				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(itemHolder ->
+						AccessoryUtil.registerEmptyRenderer(itemHolder.value().asItem())
+				);
+				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.TOTEMS).forEach(itemHolder ->
+						AccessoryUtil.registerEmptyRenderer(itemHolder.value().asItem())
 				);
 				tagEventsProcessed = true;
 			}

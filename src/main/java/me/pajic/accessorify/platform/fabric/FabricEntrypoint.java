@@ -123,7 +123,6 @@ public class FabricEntrypoint implements ModInitializer {
 		AccessoryUtil.registerAccessory(Items.ENDER_CHEST, new EnderChestAccessory());
 		AccessoryUtil.registerAccessory(Items.RECOVERY_COMPASS, new RecoveryCompassAccessory());
 		AccessoryUtil.registerAccessory(Items.SPYGLASS, new SpyglassAccessory());
-		AccessoryUtil.registerAccessory(Items.TOTEM_OF_UNDYING, new TotemOfUndyingAccessory());
 	}
 
 	private static void initRegistryAddedCallbacks() {
@@ -146,8 +145,11 @@ public class FabricEntrypoint implements ModInitializer {
 				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.LANTERNS).forEach(itemHolder ->
 						AccessoryUtil.registerAccessory(itemHolder.value(), new LanternAccessory())
 				);
-				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(blockHolder ->
-						AccessoryUtil.registerAccessory(blockHolder.value().asItem(), new ShulkerBoxAccessory())
+				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(itemHolder ->
+						AccessoryUtil.registerAccessory(itemHolder.value().asItem(), new ShulkerBoxAccessory())
+				);
+				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.TOTEMS).forEach(itemHolder ->
+						AccessoryUtil.registerAccessory(itemHolder.value().asItem(), new TotemOfUndyingAccessory())
 				);
 				tagEventsProcessed = true;
 			}

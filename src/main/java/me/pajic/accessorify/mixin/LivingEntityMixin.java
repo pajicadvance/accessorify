@@ -6,7 +6,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.util.AccessoryUtil;
 import me.pajic.accessorify.util.ClientUtil;
+import me.pajic.accessorify.util.FakeHandHolder;
 import me.pajic.accessorify.util.GameplayUtil;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -18,21 +20,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class LivingEntityMixin {
 
     @Shadow protected abstract void updateUsingItem(ItemStack usingItem);
-
-    @ModifyExpressionValue(
-            method = "checkTotemDeathProtection",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/LivingEntity;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"
-            )
-    )
-    private ItemStack tryConsumeTotemAccessory(ItemStack original) {
-        if (Accessorify.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
-            ItemStack stack = AccessoryUtil.getAccessoryStack((LivingEntity) (Object) this, GameplayUtil::isTotem);
-            return stack.isEmpty() ? original : stack;
-        }
-        return original;
-    }
 
     @WrapMethod(method = "updatingUsingItem")
     private void useSpyglassAccessory(Operation<Void> original) {
@@ -58,4 +45,17 @@ public abstract class LivingEntityMixin {
         return original;
     }
     *///?}
+
+	@WrapMethod(method = "getItemInHand")
+	private ItemStack checkFakeHandForTotem(InteractionHand hand, Operation<ItemStack> original) {
+		if (hand == FakeHandHolder.FAKE_HAND && Accessorify.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
+			return AccessoryUtil.getAccessoryStack((LivingEntity) (Object) this, GameplayUtil::isTotem);
+		}
+		return original.call(hand);
+	}
+
+	@WrapMethod(method = "setItemInHand")
+	private void skipFakeHand(InteractionHand hand, ItemStack stack, Operation<Void> original) {
+		if (hand != FakeHandHolder.FAKE_HAND) original.call(hand, stack);
+	}
 }

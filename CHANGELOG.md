@@ -1,4 +1,3 @@
 **Please read the changelog for 2.4.0-beta.1 first**
 
-- Downgraded required Fabric Loader on MC 1.20.1 to 0.16.14 (Fixes crash on Forge 1.20.1 through Connector)
-- Fixed mod loading issue on NeoForge 1.21.1
+- Modded totem compatibility has been streamlined, simply add the totems to the `accessorify:totems` item tag via a datapack. Totems from Friends and Foes, Ars Elixirum and Netherite Extras are supported out of the box.

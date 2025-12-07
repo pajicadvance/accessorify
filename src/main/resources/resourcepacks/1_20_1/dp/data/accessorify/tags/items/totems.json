@@ -1,0 +1,8 @@
+{
+  "values": [
+    "minecraft:totem_of_undying",
+    { "id": "#friendsandfoes:totems", "required": false },
+    { "id": "elixirum:witch_totem_of_undying", "required": false },
+    { "id": "netheriteextras:totem_of_neverdying", "required": false }
+  ]
+}

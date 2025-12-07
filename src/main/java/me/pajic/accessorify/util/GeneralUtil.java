@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 public class GeneralUtil {
 	public static final TagKey<Item> LANTERNS = TagKey.create(Registries.ITEM, Accessorify.id("lanterns"));
 	public static final TagKey<Item> SHULKER_BOXES = TagKey.create(Registries.ITEM, Accessorify.id("shulker_boxes"));
+	public static final TagKey<Item> TOTEMS = TagKey.create(Registries.ITEM, Accessorify.id("totems"));
 
 	public static ResourceLocation vanillaId(String path) {
 		//? if 1.20.1

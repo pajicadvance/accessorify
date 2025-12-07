@@ -14,7 +14,7 @@ The configuration menu can be accessed using [ModMenu](https://modrinth.com/mod/
 
 The Fabric 1.20.1 version works on Forge using [Sinytra Connector](https://modrinth.com/mod/connector).
 
-For additional compatibility with items added by other mods (e.g. totems, elytras and shulker variants), check out [Accessorify Plus](https://modrinth.com/mod/gk1h-accessorify+).
+For additional compatibility with items added by other mods (e.g. elytras and shulker variants), check out [Accessorify Plus](https://modrinth.com/mod/gk1h-accessorify+).
 
 ## Slot modes
 
@@ -101,6 +101,7 @@ Type `arrow` in the slot box instead to modify the amount of arrow slots in the 
 ## Mod compatibility
 
 - Add modded lanterns to the `minecraft:lanterns` (MC 1.21.10 and above only) or `accessorify:lanterns` item tags via a datapack to add mod support. Lanterns from [Additional Lanterns](https://modrinth.com/mod/additional-lanterns) and [Aurora's Lanterns](https://modrinth.com/mod/auroraslanterns) are supported out of the box.
+- Add modded totems to the `accessorify:totems` item tag via a datapack to add mod support. Totems from [Friends and Foes](https://modrinth.com/mod/friends-and-foes), [Netherite Extras](https://modrinth.com/mod/netherite-extras) and [Ars Elixirum](https://modrinth.com/mod/ars-elixirum) are supported out of the box.
 - Add modded arrows to the `minecraft:arrows` item tag via a datapack to add mod support.
 - [Serene Seasons](https://modrinth.com/mod/serene-seasons) or [Fabric Seasons](https://modrinth.com/mod/fabric-seasons) + [Fabric Seasons Extras](https://modrinth.com/mod/fabric-seasons-extras): Calendar equippable in the Charm/Calendar slot and shows the current season in the info overlay.
 - [Notes](https://modrinth.com/mod/notes): If "Hide gameplay info from F3 menu in survival" is on, the buttons used to add info such as coordinates to notes will be disabled unless you have a compass equipped.

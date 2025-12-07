@@ -24,9 +24,9 @@ public class GameplayUtil {
 
 	public static boolean isTotem(ItemStack stack) {
 		//? if <= 1.21.1
-		//return stack.is(Items.TOTEM_OF_UNDYING);
+		//return stack.is(GeneralUtil.TOTEMS);
 		//? if > 1.21.1
-		return stack.has(DataComponents.DEATH_PROTECTION);
+		return stack.is(GeneralUtil.TOTEMS) || stack.has(DataComponents.DEATH_PROTECTION);
 	}
 
 	public static boolean isLantern(ItemStack stack) {
