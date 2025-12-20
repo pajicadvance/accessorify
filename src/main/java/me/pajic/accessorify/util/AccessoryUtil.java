@@ -114,6 +114,7 @@ public class AccessoryUtil {
 
     public static void registerEmptyRenderer(Item... items) {
         for (Item item : items) {
+			Accessorify.debugLog("Binding {} to empty renderer", item.getDescriptionId());
             //? if <= 1.21.1
             //AccessoriesRendererRegistry.registerNoRenderer(item);
             //? if > 1.21.1
@@ -122,6 +123,7 @@ public class AccessoryUtil {
     }
 
     public static void bindItemToLanternRenderer(Item item) {
+		Accessorify.debugLog("Binding {} to lantern renderer", item.getDescriptionId());
         //? if <= 1.21.1
         //AccessoriesRendererRegistry.registerRenderer(item, LanternAccessoryRenderer::new);
         //? if > 1.21.1

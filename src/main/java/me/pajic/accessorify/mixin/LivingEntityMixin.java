@@ -48,7 +48,7 @@ public abstract class LivingEntityMixin {
 
 	@WrapMethod(method = "getItemInHand")
 	private ItemStack checkFakeHandForTotem(InteractionHand hand, Operation<ItemStack> original) {
-		if (hand == FakeHandHolder.FAKE_HAND && Accessorify.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
+		if (Accessorify.CONFIG.accessorySettings.totemOfUndyingAccessory.get() && hand == FakeHandHolder.FAKE_HAND) {
 			return AccessoryUtil.getAccessoryStack((LivingEntity) (Object) this, GameplayUtil::isTotem);
 		}
 		return original.call(hand);
@@ -56,6 +56,9 @@ public abstract class LivingEntityMixin {
 
 	@WrapMethod(method = "setItemInHand")
 	private void skipFakeHand(InteractionHand hand, ItemStack stack, Operation<Void> original) {
-		if (hand != FakeHandHolder.FAKE_HAND) original.call(hand, stack);
+		if (Accessorify.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
+			if (hand != FakeHandHolder.FAKE_HAND) original.call(hand, stack);
+		}
+		else original.call(hand, stack);
 	}
 }

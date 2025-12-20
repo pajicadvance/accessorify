@@ -56,7 +56,6 @@ public class NeoforgeClientEventSubscriber {
 
 	@SubscribeEvent
 	private static void initRegistry(FMLClientSetupEvent event) {
-		//? if > 1.21.1
 		AccessoriesRendererRegistry.registerRenderer(Accessorify.id("lantern_renderer"), LanternAccessoryRenderer::new);
 		AccessoryUtil.registerEmptyRenderer(
 				Items.CLOCK, Items.COMPASS, Items.ELYTRA, Items.ENDER_CHEST,
@@ -75,8 +74,8 @@ public class NeoforgeClientEventSubscriber {
 
 	@SubscribeEvent
 	private static void initTagsLoadedEvents(TagsUpdatedEvent event) {
-		if (!tagEventsProcessed) {
-			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^//^getRegistryAccess()^//^?} else {^/getLookupProvider()/^?}^/.lookupOrThrow(Registries.ITEM);
+		if (!tagEventsProcessed && event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
+			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^/getRegistryAccess()/^?} else {^//^getLookupProvider()^//^?}^/.lookupOrThrow(Registries.ITEM);
 			lookup.getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
 					AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 			);
@@ -86,6 +85,8 @@ public class NeoforgeClientEventSubscriber {
 			lookup.getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(blockHolder ->
 					AccessoryUtil.registerEmptyRenderer(blockHolder.value().asItem())
 			);
+			//? if <= 1.21.1
+			Minecraft.getInstance().reloadResourcePacks();
 			tagEventsProcessed = true;
 		}
 	}
@@ -93,7 +94,7 @@ public class NeoforgeClientEventSubscriber {
 	@SubscribeEvent
 	private static void initKeybinds(RegisterKeyMappingsEvent event) {
 		//? if >= 1.21.10
-		event.registerCategory(ModKeybinds.MOD_KEYS);
+		//event.registerCategory(ModKeybinds.MOD_KEYS);
 		event.register(ModKeybinds.OPEN_WIDGET);
 		event.register(ModKeybinds.OPEN_ENDER_CHEST);
 		event.register(ModKeybinds.USE_SPYGLASS);

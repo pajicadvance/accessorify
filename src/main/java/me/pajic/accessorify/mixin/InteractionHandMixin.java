@@ -1,5 +1,6 @@
 package me.pajic.accessorify.mixin;
 
+import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.util.FakeHandHolder;
 import net.minecraft.world.InteractionHand;
 import org.spongepowered.asm.mixin.Final;
@@ -22,10 +23,12 @@ public class InteractionHandMixin {
 	}
 
 	static {
-		ArrayList<InteractionHand> list = new ArrayList<>(Arrays.asList($VALUES));
-		int size = list.size();
-		FakeHandHolder.FAKE_HAND = invokeInit("FAKE_HAND", size);
-		list.add(FakeHandHolder.FAKE_HAND);
-		$VALUES = list.toArray(new InteractionHand[size + 1]);
+		if (Accessorify.CONFIG.accessorySettings.totemOfUndyingAccessory.get()) {
+			ArrayList<InteractionHand> list = new ArrayList<>(Arrays.asList($VALUES));
+			int size = list.size();
+			FakeHandHolder.FAKE_HAND = invokeInit("FAKE_HAND", size);
+			list.add(FakeHandHolder.FAKE_HAND);
+			$VALUES = list.toArray(new InteractionHand[size + 1]);
+		}
 	}
 }

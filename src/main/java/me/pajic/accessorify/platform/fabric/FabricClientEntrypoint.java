@@ -24,6 +24,7 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 //
@@ -84,7 +85,7 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 
 	private static void initTagsLoadedEvents() {
 		CommonLifecycleEvents.TAGS_LOADED.register((registries, client) -> {
-			if (!tagEventsProcessed) {
+			if (!tagEventsProcessed && client) {
 				registries.lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
 						AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 				);
@@ -97,6 +98,8 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.TOTEMS).forEach(itemHolder ->
 						AccessoryUtil.registerEmptyRenderer(itemHolder.value().asItem())
 				);
+				//? if <= 1.21.1
+				//Minecraft.getInstance().reloadResourcePacks();
 				tagEventsProcessed = true;
 			}
 		});

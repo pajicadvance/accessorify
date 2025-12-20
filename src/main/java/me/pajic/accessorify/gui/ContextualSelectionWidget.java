@@ -33,10 +33,10 @@ public class ContextualSelectionWidget {
     private static final Minecraft MC = Minecraft.getInstance();
 
     public static void render(GuiGraphics guiGraphics) {
-        if (Accessorify.CONFIG.accessorySettings.shulkerBoxAccessory.get() && MC.player != null && MC.level != null) {
+        if (MC.player != null && MC.level != null) {
             Optional<AccessoriesCapability> ac = AccessoriesCapability.getOptionally(MC.player);
             if (ac.isPresent()) {
-                if (GameplayUtil.isHoldingProjectileWeapon(MC.player)) {
+                if (Accessorify.CONFIG.accessorySettings.arrowAccessory.get() && GameplayUtil.isHoldingProjectileWeapon(MC.player)) {
                     AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(MC.level, "arrow"));
                     if (container != null) {
 						ExpandedContainer arrows = container.getAccessories();
@@ -82,7 +82,7 @@ public class ContextualSelectionWidget {
                             }
                         }
                     }
-                } else {
+                } else if (Accessorify.CONFIG.accessorySettings.shulkerBoxAccessory.get()) {
                     AccessoriesContainer container = ac.get().getContainer(SlotTypeLoader.getSlotType(MC.level, "shulker"));
                     if (container != null) {
 						ExpandedContainer shulkers = container.getAccessories();

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import io.wispforest.accessories.api.client.renderers.AccessoryRenderer;
 import io.wispforest.accessories.api.client.renderers.SimpleAccessoryRenderer;
 import io.wispforest.accessories.api.slot.SlotReference;
+import me.pajic.accessorify.Accessorify;
 import me.pajic.accessorify.util.GameplayUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
