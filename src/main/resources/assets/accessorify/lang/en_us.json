@@ -36,6 +36,8 @@
   "accessorify.client_config.spyglassZoomSettings": "Spyglass zoom settings",
   "accessorify.client_config.spyglassZoomSettings.scrollableZoom": "Scrollable zoom level",
   "accessorify.client_config.spyglassZoomSettings.rememberZoomLevel": "Remember zoom level",
+  "accessorify.client_config.moddedLanternWorkaround": "Modded lantern workaround",
+  "accessorify.client_config.moddedLanternWorkaround.desc": "Does a resource pack reload on first world load to align modded lanterns to display correctly on the player when equipped. Only needed if you want to wear lanterns added by mods.",
   "accessorify.config.infoOverlaySettings": "Info overlay settings",
   "accessorify.config.infoOverlaySettings.desc": "Configure gameplay-related info overlay settings.",
   "accessorify.config.infoOverlaySettings.overlayFields": "Overlay fields",

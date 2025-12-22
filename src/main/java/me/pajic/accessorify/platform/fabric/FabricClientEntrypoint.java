@@ -4,6 +4,7 @@ package me.pajic.accessorify.platform.fabric;
 
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.Accessorify;
+import me.pajic.accessorify.AccessorifyClient;
 import me.pajic.accessorify.accessories.compat.FabricSeasonsCalendarAccessory;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.keybind.ModKeybinds;
@@ -29,6 +30,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 //
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 //? if > 1.20.1 {
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -66,6 +68,8 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 	private static void initRegistry() {
 		//? if > 1.21.1
 		AccessoriesRendererRegistry.registerRenderer(Accessorify.id("lantern_renderer"), LanternAccessoryRenderer::new);
+		AccessoryUtil.bindItemToLanternRenderer(Items.LANTERN);
+		AccessoryUtil.bindItemToLanternRenderer(Items.SOUL_LANTERN);
 		AccessoryUtil.registerEmptyRenderer(
 				Items.CLOCK, Items.COMPASS, Items.ELYTRA, Items.ENDER_CHEST,
 				Items.RECOVERY_COMPASS, Items.SPYGLASS
@@ -93,13 +97,13 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 						AccessoryUtil.bindItemToLanternRenderer(itemHolder.value())
 				);
 				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(itemHolder ->
-						AccessoryUtil.registerEmptyRenderer(itemHolder.value().asItem())
+						AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 				);
 				registries.lookupOrThrow(Registries.ITEM).getOrThrow(GeneralUtil.TOTEMS).forEach(itemHolder ->
-						AccessoryUtil.registerEmptyRenderer(itemHolder.value().asItem())
+						AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 				);
 				//? if <= 1.21.1
-				//Minecraft.getInstance().reloadResourcePacks();
+				//if (AccessorifyClient.CONFIG.moddedLanternWorkaround.get()) Minecraft.getInstance().reloadResourcePacks();
 				tagEventsProcessed = true;
 			}
 		});

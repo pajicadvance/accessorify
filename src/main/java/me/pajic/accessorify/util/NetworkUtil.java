@@ -12,7 +12,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 //?} else {
 /*import net.neoforged.neoforge.network.PacketDistributor;
 //? if > 1.21.1
-//import net.neoforged.neoforge.client.network.ClientPacketDistributor;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 *///?}
 //? if > 1.20.1
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -39,9 +39,9 @@ public class NetworkUtil {
 	//?} else {
 	/*public static void C2S(CustomPacketPayload payload) {
 		//? if <= 1.21.1
-		PacketDistributor.sendToServer(payload);
+		//PacketDistributor.sendToServer(payload);
 		//? if > 1.21.1
-		//ClientPacketDistributor.sendToServer(payload);
+		ClientPacketDistributor.sendToServer(payload);
 	}
 	public static void S2C(CustomPacketPayload payload, ServerPlayer player) {
 		PacketDistributor.sendToPlayer(player, payload);

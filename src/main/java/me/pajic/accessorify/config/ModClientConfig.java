@@ -22,6 +22,8 @@ public class ModClientConfig extends Config {
     public WidgetSettings widgetSettings = new WidgetSettings();
     public SpyglassZoomSettings spyglassZoomSettings = new SpyglassZoomSettings();
     public InfoOverlayClientSettings infoOverlaySettings = new InfoOverlayClientSettings();
+	//? if <= 1.21.1
+	//public ValidatedBoolean moddedLanternWorkaround = new ValidatedBoolean(false);
 
     public static class WidgetSettings extends ConfigSection {
         public ValidatedBoolean showUIHints = new ValidatedBoolean(true);

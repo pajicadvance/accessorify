@@ -1,6 +1,8 @@
 **Please read the changelog for 2.4.0-beta.1 first**
 
-- Fixed crashes when Totem of Undying accessory is disabled in the config.
-- Fixed not being able to swap arrows when shulker box accessory is disabled.
-- Fixed lanterns rendering at the incorrect position on the player in 1.21.1 and below. As a side effect of this fix, loading into a world for the first time after launching the game will cause a resource pack reload (sorry, there was no better way to do this).
-- Added Simplified Chinese translation ([#85](https://github.com/pajicadvance/accessorify/pull/85)).
+These changes apply to Minecraft 1.21.1 and below:
+- Vanilla lanterns now display correctly on the player without a resource pack reload.
+- Added client option "Modded lantern workaround". When enabled, forces a resource pack reload on first world load to align modded lanterns to correctly display on the player when equipped. Disabled by default, only needed if you want to wear lanterns added by mods.
+
+This change applies to all Fabric versions:
+- Added support for Spyglass Astronomy. Features from the mod can now be used when using the spyglass from the accessory slot.

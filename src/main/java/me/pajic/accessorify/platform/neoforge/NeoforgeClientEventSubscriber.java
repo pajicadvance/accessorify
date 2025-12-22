@@ -4,6 +4,7 @@ package me.pajic.accessorify.platform.neoforge;
 
 /*import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import me.pajic.accessorify.Accessorify;
+import me.pajic.accessorify.AccessorifyClient;
 import me.pajic.accessorify.accessories.compat.SereneSeasonsCalendarAccessory;
 import me.pajic.accessorify.keybind.ModKeybinds;
 import me.pajic.accessorify.platform.Platform;
@@ -56,10 +57,13 @@ public class NeoforgeClientEventSubscriber {
 
 	@SubscribeEvent
 	private static void initRegistry(FMLClientSetupEvent event) {
+		//? if > 1.21.1
 		AccessoriesRendererRegistry.registerRenderer(Accessorify.id("lantern_renderer"), LanternAccessoryRenderer::new);
+		AccessoryUtil.bindItemToLanternRenderer(Items.LANTERN);
+		AccessoryUtil.bindItemToLanternRenderer(Items.SOUL_LANTERN);
 		AccessoryUtil.registerEmptyRenderer(
 				Items.CLOCK, Items.COMPASS, Items.ELYTRA, Items.ENDER_CHEST,
-				Items.RECOVERY_COMPASS, Items.SPYGLASS, Items.TOTEM_OF_UNDYING
+				Items.RECOVERY_COMPASS, Items.SPYGLASS
 		);
 	}
 
@@ -75,18 +79,21 @@ public class NeoforgeClientEventSubscriber {
 	@SubscribeEvent
 	private static void initTagsLoadedEvents(TagsUpdatedEvent event) {
 		if (!tagEventsProcessed && event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
-			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^/getRegistryAccess()/^?} else {^//^getLookupProvider()^//^?}^/.lookupOrThrow(Registries.ITEM);
+			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^//^getRegistryAccess()^//^?} else {^/getLookupProvider()/^?}^/.lookupOrThrow(Registries.ITEM);
 			lookup.getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
 					AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 			);
 			lookup.getOrThrow(GeneralUtil.LANTERNS).forEach(itemHolder ->
 					AccessoryUtil.bindItemToLanternRenderer(itemHolder.value())
 			);
-			lookup.getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(blockHolder ->
-					AccessoryUtil.registerEmptyRenderer(blockHolder.value().asItem())
+			lookup.getOrThrow(GeneralUtil.SHULKER_BOXES).forEach(itemHolder ->
+					AccessoryUtil.registerEmptyRenderer(itemHolder.value())
+			);
+			lookup.getOrThrow(GeneralUtil.TOTEMS).forEach(itemHolder ->
+					AccessoryUtil.registerEmptyRenderer(itemHolder.value())
 			);
 			//? if <= 1.21.1
-			Minecraft.getInstance().reloadResourcePacks();
+			//if (AccessorifyClient.CONFIG.moddedLanternWorkaround.get()) Minecraft.getInstance().reloadResourcePacks();
 			tagEventsProcessed = true;
 		}
 	}
@@ -94,7 +101,7 @@ public class NeoforgeClientEventSubscriber {
 	@SubscribeEvent
 	private static void initKeybinds(RegisterKeyMappingsEvent event) {
 		//? if >= 1.21.10
-		//event.registerCategory(ModKeybinds.MOD_KEYS);
+		event.registerCategory(ModKeybinds.MOD_KEYS);
 		event.register(ModKeybinds.OPEN_WIDGET);
 		event.register(ModKeybinds.OPEN_ENDER_CHEST);
 		event.register(ModKeybinds.USE_SPYGLASS);

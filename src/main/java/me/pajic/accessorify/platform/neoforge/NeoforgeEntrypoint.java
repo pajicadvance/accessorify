@@ -180,7 +180,7 @@ public class NeoforgeEntrypoint {
 	@SubscribeEvent
 	private static void initTagsLoadedEvents(TagsUpdatedEvent event) {
 		if (!tagEventsProcessed) {
-			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^/getRegistryAccess()/^?} else {^//^getLookupProvider()^//^?}^/.lookupOrThrow(Registries.ITEM);
+			HolderLookup<Item> lookup = event./^? if < 1.21.10 {^//^getRegistryAccess()^//^?} else {^/getLookupProvider()/^?}^/.lookupOrThrow(Registries.ITEM);
 			lookup.getOrThrow(ItemTags.ARROWS).forEach(itemHolder ->
 					AccessoryUtil.registerAccessory(itemHolder.value(), new ArrowAccessory())
 			);

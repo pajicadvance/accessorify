@@ -142,6 +142,9 @@ dependencies {
 	modCompileOnly("maven.modrinth:notes:${prop("deps.notes")}") {
 		exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
 	}
+	modImplementation("maven.modrinth:spyglass-astronomy:${prop("deps.sa")}") {
+		exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
+	}
 	// 1.20.1 only mods
 	if (stonecutter.eval(stonecutter.current.version, "1.20.1")) {
 		modCompileOnly("maven.modrinth:sodium-dynamic-lights:${prop("deps.sdl")}") {
